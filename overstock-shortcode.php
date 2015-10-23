@@ -172,15 +172,20 @@ function generateRectangleWidget($atts){
     ), $atts);
      
   $productId = (isset($atts['id']) ? $atts['id'] : null);
+
   if (is_null($productId)) {
     return formatError("id parameter cannot be empty."); 
   } else {
   	$item = new MultiProductDataFromArray(array($productId), 1);
-    $output = '<div class="ostk-element ostk-'.$atts['type'].'" '.getStyles($atts).'>';
-      $output .= getBranding();
-      $output .= generateRectangleHtmlOutput($item, $atts);
-    $output .= '</div>';
-    return $output;
+    if($item->isAllValidProductIDs()){
+      $output = '<div class="ostk-element ostk-'.$atts['type'].'" '.getStyles($atts).'>';
+        $output .= getBranding();
+        $output .= generateRectangleHtmlOutput($item, $atts);
+      $output .= '</div>';
+      return $output;
+    }else{
+      return formatError('Invalid product id');
+    }
   }
 }//generateRectangleWidget
 
