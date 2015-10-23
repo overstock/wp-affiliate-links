@@ -347,15 +347,6 @@ $patterns = json_decode('
         ],
         "optional_attributes": [
             {
-                "name": "display",
-                "description": "Choose an attribute to display",
-                "options": [
-                    "image_large",
-                    "image_medium",
-                    "image_small"
-                ]
-            },
-            {
                 "name": "image_number",
                 "description": "Choose an image number, images are numbered from left to right on the product page, 1,2,3, ect."
             },
