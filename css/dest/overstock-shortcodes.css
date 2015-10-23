@@ -1,0 +1,1023 @@
+/* Less Variable */
+/* Widths */
+/* Colors */
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Styles for the short code elements */
+.ostk-element,
+#main .ostk-element,
+#sidebar .ostk-element {
+  /*
+  The "#main" and "#sidebar" is being used to make sure that the ostk styles have enough specificity to maintain ostk styles even in custom Wordpress themes.
+  */
+  /*----------------------------- Global for All Short Code Elements -----------------------------*/
+  /**
+ * Global Reset of all HTML Elements
+ *
+ * Resetting all of our HTML Elements ensures a smoother
+ * visual transition between browsers. If you don't believe me,
+ * try temporarily commenting out this block of code, then go
+ * and look at Mozilla versus Safari, both good browsers with
+ * a good implementation of CSS. The thing is, all browser CSS
+ * defaults are different and at the end of the day if visual
+ * consistency is what we're shooting for, then we need to
+ * make sure we're resetting all spacing elements.
+ *
+ */
+  position: relative;
+  overflow: hidden;
+  /*----------------------------- Pattern 1 - search -----------------------------*/
+  /* .ostk-search  */
+  /*----------------------------- Pattern 2 - link -----------------------------*/
+  /* .ostk-link  */
+  /*----------------------------- Pattern 3 - rectangle -----------------------------*/
+  /* .ostk-rectangle  */
+  /*----------------------------- Pattern 4 - leaderboard -----------------------------*/
+  /* .ostk-leaderboard  */
+  /*----------------------------- Pattern 5 - skyscraper -----------------------------*/
+  /* .ostk-skyscraper  */
+  /*----------------------------- Pattern 6 - carousel -----------------------------*/
+  /* .ostk-carousel */
+  /*----------------------------- Pattern 7 - stock photo -----------------------------*/
+  /* .ostk-stock-photo */
+  /*----------------------------- Pattern 8 - product link -----------------------------*/
+  /* .ostk-product-link */
+}
+.ostk-element html,
+#main .ostk-element html,
+#sidebar .ostk-element html,
+.ostk-element body,
+#main .ostk-element body,
+#sidebar .ostk-element body {
+  border: 0;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+.ostk-element div,
+#main .ostk-element div,
+#sidebar .ostk-element div,
+.ostk-element span,
+#main .ostk-element span,
+#sidebar .ostk-element span,
+.ostk-element object,
+#main .ostk-element object,
+#sidebar .ostk-element object,
+.ostk-element iframe,
+#main .ostk-element iframe,
+#sidebar .ostk-element iframe,
+.ostk-element img,
+#main .ostk-element img,
+#sidebar .ostk-element img,
+.ostk-element table,
+#main .ostk-element table,
+#sidebar .ostk-element table,
+.ostk-element caption,
+#main .ostk-element caption,
+#sidebar .ostk-element caption,
+.ostk-element thead,
+#main .ostk-element thead,
+#sidebar .ostk-element thead,
+.ostk-element tbody,
+#main .ostk-element tbody,
+#sidebar .ostk-element tbody,
+.ostk-element tfoot,
+#main .ostk-element tfoot,
+#sidebar .ostk-element tfoot,
+.ostk-element tr,
+#main .ostk-element tr,
+#sidebar .ostk-element tr,
+.ostk-element tr,
+#main .ostk-element tr,
+#sidebar .ostk-element tr,
+.ostk-element td,
+#main .ostk-element td,
+#sidebar .ostk-element td,
+.ostk-element article,
+#main .ostk-element article,
+#sidebar .ostk-element article,
+.ostk-element aside,
+#main .ostk-element aside,
+#sidebar .ostk-element aside,
+.ostk-element canvas,
+#main .ostk-element canvas,
+#sidebar .ostk-element canvas,
+.ostk-element details,
+#main .ostk-element details,
+#sidebar .ostk-element details,
+.ostk-element figure,
+#main .ostk-element figure,
+#sidebar .ostk-element figure,
+.ostk-element hgroup,
+#main .ostk-element hgroup,
+#sidebar .ostk-element hgroup,
+.ostk-element menu,
+#main .ostk-element menu,
+#sidebar .ostk-element menu,
+.ostk-element nav,
+#main .ostk-element nav,
+#sidebar .ostk-element nav,
+.ostk-element footer,
+#main .ostk-element footer,
+#sidebar .ostk-element footer,
+.ostk-element header,
+#main .ostk-element header,
+#sidebar .ostk-element header,
+.ostk-element section,
+#main .ostk-element section,
+#sidebar .ostk-element section,
+.ostk-element summary,
+#main .ostk-element summary,
+#sidebar .ostk-element summary,
+.ostk-element mark,
+#main .ostk-element mark,
+#sidebar .ostk-element mark,
+.ostk-element audio,
+#main .ostk-element audio,
+#sidebar .ostk-element audio,
+.ostk-element video,
+#main .ostk-element video,
+#sidebar .ostk-element video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.ostk-element h1,
+#main .ostk-element h1,
+#sidebar .ostk-element h1,
+.ostk-element h2,
+#main .ostk-element h2,
+#sidebar .ostk-element h2,
+.ostk-element h3,
+#main .ostk-element h3,
+#sidebar .ostk-element h3,
+.ostk-element h4,
+#main .ostk-element h4,
+#sidebar .ostk-element h4,
+.ostk-element h5,
+#main .ostk-element h5,
+#sidebar .ostk-element h5,
+.ostk-element h6,
+#main .ostk-element h6,
+#sidebar .ostk-element h6,
+.ostk-element p,
+#main .ostk-element p,
+#sidebar .ostk-element p,
+.ostk-element blockquote,
+#main .ostk-element blockquote,
+#sidebar .ostk-element blockquote,
+.ostk-element pre,
+#main .ostk-element pre,
+#sidebar .ostk-element pre,
+.ostk-element a,
+#main .ostk-element a,
+#sidebar .ostk-element a,
+.ostk-element abbr,
+#main .ostk-element abbr,
+#sidebar .ostk-element abbr,
+.ostk-element address,
+#main .ostk-element address,
+#sidebar .ostk-element address,
+.ostk-element cit,
+#main .ostk-element cit,
+#sidebar .ostk-element cit,
+.ostk-element code,
+#main .ostk-element code,
+#sidebar .ostk-element code,
+.ostk-element del,
+#main .ostk-element del,
+#sidebar .ostk-element del,
+.ostk-element dfn,
+#main .ostk-element dfn,
+#sidebar .ostk-element dfn,
+.ostk-element em,
+#main .ostk-element em,
+#sidebar .ostk-element em,
+.ostk-element ins,
+#main .ostk-element ins,
+#sidebar .ostk-element ins,
+.ostk-element q,
+#main .ostk-element q,
+#sidebar .ostk-element q,
+.ostk-element samp,
+#main .ostk-element samp,
+#sidebar .ostk-element samp,
+.ostk-element small,
+#main .ostk-element small,
+#sidebar .ostk-element small,
+.ostk-element strong,
+#main .ostk-element strong,
+#sidebar .ostk-element strong,
+.ostk-element sub,
+#main .ostk-element sub,
+#sidebar .ostk-element sub,
+.ostk-element sup,
+#main .ostk-element sup,
+#sidebar .ostk-element sup,
+.ostk-element b,
+#main .ostk-element b,
+#sidebar .ostk-element b,
+.ostk-element i,
+#main .ostk-element i,
+#sidebar .ostk-element i,
+.ostk-element hr,
+#main .ostk-element hr,
+#sidebar .ostk-element hr,
+.ostk-element dl,
+#main .ostk-element dl,
+#sidebar .ostk-element dl,
+.ostk-element dt,
+#main .ostk-element dt,
+#sidebar .ostk-element dt,
+.ostk-element dd,
+#main .ostk-element dd,
+#sidebar .ostk-element dd,
+.ostk-element ol,
+#main .ostk-element ol,
+#sidebar .ostk-element ol,
+.ostk-element ul,
+#main .ostk-element ul,
+#sidebar .ostk-element ul,
+.ostk-element li,
+#main .ostk-element li,
+#sidebar .ostk-element li,
+.ostk-element fieldset,
+#main .ostk-element fieldset,
+#sidebar .ostk-element fieldset,
+.ostk-element legend,
+#main .ostk-element legend,
+#sidebar .ostk-element legend,
+.ostk-element label,
+#main .ostk-element label,
+#sidebar .ostk-element label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+.ostk-element article,
+#main .ostk-element article,
+#sidebar .ostk-element article,
+.ostk-element aside,
+#main .ostk-element aside,
+#sidebar .ostk-element aside,
+.ostk-element canvas,
+#main .ostk-element canvas,
+#sidebar .ostk-element canvas,
+.ostk-element figure,
+#main .ostk-element figure,
+#sidebar .ostk-element figure,
+.ostk-element figure img,
+#main .ostk-element figure img,
+#sidebar .ostk-element figure img,
+.ostk-element figcaption,
+#main .ostk-element figcaption,
+#sidebar .ostk-element figcaption,
+.ostk-element hgroup,
+#main .ostk-element hgroup,
+#sidebar .ostk-element hgroup,
+.ostk-element footer,
+#main .ostk-element footer,
+#sidebar .ostk-element footer,
+.ostk-element header,
+#main .ostk-element header,
+#sidebar .ostk-element header,
+.ostk-element nav,
+#main .ostk-element nav,
+#sidebar .ostk-element nav,
+.ostk-element section,
+#main .ostk-element section,
+#sidebar .ostk-element section,
+.ostk-element audio,
+#main .ostk-element audio,
+#sidebar .ostk-element audio,
+.ostk-element video,
+#main .ostk-element video,
+#sidebar .ostk-element video {
+  display: block;
+}
+.ostk-element table,
+#main .ostk-element table,
+#sidebar .ostk-element table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.ostk-element table caption,
+#main .ostk-element table caption,
+#sidebar .ostk-element table caption,
+.ostk-element table th,
+#main .ostk-element table th,
+#sidebar .ostk-element table th,
+.ostk-element table td,
+#main .ostk-element table td,
+#sidebar .ostk-element table td {
+  text-align: left;
+  vertical-align: middle;
+}
+.ostk-element a img,
+#main .ostk-element a img,
+#sidebar .ostk-element a img {
+  border: 0;
+}
+.ostk-element :focus,
+#main .ostk-element :focus,
+#sidebar .ostk-element :focus {
+  outline: 0;
+}
+.ostk-element *,
+#main .ostk-element *,
+#sidebar .ostk-element * {
+  box-sizing: border-box;
+}
+.ostk-element img,
+#main .ostk-element img,
+#sidebar .ostk-element img {
+  max-width: 100%;
+}
+.ostk-element .branding,
+#main .ostk-element .branding,
+#sidebar .ostk-element .branding {
+  background: #c80f2e;
+  padding: 5px 0;
+}
+.ostk-element .branding img,
+#main .ostk-element .branding img,
+#sidebar .ostk-element .branding img {
+  margin: 0 auto;
+  display: block;
+}
+.ostk-element .element-content,
+#main .ostk-element .element-content,
+#sidebar .ostk-element .element-content {
+  padding: 10px;
+  position: relative;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.ostk-element .element-content a,
+#main .ostk-element .element-content a,
+#sidebar .ostk-element .element-content a {
+  text-decoration: none;
+}
+.ostk-element .element-content p,
+#main .ostk-element .element-content p,
+#sidebar .ostk-element .element-content p {
+  font-size: 16px;
+  margin: 0;
+}
+.ostk-element .element-content p.title,
+#main .ostk-element .element-content p.title,
+#sidebar .ostk-element .element-content p.title {
+  color: #c80f2e;
+}
+.ostk-element .element-content p.price,
+#main .ostk-element .element-content p.price,
+#sidebar .ostk-element .element-content p.price {
+  color: #444444;
+}
+.ostk-element .element-overlay,
+#main .ostk-element .element-overlay,
+#sidebar .ostk-element .element-overlay {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  padding: 10px;
+  -webkit-transition: all linear 500ms;
+  -moz-transition: all linear 500ms;
+  -ms-transition: all linear 500ms;
+  -o-transition: all linear 500ms;
+  transition: all linear 500ms;
+}
+.ostk-element .element-overlay img,
+#main .ostk-element .element-overlay img,
+#sidebar .ostk-element .element-overlay img {
+  width: auto;
+}
+.ostk-element .element-overlay img.ostk-logo,
+#main .ostk-element .element-overlay img.ostk-logo,
+#sidebar .ostk-element .element-overlay img.ostk-logo {
+  float: right;
+}
+.ostk-element .element-overlay p,
+#main .ostk-element .element-overlay p,
+#sidebar .ostk-element .element-overlay p {
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+.ostk-element .element-overlay p.title,
+#main .ostk-element .element-overlay p.title,
+#sidebar .ostk-element .element-overlay p.title {
+  font-weight: bold;
+  color: #c80f2e;
+}
+.ostk-element .element-overlay p.price,
+#main .ostk-element .element-overlay p.price,
+#sidebar .ostk-element .element-overlay p.price {
+  font-weight: bold;
+}
+.ostk-element.ostk-rectangle,
+#main .ostk-element.ostk-rectangle,
+#sidebar .ostk-element.ostk-rectangle {
+  border: solid 2px #c80f2e;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.ostk-element.ostk-rectangle:hover .element-overlay,
+#main .ostk-element.ostk-rectangle:hover .element-overlay,
+#sidebar .ostk-element.ostk-rectangle:hover .element-overlay {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-leaderboard,
+#main .ostk-element.ostk-leaderboard,
+#sidebar .ostk-element.ostk-leaderboard {
+  border: solid 2px #c80f2e;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  width: 728px;
+  height: 90px;
+}
+.ostk-element.ostk-leaderboard .item-holder,
+#main .ostk-element.ostk-leaderboard .item-holder,
+#sidebar .ostk-element.ostk-leaderboard .item-holder {
+  margin-right: 150px;
+}
+.ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content,
+#main .ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content,
+#sidebar .ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content {
+  width: 50%;
+  float: left;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content {
+  padding: 0;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content p,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content p,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p {
+  text-align: left;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content p.title,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content p.title,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content p.description,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content p.description,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p.description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content img.product-image,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content img.product-image,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content img.product-image {
+  padding: 5px;
+  float: left;
+  margin: 0;
+  max-height: 70px;
+}
+.ostk-element.ostk-leaderboard .branding,
+#main .ostk-element.ostk-leaderboard .branding,
+#sidebar .ostk-element.ostk-leaderboard .branding {
+  position: absolute;
+  right: 0;
+  width: 130px;
+  padding: 30px 0;
+}
+.ostk-element.ostk-skyscraper,
+#main .ostk-element.ostk-skyscraper,
+#sidebar .ostk-element.ostk-skyscraper {
+  border: solid 2px #c80f2e;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.ostk-element.ostk-skyscraper .element-content p,
+#main .ostk-element.ostk-skyscraper .element-content p,
+#sidebar .ostk-element.ostk-skyscraper .element-content p {
+  text-align: center;
+}
+.ostk-element.ostk-skyscraper .element-content img,
+#main .ostk-element.ostk-skyscraper .element-content img,
+#sidebar .ostk-element.ostk-skyscraper .element-content img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.ostk-element.ostk-carousel,
+#main .ostk-element.ostk-carousel,
+#sidebar .ostk-element.ostk-carousel {
+  /* flexslider */
+  /* Arrows */
+  /* Arrows Navigation */
+  /* .ostk-carousel.desktop-size */
+}
+.ostk-element.ostk-carousel .ostk-flexslider,
+#main .ostk-element.ostk-carousel .ostk-flexslider,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider {
+  position: relative;
+}
+.ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
+#main .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-carousel .ostk-flexslider a,
+#main .ostk-element.ostk-carousel .ostk-flexslider a,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider a {
+  text-decoration: none;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides {
+  margin: 0;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides li,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li {
+  position: relative;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content {
+  padding: 0;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.ostk-element.ostk-carousel .element-overlay p,
+#main .ostk-element.ostk-carousel .element-overlay p,
+#sidebar .ostk-element.ostk-carousel .element-overlay p {
+  text-align: center;
+}
+.ostk-element.ostk-carousel .element-overlay img,
+#main .ostk-element.ostk-carousel .element-overlay img,
+#sidebar .ostk-element.ostk-carousel .element-overlay img {
+  width: auto;
+}
+.ostk-element.ostk-carousel .element-overlay img.ostk-rating,
+#main .ostk-element.ostk-carousel .element-overlay img.ostk-rating,
+#sidebar .ostk-element.ostk-carousel .element-overlay img.ostk-rating {
+  margin: 0 auto 5px auto;
+  display: block;
+}
+.ostk-element.ostk-carousel .ostk-arrow,
+#main .ostk-element.ostk-carousel .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow {
+  background-image: url('../../images/overstock-arrows.png');
+  background-repeat: no-repeat;
+  outline: none;
+  height: 25px;
+  width: 25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left {
+  background-position: 0 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover {
+  background-position: 0 -25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right {
+  background-position: -25px 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover {
+  background-position: -25px -25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red {
+  background-position: -50px 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover {
+  background-position: -50px -25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red {
+  background-position: -75px 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover {
+  background-position: -75px -25px;
+}
+.ostk-element.ostk-carousel .custom-navigation a,
+#main .ostk-element.ostk-carousel .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel .custom-navigation a {
+  text-decoration: none;
+}
+.ostk-element.ostk-carousel .custom-navigation a.flex-prev,
+#main .ostk-element.ostk-carousel .custom-navigation a.flex-prev,
+#sidebar .ostk-element.ostk-carousel .custom-navigation a.flex-prev {
+  float: left;
+}
+.ostk-element.ostk-carousel .custom-navigation a.flex-next,
+#main .ostk-element.ostk-carousel .custom-navigation a.flex-next,
+#sidebar .ostk-element.ostk-carousel .custom-navigation a.flex-next {
+  float: right;
+}
+.ostk-element.ostk-carousel.mobile-size,
+#main .ostk-element.ostk-carousel.mobile-size,
+#sidebar .ostk-element.ostk-carousel.mobile-size {
+  /* Arrows Navigation */
+  /* .custom-navigation */
+}
+.ostk-element.ostk-carousel.mobile-size:hover,
+#main .ostk-element.ostk-carousel.mobile-size:hover,
+#sidebar .ostk-element.ostk-carousel.mobile-size:hover {
+  /* Arrows Navigation */
+}
+.ostk-element.ostk-carousel.mobile-size:hover .custom-navigation a,
+#main .ostk-element.ostk-carousel.mobile-size:hover .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel.mobile-size:hover .custom-navigation a {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  padding: 0 10px;
+  /* .custom-controls-container */
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a {
+  -webkit-transition: all linear 500ms;
+  -moz-transition: all linear 500ms;
+  -ms-transition: all linear 500ms;
+  -o-transition: all linear 500ms;
+  transition: all linear 500ms;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container {
+  display: none;
+}
+.ostk-element.ostk-carousel.desktop-size,
+#main .ostk-element.ostk-carousel.desktop-size,
+#sidebar .ostk-element.ostk-carousel.desktop-size {
+  /* Arrows Navigation */
+  /* custom-navigation */
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation {
+  max-width: 430px;
+  margin: 10px auto 0 auto;
+  /* Thumbail Navigation */
+  /* .custom-controls-container */
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation a,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a {
+  border: solid 1px #aeaeae;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #dddddd;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow {
+  margin: 25px 0;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover {
+  background: #f6f6f6;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container {
+  display: table;
+  margin: 0 auto;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li {
+  display: table-cell;
+  padding: 5px;
+  width: auto;
+  display: none;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: solid 1px grey;
+  width: 65px;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active {
+  border: solid 1px #c80f2e;
+}
+.ostk-element.ostk-stock-photo:hover .element-overlay,
+#main .ostk-element.ostk-stock-photo:hover .element-overlay,
+#sidebar .ostk-element.ostk-stock-photo:hover .element-overlay {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-stock-photo.image-small,
+#main .ostk-element.ostk-stock-photo.image-small,
+#sidebar .ostk-element.ostk-stock-photo.image-small {
+  width: 200px;
+}
+.ostk-element.ostk-stock-photo.image-medium,
+#main .ostk-element.ostk-stock-photo.image-medium,
+#sidebar .ostk-element.ostk-stock-photo.image-medium {
+  width: 400px;
+}
+.ostk-element.ostk-stock-photo.img-large,
+#main .ostk-element.ostk-stock-photo.img-large,
+#sidebar .ostk-element.ostk-stock-photo.img-large {
+  width: 600px;
+}
+.ostk-element.ostk-stock-photo .element-overlay,
+#main .ostk-element.ostk-stock-photo .element-overlay,
+#sidebar .ostk-element.ostk-stock-photo .element-overlay {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-transition: all linear 500ms;
+  -moz-transition: all linear 500ms;
+  -ms-transition: all linear 500ms;
+  -o-transition: all linear 500ms;
+  transition: all linear 500ms;
+}
+/* Styles for the WordPress plugin setting pages */
+/*----------------------------- General Styles -----------------------------*/
+.ostk-plugin-settings {
+  background: #ffffff;
+}
+.ostk-plugin-settings .clearfix {
+  clear: both;
+}
+.ostk-plugin-settings p {
+  color: #7b7b7b;
+}
+.ostk-plugin-settings p.ostk-error {
+  color: #c80f2e;
+}
+.ostk-plugin-settings span.highlight {
+  color: #c80f2e;
+}
+.ostk-plugin-settings h1 {
+  color: #444444;
+  font-size: 25px;
+  line-height: 27px;
+  margin: 10px 0;
+}
+.ostk-plugin-settings h2 {
+  color: #c80f2e;
+  font-size: 40px;
+  line-height: 42px;
+  margin: 0;
+}
+.ostk-plugin-settings h3 {
+  color: #444444;
+  font-size: 20px;
+  line-height: 22px;
+  margin: 10px 0;
+}
+.ostk-plugin-settings .btn {
+  background: #c80f2e;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.ostk-plugin-settings .btn:hover {
+  background: #690818;
+}
+.ostk-plugin-settings .btn.active {
+  background: #690818;
+}
+.ostk-plugin-settings .header {
+  overflow: hidden;
+  border-bottom: solid 3px #c80f2e;
+  padding: 10px 20px;
+}
+@media (max-width: 767px) {
+  .ostk-plugin-settings .header img.logo {
+    display: background;
+    margin: 0 auot;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-plugin-settings .header img.logo {
+    float: left;
+    margin-right: 40px;
+  }
+}
+.ostk-plugin-settings .header nav ul {
+  overflow: hidden;
+}
+.ostk-plugin-settings .header nav ul li {
+  float: left;
+  margin-right: 10px;
+}
+.ostk-plugin-settings .header nav ul li a.btn {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  padding: 5px 20px;
+}
+.ostk-plugin-settings .ostk-page {
+  max-width: 1024px;
+  padding: 20px;
+}
+/*----------------------------- WP Plugin Home Page -----------------------------*/
+/*----------------------------- WP Plugin Documentation Page -----------------------------*/
+.ostk-doc-page .section-title {
+  margin: 50px 0 10px 0;
+}
+.ostk-doc-page .section-title h3 {
+  font-size: 16px;
+}
+.ostk-doc-page .section-title a {
+  text-decoration: none;
+}
+.ostk-doc-page .section-title a:hover h2 {
+  color: #f24b67;
+}
+.ostk-doc-page .center {
+  text-align: center;
+}
+.ostk-doc-page .atts ul {
+  margin: 0px 0 20px 0px;
+}
+@media (max-width: 767px) {
+  .ostk-doc-page .atts ul {
+    padding: 0 20px;
+  }
+}
+.ostk-doc-page .atts ul li {
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .ostk-doc-page .atts ul li {
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li {
+    margin-bottom: 10px;
+  }
+}
+.ostk-doc-page .atts ul li p {
+  line-height: 18px;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+}
+@media (max-width: 767px) {
+  .ostk-doc-page .atts ul li p {
+    margin-left: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li p {
+    margin-left: 130px;
+  }
+}
+.ostk-doc-page .atts ul li p span.atts-subtitle {
+  font-weight: bold;
+  color: #7b7b7b;
+}
+.ostk-doc-page .atts ul li p.title {
+  margin-left: 0px;
+  font-weight: bold;
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li p.title {
+    width: 100px;
+    float: left;
+    text-align: right;
+  }
+}
+.ostk-doc-page .atts ul li p.note {
+  color: #c80f2e;
+}
+.ostk-doc-page code {
+  background-color: #444444;
+  color: #ffffff;
+  display: block;
+  margin: 10px auto;
+  max-width: 400px;
+  padding: 5px;
+  text-align: center;
+}
+.ostk-doc-page .shortcode-output {
+  margin: 10px auto 50px auto;
+}
+.ostk-doc-page .shortcode-output .ostk-element {
+  display: block;
+  margin: 0 auto;
+}
+.ostk-doc-page .shortcode-output a.ostk-element.ostk-search,
+.ostk-doc-page .shortcode-output a.ostk-element.ostk-link,
+.ostk-doc-page .shortcode-output a.ostk-element.ostk-product-link {
+  display: block;
+  text-align: center;
+}
+/*----------------------------- WP Plugin Sandbox Page -----------------------------*/
+@media (min-width: 768px) {
+  .ostk-sandbox-page .shortcode-input,
+  .ostk-sandbox-page .shortcode-output {
+    float: left;
+    width: 50%;
+  }
+  .ostk-sandbox-page .shortcode-input h2,
+  .ostk-sandbox-page .shortcode-output h2 {
+    text-align: center;
+  }
+}
+.ostk-sandbox-page .shortcode-input .inner,
+.ostk-sandbox-page .shortcode-output .inner {
+  margin: 10px;
+}
+.ostk-sandbox-page .shortcode-input textarea {
+  width: 100%;
+}
+.ostk-sandbox-page .shortcode-input .btn {
+  display: block;
+  margin: 5px auto 0 auto;
+  max-width: 100px;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .ostk-sandbox-page .shortcode-output {
+    margin-top: 80px;
+  }
+}
+.ostk-sandbox-page .shortcode-output .inner {
+  border: solid 1px grey;
+  min-height: 200px;
+}
+.ostk-sandbox-page .shortcode-output .inner img {
+  max-width: 100%;
+}
