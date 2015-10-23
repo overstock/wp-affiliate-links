@@ -29,6 +29,7 @@ class SingleProductData {
 	var $numImages;
 	var $arrayOfAllProductImages;
 	var $description;
+	var $validProductID;
 	
   function __construct($productId) {
   	//make the api call using product details api
@@ -36,12 +37,19 @@ class SingleProductData {
 	$url = "http://www.overstock.com/api/product.json?prod_id=" . $productId;
 	$json = file_get_contents($url);
 	$productData = json_decode($json, true);
+
+	if(isset($productData['id'])){
+		$this->validProductID = True;
+	}else{
+		$this->validProductID = False;
+	}
+
 	$taxonomyStore = $productData[taxonomy][store][id];
 	$this->name = $productData[name];
 	$this->productId = $productData[id];
 	$this->developerId = $GLOBALS['developerId'];
 	if($taxonomyStore == 2 || $taxonomyStore == 3) {
-		return "ERROR: Our apologies we do not offer <b>'$this->name'</b> for affiliate sale. Product ID is '$productId'";
+		return formatError("Our apologies we do not offer <b>'$this->name'</b> for affiliate sale. Product ID is '$productId'");
 	} else {
 	//we have dynamic pricing types, including COMPARISON_PRICE, DISCOUNTED_AMOUNT, CURRENT_PRICE
 	//return only the CURRENT_PRICE (formatted)
@@ -50,7 +58,7 @@ class SingleProductData {
 			if ($productData[priceSet][$i][priceType] == "CURRENT_PRICE") {
 				$this->price = $productData[priceSet][$i][formattedPrice];
 				if($this->price >= 1500) {
-				  return "ERROR: Maximum price for affiliate items is $1500.";
+				  return formatError("Maximum price for affiliate items is $1500.");
 				}
 			}
 		}
@@ -79,49 +87,49 @@ class SingleProductData {
     	$this->description = $productData[shortDescription];
 	}
   }
-  
+
   function getProductId(){
-	return (isset($this->productId) ? $this->productId : "ERROR: \$productId is not set" );
+	return (isset($this->productId) ? $this->productId : formatError("\$productId is not set") );
   }
 
   function getName() {
-    return (isset($this->name) ? $this->name : "ERROR: \$name is not set" );
+    return (isset($this->name) ? $this->name : formatError("\$name is not set") );
   }
 
   function getPrice() {
-    return (isset($this->price) ? $this->price : "ERROR: \$price is not set" );
+    return (isset($this->price) ? $this->price : formatError("\$price is not set") );
   }
 
   function getImageBaseUrl() {
-    return (isset($this->baseImageUrl) ? $this->baseImageUrl : "ERROR: \$baseImageUrl is not set" );
+    return (isset($this->baseImageUrl) ? $this->baseImageUrl : formatError("\$baseImageUrl is not set") );
   }
 
   function getImage_Thumbnail() {
-    return (isset($this->imgUrl_thumbnail) ? $this->imgUrl_thumbnail : "ERROR: \$imgUrl_thumbnail is not set" );
+    return (isset($this->imgUrl_thumbnail) ? $this->imgUrl_thumbnail : formatError("\$imgUrl_thumbnail is not set") );
   }
 
   function getImage_Medium() {
-    return (isset($this->imgUrl_medium) ? $this->imgUrl_medium : "ERROR: \$imgUrl_medium is not set" );
+    return (isset($this->imgUrl_medium) ? $this->imgUrl_medium : formatError("\$imgUrl_medium is not set") );
   }
 
   function getImage_Large() {
-    return (isset($this->imgUrl_large) ? $this->imgUrl_large : "ERROR: \$imgUrl_large is not set" );
+    return (isset($this->imgUrl_large) ? $this->imgUrl_large : formatError("\$imgUrl_large is not set") );
   }
 
   function getDeveloperId(){
-    return (isset($this->developerId) ? $this->developerId : "ERROR: \$developerId is not set");
+    return (isset($this->developerId) ? $this->developerId : formatError("\$developerId is not set") );
   }
 
   function getAffiliateUrl(){
-	return (isset($this->affiliateUrl) ? $this->affiliateUrl : "ERROR: \$affiliateUrl is not set" );
+	return (isset($this->affiliateUrl) ? $this->affiliateUrl : formatError("\$affiliateUrl is not set") );
   }
   
   function getAverageReviewAsDecimal(){
-  	return (isset($this->averageReviewAsDecimal) ? $this->averageReviewAsDecimal : "ERROR: \$averageReviewAsDecimal is not set" );
+  	return (isset($this->averageReviewAsDecimal) ? $this->averageReviewAsDecimal : formatError("\$averageReviewAsDecimal is not set") );
   }
   
   function getAverageReviewAsGif(){
-  	return (isset($this->averageReviewAsGif) ? $this->averageReviewAsGif : "ERROR: \$averageReviewAsGif is not set" );
+  	return (isset($this->averageReviewAsGif) ? $this->averageReviewAsGif : formatError("\$averageReviewAsGif is not set") );
   }
   
   function getImageAtIndex($index){
@@ -162,36 +170,52 @@ class SingleProductData {
 **/
 
 class MultiProductDataFromArray {
-  var $productList;
-	
-  function __construct($productArray, $num) {
-      for($i = 0; $i < $num; $i++){
-      	$this->productList[$i] = new SingleProductData($productArray[$i]);
-      }
-  }
-  
-  function getProductList(){
-  	return $this->productList;
-  }
-}
+	var $productList = array();
+	var $invalidProductIDs = array();
+	var $allValidProductIDs = True;
+
+	function __construct($productArray, $num) {
+		for($i = 0; $i < $num; $i++){
+			$item = new SingleProductData($productArray[$i]);
+		    if($item->validProductID){
+				array_push($this->productList, $item);
+		    }else{
+				array_push($this->invalidProductIDs, $productArray[$i]);
+				$allValidProductIDs = False;
+		    }
+		}//for
+	}//__construct
+
+	function isAllValidProductIDs(){
+	    if(count($this->invalidProductIDs) > 0){
+	    	return False;
+    	}else{
+	    	return True;
+    	}
+	}//isAllValidProductIDs
+
+	function getProductList(){
+		return $this->productList;
+	}//getProductList
+}//MultiProductDataFromArray
 
 class MultiProductDataFromQuery {
-  var $productList;	
-    function __construct($query, $num) {
+	var $productList;	
+	function __construct($query, $num) {
 		$url = $query;
 		$json = file_get_contents($url);
 		$productData = json_decode($json, true);
 		$numResults = (count($productData[products][products]) > 0) ? count($productData[products][products]) : 0;
 		if ($numResults == 0){
-		  return "ERROR: There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.";
+		  return formatError("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
 		}
 		for ($i = 0; $i < $num; $i++) {
 		  $this->productList[$i] = new SingleProductData($productData[products][products][$i][id]);
 		}
-    }
+	}//__construct
    
      function getProductList(){
   	   return $this->productList;
-    } 
-}
+    }//getProductList
+}//MultiProductDataFromQuery
 ?>
