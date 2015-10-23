@@ -13,7 +13,7 @@ $ostk_jQuery(window).load(function() {
 		_this.children('.ostk-flexslider').flexslider({
 			animation: "slide",
 			controlNav: "thumbnails",
-			customDirectionNav: _this.find(".custom-navigation").children("a"),
+			customDirectionNav: _this.find(".custom-navigation").children(".arrow"),
 			controlsContainer: _this.find(".custom-controls-container"),
 			touch: true,
 			slideshow: false,
