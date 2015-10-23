@@ -174,16 +174,16 @@ class MultiProductDataFromArray {
 	var $invalidProductIDs = array();
 	var $allValidProductIDs = True;
 
-	function __construct($productArray, $num) {
-		for($i = 0; $i < $num; $i++){
-			$item = new SingleProductData($productArray[$i]);
+	function __construct($productArray) {
+		foreach ($productArray as $product) {
+			$item = new SingleProductData($product);
 		    if($item->validProductID){
 				array_push($this->productList, $item);
 		    }else{
-				array_push($this->invalidProductIDs, $productArray[$i]);
+				array_push($this->invalidProductIDs, $product);
 				$allValidProductIDs = False;
 		    }
-		}//for
+		}//foreach
 	}//__construct
 
 	function isAllValidProductIDs(){

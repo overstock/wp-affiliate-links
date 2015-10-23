@@ -172,20 +172,13 @@ function generateRectangleWidget($atts){
     ), $atts);
      
   $productId = (isset($atts['id']) ? $atts['id'] : null);
-
-  if (is_null($productId)) {
-    return formatError("id parameter cannot be empty."); 
-  } else {
-  	$item = new MultiProductDataFromArray(array($productId), 1);
-    if($item->isAllValidProductIDs()){
-      $output = '<div class="ostk-element ostk-'.$atts['type'].'" '.getStyles($atts).'>';
-        $output .= getBranding();
-        $output .= generateRectangleHtmlOutput($item, $atts);
-      $output .= '</div>';
-      return $output;
-    }else{
-      return formatError('Invalid product id');
-    }
+	$item = new MultiProductDataFromArray(array($productId));
+  if($item->isAllValidProductIDs()){
+    $output = '<div class="ostk-element ostk-'.$atts['type'].'" '.getStyles($atts).'>';
+      $output .= getBranding();
+      $output .= generateRectangleHtmlOutput($item, $atts);
+    $output .= '</div>';
+    return $output;
   }
 }//generateRectangleWidget
 
@@ -210,8 +203,8 @@ function generateLeaderboardWidget($atts){
   		return formatError("Commas missing between ids, returning...");
   	}
   }//foreach
-  $products = new MultiProductDataFromArray($product_ids, count($product_ids));
-
+  $product_ids = limitArrayCount($product_ids, 2);
+  $products = new MultiProductDataFromArray($product_ids);
   $output = '<div class="ostk-element ostk-leaderboard">';
     $output .= getBranding();
     $output .= '<div class="item-holder item-count-'.count($product_ids).'">';
@@ -236,26 +229,15 @@ function generateSkyscraperWidget($atts){
       'link_target' => 'new_tab'
     ), $atts);
   $product_ids = (isset($atts['product_ids']) ? array_map('trim', explode(',', $atts['product_ids'])) : null);
-  if(is_null($product_ids)) { 
-    return formatError("The product_ids parameter cannot be empty.");
-  //code is repeated here, but there will be different html output for different numbers of products
-  } else if (count($product_ids) == 1) {
-  	//echo "\$product_ids count is 1 (skyscraper)";
-  	$products = new MultiProductDataFromArray($product_ids, 1);
-    $output = generateSkyscraperHtmlOutput($products, $atts);
-  } else if (count($product_ids) == 2) {
-  	//echo "\$product_ids count is 2 (skyscraper)";
-  	$products = new MultiProductDataFromArray($product_ids, 2);
-    $output = generateSkyscraperHtmlOutput($products, $atts);
-  } else {
-  	foreach($product_ids as $ids) {
-    	if(checkForMissingCommas($id) == true) {
-    		return formatError("Commas missing between ids, return ing...");
-    	}
+   foreach($product_ids as $ids) {
+     if(checkForMissingCommas($id) == true) {
+       return formatError("Commas missing between ids, return ing...");
+     }
     }//foreach
-  	$products = new MultiProductDataFromArray($product_ids, 3);
-  	$output = generateSkyscraperHtmlOutput($products, $atts);
-  }
+  $product_ids = limitArrayCount($product_ids, 3);
+  $products = new MultiProductDataFromArray($product_ids);
+  $output = generateSkyscraperHtmlOutput($products, $atts);
+
   $output2 = '<div class="ostk-element ostk-skyscraper" '.getStyles($atts).'>';
     $output2 .= getBranding();
     $output2 .= $output;
@@ -299,7 +281,7 @@ function generateCarouselWidget($atts){
       		return formatError("Commas missing between ids, return ing...");
       	}
       }//foreach
-	  $products = new MultiProductDataFromArray($product_ids, count($product_ids));
+	  $products = new MultiProductDataFromArray($product_ids);
   } else {
 	  $query = "http://www.overstock.com/api/search.json?{$keywords}{$taxonomy}{$sortOption}";
 	  $products = new MultiProductDataFromQuery($query, $limit);
