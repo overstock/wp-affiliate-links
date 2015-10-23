@@ -324,16 +324,6 @@ function generateStockPhoto($atts){
     $item = new SingleProductData($id);
     $output = generateStockPhotoHtmlOutput($item, $atts);
 
-    if(isset($atts['id']){
-      switch(){
-
-        default:
-          return formatError('"category" not found. Please check spelling and try again.');
-
-      }//switch
-      "image_large", "image_medium", "image_small"
-    }
-
     $output2 = '<div class="ostk-element ostk-stock-photo" '.getStyles($atts).'>';
       $output2 .= $output;
     $output2 .= '</div>';
