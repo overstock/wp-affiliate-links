@@ -22,6 +22,7 @@
   The "#main" and "#sidebar" is being used to make sure that the ostk styles have enough specificity to maintain ostk styles even in custom Wordpress themes.
   */
   /*----------------------------- Global for All Short Code Elements -----------------------------*/
+  background: #ffffff;
   /**
  * Global Reset of all HTML Elements
  *
