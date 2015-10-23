@@ -266,6 +266,13 @@ function getCarouselListItems($product, $productImg, $atts){
 	return $output;
 }//getCarouselListItems
 
+function limitArrayCount($product_ids, $num){
+	if(count($product_ids) > $num){
+		return array_slice($product_ids, 0, $num);
+	}else{
+		return $product_ids;
+	}
+}//limitArrayCount
 
 /*
 Validate that the shortcode attributes are valid. return Boolean.
