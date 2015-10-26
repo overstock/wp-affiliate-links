@@ -32,27 +32,27 @@ function ostk_doc_page() {
                 echo '</div><!-- section-title -->';
                 if($current_pattern){
                     $shortcodes = getShortCode($pattern['example_shortcodes']);
+                    foreach($shortcodes as $shortcode){
+                        echo '<h3 class="center">'.$pattern['name'].' Sample Shortcode</h3>';
+                        echo '<code>'.$shortcode.'</code>';
+                        echo '<div class="shortcode-output">';
+                            echo do_shortcode($shortcode);
+                        echo '</div><!--.shortcode-output-->';
+                    }//foreach
 					echo '<div class="atts">';
                             if(isset($pattern['required_attributes'])){
-                                echo '<h3>Required Attributes</h3>';
+                                echo '<h3>'.$pattern['name'].' Required Attributes</h3>';
                                     echo '<ul>';
                                         echo get_pattern_attributes($pattern['required_attributes']);
                                 echo '</ul>';
                             }
                             if(isset($pattern['optional_attributes'])){
-                            echo '<h3>Optional Attributes</h3>';
+                            echo '<h3>'.$pattern['name'].' Optional Attributes</h3>';
                                 echo '<ul>';
     								echo get_pattern_attributes($pattern['optional_attributes']);
                                 echo '</ul>';
                             }
 					echo '</div><!--atts-->';
-					foreach($shortcodes as $shortcode){
-						echo '<h3 class="center">Sample Code</h3>';
-						echo '<code>'.$shortcode.'</code>';
-						echo '<div class="shortcode-output">';
-							echo do_shortcode($shortcode);
-						echo '</div><!--.shortcode-output-->';
-					}//foreach
 				}
 				$pattern_counter++;
 			}//foreach			
