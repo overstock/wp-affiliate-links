@@ -278,13 +278,13 @@ $patterns = json_decode('
             {
                 "name": "type",
                 "description": "= \"carousel\""
-            },
-            {
-                "name": "product_ids",
-                "description": "A list of product ids separated by commas."
             }
         ],
         "optional_attributes": [
+            {
+                "name": "product_ids",
+                "description": "A list of product ids separated by commas."
+            },
             {
                 "name": "category",
                 "example": "Pets",
