@@ -153,14 +153,11 @@ function generateSkyscraperHtmlOutput($products, $atts){
   return $output;
 }//generateSkyscraperHtmlOutput
 
-function generateRectangleHtmlOutput($products, $atts){
-  $productList = $products->getProductList();
-  $output;
-  foreach ($productList as $product){
-    $output .= '<div class="element-content">';
+function generateRectangleHtmlOutput($product, $atts){
+	$output = '<div class="element-content">';
 		$output .= '<img src="'.$product->getImage_Large().'"/>';
 	$output .= '</div>';
-    $output .= '<div class="element-overlay">';
+	$output .= '<div class="element-overlay">';
 	    $output .= '<div class="element-content">';
 			$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
 				$output .= '<p class="title">'.$product->getName().'</p>';
@@ -171,7 +168,6 @@ function generateRectangleHtmlOutput($products, $atts){
 			$output .= '</a>';
 		$output .= '</div>';
 	$output .= '</div>';
-  }//foreach
   return $output;
 }//generateRectangleHtmlOutput
 

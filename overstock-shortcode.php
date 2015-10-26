@@ -170,10 +170,9 @@ function generateRectangleWidget($atts){
       'width' => null,
       'link_target' => 'new_tab'
     ), $atts);
-     
   $productId = (isset($atts['id']) ? $atts['id'] : null);
-	$item = new MultiProductDataFromArray(array($productId));
-  if($item->isAllValidProductIDs()){
+  $item = new SingleProductData($productId);
+  if($item->isValidProductID()){
     $output = '<div class="ostk-element ostk-'.$atts['type'].'" '.getStyles($atts).'>';
       $output .= getBranding();
       $output .= generateRectangleHtmlOutput($item, $atts);
@@ -205,12 +204,14 @@ function generateLeaderboardWidget($atts){
   }//foreach
   $product_ids = limitArrayCount($product_ids, 2);
   $products = new MultiProductDataFromArray($product_ids);
-  $output = '<div class="ostk-element ostk-leaderboard">';
-    $output .= getBranding();
-    $output .= '<div class="item-holder item-count-'.count($product_ids).'">';
-      $output .= generateLeaderboardHtmlOutput($products, $atts);
+  if($products->isAllValidProductIDs()){
+    $output = '<div class="ostk-element ostk-leaderboard">';
+      $output .= getBranding();
+      $output .= '<div class="item-holder item-count-'.count($product_ids).'">';
+        $output .= generateLeaderboardHtmlOutput($products, $atts);
+      $output .= '</div>';
     $output .= '</div>';
-  $output .= '</div>';
+  }
   return $output;
 }//generateLeaderboardWidget
 
@@ -236,13 +237,15 @@ function generateSkyscraperWidget($atts){
     }//foreach
   $product_ids = limitArrayCount($product_ids, 3);
   $products = new MultiProductDataFromArray($product_ids);
-  $output = generateSkyscraperHtmlOutput($products, $atts);
+  if($products->isAllValidProductIDs()){
+    $output = generateSkyscraperHtmlOutput($products, $atts);
 
-  $output2 = '<div class="ostk-element ostk-skyscraper" '.getStyles($atts).'>';
-    $output2 .= getBranding();
-    $output2 .= $output;
-  $output2 .= '</div>';
-  return $output2;
+    $output2 = '<div class="ostk-element ostk-skyscraper" '.getStyles($atts).'>';
+      $output2 .= getBranding();
+      $output2 .= $output;
+    $output2 .= '</div>';
+    return $output2;
+  }
 }//generateSkyscraperWidget
 
 /**
@@ -284,11 +287,13 @@ function generateCarouselWidget($atts){
 	  $products = new MultiProductDataFromArray($product_ids);
   } else {
 	  $query = "http://www.overstock.com/api/search.json?{$keywords}{$taxonomy}{$sortOption}";
-	  $products = new MultiProductDataFromQuery($query, $limit);
+	  $products = new MultiProductDataFromQuery($query);
   }
-	$output = generateCarouselHTML('carousel', $products->getProductList(), $atts);
-  $styles = getStyles($atts);
-	return '<div class="ostk-element ostk-carousel" '.$styles.'>'.$output.'</div>';
+  if($products->isAllValidProductIDs()){
+    $output = generateCarouselHTML('carousel', $products->getProductList(), $atts);
+    $styles = getStyles($atts);
+    return '<div class="ostk-element ostk-carousel" '.$styles.'>'.$output.'</div>';
+  }
 }//generateCarouselWidget
 
 /**
@@ -309,12 +314,10 @@ function generateStockPhoto($atts){
       ), $atts);
     $id = (isset($atts['id']) ? $atts['id'] : null);
     $item = new SingleProductData($id);
-    $output = generateStockPhotoHtmlOutput($item, $atts);
-
-    $output2 = '<div class="ostk-element ostk-stock-photo" '.getStyles($atts).'>';
-      $output2 .= $output;
-    $output2 .= '</div>';
-    return $output2;
+    if($item->isValidProductID()){
+      $output .= generateStockPhotoHtmlOutput($item, $atts);
+      return '<div class="ostk-element ostk-stock-photo" '.getStyles($atts).'>'.$output.'</div>';
+    }
 }//generateStockPhoto
 
 /**
@@ -330,7 +333,8 @@ function generateProductLinks($atts){
         'display' => null,
         'link_target' => 'new_tab'
       ), $atts);
-    $item = new SingleProductData($atts['id']);
+  $item = new SingleProductData($atts['id']);
+  if($item->isValidProductID()){
     $display = trim($atts['display']);
     $output;
     switch ($display) {
@@ -347,6 +351,7 @@ function generateProductLinks($atts){
 	  	return formatError('We do not recognize your display input, please check it.');
     }//switch
     return '<a href="'.$item->getAffiliateUrl().'" class="ostk-element ostk-product-link" '.getLinkTarget($atts).'>'.$output.'</a>';
+  }
 }//generateProductLinks
 
 /**
@@ -363,8 +368,10 @@ function generateProductCarouselWidget($atts){
     'link_target' => 'new_tab'
   ), $atts);
   $item = new SingleProductData($atts['id']);
-  $output = generateCarouselHTML('product_carousel', $item, $atts);
-  return '<div class="ostk-element ostk-carousel" '.getStyles($atts).'>'.$output.'</div>';
+  if($item->isValidProductID()){
+    $output = generateCarouselHTML('product_carousel', $item, $atts);
+    return '<div class="ostk-element ostk-carousel" '.getStyles($atts).'>'.$output.'</div>';
+  }
 }//generateProductCarouselWidget
 
 /**

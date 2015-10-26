@@ -36,7 +36,7 @@ class SingleProductData {
     //https://confluence.overstock.com/display/WIIP/Bridge2Solutions+-+Product+Details+API
 	$url = "http://www.overstock.com/api/product.json?prod_id=" . $productId;
 	$json = file_get_contents($url);
-	$productData = json_decode($json, true);
+	$productData = json_decode($json, True);
 
 	if(isset($productData['id'])){
 		$this->validProductID = True;
@@ -63,16 +63,6 @@ class SingleProductData {
 			}
 		}
 		$this->baseImageUrl = $productData[meta][imageBaseUrl];
-		$this->imgUrl_large = $this->baseImageUrl . $productData[imageLarge];
-		$this->imgUrl_medium = $this->baseImageUrl . $productData[imageMedium1];
-		$this->imgUrl_thumbnail = $this->baseImageUrl . $productData[imageThumbnail];
-		$murl = "http%3A%2F%2Fwww.overstock.com%2F" . $this->productId . "%2Fproduct.html";
-		$this->affiliateUrl = generateAffiliateLink($murl);
-	    $this->averageReviewAsDecimal = $productData[reviews];
-
-	    if(!empty($productData[rating])){
-		    $this->averageReviewAsGif = "http://ak1.ostkcdn.com/" . $productData[rating];
-	    }
 
 	    $this->numImages = count($productData[oViewerImages]);
 	    //we must populate the $arrayOfAllProductImages dynamically based on $numImages
@@ -80,11 +70,34 @@ class SingleProductData {
 	    for($j = 1; $j <= $this->numImages; $j++){ 
 	      $imageSizeCount = count($productData[oViewerImages][$j-1][imageSizes]); //each oViewerImage has a dynamic number of sizes, fetch the biggest one
 	      $imagePath = $productData[oViewerImages][$j-1][imageSizes][$imageSizeCount-1][imagePath]; //last img in array is the biggest one.
-	      //echo var_dump($imagePath);
 	      $imageUrl = $this->baseImageUrl . $imagePath;
 	      array_push($this->arrayOfAllProductImages, $imageUrl);
     	}
     	$this->description = $productData[shortDescription];
+
+		$this->imgUrl_large = $this->arrayOfAllProductImages[0];
+		$this->imgUrl_medium = $this->baseImageUrl . $productData[imageMedium1];
+		$this->imgUrl_thumbnail = $this->baseImageUrl . $productData[imageThumbnail];
+		// $this->imgUrl_large = $this->baseImageUrl . $productData[imageLarge];
+		// $this->imgUrl_medium = $this->baseImageUrl . $productData[imageMedium1];
+		// $this->imgUrl_thumbnail = $this->baseImageUrl . $productData[imageThumbnail];
+		$murl = "http%3A%2F%2Fwww.overstock.com%2F" . $this->productId . "%2Fproduct.html";
+		$this->affiliateUrl = generateAffiliateLink($murl);
+	    $this->averageReviewAsDecimal = $productData[reviews];
+
+	    if(!empty($productData[rating])){
+		    $this->averageReviewAsGif = "http://ak1.ostkcdn.com/" . $productData[rating];
+	    }
+	}
+  }
+
+
+  function isValidProductID(){
+	if(isset($this->productId)){
+		return True;
+	}else{
+		echo formatError('Invalid product ID');
+		return False;
 	}
   }
 
@@ -188,6 +201,11 @@ class MultiProductDataFromArray {
 
 	function isAllValidProductIDs(){
 	    if(count($this->invalidProductIDs) > 0){
+	    	$multiMarker = '';
+		    if(count($this->invalidProductIDs) > 1){
+		    	$multiMarker = 's';
+	    	}
+	    	echo formatError('Invalid product ID'.$multiMarker.': '.implode(', ', $this->invalidProductIDs));
 	    	return False;
     	}else{
 	    	return True;
