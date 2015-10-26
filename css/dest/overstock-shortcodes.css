@@ -746,6 +746,11 @@
   display: table;
   margin: 0 auto;
 }
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol {
+  list-style: none;
+}
 .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
 #main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
 #sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li {
@@ -753,6 +758,7 @@
   padding: 5px;
   width: auto;
   display: none;
+  list-style: none;
 }
 .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
 #main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
@@ -767,6 +773,16 @@
 #main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
 #sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active {
   border: solid 1px #c80f2e;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav {
+  list-style: none;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li {
+  list-style: none;
 }
 .ostk-element.ostk-stock-photo:hover .element-overlay,
 #main .ostk-element.ostk-stock-photo:hover .element-overlay,
