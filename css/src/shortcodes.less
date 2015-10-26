@@ -275,11 +275,13 @@
           display: table;
           margin: 0 auto;
           ol {
+            list-style: none;
             li {
               display: table-cell; 
               padding: 5px;
               width: auto;
               display: none;
+              list-style: none;
               img {
                 .border-radius(2px);
                 border: solid 1px grey;
@@ -288,6 +290,12 @@
                   border: solid 1px @primary;
                 }
               }
+            }
+          }
+          ul.flex-direction-nav {
+            list-style: none;
+            li {
+              list-style: none;              
             }
           }
         }/* .custom-controls-container */
