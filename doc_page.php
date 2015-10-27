@@ -91,19 +91,22 @@ function get_pattern_attributes($att_array){
 				$output .= '<p><span class="atts-subtitle">Example:</span> "'.$att['example'].'"</p>';
 			}
             if(isset($att['options'])){
-                $output .= '<p><span class="atts-subtitle">Options:</span> ';
-                $i = 0;
+                $output .= '<p><span class="atts-subtitle">Options:</span><p>';
+                $output .= '<ul>';
+                $ulOptionsClass = '';
+                if(count($att['options']) > 5){
+                    $ulOptionsClass = 'options-col-3';
+                }else if(count($att['options']) > 3){
+                    $ulOptionsClass = 'options-col-2';
+                }
                 foreach($att['options'] as $att_option){
-                    if($i > 0){
-                        $output .= ', ';
-                    }
-                    $output .= '"'.$att_option.'"';
+                    $defaultText = '';
                     if(isset($att['default']) && $att['default'] === $att_option){
-                        $output .= ' (Default)';
+                        $defaultText = ' (Default)';
                     }
-                    $i++;
+                    $output .= '<li class='.$ulOptionsClass.'>"'.$att_option.'" '.$defaultText.'</li>';
                 }//foreach
-                $output .= '</p>';
+                $output .= '</ul>';
             }
             if(isset($att['notes'])){
                 foreach($att['notes'] as $att_note){

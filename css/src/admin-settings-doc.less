@@ -26,12 +26,39 @@
 			@media (min-width: 768px) {
 			}
 			li {
-				overflow: hidden;
+				clear: both;
 				@media (max-width: 767px) {
 					margin-bottom: 20px;
 				}
 				@media (min-width: 768px) {
 					margin-bottom: 10px;
+				}
+				ul {
+					padding: 0 20px;
+					overflow: hidden;
+					@media (max-width: 767px) {
+						margin-left: 60px;
+					}
+					@media (min-width: 768px) {
+						margin-left: 160px;
+					}
+					li {
+						list-style: disc;
+						&.options-col-3 {
+							@media (min-width: 768px) {
+								float: left;
+								width: 30%;
+								clear: none;
+							}
+						}
+						&.options-col-2 {
+							@media (min-width: 768px) {
+								float: left;
+								width: 50%;
+								clear: none;
+							}
+						}
+					}
 				}
 				p {
 				    line-height: 18px;
@@ -43,14 +70,8 @@
 					@media (min-width: 768px) {
 						margin-left: 130px;
 					}
-					span {
-						&.atts-subtitle {
-							font-weight: bold;
-							color: @grey;
-						}
-					}
 					&.title {
-						margin-left: 0px;
+						margin: 0;
 						font-weight: bold;
 						@media (max-width: 767px) {
 						}
@@ -59,6 +80,10 @@
 							float: left;
 							text-align: right;
 						}
+					}
+					&.atts-subtitle {
+						font-weight: bold;
+						color: @grey;
 					}
 					&.note {
 						color: @primary;
