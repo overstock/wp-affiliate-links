@@ -40,18 +40,18 @@ function ostk_doc_page() {
                         echo '</div><!--.shortcode-output-->';
                     }//foreach
 					echo '<div class="atts">';
-                            if(isset($pattern['required_attributes'])){
-                                echo '<h3>'.$pattern['name'].' Required Attributes</h3>';
-                                    echo '<ul>';
-                                        echo get_pattern_attributes($pattern['required_attributes']);
-                                echo '</ul>';
-                            }
-                            if(isset($pattern['optional_attributes'])){
-                            echo '<h3>'.$pattern['name'].' Optional Attributes</h3>';
+                        if(isset($pattern['required_attributes'])){
+                            echo '<h3>'.$pattern['name'].' Required Attributes</h3>';
                                 echo '<ul>';
-    								echo get_pattern_attributes($pattern['optional_attributes']);
-                                echo '</ul>';
-                            }
+                                    echo get_pattern_attributes($pattern['required_attributes']);
+                            echo '</ul>';
+                        }
+                        if(isset($pattern['optional_attributes'])){
+                        echo '<h3>'.$pattern['name'].' Optional Attributes</h3>';
+                            echo '<ul>';
+								echo get_pattern_attributes($pattern['optional_attributes']);
+                            echo '</ul>';
+                        }
 					echo '</div><!--atts-->';
 				}
 				$pattern_counter++;

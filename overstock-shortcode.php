@@ -1,6 +1,6 @@
 <?php
 /*
-* Plugin Name: Overstock Affiliate Product Embed
+* Plugin Name: Overstock Affiliate Links
 * Description: Embed Overstock Products into your Posts 
 * Version: 1.0
 * Author: Reif Tauati and Travis Hoki
