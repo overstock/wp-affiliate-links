@@ -297,7 +297,7 @@ function generateCarouselWidget($atts){
 }//generateCarouselWidget
 
 /**
- * Pattern 7 - Image Link: lets you create an image link to a product page (stock photo)
+ * Pattern 7 - Stock Photo: lets you create an image link to a product page (stock photo)
  * Allow users to add stock photos to their posts (and get paid for it).
  * Example Usage:
  * 1) [overstock type="stock_photo" id="8859234"]
@@ -314,22 +314,21 @@ function generateStockPhoto($atts){
       ), $atts);
     $id = (isset($atts['id']) ? $atts['id'] : null);
     $item = new SingleProductData($id);
-    if($atts['image_number'] <= $item->numImages){
-      if($item->isValidProductID()){
-        $output .= generateStockPhotoHtmlOutput($item, $atts);
-        return '<div class="ostk-element ostk-stock-photo" '.getStyles($atts).'>'.$output.'</div>';
-      }
-    }else{
-      $imageNumberError = 'Image number '.$atts['image_number'].' is not available.';
-      if($item->numImages > 1){
-        $imageNumberError .= ' Image numbers from 1 to '. $item->numImages .' are available.';
+    if($item->isValidProductID()){
+      if($atts['image_number'] <= $item->numImages){
+          $output .= generateStockPhotoHtmlOutput($item, $atts);
+          return '<div class="ostk-element ostk-stock-photo" '.getStyles($atts).'>'.$output.'</div>';
       }else{
-        $imageNumberError .= ' This image only has 1 available image.';
+        $imageNumberError = 'Image number '.$atts['image_number'].' is not available.';
+        if($item->numImages > 1){
+          $imageNumberError .= ' Image numbers from 1 to '. $item->numImages .' are available.';
+        }else{
+          $imageNumberError .= ' This image only has 1 available image.';
+        }
+        $imageNumberError .= ' Please change the image_number attribute and try again';
+        return formatError($imageNumberError);
       }
-      $imageNumberError .= ' Please change the image_number attribute and try again';
-      return formatError($imageNumberError);
     }
-
 }//generateStockPhoto
 
 /**
