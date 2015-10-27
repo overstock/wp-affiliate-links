@@ -1,5 +1,11 @@
 /*----------------------------- WP Plugin Documentation Page -----------------------------*/
 .ostk-doc-page {
+	p,
+	span {
+		&.red {
+			color: @primary;
+		}
+	}
 	.section-title {
 		margin: 50px 0 10px 0;
 		h3 {
@@ -27,12 +33,7 @@
 			}
 			li {
 				clear: both;
-				@media (max-width: 767px) {
-					margin-bottom: 20px;
-				}
-				@media (min-width: 768px) {
-					margin-bottom: 10px;
-				}
+				margin-bottom: 20px;
 				ul {
 					padding: 0 20px;
 					overflow: hidden;
@@ -40,9 +41,10 @@
 						margin-left: 60px;
 					}
 					@media (min-width: 768px) {
-						margin-left: 160px;
+						margin-left: 180px;
 					}
 					li {
+						margin-bottom: 10px;
 						list-style: disc;
 						&.options-col-3 {
 							@media (min-width: 768px) {
@@ -68,7 +70,7 @@
 						margin-left: 30px;
 					}
 					@media (min-width: 768px) {
-						margin-left: 130px;
+						margin-left: 150px;
 					}
 					&.title {
 						margin: 0;
@@ -76,17 +78,16 @@
 						@media (max-width: 767px) {
 						}
 						@media (min-width: 768px) {
-							width: 100px;
+							width: 120px;
 							float: left;
 							text-align: right;
 						}
 					}
-					&.atts-subtitle {
-						font-weight: bold;
-						color: @grey;
-					}
-					&.note {
-						color: @primary;
+					span {
+						&.atts-subtitle {
+							font-weight: bold;
+							color: @grey;
+						}
 					}
 				}
 			}

@@ -913,6 +913,10 @@
 }
 /*----------------------------- WP Plugin Home Page -----------------------------*/
 /*----------------------------- WP Plugin Documentation Page -----------------------------*/
+.ostk-doc-page p.red,
+.ostk-doc-page span.red {
+  color: #c80f2e;
+}
 .ostk-doc-page .section-title {
   margin: 50px 0 10px 0;
 }
@@ -938,16 +942,7 @@
 }
 .ostk-doc-page .atts ul li {
   clear: both;
-}
-@media (max-width: 767px) {
-  .ostk-doc-page .atts ul li {
-    margin-bottom: 20px;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-doc-page .atts ul li {
-    margin-bottom: 10px;
-  }
+  margin-bottom: 20px;
 }
 .ostk-doc-page .atts ul li ul {
   padding: 0 20px;
@@ -960,10 +955,11 @@
 }
 @media (min-width: 768px) {
   .ostk-doc-page .atts ul li ul {
-    margin-left: 160px;
+    margin-left: 180px;
   }
 }
 .ostk-doc-page .atts ul li ul li {
+  margin-bottom: 10px;
   list-style: disc;
 }
 @media (min-width: 768px) {
@@ -992,7 +988,7 @@
 }
 @media (min-width: 768px) {
   .ostk-doc-page .atts ul li p {
-    margin-left: 130px;
+    margin-left: 150px;
   }
 }
 .ostk-doc-page .atts ul li p.title {
@@ -1001,17 +997,14 @@
 }
 @media (min-width: 768px) {
   .ostk-doc-page .atts ul li p.title {
-    width: 100px;
+    width: 120px;
     float: left;
     text-align: right;
   }
 }
-.ostk-doc-page .atts ul li p.atts-subtitle {
+.ostk-doc-page .atts ul li p span.atts-subtitle {
   font-weight: bold;
   color: #7b7b7b;
-}
-.ostk-doc-page .atts ul li p.note {
-  color: #c80f2e;
 }
 .ostk-doc-page code {
   background-color: #444444;

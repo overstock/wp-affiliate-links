@@ -265,7 +265,8 @@ $patterns = json_decode('
         "slug": "carousel",
         "description": "Lets you create a carousel widget for up to 10 products. You will get the product ids from the product&apos;s URL on Overstock.com.",
         "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>."
+            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
+            "<span class=\"red\">At least one of the starred (\"*\") optional attributes must be provided. For instance, a carousel can be created by EITHER a list of product ids, a category, or a keywords.</span>"
         ],
         "example_shortcodes": [
             {
@@ -283,24 +284,41 @@ $patterns = json_decode('
         "optional_attributes": [
             {
                 "name": "product_ids",
-                "description": "A list of product ids separated by commas."
+                "description": "<span class=\"red\">*</span> A list of product ids separated by commas."
             },
             {
                 "name": "category",
-                "example": "Pets",
-                "description": "Select items from a specific Overstock store."
+                "description": "<span class=\"red\">*</span> Select items from a specific Overstock store.",
+                "options": [
+                    "Home & Garden",
+                    "Jewelry & Watches",
+                    "Sports & Toys",
+                    "Worldstock Fair Trade",
+                    "Clothing & Shoes",
+                    "Health & Beauty",
+                    "Food & Gifts",
+                    "Office Supplies",
+                    "Luggage & Bags",
+                    "Crafts & Sewing",
+                    "Baby",
+                    "Crafts & Sewing",
+                    "Pet Supplies",
+                    "Emergency Preparedness",
+                    "Bedding & Bath"
+                ]
             },
             {
                 "name": "keywords",
-                "description": "a keyword search"
+                "description": "<span class=\"red\">*</span> A keyword search",
+                "example": "soccer shoes"
             },
             {
                 "name": "sort_by",
-                "description": "choose a sort option"
+                "description": "Choose a sort option"
             },
             {
                 "name": "number_of_items",
-                "description": "choose an item limit"
+                "description": "Choose an item limit"
             },
             {
                 "name": "width",
