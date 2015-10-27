@@ -266,7 +266,7 @@ $patterns = json_decode('
         "description": "Lets you create a carousel widget for up to 10 products. You will get the product ids from the product&apos;s URL on Overstock.com.",
         "notes": [
             "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-            "<span class=\"red\">At least one of the starred \"*\" optional attributes must be provided. For instance, a carousel can be created by EITHER a list of product ids, a category, or a keyword.</span>"
+            "<span class=\"red\">At least one of the starred (\"*\") optional attributes must be provided. For instance, a carousel can be created by EITHER a list of product ids, a category, or a keywords.</span>"
         ],
         "example_shortcodes": [
             {
