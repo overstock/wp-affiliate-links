@@ -82,7 +82,10 @@ function get_pattern_attributes($att_array){
 		$output .= '<li>';
 			$output .= '<p class="title">'.$att['name'].'</p>';
             $output .= '<p> '.$att['description'].'</p>';
-            if(isset($att['description'])){
+            if(isset($att['notes'])){
+                foreach($att['notes'] as $att_note){
+                    $output .= '<p class="note">Note: '.$att_note.'</p>';
+                }//foreach
             }
             if(isset($att['default'])){
 				$output .= '<p><span class="atts-subtitle">Default:</span> '.$att['default'].'</p>';
@@ -107,11 +110,6 @@ function get_pattern_attributes($att_array){
                     $output .= '<li class='.$ulOptionsClass.'>"'.$att_option.'" '.$defaultText.'</li>';
                 }//foreach
                 $output .= '</ul>';
-            }
-            if(isset($att['notes'])){
-                foreach($att['notes'] as $att_note){
-                    $output .= '<p class="note">Note: '.$att_note.'</p>';
-                }//foreach
             }
 		$output .= '</li>';
 	}//foreach
