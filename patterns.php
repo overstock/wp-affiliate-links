@@ -65,7 +65,6 @@ $patterns = json_decode('
                 "options": [
                     "Relevance", 
                     "Recommended",
-                    "Reviews",
                     "Reviews", 
                     "Lowest Price", 
                     "Highest Price", 
@@ -321,7 +320,6 @@ $patterns = json_decode('
                     "Relevance", 
                     "Recommended",
                     "Reviews",
-                    "Reviews", 
                     "Lowest Price", 
                     "Highest Price", 
                     "New Arrivals"
