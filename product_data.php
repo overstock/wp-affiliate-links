@@ -187,7 +187,10 @@ class MultiProductDataFromArray {
 	var $invalidProductIDs = array();
 	var $allValidProductIDs = True;
 
-	function __construct($productArray) {
+	function __construct($productArray, $limit = null) {
+		if($limit !== null){
+			$productArray = limitArrayCount($productArray, $limit);
+		}
 		foreach ($productArray as $product) {
 			$item = new SingleProductData($product);
 		    if($item->validProductID){
