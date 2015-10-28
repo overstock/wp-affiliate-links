@@ -95,25 +95,28 @@ function checkTaxonomy($input, $taxonomy) {
 
 function getSortOption($input){
 	switch (strtolower($input)) {
-	  case strtolower("Top Sellers"):
-	  	return "Top+Sellers";
-	  break;
-	  case strtolower("Reviews"):
-	  	return "Review+Raitings";
-	  break;
-	  case strtolower("Name"):
-	  	return "Name";
-	  break;
-	  case strtolower("Lowest Price"):
-	  	return "Lowest+Price";
-	  break;
-	  case strtolower("Highest Price"):
-	  	return "Highest+Price";
-	  break;
-	  case strtolower("New Arrivals"):
-	  	return "New+Arrivals";
-	  break;
-	}
+		case strtolower("Relevance"):
+			return "Relevance";
+			break;
+		case strtolower("Recommended"):
+			return "Recommended";
+			break;
+		case strtolower("Reviews"):
+			return "Avg.%20Customer%20Review";
+			break;
+		case strtolower("Name"):
+			return "Name";
+			break;
+		case strtolower("Lowest Price"):
+			return "Lowest+Price";
+			break;
+		case strtolower("Highest Price"):
+			return "Highest+Price";
+			break;
+		case strtolower("New Arrivals"):
+			return "New+Arrivals";
+			break;
+	}//switch
 }//getSortOption
 
 function generateLeaderboardHtmlOutput($products, $atts){

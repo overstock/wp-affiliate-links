@@ -63,7 +63,9 @@ $patterns = json_decode('
                 "name": "sort_by",
                 "description": "Sort results in different ways",
                 "options": [
-                    "Top Sellers", 
+                    "Relevance", 
+                    "Recommended",
+                    "Reviews",
                     "Reviews", 
                     "Lowest Price", 
                     "Highest Price", 
@@ -316,7 +318,9 @@ $patterns = json_decode('
                 "name": "sort_by",
                 "description": "Choose a sort option",
                 "options": [
-                    "Top Sellers", 
+                    "Relevance", 
+                    "Recommended",
+                    "Reviews",
                     "Reviews", 
                     "Lowest Price", 
                     "Highest Price", 
