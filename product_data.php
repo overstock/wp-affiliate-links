@@ -219,6 +219,9 @@ class MultiProductDataFromArray {
 
 class MultiProductDataFromQuery {
 	var $productList;	
+	var $invalidProductIDs = array();
+	var $allValidProductIDs = True;
+
 	function __construct($query, $num) {
 		$url = $query;
 		$json = file_get_contents($url);
@@ -229,11 +232,26 @@ class MultiProductDataFromQuery {
 		}
 		for ($i = 0; $i < $num; $i++) {
 		  $this->productList[$i] = new SingleProductData($productData[products][products][$i][id]);
-		}
+		}//for
 	}//__construct
    
      function getProductList(){
   	   return $this->productList;
     }//getProductList
+
+
+	function isAllValidProductIDs(){
+	    if(count($this->invalidProductIDs) > 0){
+	    	$multiMarker = '';
+		    if(count($this->invalidProductIDs) > 1){
+		    	$multiMarker = 's';
+	    	}
+	    	echo formatError('Invalid product ID'.$multiMarker.': '.implode(', ', $this->invalidProductIDs));
+	    	return False;
+    	}else{
+	    	return True;
+    	}
+	}//isAllValidProductIDs
+
 }//MultiProductDataFromQuery
 ?>
