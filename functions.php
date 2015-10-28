@@ -250,19 +250,19 @@ function generateCarouselHTML($carousel_type, $obj, $atts){
 function getCarouselListItems($product, $productImg, $atts){
 	$output;
 	$output .= '<li data-thumb="'.$productImg.'">';
+		$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
 		    $output .= '<div class="element-content">';
-			$output .= '<img src="'.$productImg.'"/>';
-		$output .= '</div>';
-	    $output .= '<div class="element-overlay">';
-			$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
-				$output .= '<p class="title">'.$product->getName().'</p>';
-				if($product->averageReviewAsGif){
-					$output .= '<img class="ostk-rating" src="'.$product->getAverageReviewAsGif().'"/>';
-				}
-				$output .= '<p class="price">'.$product->getPrice().'</p>';
-				$output .= '<img class="ostk-logo" src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo.png">';
-			$output .= '</a>';
-		$output .= '</div>';
+				$output .= '<img src="'.$productImg.'"/>';
+			$output .= '</div>';
+		    $output .= '<div class="element-overlay">';
+					$output .= '<p class="title">'.$product->getName().'</p>';
+					if($product->averageReviewAsGif){
+						$output .= '<img class="ostk-rating" src="'.$product->getAverageReviewAsGif().'"/>';
+					}
+					$output .= '<p class="price">'.$product->getPrice().'</p>';
+					$output .= '<img class="ostk-logo" src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo.png">';
+			$output .= '</div>';
+		$output .= '</a>';
 	$output .= '</li>';
 	return $output;
 }//getCarouselListItems
