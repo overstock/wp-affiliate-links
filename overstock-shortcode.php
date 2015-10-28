@@ -260,7 +260,7 @@ function generateCarouselWidget($atts){
   $atts = shortcode_atts(
     array(
     'category' => null, 
-    'number_of_items' => 2,
+    'number_of_items' => null,
     'sort_by' => null, 
     'keywords' => null,
     'product_ids' => null,
@@ -272,7 +272,6 @@ function generateCarouselWidget($atts){
   $sortOption = (isset($atts['sort_by'], $atts) ? "&sortOption=" . getSortOption($atts['sort_by']) : '');
   $keywords = (isset($atts['keywords'], $atts) ? "keywords=" . str_replace(' ', '%20', $atts['keywords']) : null);
   $product_ids = (isset($atts['product_ids']) ? array_map('trim', explode(',', $atts['product_ids'])) : null);
-  $limit = ($atts['number_of_items'] <= 10 ? $atts['number_of_items'] : 5);
   
   if (isset($taxonomy) && getTaxonomy(htmlspecialchars_decode($atts['category'])) == false) {
   	return formatError("category=\"{$atts['category']}\" does not match our given categories, please check it.");
@@ -287,7 +286,7 @@ function generateCarouselWidget($atts){
 	  $products = new MultiProductDataFromArray($product_ids);
   } else {
 	  $query = "http://www.overstock.com/api/search.json?{$keywords}{$taxonomy}{$sortOption}";
-    $products = new MultiProductDataFromQuery($query, $limit);
+    $products = new MultiProductDataFromQuery($query, $atts['number_of_items']);
   }
   if($products->isAllValidProductIDs()){
     $output = generateCarouselHTML('carousel', $products->getProductList(), $atts);
