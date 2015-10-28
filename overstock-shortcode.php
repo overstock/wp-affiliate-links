@@ -287,13 +287,9 @@ function generateCarouselWidget($atts){
 	  $products = new MultiProductDataFromArray($product_ids);
   } else {
 	  $query = "http://www.overstock.com/api/search.json?{$keywords}{$taxonomy}{$sortOption}";
-    echo 'query: '.$query.'<br>';
     $products = new MultiProductDataFromQuery($query, $limit);
   }
   if($products->isAllValidProductIDs()){
-
-    echo json_encode($products->getProductList());
-
     $output = generateCarouselHTML('carousel', $products->getProductList(), $atts);
     $styles = getStyles($atts);
     return '<div class="ostk-element ostk-carousel" '.$styles.'>'.$output.'</div>';

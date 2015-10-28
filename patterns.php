@@ -314,7 +314,14 @@ $patterns = json_decode('
             },
             {
                 "name": "sort_by",
-                "description": "Choose a sort option"
+                "description": "Choose a sort option",
+                "options": [
+                    "Top Sellers", 
+                    "Reviews", 
+                    "Lowest Price", 
+                    "Highest Price", 
+                    "New Arrivals"
+                ]
             },
             {
                 "name": "number_of_items",
