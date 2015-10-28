@@ -534,15 +534,16 @@
 .ostk-element.ostk-carousel,
 #main .ostk-element.ostk-carousel,
 #sidebar .ostk-element.ostk-carousel {
+  position: relative;
   /* flexslider */
   /* Arrows */
   /* Arrows Navigation */
   /* .ostk-carousel.desktop-size */
 }
-.ostk-element.ostk-carousel .ostk-flexslider,
-#main .ostk-element.ostk-carousel .ostk-flexslider,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider {
-  position: relative;
+.ostk-element.ostk-carousel.mobile-size .ostk-flexslider,
+#main .ostk-element.ostk-carousel.mobile-size .ostk-flexslider,
+#sidebar .ostk-element.ostk-carousel.mobile-size .ostk-flexslider {
+  padding: 30px;
 }
 .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
 #main .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
@@ -577,8 +578,6 @@
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-  width: 100%;
-  min-height: 200px;
 }
 .ostk-element.ostk-carousel .element-overlay p,
 #main .ostk-element.ostk-carousel .element-overlay p,
@@ -666,43 +665,42 @@
   /* Arrows Navigation */
   /* .custom-navigation */
 }
-.ostk-element.ostk-carousel.mobile-size:hover,
-#main .ostk-element.ostk-carousel.mobile-size:hover,
-#sidebar .ostk-element.ostk-carousel.mobile-size:hover {
-  /* Arrows Navigation */
-}
-.ostk-element.ostk-carousel.mobile-size:hover .custom-navigation a,
-#main .ostk-element.ostk-carousel.mobile-size:hover .custom-navigation a,
-#sidebar .ostk-element.ostk-carousel.mobile-size:hover .custom-navigation a {
-  -webkit-opacity: 1;
-  -moz-opacity: 1;
-  opacity: 1;
-}
 .ostk-element.ostk-carousel.mobile-size .custom-navigation,
 #main .ostk-element.ostk-carousel.mobile-size .custom-navigation,
 #sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation {
   position: absolute;
   width: 100%;
   top: 50%;
-  padding: 0 10px;
+  /* Thumbail Navigation */
   /* .custom-controls-container */
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation a,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a {
-  -webkit-transition: all linear 500ms;
-  -moz-transition: all linear 500ms;
-  -ms-transition: all linear 500ms;
-  -o-transition: all linear 500ms;
-  transition: all linear 500ms;
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
-  background: rgba(255, 255, 255, 0.5);
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow {
   padding: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left {
+  background-position: -50px 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover {
+  background-position: -50px -25px;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right {
+  background-position: -75px 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover {
+  background-position: -75px -25px;
 }
 .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
 #main .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
