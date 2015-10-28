@@ -376,7 +376,8 @@ function generateProductCarouselWidget($atts){
     array(
     'id' => null,
     'width' => null,
-    'link_target' => 'new_tab'
+    'link_target' => 'new_tab',
+    'number_of_items' => null
   ), $atts);
   $item = new SingleProductData($atts['id']);
   if($item->isValidProductID()){
