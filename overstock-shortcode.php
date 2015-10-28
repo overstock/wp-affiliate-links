@@ -414,31 +414,4 @@ function sampleWidget($atts) {
 HTML;
   return $output;
 }//sampleWidget
-
-function getBranding(){
-  $output = '<div class="branding">';
-    $output .= '<img src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo-white.png" width="110" height="30"/>';
-  $output .= '</div>';
-  return $output;
-}//getBranding
-
-function getStyles($atts){
-  $output;
-  if(isset($atts['width'])){
-    $output .= 'width:'.$atts['width'].';';
-  }
-  return 'style="'.$output.'"';
-}//getStyles
-
-function getLinkTarget($atts){
-  $target = '_blank';
-  if(isset($atts['link_target'])){
-    switch($atts['link_target']){
-      case 'current_tab':
-        $target = '_self';
-        break;
-    }//switch
-  }
-  return "target='".$target."'";
-}//getLinkTarget
 ?>
