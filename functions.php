@@ -215,7 +215,9 @@ function generateCarouselHTML($carousel_type, $obj, $atts){
 		$product = $obj;
 		$productList = $product->getArrayOfAllProductImages();
 	}
-
+	if($atts['number_of_items'] !== null){
+		$productList = limitArrayCount($productList, $atts['number_of_items']);
+	}
 	$output .= '<div class="ostk-flexslider">';
 		$output .= '<ul class="slides">';
 			if($carousel_type == 'carousel'){
@@ -375,4 +377,40 @@ function findObjWhereKeyEqualsValue($obj, $key_1, $value_1){
   }//foreach
   return null;
 }//findObjWhereKeyEquals
+
+
+function getBranding(){
+  $output = '<div class="branding">';
+    $output .= '<img src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo-white.png" width="110" height="30"/>';
+  $output .= '</div>';
+  return $output;
+}//getBranding
+
+function getStyles($atts){
+  $output;
+  if(isset($atts['width'])){
+    $output .= 'width:'.$atts['width'].';';
+  }
+  return 'style="'.$output.'"';
+}//getStyles
+
+function getLinkTarget($atts){
+  $output;
+  if(isset($atts['link_target'])){
+    $link_target = $atts['link_target'];
+    switch($link_target){
+      case 'current_tab':
+        $output = '_self';
+        break;
+      case 'new_window':
+        $output = '_parent';
+        break;
+      default:
+        $output = '_blank';
+    }//switch
+  }else{
+    $output = '_blank';
+  }
+  return "target='".$output."'";
+}//getLinkTarget
 ?>

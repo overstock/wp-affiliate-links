@@ -202,8 +202,7 @@ function generateLeaderboardWidget($atts){
   		return formatError("Commas missing between ids, returning...");
   	}
   }//foreach
-  $product_ids = limitArrayCount($product_ids, 2);
-  $products = new MultiProductDataFromArray($product_ids);
+  $products = new MultiProductDataFromArray($product_ids, 2);
   if($products->isAllValidProductIDs()){
     $output = '<div class="ostk-element ostk-leaderboard">';
       $output .= getBranding();
@@ -235,8 +234,7 @@ function generateSkyscraperWidget($atts){
        return formatError("Commas missing between ids, return ing...");
      }
     }//foreach
-  $product_ids = limitArrayCount($product_ids, 3);
-  $products = new MultiProductDataFromArray($product_ids);
+  $products = new MultiProductDataFromArray($product_ids, 3);
   if($products->isAllValidProductIDs()){
     $output = generateSkyscraperHtmlOutput($products, $atts);
 
@@ -260,7 +258,6 @@ function generateCarouselWidget($atts){
   $atts = shortcode_atts(
     array(
     'category' => null, 
-    'number_of_items' => 2,
     'sort_by' => null, 
     'keywords' => null,
     'product_ids' => null,
@@ -272,7 +269,6 @@ function generateCarouselWidget($atts){
   $sortOption = (isset($atts['sort_by'], $atts) ? "&sortOption=" . getSortOption($atts['sort_by']) : '');
   $keywords = (isset($atts['keywords'], $atts) ? "keywords=" . str_replace(' ', '%20', $atts['keywords']) : null);
   $product_ids = (isset($atts['product_ids']) ? array_map('trim', explode(',', $atts['product_ids'])) : null);
-  $limit = ($atts['number_of_items'] <= 10 ? $atts['number_of_items'] : 5);
   
   if (isset($taxonomy) && getTaxonomy(htmlspecialchars_decode($atts['category'])) == false) {
   	return formatError("category=\"{$atts['category']}\" does not match our given categories, please check it.");
@@ -287,7 +283,7 @@ function generateCarouselWidget($atts){
 	  $products = new MultiProductDataFromArray($product_ids);
   } else {
 	  $query = "http://www.overstock.com/api/search.json?{$keywords}{$taxonomy}{$sortOption}";
-    $products = new MultiProductDataFromQuery($query, $limit);
+    $products = new MultiProductDataFromQuery($query);
   }
   if($products->isAllValidProductIDs()){
     $output = generateCarouselHTML('carousel', $products->getProductList(), $atts);
@@ -376,7 +372,8 @@ function generateProductCarouselWidget($atts){
     array(
     'id' => null,
     'width' => null,
-    'link_target' => 'new_tab'
+    'link_target' => 'new_tab',
+    'number_of_items' => null
   ), $atts);
   $item = new SingleProductData($atts['id']);
   if($item->isValidProductID()){
@@ -414,39 +411,4 @@ function sampleWidget($atts) {
 HTML;
   return $output;
 }//sampleWidget
-
-function getBranding(){
-  $output = '<div class="branding">';
-    $output .= '<img src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo-white.png" width="110" height="30"/>';
-  $output .= '</div>';
-  return $output;
-}//getBranding
-
-function getStyles($atts){
-  $output;
-  if(isset($atts['width'])){
-    $output .= 'width:'.$atts['width'].';';
-  }
-  return 'style="'.$output.'"';
-}//getStyles
-
-function getLinkTarget($atts){
-  $output;
-  if(isset($atts['link_target'])){
-    $link_target = $atts['link_target'];
-    switch($link_target){
-      case 'current_tab':
-        $output = '_self';
-        break;
-      case 'new_window':
-        $output = '_parent';
-        break;
-      default:
-        $output = '_blank';
-    }//switch
-  }else{
-    $output = '_blank';
-  }
-  return "target='".$output."'";
-}//getLinkTarget
 ?>

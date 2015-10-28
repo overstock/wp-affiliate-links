@@ -326,10 +326,6 @@ $patterns = json_decode('
                 ]
             },
             {
-                "name": "number_of_items",
-                "description": "Choose an item limit"
-            },
-            {
                 "name": "width",
                 "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
                 "default": "100%",
@@ -459,8 +455,8 @@ $patterns = json_decode('
     {
         "name": "Product Carousel",
         "slug": "product_carousel",
-        "description": "Product Carousel Widget: Create a simple carousel viewer for a certain product. Each image will link to the product page on Overstock.com.",
-        "notes": ["Currently the carousel is limited to 5 images."],
+        "description": "Create a simple carousel viewer for a certain product. Each image will link to the product page on Overstock.com.",
+        "notes": [],
         "example_shortcodes": [
             {
                 "type": "product_carousel",
@@ -480,6 +476,11 @@ $patterns = json_decode('
             }
         ],
         "optional_attributes": [
+            {
+                "name": "number_of_items",
+                "description": "Choose an item limit. By default it is unlimited.",
+                "example": "10"
+            },
             {
                 "name": "width",
                 "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
