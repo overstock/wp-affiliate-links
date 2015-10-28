@@ -77,8 +77,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -125,8 +124,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -169,8 +167,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -211,8 +208,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -255,8 +251,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -337,8 +332,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -394,8 +388,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             },
             {
@@ -446,8 +439,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
@@ -493,8 +485,7 @@ $patterns = json_decode('
                 "default": "new_tab",
                 "options": [
                     "new_tab", 
-                    "current_tab", 
-                    "new_window"
+                    "current_tab"
                 ]
             }
         ]
