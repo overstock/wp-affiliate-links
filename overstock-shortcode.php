@@ -126,7 +126,7 @@ function generateLinktoSearchPage($atts){
     if(empty($sortOptionParam)) {
       return formatError('"sort_by" not found. Please check spelling and try again.');
     } else {
-      $sortOption = "&taxonomy=" . $sortOptionParam; 
+      $sortOption = "&sortOption=" . $sortOptionParam; 
     }
   }
 
@@ -444,9 +444,9 @@ function getLinkTarget($atts){
       default:
         $output = '_blank';
     }//switch
-    return "target='".$output."'";
   }else{
-    return;
+    $output = '_blank';
   }
+  return "target='".$output."'";
 }//getLinkTarget
 ?>
