@@ -215,6 +215,7 @@ function generateCarouselHTML($carousel_type, $obj, $atts){
 		$product = $obj;
 		$productList = $product->getArrayOfAllProductImages();
 	}
+	echo 'number_of_items: '.$atts['number_of_items'].'<br>';
 	if($atts['number_of_items'] !== null){
 		$productList = limitArrayCount($productList, $atts['number_of_items']);
 	}
