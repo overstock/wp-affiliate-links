@@ -147,8 +147,15 @@
 
   /*----------------------------- Pattern 6 - carousel -----------------------------*/
   &.ostk-carousel {
-    .ostk-flexslider {
       position: relative;
+
+    &.mobile-size {
+      .ostk-flexslider {
+        padding: 30px;
+      }
+    }
+    .ostk-flexslider {
+
       &:hover {
         .element-overlay {
           .opacity(1);
@@ -165,8 +172,6 @@
             padding: 0;
             img {
               .border-radius(2px);
-              width: 100%;
-              min-height: 200px;
             }      
           }
         }      
@@ -203,7 +208,6 @@
             background-position: -25px -25px;
           }
         }
-
         &.ostk-arrow-left-red {
           background-position: -50px 0;
           &:hover {
@@ -230,27 +234,29 @@
       }
     }
     &.mobile-size {
-      &:hover {
-        /* Arrows Navigation */
-        .custom-navigation {
-          a {
-            .opacity(1);
-          }
-        }          
-      }
       /* Arrows Navigation */
       .custom-navigation {
         position: absolute;
         width: 100%;
         top: 50%;
-        padding: 0 10px;
-        a {
-          .transition(all linear 500ms);
-          .opacity(0);
-          background: rgba(255,255,255,.5);
+        .ostk-arrow {
           padding: 5px;
           .border-radius(5px);
+          &.ostk-arrow-left {
+            background-position: -50px 0;
+            &:hover {
+              background-position: -50px -25px;
+            }
+          }
+          &.ostk-arrow-right {
+            background-position: -75px 0;
+            &:hover {
+              background-position: -75px -25px;
+            }
+          }
         }
+
+        /* Thumbail Navigation */
         .custom-controls-container {
           display: none;
         }/* .custom-controls-container */
