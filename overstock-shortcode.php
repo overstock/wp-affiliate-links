@@ -431,22 +431,14 @@ function getStyles($atts){
 }//getStyles
 
 function getLinkTarget($atts){
-  $output;
+  $target = '_blank';
   if(isset($atts['link_target'])){
-    $link_target = $atts['link_target'];
-    switch($link_target){
+    switch($atts['link_target']){
       case 'current_tab':
-        $output = '_self';
+        $target = '_self';
         break;
-      case 'new_window':
-        $output = '_parent';
-        break;
-      default:
-        $output = '_blank';
     }//switch
-  }else{
-    $output = '_blank';
   }
-  return "target='".$output."'";
+  return "target='".$target."'";
 }//getLinkTarget
 ?>
