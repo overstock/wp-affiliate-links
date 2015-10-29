@@ -74,13 +74,13 @@ class SingleProductData {
 	      array_push($this->arrayOfAllProductImages, $imageUrl);
     	}
     	$this->description = $productData[shortDescription];
-
-		$this->imgUrl_large = $this->arrayOfAllProductImages[0];
+		if(empty($this->arrayOfAllProductImages)){
+			$this->imgUrl_large = $this->baseImageUrl . $productData[imageLarge];
+		}else{
+			$this->imgUrl_large = $this->arrayOfAllProductImages[0];
+		}
 		$this->imgUrl_medium = $this->baseImageUrl . $productData[imageMedium1];
 		$this->imgUrl_thumbnail = $this->baseImageUrl . $productData[imageThumbnail];
-		// $this->imgUrl_large = $this->baseImageUrl . $productData[imageLarge];
-		// $this->imgUrl_medium = $this->baseImageUrl . $productData[imageMedium1];
-		// $this->imgUrl_thumbnail = $this->baseImageUrl . $productData[imageThumbnail];
 		$murl = "http%3A%2F%2Fwww.overstock.com%2F" . $this->productId . "%2Fproduct.html";
 		$this->affiliateUrl = generateAffiliateLink($murl);
 	    $this->averageReviewAsDecimal = $productData[reviews];
