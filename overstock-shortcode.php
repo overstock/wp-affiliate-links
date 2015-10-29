@@ -260,7 +260,7 @@ function generateCarouselWidget($atts){
   $atts = shortcode_atts(
     array(
     'category' => null, 
-    'number_of_items' => null,
+    'number_of_items' => 10,
     'sort_by' => null, 
     'keywords' => null,
     'product_ids' => null,
@@ -272,7 +272,7 @@ function generateCarouselWidget($atts){
   $sortOption = (isset($atts['sort_by'], $atts) ? "&sortOption=" . getSortOption($atts['sort_by']) : '');
   $keywords = (isset($atts['keywords'], $atts) ? "keywords=" . str_replace(' ', '%20', $atts['keywords']) : null);
   $product_ids = (isset($atts['product_ids']) ? array_map('trim', explode(',', $atts['product_ids'])) : null);
-  
+
   if (isset($taxonomy) && getTaxonomy(htmlspecialchars_decode($atts['category'])) == false) {
   	return formatError("category=\"{$atts['category']}\" does not match our given categories, please check it.");
   } else if ($taxonomy == null && $keywords == null && $product_ids == null) {

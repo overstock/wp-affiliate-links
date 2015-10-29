@@ -221,11 +221,11 @@ class MultiProductDataFromArray {
 }//MultiProductDataFromArray
 
 class MultiProductDataFromQuery {
-	var $productList;	
+	var $productList;
 	var $invalidProductIDs = array();
 	var $allValidProductIDs = True;
 
-	function __construct($query, $num) {
+	function __construct($query, $limit) {
 		$url = $query;
 		$json = file_get_contents($url);
 		$productData = json_decode($json, true);
@@ -233,7 +233,12 @@ class MultiProductDataFromQuery {
 		if ($numResults == 0){
 		  return formatError("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
 		}
-		for ($i = 0; $i < $num; $i++) {
+		$temp = $numResults;
+		if($numResults > $limit){
+			$temp = $limit;
+		}
+		for ($i = 0; $i < $temp; $i++) {
+			echo 'product<br>';
 		  $this->productList[$i] = new SingleProductData($productData[products][products][$i][id]);
 		}//for
 	}//__construct
