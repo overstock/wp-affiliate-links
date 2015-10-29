@@ -238,7 +238,6 @@ class MultiProductDataFromQuery {
 			$temp = $limit;
 		}
 		for ($i = 0; $i < $temp; $i++) {
-			echo 'product<br>';
 		  $this->productList[$i] = new SingleProductData($productData[products][products][$i][id]);
 		}//for
 	}//__construct

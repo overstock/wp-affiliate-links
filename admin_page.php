@@ -28,14 +28,15 @@ add_action("admin_init", "ostk_register_settings");
 * Bring in the stylesheets
 */
 function admin_add_css_and_js() {
-    $siteurl = get_option('siteurl');
-    $url = $siteurl . '/wp-content/plugins/' . basename(dirname(__FILE__));
+    $url = get_option('siteurl') . '/wp-content/plugins/' . basename(dirname(__FILE__));
     //Add CSS
-    echo "<link rel='stylesheet' type='text/css' href='".$url."/flex-slider/flexslider.css' />";
-    echo "<link rel='stylesheet' type='text/css' href='".$url."/css/dest/overstock-shortcodes.min.css' />";
+	wp_enqueue_style( 'flexslider_styles', $url.'/flex-slider/flexslider.css'); 
+	wp_enqueue_style( 'ostk_styles', $url.'/css/dest/overstock-shortcodes.min.css'); 
+
     //Add JS
-	echo "<script src='".$url."/flex-slider/jquery.flexslider-min.js'></script>";
-	echo "<script src='".$url."/js/dest/overstock-shortcodes.min.js'></script>";
+	wp_enqueue_script( 'flexslider_script', $url.'/flex-slider/flexslider.css');
+	wp_enqueue_script( 'ostk_script', $url.'/css/dest/overstock-shortcodes.min.css');
+
 }//admin_add_overstock_shortcode_stylesheet
 
 function ostk_get_header($current_page){
