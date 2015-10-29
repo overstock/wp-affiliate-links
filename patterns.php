@@ -309,6 +309,11 @@ $patterns = json_decode('
                 "example": "soccer shoes"
             },
             {
+                "name": "number_of_items",
+                "description": "Choose an item limit. By default it is unlimited.",
+                "example": "10"
+            },
+            {
                 "name": "sort_by",
                 "description": "Choose a sort option",
                 "options": [
