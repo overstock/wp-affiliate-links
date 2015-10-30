@@ -152,15 +152,13 @@
 
   /*----------------------------- Pattern 6 - carousel -----------------------------*/
   &.ostk-carousel {
-      position: relative;
-
+    position: relative;
     &.mobile-size {
       .ostk-flexslider {
         padding: 30px;
       }
     }
     .ostk-flexslider {
-
       &:hover {
         .element-overlay {
           .opacity(1);
@@ -271,13 +269,23 @@
       /* Arrows Navigation */
       .custom-navigation {
         max-width: 430px;
+        &.count-4 {
+          max-width: 360px;
+        }
+        &.count-3 {
+          max-width: 280px;
+        }
+        &.count-2 {
+          max-width: 210px;
+        }
         margin: 10px auto 0 auto;
         a {
           border: solid 1px lighten(@grey, 20%);
           .border-radius(2px);
           background: lighten(@grey-lt, 20%);
+          margin-top: 5px;
           .ostk-arrow {
-            margin: 25px 0;
+            margin: 20px 0;
           }
           &:hover {
             background: lighten(@grey-lt, 30%);
