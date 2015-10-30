@@ -910,6 +910,28 @@
   padding: 20px;
 }
 /*----------------------------- WP Plugin Home Page -----------------------------*/
+.ostk-home-page.ostk-page {
+  max-width: 700px;
+}
+.ostk-home-page .ostk-notification-block {
+  padding: 10px;
+  margin: 10px 0;
+}
+.ostk-home-page .ostk-notification-block.ostk-notification-success {
+  background: #007b17;
+}
+.ostk-home-page .ostk-notification-block.ostk-notification-danger {
+  background: #c80f2e;
+}
+.ostk-home-page .ostk-notification-block p {
+  color: white;
+  margin: 0 0 5px 0;
+}
+.ostk-home-page .ostk-notification-block a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
 /*----------------------------- WP Plugin Documentation Page -----------------------------*/
 .ostk-doc-page p.red,
 .ostk-doc-page span.red {
