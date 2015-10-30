@@ -57,9 +57,9 @@ function add_overstock_shortcode_stylesheet() {
  * 2) [overstock type="carousel" category="Pets" number_of_items="5"]
 **/
 function generateShortcodeWidgets($atts){
-	if(is_array($atts) && !in_array($atts['type'], $atts)){ 
-    return formatError("Type parameter cannot be empty."); 
-  } else if($GLOBALS['developerId'] == '' || is_null($GLOBALS['developerId'])){
+  if($GLOBALS['developerId'] == '' || is_null($GLOBALS['developerId'])){
+    return formatError("Linkshare ID needs to be authenticated."); 
+  }else if(is_array($atts) && !in_array($atts['type'], $atts)){ 
     return formatError("Type parameter cannot be empty."); 
   } else {
 		$type = (is_array($atts) ? $atts['type'] : null);

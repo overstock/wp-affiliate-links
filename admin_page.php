@@ -32,6 +32,7 @@ function admin_add_css_and_js() {
     //Add CSS
 	wp_enqueue_style( 'flexslider_styles', $url.'/flex-slider/flexslider.css'); 
 	wp_enqueue_style( 'ostk_styles', $url.'/css/dest/overstock-shortcodes.min.css'); 
+	wp_enqueue_style( 'ostk_styles', $url.'/fontawesome.css'); 
 
     //Add JS
 	wp_enqueue_script( 'flexslider_script', $url.'/flex-slider/flexslider.css');
