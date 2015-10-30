@@ -181,22 +181,21 @@ function generateStockPhotoHtmlOutput($product, $atts){
 	$image_width = $atts['width'];
 
 	$output ="";
-    $output .= '<div class="element-content">';
-    $custom_css = '';
-	$output .= '<img src="'.$product->getImageAtIndex($image_number).'" style="'.$atts['custom_css'].'">';
-	$output .= '</div>';
-    $output .= '<div class="element-overlay">';
+	$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
 	    $output .= '<div class="element-content">';
-			$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
-				$output .= '<p class="title">'.$product->getName().'</p>';
-				if($product->averageReviewAsGif){
-					$output .= '<img class="ostk-rating" src="'.$product->getAverageReviewAsGif().'"/>';
-				}
-				$output .= '<p class="price">'.$product->getPrice().'</p>';
-				$output .= '<img class="ostk-logo" src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo.png">';
-			$output .= '</a>';
+			$output .= '<img src="'.$product->getImageAtIndex($image_number).'" style="'.$atts['custom_css'].'">';
+			$output .= '</div>';
+		    $output .= '<div class="element-overlay">';
+			    $output .= '<div class="element-content">';
+					$output .= '<p class="title">'.$product->getName().'</p>';
+					if($product->averageReviewAsGif){
+						$output .= '<img class="ostk-rating" src="'.$product->getAverageReviewAsGif().'"/>';
+					}
+					$output .= '<p class="price">'.$product->getPrice().'</p>';
+					$output .= '<img class="ostk-logo" src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo.png">';
+			$output .= '</div>';
 		$output .= '</div>';
-	$output .= '</div>';
+	$output .= '</a>';
   return $output;
 }//generateStockPhotoHtmlOutput
 
@@ -398,17 +397,17 @@ function ostk_isValidLinkTarget($atts){
 }
 
 function getLinkTarget($atts){
-  $output;
-    switch($atts['link_target']){
-      case 'new_tab':
-        $output = '_blank';
-        break;
-      case 'current_tab':
-        $output = '_self';
-        break;
-      default:
-		return false;
-    }//switch
-	return "target='".$output."'";
+	$output;
+	if($atts['link_target']){
+		switch($atts['link_target']){
+		  case 'new_tab':
+		    $output = '_blank';
+		    break;
+		  case 'current_tab':
+		    $output = '_self';
+		    break;
+		}//switch
+		return "target='".$output."'";
+	}
 }//getLinkTarget
 ?>

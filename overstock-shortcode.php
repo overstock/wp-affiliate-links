@@ -68,13 +68,8 @@ function generateShortcodeWidgets($atts){
   }else if(isset($atts['link_target']) && !ostk_isValidLinkTarget($atts)){ 
     return formatError('"link_target" not found. Please check spelling and try again.');
   }
-  if(isset($atts['width'])){
-    if(isset($atts['width']) && intval($atts['width']) <= 0){ 
-      return formatError("Width has to be greater than 0.");
-    }
-    if(strpos($atts['width'], 'px') === FALSE && strpos($atts['width'], '%') === FALSE){ 
-      return formatError("Width requires % or px");
-    }
+  if(isset($atts['width']) && !preg_match("/^[1-9]\d*(px|%)$/i", $atts['width'])){
+      return formatError("Width requires % or px, and a value greater than 0.");
   }
 	$type = (is_array($atts) ? $atts['type'] : null);
 		switch ($type) {
