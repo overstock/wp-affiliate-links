@@ -239,9 +239,16 @@
     &.mobile-size {
       /* Arrows Navigation */
       .custom-navigation {
-        position: absolute;
-        width: 100%;
-        top: 50%;
+        a {
+          position: absolute;
+          top: 50%;
+          &.flex-prev {
+            left: 0;
+          }
+          &.flex-next {
+            right: 0;
+          }
+        }
         .ostk-arrow {
           padding: 5px;
           .border-radius(5px);

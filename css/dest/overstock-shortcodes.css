@@ -677,11 +677,24 @@
 .ostk-element.ostk-carousel.mobile-size .custom-navigation,
 #main .ostk-element.ostk-carousel.mobile-size .custom-navigation,
 #sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation {
-  position: absolute;
-  width: 100%;
-  top: 50%;
   /* Thumbail Navigation */
   /* .custom-controls-container */
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a {
+  position: absolute;
+  top: 50%;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev {
+  left: 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next {
+  right: 0;
 }
 .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
 #main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
