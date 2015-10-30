@@ -233,7 +233,7 @@ function generateCarouselHTML($carousel_type, $obj, $atts){
 	$output .= '</div>';
 	if(count($productList) > 1){
 		//only show thumbnail navigation if more than 1 item
-		$output .=  '<div class="custom-navigation">';
+		$output .=  '<div class="custom-navigation count-'.count($productList).'">';
 			$output .= '<a href="#" class="flex-prev">';
 				$output .= '<div class="ostk-arrow ostk-arrow-left"></div>';
 			$output .= '</a>';
