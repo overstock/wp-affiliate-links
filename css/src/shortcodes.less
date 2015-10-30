@@ -12,6 +12,14 @@
   * {
     box-sizing: border-box;
   }
+  a {
+    text-decoration: none;
+    outline: 0;
+    .box-shadow (none);
+    &:focus {
+      outline: 0;
+    }
+  }
   img {
     max-width: 100%;
   }
@@ -27,9 +35,6 @@
     padding: 10px;
     position: relative;
     .border-radius(2px);
-    a {
-      text-decoration: none;
-    }
     p {
       font-size: 16px;
       margin: 0;

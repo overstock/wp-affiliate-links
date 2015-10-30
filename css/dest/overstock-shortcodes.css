@@ -343,6 +343,20 @@
 #sidebar .ostk-element * {
   box-sizing: border-box;
 }
+.ostk-element a,
+#main .ostk-element a,
+#sidebar .ostk-element a {
+  text-decoration: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.ostk-element a:focus,
+#main .ostk-element a:focus,
+#sidebar .ostk-element a:focus {
+  outline: 0;
+}
 .ostk-element img,
 #main .ostk-element img,
 #sidebar .ostk-element img {
@@ -368,11 +382,6 @@
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-}
-.ostk-element .element-content a,
-#main .ostk-element .element-content a,
-#sidebar .ostk-element .element-content a {
-  text-decoration: none;
 }
 .ostk-element .element-content p,
 #main .ostk-element .element-content p,
