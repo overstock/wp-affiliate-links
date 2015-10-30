@@ -280,7 +280,7 @@ Validate that the shortcode attributes are valid. return Boolean.
 */
 function areAttributesValid($atts){
   global $patterns;
-  $validShortCode = true;
+  $validShortCode = True;
   $errorStr = '';
 
   $type = $atts['type'];
@@ -292,16 +292,16 @@ function areAttributesValid($atts){
   //Fail if missing any required attributes
   $missingRequiredAtts = lookForMissingRequiredAttributes($keys, $required_attributes);
   if(count($missingRequiredAtts) > 0){
-    $validShortCode = false;
-    $errorStr = formatError('Missing required attributes: '.implode(', ', $missingRequiredAtts));
+    $validShortCode = False;
+    return formatError('Missing required attributes: '.implode(', ', $missingRequiredAtts));
   }
 
   //Fail if using undefined attributes
   if($validShortCode){
     $invalidExtraAtts = lookForInvalidExtraAtts($keys, $required_attributes, $optional_attributes);
     if(count($invalidExtraAtts) > 0){
-      $validShortCode = false;
-      $errorStr = formatError('The following are not valid attributes: '.implode(', ', $invalidExtraAtts));
+      $validShortCode = False;
+      return formatError('The following are not valid attributes: '.implode(', ', $invalidExtraAtts));
     }
   }
 
@@ -309,18 +309,12 @@ function areAttributesValid($atts){
   if($validShortCode){
     $nullAtts = lookForNullAtts($atts);
     if(count($nullAtts) > 0){
-      $validShortCode = false;
-      $errorStr = formatError('The following atts cannot be null: '.implode(', ', $nullAtts));
+      $validShortCode = False;
+      return formatError('The following atts cannot be null: '.implode(', ', $nullAtts));
     }
   }
 
-  if($validShortCode){
-    return true;
-  }else{
-    echo $errorStr;
-    return false;
-  }
-
+	return True;
 }//areAttributesValid
 
 /* Return a list of the attribute names that have a null value 
@@ -378,7 +372,6 @@ function findObjWhereKeyEqualsValue($obj, $key_1, $value_1){
   return null;
 }//findObjWhereKeyEquals
 
-
 function getBranding(){
   $output = '<div class="branding">';
     $output .= '<img src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo-white.png" width="110" height="30"/>';
@@ -394,23 +387,28 @@ function getStyles($atts){
   return 'style="'.$output.'"';
 }//getStyles
 
+function ostk_isValidLinkTarget($atts){
+	switch($atts['link_target']){
+	  case 'new_tab':
+	  case 'current_tab':
+		return True;
+	  default:
+		return False;
+	}//switch
+}
+
 function getLinkTarget($atts){
   $output;
-  if(isset($atts['link_target'])){
-    $link_target = $atts['link_target'];
-    switch($link_target){
+    switch($atts['link_target']){
+      case 'new_tab':
+        $output = '_blank';
+        break;
       case 'current_tab':
         $output = '_self';
         break;
-      case 'new_window':
-        $output = '_parent';
-        break;
       default:
-        $output = '_blank';
+		return false;
     }//switch
-  }else{
-    $output = '_blank';
-  }
-  return "target='".$output."'";
+	return "target='".$output."'";
 }//getLinkTarget
 ?>

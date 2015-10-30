@@ -59,42 +59,53 @@ function add_overstock_shortcode_stylesheet() {
 function generateShortcodeWidgets($atts){
   if($GLOBALS['developerId'] == '' || is_null($GLOBALS['developerId'])){
     return formatError("Linkshare ID needs to be authenticated."); 
-  }else if(is_array($atts) && !in_array($atts['type'], $atts)){ 
-    return formatError("Type parameter cannot be empty."); 
-  } else {
-		$type = (is_array($atts) ? $atts['type'] : null);
-    if(areAttributesValid($atts)){
-  		switch ($type) {
-  			case 'search':
-  				return generateLinktoSearchPage($atts);
-  				break;
-  			case 'link':
-  				return generateLinktoAnyPage($atts);
-  				break;
-  			case 'rectangle':
-  				return generateRectangleWidget($atts);
-  				break;
-  			case 'leaderboard':
-  				return generateLeaderboardWidget($atts);
-  				break;
-  			case 'skyscraper':
-  				return generateSkyscraperWidget($atts);
-  				break;
-  			case 'carousel':
-  				return generateCarouselWidget($atts);
-  				break;
-  			case 'stock_photo':
-  				return generateStockPhoto($atts);
-  			case 'product_link':
-  				return generateProductLinks($atts);
-  			case 'product_carousel':
-  				return generateProductCarouselWidget($atts);
-  				break;
-  			default:
-          return formatError('Shortcode may have been malformed, check the syntax and try again. Refer to our cheat sheet if you have questions.');
-  		}//switch
+  }
+  if(areAttributesValid($atts) !== True){
+    return areAttributesValid($atts);
+  }
+  if(is_array($atts) && !in_array($atts['type'], $atts)){ 
+    return formatError("Type parameter cannot be empty.");
+  }else if(isset($atts['link_target']) && !ostk_isValidLinkTarget($atts)){ 
+    return formatError('"link_target" not found. Please check spelling and try again.');
+  }
+  if(isset($atts['width'])){
+    if(isset($atts['width']) && intval($atts['width']) <= 0){ 
+      return formatError("Width has to be greater than 0.");
     }
-	}
+    if(strpos($atts['width'], 'px') === FALSE && strpos($atts['width'], '%') === FALSE){ 
+      return formatError("Width requires % or px");
+    }
+  }
+	$type = (is_array($atts) ? $atts['type'] : null);
+		switch ($type) {
+			case 'search':
+				return generateLinktoSearchPage($atts);
+				break;
+			case 'link':
+				return generateLinktoAnyPage($atts);
+				break;
+			case 'rectangle':
+				return generateRectangleWidget($atts);
+				break;
+			case 'leaderboard':
+				return generateLeaderboardWidget($atts);
+				break;
+			case 'skyscraper':
+				return generateSkyscraperWidget($atts);
+				break;
+			case 'carousel':
+				return generateCarouselWidget($atts);
+				break;
+			case 'stock_photo':
+				return generateStockPhoto($atts);
+			case 'product_link':
+				return generateProductLinks($atts);
+			case 'product_carousel':
+				return generateProductCarouselWidget($atts);
+				break;
+			default:
+        return formatError('Shortcode may have been malformed, check the syntax and try again. Refer to our cheat sheet if you have questions.');
+		}//switch
 }//generateShortcodeWidgets
 
 /**
@@ -238,13 +249,11 @@ function generateSkyscraperWidget($atts){
   $product_ids = limitArrayCount($product_ids, 3);
   $products = new MultiProductDataFromArray($product_ids);
   if($products->isAllValidProductIDs()){
-    $output = generateSkyscraperHtmlOutput($products, $atts);
-
-    $output2 = '<div class="ostk-element ostk-skyscraper" '.getStyles($atts).'>';
-      $output2 .= getBranding();
-      $output2 .= $output;
-    $output2 .= '</div>';
-    return $output2;
+    $output = '<div class="ostk-element ostk-skyscraper" '.getStyles($atts).'>';
+      $output .= getBranding();
+      $output .= generateSkyscraperHtmlOutput($products, $atts);
+    $output .= '</div>';
+    return $output;
   }
 }//generateSkyscraperWidget
 
