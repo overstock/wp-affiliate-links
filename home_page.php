@@ -1,7 +1,8 @@
 <?php
 function ostk_admin_page() {
 	ob_start(); 
-	if(empty(get_option('ostk_settings'))){
+	$ostk_option_settings = get_option('ostk_settings');
+	if(empty($ostk_option_settings)){
 		$ostk_submitBtnText = 'Add ID';
 	}else{
 		$ostk_submitBtnText = 'Save Changes';
@@ -26,7 +27,7 @@ function ostk_admin_page() {
 		      ?>
 		        <h2>Authenticate LinkShare ID: </h2>
 
-				<?php if(empty(get_option('ostk_settings'))): ?>
+				<?php if(empty($ostk_option_settings)): ?>
 					<div class="ostk-notification-block ostk-notification-danger">
 						<p>You'll need an authentic LinkShare ID provided free at <a href="http://overstock.com/devapi/" target="_blank" title="Overstock DEV API">http://overstock.com/devapi/</a></p>
 					</div>
