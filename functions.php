@@ -181,7 +181,7 @@ function ostk_generateStockPhotoHtmlOutput($product, $atts){
 	$image_width = $atts['width'];
 
 	$output ="";
-	$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
+	$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
 	    $output .= '<div class="element-content">';
 			$output .= '<img src="'.$product->getImageAtIndex($image_number).'" style="'.$atts['custom_css'].'">';
 			$output .= '</div>';
