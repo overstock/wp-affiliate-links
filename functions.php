@@ -175,15 +175,9 @@ function ostk_generateRectangleHtmlOutput($product, $atts){
 }//ostk_generateRectangleHtmlOutput
 
 function ostk_generateStockPhotoHtmlOutput($product, $atts){
-	$custom_css = $atts['custom_css']; 
-	$image_number = $atts['image_number'];
-	$image_height = $atts['height'];
-	$image_width = $atts['width'];
-
-	$output ="";
-	$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
+	$output = '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
 	    $output .= '<div class="element-content">';
-			$output .= '<img src="'.$product->getImageAtIndex($image_number).'" style="'.$atts['custom_css'].'">';
+			$output .= '<img src="'.$product->getImageAtIndex($atts['image_number']).'" width="'.$atts['width'].'" height="'.$atts['height'].'" style="'.$atts['custom_css'].'">';
 			$output .= '</div>';
 		    $output .= '<div class="element-overlay">';
 			    $output .= '<div class="element-content">';
