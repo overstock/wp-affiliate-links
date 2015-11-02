@@ -6,76 +6,76 @@
 
 add_filter('widget_text', 'do_shortcode');
 
-function generateAffiliateLink($murl) {
+function ostk_generateAffiliateLink($murl) {
 	$developerId = $GLOBALS['developerId'];
 	$symbol = '?';
 	if(strpos($murl, '?') !== false){
 		$symbol = '&';
 	}
 	return 'https://api.overstock.com/ads/deeplink?id='.$developerId.'&mid=38601&murl='.urlencode($murl.$symbol."utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid=".$developerId);
-}//generateAffiliateLink
+}//ostk_generateAffiliateLink
 
-function checkForMissingCommas($string){
+function ostk_checkForMissingCommas($string){
 	return (strpos($string, " ") === false ? false : true);
-}//checkForMissingCommas
+}//ostk_checkForMissingCommas
 
-function getTaxonomy($input){
+function ostk_getTaxonomy($input){
 	if(is_null($input)) { 
-		return formatError("category input was null");
+		return ostk_formatError("category input was null");
 	} else {
 		switch ($input) {
-			case (checkTaxonomy($input, "Home & Garden") ? true : false):
+			case (ostk_checkTaxonomy($input, "Home & Garden") ? true : false):
 			  return "sto1";
 			  break;
-			case (checkTaxonomy($input, "Jewelry & Watches") ? true : false):
+			case (ostk_checkTaxonomy($input, "Jewelry & Watches") ? true : false):
 			  return "sto4";
 			  break;
-			case (checkTaxonomy($input, "Sports & Toys") ? true : false):
+			case (ostk_checkTaxonomy($input, "Sports & Toys") ? true : false):
 			  return "sto5";
 			  break;
-			case (checkTaxonomy($input, "Worldstock Fair Trade") ? true : false):
+			case (ostk_checkTaxonomy($input, "Worldstock Fair Trade") ? true : false):
 		      return "sto6";
 		      break;
-		    case (checkTaxonomy($input, "Clothing & Shoes") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Clothing & Shoes") ? true : false):
 		      return "sto7";
 		      break;
-		    case (checkTaxonomy($input, "Health & Beauty") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Health & Beauty") ? true : false):
 		      return "sto8";
 		      break;
-		    case (checkTaxonomy($input, "Food & Gifts") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Food & Gifts") ? true : false):
 		      return "sto9";
 		      break;
-		    case (checkTaxonomy($input, "Office Supplies") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Office Supplies") ? true : false):
 		      return "sto22";
 		      break;
-		    case (checkTaxonomy($input, "Luggage & Bags") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Luggage & Bags") ? true : false):
 		      return "sto33";
 		      break;
-		    case (checkTaxonomy($input, "Crafts & Sewing") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Crafts & Sewing") ? true : false):
 		      return "sto34";
 		      break;
-		    case (checkTaxonomy($input, "Baby") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Baby") ? true : false):
 		      return "sto35";
 		      break;
-		    case (checkTaxonomy($input, "Crafts & Sewing") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Crafts & Sewing") ? true : false):
 		      return "sto34";
 		      break;
-		    case (checkTaxonomy($input, "Pet Supplies") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Pet Supplies") ? true : false):
 		      return "sto37";
 		      break;
-		    case (checkTaxonomy($input, "Emergency Preparedness") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Emergency Preparedness") ? true : false):
 		      return "sto42";
 		      break;
-		    case (checkTaxonomy($input, "Bedding & Bath") ? true : false):
+		    case (ostk_checkTaxonomy($input, "Bedding & Bath") ? true : false):
 		      return "sto43";
 		      break;
 		    default :
 		      return false;
 		}
 	}
-}//getTaxonomy
+}//ostk_getTaxonomy
 	
-function checkTaxonomy($input, $taxonomy) {
+function ostk_checkTaxonomy($input, $taxonomy) {
 	$input = strtolower($input);
 	$taxonomy = strtolower($taxonomy);
 	if ($taxonomy == $input) { 
@@ -91,9 +91,9 @@ function checkTaxonomy($input, $taxonomy) {
 	  }	
 	}//foreach
 	return false;
-}//checkTaxonomy
+}//ostk_checkTaxonomy
 
-function getSortOption($input){
+function ostk_getSortOption($input){
 	switch (strtolower($input)) {
 		case strtolower("Relevance"):
 			return "Relevance";
@@ -117,14 +117,14 @@ function getSortOption($input){
 			return "New+Arrivals";
 			break;
 	}//switch
-}//getSortOption
+}//ostk_getSortOption
 
-function generateLeaderboardHtmlOutput($products, $atts){
+function ostk_generateLeaderboardHtmlOutput($products, $atts){
   $productList = $products->getProductList();
   $output;
   foreach ($productList as $product){
     $output .= '<div class="element-content">';
-		$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
+		$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
 			$output .= '<img class="product-image" src="'.$product->getImage_Large().'"/>';
 			$output .= '<p class="title">'.$product->getName().'</p>';
 			$output .= '<p class="description">'.$product->description.'</p>';
@@ -136,14 +136,14 @@ function generateLeaderboardHtmlOutput($products, $atts){
 	$output .= '</div>';
   }//foreach
   return $output;
-}//generateLeaderboardHtmlOutput
+}//ostk_generateLeaderboardHtmlOutput
 
-function generateSkyscraperHtmlOutput($products, $atts){
+function ostk_generateSkyscraperHtmlOutput($products, $atts){
   $productList = $products->getProductList();
   $output;
   foreach ($productList as $product){
     $output .= '<div class="element-content">';
-		$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
+		$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
 			$output .= '<img class="product-image" src="'.$product->getImage_Large().'"/>';
 			$output .= '<p class="title">'.$product->getName().'</p>';
 			if($product->averageReviewAsGif){
@@ -154,15 +154,15 @@ function generateSkyscraperHtmlOutput($products, $atts){
 	$output .= '</div>';
   }//foreach
   return $output;
-}//generateSkyscraperHtmlOutput
+}//ostk_generateSkyscraperHtmlOutput
 
-function generateRectangleHtmlOutput($product, $atts){
+function ostk_generateRectangleHtmlOutput($product, $atts){
 	$output = '<div class="element-content">';
 		$output .= '<img src="'.$product->getImage_Large().'"/>';
 	$output .= '</div>';
 	$output .= '<div class="element-overlay">';
 	    $output .= '<div class="element-content">';
-			$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
+			$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
 				$output .= '<p class="title">'.$product->getName().'</p>';
 				if($product->averageReviewAsGif){
 					$output .= '<img class="ostk-rating" src="'.$product->getAverageReviewAsGif().'"/>';
@@ -172,9 +172,9 @@ function generateRectangleHtmlOutput($product, $atts){
 		$output .= '</div>';
 	$output .= '</div>';
   return $output;
-}//generateRectangleHtmlOutput
+}//ostk_generateRectangleHtmlOutput
 
-function generateStockPhotoHtmlOutput($product, $atts){
+function ostk_generateStockPhotoHtmlOutput($product, $atts){
 	$custom_css = $atts['custom_css']; 
 	$image_number = $atts['image_number'];
 	$image_height = $atts['height'];
@@ -197,17 +197,17 @@ function generateStockPhotoHtmlOutput($product, $atts){
 		$output .= '</div>';
 	$output .= '</a>';
   return $output;
-}//generateStockPhotoHtmlOutput
+}//ostk_generateStockPhotoHtmlOutput
 
-function formatError($str){
+function ostk_formatError($str){
 	return '<p class="ostk-error">ERROR: '.$str.'</p>';
-}//formatError
+}//ostk_formatError
 
-function checkDeveloperId(){
+function ostk_checkDeveloperId(){
 	return (isset($GLOBALS['developerId']) ? true : false);
-}//checkDeveloperId
+}//ostk_checkDeveloperId
 
-function generateCarouselHTML($carousel_type, $obj, $atts){
+function ostk_generateCarouselHTML($carousel_type, $obj, $atts){
 	if($carousel_type == 'carousel'){
 		$productList = $obj;
 	}else if($carousel_type == 'product_carousel'){
@@ -215,18 +215,18 @@ function generateCarouselHTML($carousel_type, $obj, $atts){
 		$productList = $product->getArrayOfAllProductImages();
 	}
 	if($atts['number_of_items'] !== null){
-		$productList = limitArrayCount($productList, $atts['number_of_items']);
+		$productList = ostk_limitArrayCount($productList, $atts['number_of_items']);
 	}
 	$output .= '<div class="ostk-flexslider">';
 		$output .= '<ul class="slides">';
 			if($carousel_type == 'carousel'){
 				foreach($productList as $product){
 					$productImg = $product->getImage_Large();
-					$output .= getCarouselListItems($product, $productImg, $atts);
+					$output .= ostk_getCarouselListItems($product, $productImg, $atts);
 				}//foreach
 			}else if($carousel_type == 'product_carousel'){
 				foreach($productList as $productImg){
-					$output .= getCarouselListItems($product, $productImg, $atts);
+					$output .= ostk_getCarouselListItems($product, $productImg, $atts);
 				}//foreach
 			}
 		$output .= '</ul>';
@@ -244,12 +244,12 @@ function generateCarouselHTML($carousel_type, $obj, $atts){
 		$output .= '</div>';
 	}
 	return $output;
-}//generateCarouselHTML
+}//ostk_generateCarouselHTML
 
-function getCarouselListItems($product, $productImg, $atts){
+function ostk_getCarouselListItems($product, $productImg, $atts){
 	$output;
 	$output .= '<li data-thumb="'.$productImg.'">';
-		$output .= '<a href="'.$product->getAffiliateUrl().'" '.getLinkTarget($atts).'>';
+		$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
 		    $output .= '<div class="element-content">';
 				$output .= '<img src="'.$productImg.'"/>';
 			$output .= '</div>';
@@ -264,61 +264,62 @@ function getCarouselListItems($product, $productImg, $atts){
 		$output .= '</a>';
 	$output .= '</li>';
 	return $output;
-}//getCarouselListItems
+}//ostk_getCarouselListItems
 
-function limitArrayCount($product_ids, $num){
+function ostk_limitArrayCount($product_ids, $num){
 	if(count($product_ids) > $num){
 		return array_slice($product_ids, 0, $num);
 	}else{
 		return $product_ids;
 	}
-}//limitArrayCount
+}//ostk_limitArrayCount
 
 /*
 Validate that the shortcode attributes are valid. return Boolean.
 */
-function areAttributesValid($atts){
+function ostk_areAttributesValid($atts){
   global $patterns;
   $validShortCode = True;
   $errorStr = '';
 
   $type = $atts['type'];
-  $keys = getKeyList($atts);
-  $item = findObjWhereKeyEqualsValue($patterns, 'slug', $type);
-  $required_attributes = getListByKey($item['required_attributes'], 'name');
-  $optional_attributes = getListByKey($item['optional_attributes'], 'name');
+  $keys = ostk_getKeyList($atts);
+  $item = ostk_findObjWhereKeyEqualsValue($patterns, 'slug', $type);
+  $required_attributes = ostk_getListByKey($item['required_attributes'], 'name');
+  $optional_attributes = ostk_getListByKey($item['optional_attributes'], 'name');
 
   //Fail if missing any required attributes
-  $missingRequiredAtts = lookForMissingRequiredAttributes($keys, $required_attributes);
+  $missingRequiredAtts = ostk_lookForMissingRequiredAttributes($keys, $required_attributes);
   if(count($missingRequiredAtts) > 0){
     $validShortCode = False;
-    return formatError('Missing required attributes: '.implode(', ', $missingRequiredAtts));
+    return ostk_formatError('Missing required attributes: '.implode(', ', $missingRequiredAtts));
   }
 
   //Fail if using undefined attributes
   if($validShortCode){
-    $invalidExtraAtts = lookForInvalidExtraAtts($keys, $required_attributes, $optional_attributes);
+    $invalidExtraAtts = ostk_lookForInvalidExtraAtts($keys, $required_attributes, $optional_attributes);
     if(count($invalidExtraAtts) > 0){
       $validShortCode = False;
-      return formatError('The following are not valid attributes: '.implode(', ', $invalidExtraAtts));
+      return ostk_formatError('The following are not valid attributes: '.implode(', ', $invalidExtraAtts));
     }
   }
 
   //Fail if any null attributes
   if($validShortCode){
-    $nullAtts = lookForNullAtts($atts);
+    $nullAtts = ostk_lookForNullAtts($atts);
     if(count($nullAtts) > 0){
       $validShortCode = False;
-      return formatError('The following atts cannot be null: '.implode(', ', $nullAtts));
+      return ostk_formatError('The following atts cannot be null: '.implode(', ', $nullAtts));
     }
   }
 
 	return True;
 }//areAttributesValid
 
+
 /* Return a list of the attribute names that have a null value 
-(areAttributesValid - helper function) */
-function lookForNullAtts($obj){
+(ostk_areAttributesValid - helper function) */
+function ostk_lookForNullAtts($obj){
   $array = array();
   foreach ($obj as $key=>$value) {
     if(empty($value) || is_null($value)){
@@ -326,43 +327,43 @@ function lookForNullAtts($obj){
     }
   }//foreach
   return $array;
-}//lookForNullAtts
+}//ostk_lookForNullAtts
 
 /* Return an array of attributes that are not either in the list of required or optional attributes
-(areAttributesValid - helper function) */
-function lookForInvalidExtraAtts($keys, $required_attributes, $optional_attributes){
+(ostk_areAttributesValid - helper function) */
+function ostk_lookForInvalidExtraAtts($keys, $required_attributes, $optional_attributes){
   return array_diff($keys, $required_attributes, $optional_attributes);
-}//lookForInvalidExtraAtts
+}//ostk_lookForInvalidExtraAtts
 
 /* Return an array of the required attributes that are missing.
-(areAttributesValid - helper function) */
-function lookForMissingRequiredAttributes($keys, $required_attributes){
+(ostk_areAttributesValid - helper function) */
+function ostk_lookForMissingRequiredAttributes($keys, $required_attributes){
   return array_diff($required_attributes, $keys);
-}//lookForMissingRequiredAttributes
+}//ostk_lookForMissingRequiredAttributes
 
 /* Return all keys of an object as an array
-(areAttributesValid - helper function) */
-function getKeyList($obj){
+(ostk_areAttributesValid - helper function) */
+function ostk_getKeyList($obj){
   $array = array();
   foreach ($obj as $key=>$value) {
     array_push($array, $key);
   }//foreach
   return $array;
-}//getKeyList
+}//ostk_getKeyList
 
 /* Iterate throught an array and return an array of the values of a specific keys
-(areAttributesValid - helper function) */
-function getListByKey($obj, $key){
+(ostk_areAttributesValid - helper function) */
+function ostk_getListByKey($obj, $key){
   $array = array();
   foreach ($obj as $item) {
     array_push($array, $item[$key]);
   }//foreach
   return $array;
-}//getKeyList
+}//ostk_getKeyList
 
 /* Iterate throught an array and return the first item that has a specific key with a specific value
-(areAttributesValid - helper function) */
-function findObjWhereKeyEqualsValue($obj, $key_1, $value_1){
+(ostk_areAttributesValid - helper function) */
+function ostk_findObjWhereKeyEqualsValue($obj, $key_1, $value_1){
   foreach($obj as $item){
     if($item[$key_1] == $value_1){
       return $item;
@@ -371,20 +372,20 @@ function findObjWhereKeyEqualsValue($obj, $key_1, $value_1){
   return null;
 }//findObjWhereKeyEquals
 
-function getBranding(){
+function ostk_getBranding(){
   $output = '<div class="branding">';
     $output .= '<img src="'.plugin_dir_url( __FILE__ ).'images/overstock-logo-white.png" width="110" height="30"/>';
   $output .= '</div>';
   return $output;
-}//getBranding
+}//ostk_getBranding
 
-function getStyles($atts){
+function ostk_getStyles($atts){
   $output;
   if(isset($atts['width'])){
     $output .= 'width:'.$atts['width'].';';
   }
   return 'style="'.$output.'"';
-}//getStyles
+}//ostk_getStyles
 
 function ostk_isValidLinkTarget($atts){
 	switch($atts['link_target']){
@@ -396,7 +397,7 @@ function ostk_isValidLinkTarget($atts){
 	}//switch
 }
 
-function getLinkTarget($atts){
+function ostk_getLinkTarget($atts){
 	$output;
 	if($atts['link_target']){
 		switch($atts['link_target']){
@@ -409,5 +410,5 @@ function getLinkTarget($atts){
 		}//switch
 		return "target='".$output."'";
 	}
-}//getLinkTarget
+}//ostk_getLinkTarget
 ?>
