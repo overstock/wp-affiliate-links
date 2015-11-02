@@ -398,17 +398,14 @@ function ostk_isValidLinkTarget($atts){
 }
 
 function ostk_getLinkTarget($atts){
-	$output;
+    $output = '_blank';
 	if($atts['link_target']){
 		switch($atts['link_target']){
-		  case 'new_tab':
-		    $output = '_blank';
-		    break;
 		  case 'current_tab':
 		    $output = '_self';
 		    break;
 		}//switch
-		return "target='".$output."'";
 	}
+	return "target='".$output."'";
 }//ostk_getLinkTarget
 ?>
