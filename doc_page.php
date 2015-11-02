@@ -31,7 +31,7 @@ function ostk_doc_page() {
                     }
                 echo '</div><!-- section-title -->';
                 if($current_pattern){
-                    $shortcodes = getShortCode($pattern['example_shortcodes']);
+                    $shortcodes = ostk_getShortCode($pattern['example_shortcodes']);
                     foreach($shortcodes as $shortcode){
                         echo '<h3 class="center">'.$pattern['name'].' Sample Shortcode</h3>';
                         echo '<code>'.$shortcode.'</code>';
@@ -43,13 +43,13 @@ function ostk_doc_page() {
                         if(isset($pattern['required_attributes'])){
                             echo '<h3>'.$pattern['name'].' Required Attributes</h3>';
                                 echo '<ul>';
-                                    echo get_pattern_attributes($pattern['required_attributes']);
+                                    echo ostk_get_pattern_attributes($pattern['required_attributes']);
                             echo '</ul>';
                         }
                         if(isset($pattern['optional_attributes'])){
                         echo '<h3>'.$pattern['name'].' Optional Attributes</h3>';
                             echo '<ul>';
-								echo get_pattern_attributes($pattern['optional_attributes']);
+								echo ostk_get_pattern_attributes($pattern['optional_attributes']);
                             echo '</ul>';
                         }
 					echo '</div><!--atts-->';
@@ -64,7 +64,7 @@ function ostk_doc_page() {
 	echo ob_get_clean();
 }//ostk_doc_page
 
-function getShortCode($example_shortcodes){
+function ostk_getShortCode($example_shortcodes){
 	$output_array = array();
 	foreach($example_shortcodes as $sc){
 		$item = '';
@@ -74,9 +74,9 @@ function getShortCode($example_shortcodes){
 		array_push($output_array, "[overstock".$item."]");
 	}//foreach
 	return $output_array;
-}//getShortCode
+}//ostk_getShortCode
 
-function get_pattern_attributes($att_array){
+function ostk_get_pattern_attributes($att_array){
 	$output;
 	foreach($att_array as $att){
 		$output .= '<li>';
@@ -114,5 +114,5 @@ function get_pattern_attributes($att_array){
 		$output .= '</li>';
 	}//foreach
 	return $output;
-}//get_pattern_attributes
+}//ostk_get_pattern_attributes
 ?>

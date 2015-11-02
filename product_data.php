@@ -49,7 +49,7 @@ class SingleProductData {
 	$this->productId = $productData[id];
 	$this->developerId = $GLOBALS['developerId'];
 	if($taxonomyStore == 2 || $taxonomyStore == 3) {
-		return formatError("Our apologies we do not offer <b>'$this->name'</b> for affiliate sale. Product ID is '$productId'");
+		return ostk_formatError("Our apologies we do not offer <b>'$this->name'</b> for affiliate sale. Product ID is '$productId'");
 	} else {
 	//we have dynamic pricing types, including COMPARISON_PRICE, DISCOUNTED_AMOUNT, CURRENT_PRICE
 	//return only the CURRENT_PRICE (formatted)
@@ -58,7 +58,7 @@ class SingleProductData {
 			if ($productData[priceSet][$i][priceType] == "CURRENT_PRICE") {
 				$this->price = $productData[priceSet][$i][formattedPrice];
 				if($this->price >= 1500) {
-				  return formatError("Maximum price for affiliate items is $1500.");
+				  return ostk_formatError("Maximum price for affiliate items is $1500.");
 				}
 			}
 		}
@@ -82,7 +82,7 @@ class SingleProductData {
 		$this->imgUrl_medium = $this->baseImageUrl . $productData[imageMedium1];
 		$this->imgUrl_thumbnail = $this->baseImageUrl . $productData[imageThumbnail];
 		$murl = "http%3A%2F%2Fwww.overstock.com%2F" . $this->productId . "%2Fproduct.html";
-		$this->affiliateUrl = generateAffiliateLink($murl);
+		$this->affiliateUrl = ostk_generateAffiliateLink($murl);
 	    $this->averageReviewAsDecimal = $productData[reviews];
 
 	    if(!empty($productData[rating])){
@@ -96,53 +96,49 @@ class SingleProductData {
 	if(isset($this->productId)){
 		return True;
 	}else{
-		echo formatError('Invalid product ID');
+		echo ostk_formatError('Invalid product ID');
 		return False;
 	}
   }
 
   function getProductId(){
-	return (isset($this->productId) ? $this->productId : formatError("\$productId is not set") );
+	return (isset($this->productId) ? $this->productId : ostk_formatError("\$productId is not set") );
   }
 
   function getName() {
-    return (isset($this->name) ? $this->name : formatError("\$name is not set") );
+    return (isset($this->name) ? $this->name : ostk_formatError("\$name is not set") );
   }
 
   function getPrice() {
-    return (isset($this->price) ? $this->price : formatError("\$price is not set") );
+    return (isset($this->price) ? $this->price : ostk_formatError("\$price is not set") );
   }
 
   function getImageBaseUrl() {
-    return (isset($this->baseImageUrl) ? $this->baseImageUrl : formatError("\$baseImageUrl is not set") );
+    return (isset($this->baseImageUrl) ? $this->baseImageUrl : ostk_formatError("\$baseImageUrl is not set") );
   }
 
   function getImage_Thumbnail() {
-    return (isset($this->imgUrl_thumbnail) ? $this->imgUrl_thumbnail : formatError("\$imgUrl_thumbnail is not set") );
+    return (isset($this->imgUrl_thumbnail) ? $this->imgUrl_thumbnail : ostk_formatError("\$imgUrl_thumbnail is not set") );
   }
 
   function getImage_Medium() {
-    return (isset($this->imgUrl_medium) ? $this->imgUrl_medium : formatError("\$imgUrl_medium is not set") );
+    return (isset($this->imgUrl_medium) ? $this->imgUrl_medium : ostk_formatError("\$imgUrl_medium is not set") );
   }
 
   function getImage_Large() {
-    return (isset($this->imgUrl_large) ? $this->imgUrl_large : formatError("\$imgUrl_large is not set") );
-  }
-
-  function getDeveloperId(){
-    return (isset($this->developerId) ? $this->developerId : formatError("\$developerId is not set") );
+    return (isset($this->imgUrl_large) ? $this->imgUrl_large : ostk_formatError("\$imgUrl_large is not set") );
   }
 
   function getAffiliateUrl(){
-	return (isset($this->affiliateUrl) ? $this->affiliateUrl : formatError("\$affiliateUrl is not set") );
+	return (isset($this->affiliateUrl) ? $this->affiliateUrl : ostk_formatError("\$affiliateUrl is not set") );
   }
   
   function getAverageReviewAsDecimal(){
-  	return (isset($this->averageReviewAsDecimal) ? $this->averageReviewAsDecimal : formatError("\$averageReviewAsDecimal is not set") );
+  	return (isset($this->averageReviewAsDecimal) ? $this->averageReviewAsDecimal : ostk_formatError("\$averageReviewAsDecimal is not set") );
   }
   
   function getAverageReviewAsGif(){
-  	return (isset($this->averageReviewAsGif) ? $this->averageReviewAsGif : formatError("\$averageReviewAsGif is not set") );
+  	return (isset($this->averageReviewAsGif) ? $this->averageReviewAsGif : ostk_formatError("\$averageReviewAsGif is not set") );
   }
   
   function getImageAtIndex($index){
@@ -189,7 +185,7 @@ class MultiProductDataFromArray {
 
 	function __construct($productArray, $limit = null) {
 		if($limit !== null){
-			$productArray = limitArrayCount($productArray, $limit);
+			$productArray = ostk_limitArrayCount($productArray, $limit);
 		}
 		foreach ($productArray as $product) {
 			$item = new SingleProductData($product);
@@ -208,7 +204,7 @@ class MultiProductDataFromArray {
 		    if(count($this->invalidProductIDs) > 1){
 		    	$multiMarker = 's';
 	    	}
-	    	echo formatError('Invalid product ID'.$multiMarker.': '.implode(', ', $this->invalidProductIDs));
+	    	echo ostk_formatError('Invalid product ID'.$multiMarker.': '.implode(', ', $this->invalidProductIDs));
 	    	return False;
     	}else{
 	    	return True;
@@ -231,7 +227,7 @@ class MultiProductDataFromQuery {
 		$productData = json_decode($json, true);
 		$numResults = (count($productData[products][products]) > 0) ? count($productData[products][products]) : 0;
 		if ($numResults == 0){
-		  return formatError("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
+		  return ostk_formatError("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
 		}
 		$temp = $numResults;
 		if($numResults > $limit){
@@ -253,7 +249,7 @@ class MultiProductDataFromQuery {
 		    if(count($this->invalidProductIDs) > 1){
 		    	$multiMarker = 's';
 	    	}
-	    	echo formatError('Invalid product ID'.$multiMarker.': '.implode(', ', $this->invalidProductIDs));
+	    	echo ostk_formatError('Invalid product ID'.$multiMarker.': '.implode(', ', $this->invalidProductIDs));
 	    	return False;
     	}else{
 	    	return True;
