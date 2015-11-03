@@ -31,10 +31,10 @@ add_action( 'wp_enqueue_scripts', 'ostk_load_overstock_js' );
 * Bring in the stylesheets for the shortcode outputs
 **/
 function ostk_add_overstock_shortcode_stylesheet() {
-    wp_register_style( 'flex-slider', plugins_url('flex-slider/flexslider.css', __FILE__) );
+    wp_register_style( 'flex-slider', plugins_url('flex-slider/flexslider.css', __FILE__));
     wp_enqueue_style( 'flex-slider' );
 
-    wp_register_style( 'ostk-custom-style', plugins_url('css/dest/overstock-shortcodes.css', __FILE__) );
+    wp_register_style( 'ostk-custom-style', plugins_url('css/dest/overstock-shortcodes.css', __FILE__));
     wp_enqueue_style( 'ostk-custom-style' );
 }//ostk_add_overstock_shortcode_stylesheet
 
@@ -44,8 +44,8 @@ function ostk_add_overstock_shortcode_stylesheet() {
 **/
 function ostk_load_overstock_js() {
   wp_enqueue_script('jquery');
-  wp_enqueue_script( 'flex-slider', plugin_dir_url( __FILE__ ) . 'js/dest/overstock-shortcodes.min.js', array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-custom-jquery', plugin_dir_url( __FILE__ ) . 'flex-slider/jquery.flexslider-min.js', array('jquery'), '1.0', true );
+  wp_enqueue_script( 'flex-slider', plugins_url('js/dest/overstock-shortcodes.min.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-custom-jquery', plugins_url('flex-slider/jquery.flexslider-min.js', __FILE__), array('jquery'), '1.0', true );
 }//ostk_load_overstock_js
 
 /**
