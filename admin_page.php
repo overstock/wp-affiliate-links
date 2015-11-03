@@ -5,7 +5,7 @@
  *
  **/
 
-$pages = array(
+$ostk_pages = array(
 	array(
 		'name' => 'Home',
 		'slug' => 'admin'
@@ -47,12 +47,12 @@ function ostk_admin_js() {
 }//ostk_admin_js
 
 function ostk_get_header($current_page){
-	global $pages;
+	global $ostk_pages;
 	$output = '<div class="header">';
 		$output .= '<img class="logo" src="'.plugin_dir_url( __FILE__ ).'images/overstock-affiliate-shortcodes.jpg" width="275" height="45"/>';	
 		$output .= '<nav>';
 			$output .= '<ul>';
-				foreach ($pages as $page) {
+				foreach ($ostk_pages as $page) {
 					$activeClass = '';
 					if($page['slug'] == $current_page){
 						$activeClass = 'active';
