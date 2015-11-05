@@ -157,21 +157,21 @@ function ostk_generateSkyscraperHtmlOutput($products, $atts){
 }//ostk_generateSkyscraperHtmlOutput
 
 function ostk_generateRectangleHtmlOutput($product, $atts){
-	$output = '<div class="element-content">';
-		$output .= '<img src="'.$product->getImage_Large().'"/>';
-	$output .= '</div>';
-	$output .= '<div class="element-overlay">';
-	    $output .= '<div class="element-content">';
-			$output .= '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
+	$output = '<a href="'.$product->getAffiliateUrl().'" '.ostk_getLinkTarget($atts).'>';
+		$output .= '<div class="element-content">';
+			$output .= '<img src="'.$product->getImage_Large().'"/>';
+		$output .= '</div>';
+		$output .= '<div class="element-overlay">';
+		    $output .= '<div class="element-content">';
 				$output .= '<p class="title">'.$product->getName().'</p>';
 				if($product->averageReviewAsGif){
 					$output .= '<img class="ostk-rating" src="'.$product->getAverageReviewAsGif().'"/>';
 				}
 				$output .= '<p class="price">'.$product->getPrice().'</p>';
-			$output .= '</a>';
+			$output .= '</div>';
 		$output .= '</div>';
-	$output .= '</div>';
-  return $output;
+	$output .= '</a>';
+	return $output;
 }//ostk_generateRectangleHtmlOutput
 
 function ostk_generateStockPhotoHtmlOutput($product, $atts){
