@@ -1,0 +1,83 @@
+/*----------------------------- General Styles -----------------------------*/
+.ostk-plugin-settings {
+	background: @white;
+	.clearfix {
+		clear: both;
+	}
+	p {
+		color: @grey;		
+		&.ostk-error {
+		  color: @primary;
+		}
+	}
+	span.highlight {
+		color: @primary;
+	}
+	h1 {
+		color: @grey-dk;
+		font-size: 25px;
+		line-height: 27px;
+		margin: 10px 0;
+	}
+	h2 {
+		color: @primary;
+		font-size: 40px;
+		line-height: 42px;
+		margin: 0;
+	}
+	h3 {
+		color: @grey-dk;
+		font-size: 20px;
+		line-height: 22px;
+		margin: 10px 0;
+	}
+	.btn {
+		background: @primary;
+		border: none;
+		color: @white;
+		cursor: pointer;
+		padding: 5px 10px;
+		&:hover {
+			background: @primary-dk;
+		}
+	}
+	.btn.active {
+		background: @primary-dk;
+	}
+	.header {
+		overflow: hidden;
+		border-bottom: solid 3px @primary; 
+		padding: 10px 20px;
+		img.logo {
+			@media (max-width: 767px) {
+				display: background;
+				margin: 0 auot;
+			}
+			@media (min-width: 768px) {
+				float: left;
+				margin-right: 40px;
+			}
+		}
+		nav {
+			ul {
+				overflow: hidden;
+				li {
+					float: left;
+					margin-right: 10px;
+					a.btn {
+						.border-radius(20px);
+						display: block;
+						font-size: 16px;
+						text-align: center;
+						text-decoration: none;
+						padding: 5px 20px;
+					}
+				}
+			}
+		}
+	}
+	.ostk-page {
+		max-width: @width-lg;
+		padding: 20px;		
+	}
+}

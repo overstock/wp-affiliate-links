@@ -1,0 +1,384 @@
+.ostk-loader {
+  background: rgba(255, 255, 255, .6);
+  padding: 10px;
+  .border-radius(10px);
+  display: block;
+  margin: 10px auto;
+  max-width: 140px; 
+  text-align: center;
+  img {
+    display: block;
+    margin: 10px auto;
+    max-width: 125px;
+  }    
+  p {
+    margin: 0;
+  }
+}
+
+.ostk-element,
+#main .ostk-element,
+#sidebar .ostk-element {
+  /*
+  The "#main" and "#sidebar" is being used to make sure that the ostk styles have enough specificity to maintain ostk styles even in custom Wordpress themes.
+  */
+  /*----------------------------- Global for All Short Code Elements -----------------------------*/
+  background: @white;
+  @import "reset.less";
+  position: relative;
+  overflow: hidden;
+  * {
+    box-sizing: border-box;
+  }
+  a {
+    text-decoration: none;
+    outline: 0;
+    .box-shadow (none);
+    &:focus {
+      outline: 0;
+    }
+  }
+  img {
+    max-width: 100%;
+  }
+  .branding {
+    background: @primary;    
+    padding: 5px 0;
+    img {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+  .element-content {
+    padding: 10px;
+    position: relative;
+    .border-radius(2px);
+    p {
+      font-size: 16px;
+      margin: 0;
+      &.title {
+        color: @primary;
+      }
+      &.price {
+        color: @grey-dk;
+      }
+    }
+  }
+  .element-overlay {
+    background-color: rgba(255, 255, 255, .9);
+    position: absolute;    
+    bottom: 0;
+    width: 100%;
+    .opacity(0);
+    padding: 10px;
+    .transition(all linear 500ms);
+    img {
+      width: auto; 
+      &.ostk-logo {
+        float: right;
+      }
+    }
+    p {
+      font-size: 16px;
+      margin: 0 0 5px 0;
+      &.title {
+        font-weight: bold;
+        color: @primary;
+      }
+      &.price {
+        font-weight: bold;
+      }
+    }
+  }
+
+  /*----------------------------- Pattern 1 - search -----------------------------*/
+  &.ostk-search {
+  }/* .ostk-search  */
+
+  /*----------------------------- Pattern 2 - link -----------------------------*/
+  &.ostk-link {
+  }/* .ostk-link  */
+
+  /*----------------------------- Pattern 3 - rectangle -----------------------------*/
+  &.ostk-rectangle {
+    border: solid 2px @primary;
+    .border-radius(8px);
+    &:hover {
+      .element-overlay {
+        .opacity(1);
+      }
+    }
+  }/* .ostk-rectangle  */
+
+  /*----------------------------- Pattern 4 - leaderboard -----------------------------*/
+  &.ostk-leaderboard {
+    border: solid 2px @primary;
+    .border-radius(8px);
+    width: 728px;
+    height: 90px;
+    .item-holder {
+      margin-right: 150px;
+      &.item-count-2 {
+        .element-content {
+          width: 50%;  
+          float: left;
+        }
+      }
+      .element-content {
+        padding: 0;
+        p {
+          text-align: left;
+          &.title {
+            .truncate;
+          }
+          &.description {
+            .truncate;
+            font-size: 12px;
+          }
+        }
+        img.product-image {
+          padding: 5px;
+          float: left;
+          margin: 0;
+          max-height: 70px;
+        }
+      }
+    }
+    .branding {
+      position: absolute;
+      right: 0;
+      width: 130px;          
+      padding: 30px 0;
+    }
+  }/* .ostk-leaderboard  */
+
+  /*----------------------------- Pattern 5 - skyscraper -----------------------------*/
+  &.ostk-skyscraper {
+    border: solid 2px @primary;
+    .border-radius(8px);
+    .element-content {
+      p {
+        text-align: center;
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+      }
+    }
+  }/* .ostk-skyscraper  */
+
+  /*----------------------------- Pattern 6 - carousel -----------------------------*/
+  &.ostk-carousel {
+    position: relative;
+    &.mobile-size {
+      .ostk-flexslider {
+        padding: 30px;
+      }
+    }
+    .ostk-flexslider {
+      &:hover {
+        .element-overlay {
+          .opacity(1);
+        }
+      }
+      a {
+        text-decoration: none;
+      }
+      ul.slides {
+        margin: 0;
+        li {
+          position: relative;
+          .element-content {
+            padding: 0;
+            img {
+              .border-radius(2px);
+            }      
+          }
+        }      
+      }
+    }/* flexslider */
+    .element-overlay {
+      p {
+        text-align: center;
+      }
+      img {
+        width: auto; 
+        &.ostk-rating {
+          margin: 0 auto 5px auto;
+          display: block;
+        }     
+      }     
+    }
+    /* Arrows */
+    .ostk-arrow {
+        background-image: url('../../images/overstock-arrows.png');
+        background-repeat: no-repeat;
+        outline: none;
+        height: 25px;
+        width: 25px;
+        &.ostk-arrow-left {
+          background-position: 0 0;
+          &:hover {
+            background-position: 0 -25px;
+          }
+        }
+        &.ostk-arrow-right {
+          background-position: -25px 0;
+          &:hover {
+            background-position: -25px -25px;
+          }
+        }
+        &.ostk-arrow-left-red {
+          background-position: -50px 0;
+          &:hover {
+            background-position: -50px -25px;
+          }
+        }
+        &.ostk-arrow-right-red {
+          background-position: -75px 0;
+          &:hover {
+            background-position: -75px -25px;
+          }
+        }
+    }
+    /* Arrows Navigation */
+    .custom-navigation {
+      a {
+        text-decoration: none;
+        &.flex-prev {
+          float: left;
+        }
+        &.flex-next {
+          float: right;
+        }
+      }
+    }
+    &.mobile-size {
+      /* Arrows Navigation */
+      .custom-navigation {
+        a {
+          position: absolute;
+          top: 50%;
+          &.flex-prev {
+            left: 0;
+          }
+          &.flex-next {
+            right: 0;
+          }
+        }
+        .ostk-arrow {
+          padding: 5px;
+          .border-radius(5px);
+          &.ostk-arrow-left {
+            background-position: -50px 0;
+            &:hover {
+              background-position: -50px -25px;
+            }
+          }
+          &.ostk-arrow-right {
+            background-position: -75px 0;
+            &:hover {
+              background-position: -75px -25px;
+            }
+          }
+        }
+
+        /* Thumbail Navigation */
+        .custom-controls-container {
+          display: none;
+        }/* .custom-controls-container */
+      }/* .custom-navigation */
+    }
+    &.desktop-size {
+      /* Arrows Navigation */
+      .custom-navigation {
+        max-width: 430px;
+        &.count-4 {
+          max-width: 360px;
+        }
+        &.count-3 {
+          max-width: 280px;
+        }
+        &.count-2 {
+          max-width: 210px;
+        }
+        margin: 10px auto 0 auto;
+        a {
+          border: solid 1px lighten(@grey, 20%);
+          .border-radius(2px);
+          background: lighten(@grey-lt, 20%);
+          margin-top: 5px;
+          .ostk-arrow {
+            margin: 20px 0;
+          }
+          &:hover {
+            background: lighten(@grey-lt, 30%);
+          }
+        }
+        /* Thumbail Navigation */
+        .custom-controls-container {
+          display: table;
+          margin: 0 auto;
+          ol {
+            list-style: none;
+            li {
+              display: table-cell; 
+              padding: 5px;
+              width: auto;
+              display: none;
+              list-style: none;
+              img {
+                .border-radius(2px);
+                border: solid 1px grey;
+                width: 65px;
+                height: 65px;
+                &.flex-active {
+                  border: solid 1px @primary;
+                }
+              }
+            }
+          }
+          ul.flex-direction-nav {
+            list-style: none;
+            li {
+              list-style: none;              
+            }
+          }
+        }/* .custom-controls-container */
+      }/* custom-navigation */
+    }/* .ostk-carousel.desktop-size */
+  }/* .ostk-carousel */
+
+  /*----------------------------- Pattern 7 - stock photo -----------------------------*/
+  &.ostk-stock-photo {
+    &:hover {
+      .element-overlay {
+        .opacity(1);
+      }
+    }
+    &.image-small {
+      width: 200px;
+    }
+    &.image-medium {
+      width: 400px;
+    }
+    &.img-large {
+      width: 600px;
+    }
+    .element-content {
+    }
+    .element-overlay {
+      background-color: rgba(255, 255, 255, .9);
+      position: absolute;    
+      bottom: 0;
+      width: 100%;
+      .opacity(0);
+      .transition(all linear 500ms);
+    }
+  }/* .ostk-stock-photo */
+
+  /*----------------------------- Pattern 8 - product link -----------------------------*/
+  &.ostk-product-link {
+  }/* .ostk-product-link */
+}
