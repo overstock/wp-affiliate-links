@@ -1,10 +1,10 @@
 <?php
 /*
-* Plugin Name: Overstock Affiliate Links
-* Description: Embed Overstock Products into your Posts 
+* Plugin Name: Overstock Affiliate Shortcode Plugin
+* Description: Create monetized links to millions of products in seconds. We support 9 different SHORTCODE types including carousel, rectangle and skyscraper. 
 * Version: 1.0
 * Author: Reif Tauati and Travis Hoki
-* Author URI: http://www.quora.com/Reif-Tauati
+* Author URI: http://www.overstock.com/affiliate-portal-homepage
 */
 
 include_once('product_data.php');
