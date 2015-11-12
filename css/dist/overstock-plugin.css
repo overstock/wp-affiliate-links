@@ -1,0 +1,278 @@
+/* Less Variable */
+/* Widths */
+/* Colors */
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Page Styles */
+/*----------------------------- General Styles -----------------------------*/
+.ostk-plugin-settings {
+  background: #FFFFFF;
+}
+.ostk-plugin-settings .clearfix {
+  clear: both;
+}
+.ostk-plugin-settings p {
+  color: #7b7b7b;
+}
+.ostk-plugin-settings p.ostk-error {
+  color: #c80f2e;
+}
+.ostk-plugin-settings span.highlight {
+  color: #c80f2e;
+}
+.ostk-plugin-settings h1 {
+  color: #444444;
+  font-size: 25px;
+  line-height: 27px;
+  margin: 10px 0;
+}
+.ostk-plugin-settings h2 {
+  color: #c80f2e;
+  font-size: 40px;
+  line-height: 42px;
+  margin: 0;
+}
+.ostk-plugin-settings h3 {
+  color: #444444;
+  font-size: 20px;
+  line-height: 22px;
+  margin: 10px 0;
+}
+.ostk-plugin-settings .btn {
+  background: #c80f2e;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.ostk-plugin-settings .btn:hover {
+  background: #690818;
+}
+.ostk-plugin-settings .btn.active {
+  background: #690818;
+}
+.ostk-plugin-settings .header {
+  overflow: hidden;
+  border-bottom: solid 3px #c80f2e;
+  padding: 10px 20px;
+}
+@media (max-width: 767px) {
+  .ostk-plugin-settings .header img.logo {
+    display: background;
+    margin: 0 auot;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-plugin-settings .header img.logo {
+    float: left;
+    margin-right: 40px;
+  }
+}
+.ostk-plugin-settings .header nav ul {
+  overflow: hidden;
+}
+.ostk-plugin-settings .header nav ul li {
+  float: left;
+  margin-right: 10px;
+}
+.ostk-plugin-settings .header nav ul li a.btn {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  padding: 5px 20px;
+}
+.ostk-plugin-settings .ostk-page {
+  max-width: 1024px;
+  padding: 20px;
+}
+/*----------------------------- WP Plugin Home Page -----------------------------*/
+.ostk-home-page.ostk-page {
+  max-width: 700px;
+}
+.ostk-home-page .ostk-notification-block {
+  padding: 10px;
+  margin: 10px 0;
+}
+.ostk-home-page .ostk-notification-block.ostk-notification-success {
+  background: #007B17;
+}
+.ostk-home-page .ostk-notification-block.ostk-notification-danger {
+  background: #c80f2e;
+}
+.ostk-home-page .ostk-notification-block p {
+  color: white;
+  margin: 0 0 5px 0;
+}
+.ostk-home-page .ostk-notification-block a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+/*----------------------------- WP Plugin Documentation Page -----------------------------*/
+.ostk-doc-page p.red,
+.ostk-doc-page span.red {
+  color: #c80f2e;
+}
+.ostk-doc-page .section-title {
+  margin: 50px 0 10px 0;
+}
+.ostk-doc-page .section-title h3 {
+  font-size: 16px;
+}
+.ostk-doc-page .section-title a {
+  text-decoration: none;
+}
+.ostk-doc-page .section-title a:hover h2 {
+  color: #f24b67;
+}
+.ostk-doc-page .center {
+  text-align: center;
+}
+.ostk-doc-page .atts ul {
+  margin: 0px 0 20px 0px;
+}
+@media (max-width: 767px) {
+  .ostk-doc-page .atts ul {
+    padding: 0 20px;
+  }
+}
+.ostk-doc-page .atts ul li {
+  clear: both;
+  margin-bottom: 20px;
+}
+.ostk-doc-page .atts ul li ul {
+  padding: 0 20px;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .ostk-doc-page .atts ul li ul {
+    margin-left: 60px;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li ul {
+    margin-left: 180px;
+  }
+}
+.ostk-doc-page .atts ul li ul li {
+  margin-bottom: 10px;
+  list-style: disc;
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li ul li.options-col-3 {
+    float: left;
+    width: 30%;
+    clear: none;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li ul li.options-col-2 {
+    float: left;
+    width: 50%;
+    clear: none;
+  }
+}
+.ostk-doc-page .atts ul li p {
+  line-height: 18px;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+}
+@media (max-width: 767px) {
+  .ostk-doc-page .atts ul li p {
+    margin-left: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li p {
+    margin-left: 150px;
+  }
+}
+.ostk-doc-page .atts ul li p.title {
+  margin: 0;
+  font-weight: bold;
+}
+@media (min-width: 768px) {
+  .ostk-doc-page .atts ul li p.title {
+    width: 120px;
+    float: left;
+    text-align: right;
+  }
+}
+.ostk-doc-page .atts ul li p span.atts-subtitle {
+  font-weight: bold;
+  color: #7b7b7b;
+}
+.ostk-doc-page code {
+  background-color: #444444;
+  color: #FFFFFF;
+  display: block;
+  margin: 10px auto;
+  max-width: 400px;
+  padding: 5px;
+  text-align: center;
+}
+.ostk-doc-page .shortcode-output {
+  margin: 10px auto 50px auto;
+}
+.ostk-doc-page .shortcode-output .ostk-element {
+  display: block;
+  margin: 0 auto;
+}
+.ostk-doc-page .shortcode-output a.ostk-element.ostk-search,
+.ostk-doc-page .shortcode-output a.ostk-element.ostk-link,
+.ostk-doc-page .shortcode-output a.ostk-element.ostk-product-link {
+  display: block;
+  text-align: center;
+}
+/*----------------------------- WP Plugin Sandbox Page -----------------------------*/
+@media (min-width: 768px) {
+  .ostk-sandbox-page .shortcode-input,
+  .ostk-sandbox-page .shortcode-output {
+    float: left;
+    width: 50%;
+  }
+  .ostk-sandbox-page .shortcode-input h2,
+  .ostk-sandbox-page .shortcode-output h2 {
+    text-align: center;
+  }
+}
+.ostk-sandbox-page .shortcode-input .inner,
+.ostk-sandbox-page .shortcode-output .inner {
+  margin: 10px;
+}
+.ostk-sandbox-page .shortcode-input textarea {
+  width: 100%;
+}
+.ostk-sandbox-page .shortcode-input .btn {
+  display: block;
+  margin: 5px auto 0 auto;
+  max-width: 100px;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .ostk-sandbox-page .shortcode-output {
+    margin-top: 80px;
+  }
+}
+.ostk-sandbox-page .shortcode-output .inner {
+  border: solid 1px grey;
+  min-height: 200px;
+}
+.ostk-sandbox-page .shortcode-output .inner img {
+  max-width: 100%;
+}

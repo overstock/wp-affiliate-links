@@ -14,6 +14,8 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		concat: {
 			'dist/overstock-plugin.js': 		[
+												'src/libs/jquery.min.js',
+												'src/libs/flexslider.min.js',
 												'src/plugin/plugin-script.js'
 												], //Compile plugin JS
 			'../api/js/overstock-embed.js': [

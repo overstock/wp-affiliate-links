@@ -29,8 +29,7 @@ function ostk_admin_page() {
 
 				<?php if(empty($ostk_option_settings)): ?>
 					<div class="ostk-notification-block ostk-notification-danger">
-						<p>You'll need an authentic LinkShare ID provided free at <a href="http://overstock.com/devapi/" target="_blank" title="Overstock DEV API">http://overstock.com/devapi/</a></p>
-					</div>
+<p><i class='fa fa-check'></i>You'll need an authentic LinkShare ID provided free at <a href="http://www.overstock.com/affiliate-portal-homepage" target="_blank" title="Overstock DEV API">http://overstock.com/devapi/</a></p>					</div>
 				<?php else: ?>
 					<div class="ostk-notification-block ostk-notification-success">
 						<p>Thank you for submitting your LinkShare ID.</p>
