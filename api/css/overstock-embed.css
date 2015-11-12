@@ -1,0 +1,712 @@
+/* Less Variable */
+/* Widths */
+/* Colors */
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Shortcode Elements */
+.ostk-loader {
+  /**
+ * Global Reset of all HTML Elements
+ *
+ * Resetting all of our HTML Elements ensures a smoother
+ * visual transition between browsers. If you don't believe me,
+ * try temporarily commenting out this block of code, then go
+ * and look at Mozilla versus Safari, both good browsers with
+ * a good implementation of CSS. The thing is, all browser CSS
+ * defaults are different and at the end of the day if visual
+ * consistency is what we're shooting for, then we need to
+ * make sure we're resetting all spacing elements.
+ *
+ */
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  display: block;
+  margin: 10px auto;
+  max-width: 140px;
+  text-align: center;
+}
+.ostk-loader html,
+.ostk-loader body {
+  border: 0;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+.ostk-loader div,
+.ostk-loader span,
+.ostk-loader object,
+.ostk-loader iframe,
+.ostk-loader img,
+.ostk-loader table,
+.ostk-loader caption,
+.ostk-loader thead,
+.ostk-loader tbody,
+.ostk-loader tfoot,
+.ostk-loader tr,
+.ostk-loader tr,
+.ostk-loader td,
+.ostk-loader article,
+.ostk-loader aside,
+.ostk-loader canvas,
+.ostk-loader details,
+.ostk-loader figure,
+.ostk-loader hgroup,
+.ostk-loader menu,
+.ostk-loader nav,
+.ostk-loader footer,
+.ostk-loader header,
+.ostk-loader section,
+.ostk-loader summary,
+.ostk-loader mark,
+.ostk-loader audio,
+.ostk-loader video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.ostk-loader h1,
+.ostk-loader h2,
+.ostk-loader h3,
+.ostk-loader h4,
+.ostk-loader h5,
+.ostk-loader h6,
+.ostk-loader p,
+.ostk-loader blockquote,
+.ostk-loader pre,
+.ostk-loader a,
+.ostk-loader abbr,
+.ostk-loader address,
+.ostk-loader cit,
+.ostk-loader code,
+.ostk-loader del,
+.ostk-loader dfn,
+.ostk-loader em,
+.ostk-loader ins,
+.ostk-loader q,
+.ostk-loader samp,
+.ostk-loader small,
+.ostk-loader strong,
+.ostk-loader sub,
+.ostk-loader sup,
+.ostk-loader b,
+.ostk-loader i,
+.ostk-loader hr,
+.ostk-loader dl,
+.ostk-loader dt,
+.ostk-loader dd,
+.ostk-loader ol,
+.ostk-loader ul,
+.ostk-loader li,
+.ostk-loader fieldset,
+.ostk-loader legend,
+.ostk-loader label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+.ostk-loader article,
+.ostk-loader aside,
+.ostk-loader canvas,
+.ostk-loader figure,
+.ostk-loader figure img,
+.ostk-loader figcaption,
+.ostk-loader hgroup,
+.ostk-loader footer,
+.ostk-loader header,
+.ostk-loader nav,
+.ostk-loader section,
+.ostk-loader audio,
+.ostk-loader video {
+  display: block;
+}
+.ostk-loader table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.ostk-loader table caption,
+.ostk-loader table th,
+.ostk-loader table td {
+  text-align: left;
+  vertical-align: middle;
+}
+.ostk-loader a img {
+  border: 0;
+}
+.ostk-loader :focus {
+  outline: 0;
+}
+.ostk-loader img {
+  display: block;
+  margin: 10px auto;
+  max-width: 125px;
+}
+.ostk-loader p {
+  margin: 0;
+}
+.ostk-element,
+#main .ostk-element,
+#sidebar .ostk-element {
+  /*
+  The "#main" and "#sidebar" is being used to make sure that the ostk styles have enough specificity to maintain ostk styles even in custom Wordpress themes. Id's are being used to add specificity instead of using important on every item. If important or other id's end up being needed, this may be motified.
+  */
+  /*----------------------------- Global for All Short Code Elements -----------------------------*/
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  /*----------------------------- Pattern 1 - search -----------------------------*/
+  /* .ostk-search  */
+  /*----------------------------- Pattern 2 - link -----------------------------*/
+  /* .ostk-link  */
+  /*----------------------------- Pattern 3 - rectangle -----------------------------*/
+  /* .ostk-rectangle  */
+  /*----------------------------- Pattern 4 - leaderboard -----------------------------*/
+  /* .ostk-leaderboard  */
+  /*----------------------------- Pattern 5 - skyscraper -----------------------------*/
+  /* .ostk-skyscraper  */
+  /*----------------------------- Pattern 6 - carousel -----------------------------*/
+  /* .ostk-carousel */
+  /*----------------------------- Pattern 7 - stock photo -----------------------------*/
+  /* .ostk-stock-photo */
+  /*----------------------------- Pattern 8 - product link -----------------------------*/
+  /* .ostk-product-link */
+}
+.ostk-element *,
+#main .ostk-element *,
+#sidebar .ostk-element * {
+  box-sizing: border-box;
+}
+.ostk-element a,
+#main .ostk-element a,
+#sidebar .ostk-element a {
+  text-decoration: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.ostk-element a:focus,
+#main .ostk-element a:focus,
+#sidebar .ostk-element a:focus {
+  outline: 0;
+}
+.ostk-element img,
+#main .ostk-element img,
+#sidebar .ostk-element img {
+  max-width: 100%;
+}
+.ostk-element .branding,
+#main .ostk-element .branding,
+#sidebar .ostk-element .branding {
+  background: #c80f2e;
+  padding: 5px 0;
+}
+.ostk-element .branding img,
+#main .ostk-element .branding img,
+#sidebar .ostk-element .branding img {
+  margin: 0 auto;
+  display: block;
+}
+.ostk-element .element-content,
+#main .ostk-element .element-content,
+#sidebar .ostk-element .element-content {
+  padding: 10px;
+  position: relative;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.ostk-element .element-content p,
+#main .ostk-element .element-content p,
+#sidebar .ostk-element .element-content p {
+  font-size: 16px;
+  margin: 0;
+}
+.ostk-element .element-content p.title,
+#main .ostk-element .element-content p.title,
+#sidebar .ostk-element .element-content p.title {
+  color: #c80f2e;
+}
+.ostk-element .element-content p.price,
+#main .ostk-element .element-content p.price,
+#sidebar .ostk-element .element-content p.price {
+  color: #444444;
+}
+.ostk-element .element-overlay,
+#main .ostk-element .element-overlay,
+#sidebar .ostk-element .element-overlay {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  padding: 10px;
+  -webkit-transition: all linear 500ms;
+  -moz-transition: all linear 500ms;
+  -ms-transition: all linear 500ms;
+  -o-transition: all linear 500ms;
+  transition: all linear 500ms;
+}
+.ostk-element .element-overlay img,
+#main .ostk-element .element-overlay img,
+#sidebar .ostk-element .element-overlay img {
+  width: auto;
+}
+.ostk-element .element-overlay img.ostk-logo,
+#main .ostk-element .element-overlay img.ostk-logo,
+#sidebar .ostk-element .element-overlay img.ostk-logo {
+  float: right;
+}
+.ostk-element .element-overlay p,
+#main .ostk-element .element-overlay p,
+#sidebar .ostk-element .element-overlay p {
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+.ostk-element .element-overlay p.title,
+#main .ostk-element .element-overlay p.title,
+#sidebar .ostk-element .element-overlay p.title {
+  font-weight: bold;
+  color: #c80f2e;
+}
+.ostk-element .element-overlay p.price,
+#main .ostk-element .element-overlay p.price,
+#sidebar .ostk-element .element-overlay p.price {
+  font-weight: bold;
+}
+.ostk-element.ostk-rectangle,
+#main .ostk-element.ostk-rectangle,
+#sidebar .ostk-element.ostk-rectangle {
+  border: solid 2px #c80f2e;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.ostk-element.ostk-rectangle:hover .element-overlay,
+#main .ostk-element.ostk-rectangle:hover .element-overlay,
+#sidebar .ostk-element.ostk-rectangle:hover .element-overlay {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-leaderboard,
+#main .ostk-element.ostk-leaderboard,
+#sidebar .ostk-element.ostk-leaderboard {
+  border: solid 2px #c80f2e;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  width: 728px;
+  height: 90px;
+}
+.ostk-element.ostk-leaderboard .item-holder,
+#main .ostk-element.ostk-leaderboard .item-holder,
+#sidebar .ostk-element.ostk-leaderboard .item-holder {
+  margin-right: 150px;
+}
+.ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content,
+#main .ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content,
+#sidebar .ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content {
+  width: 50%;
+  float: left;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content {
+  padding: 0;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content p,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content p,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p {
+  text-align: left;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content p.title,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content p.title,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content p.description,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content p.description,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p.description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+.ostk-element.ostk-leaderboard .item-holder .element-content img.product-image,
+#main .ostk-element.ostk-leaderboard .item-holder .element-content img.product-image,
+#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content img.product-image {
+  padding: 5px;
+  float: left;
+  margin: 0;
+  max-height: 70px;
+}
+.ostk-element.ostk-leaderboard .branding,
+#main .ostk-element.ostk-leaderboard .branding,
+#sidebar .ostk-element.ostk-leaderboard .branding {
+  position: absolute;
+  right: 0;
+  width: 130px;
+  padding: 30px 0;
+}
+.ostk-element.ostk-skyscraper,
+#main .ostk-element.ostk-skyscraper,
+#sidebar .ostk-element.ostk-skyscraper {
+  border: solid 2px #c80f2e;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.ostk-element.ostk-skyscraper .element-content p,
+#main .ostk-element.ostk-skyscraper .element-content p,
+#sidebar .ostk-element.ostk-skyscraper .element-content p {
+  text-align: center;
+}
+.ostk-element.ostk-skyscraper .element-content img,
+#main .ostk-element.ostk-skyscraper .element-content img,
+#sidebar .ostk-element.ostk-skyscraper .element-content img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.ostk-element.ostk-carousel,
+#main .ostk-element.ostk-carousel,
+#sidebar .ostk-element.ostk-carousel {
+  position: relative;
+  /* flexslider */
+  /* Arrows */
+  /* Arrows Navigation */
+  /* .ostk-carousel.desktop-size */
+}
+.ostk-element.ostk-carousel.mobile-size .ostk-flexslider,
+#main .ostk-element.ostk-carousel.mobile-size .ostk-flexslider,
+#sidebar .ostk-element.ostk-carousel.mobile-size .ostk-flexslider {
+  padding: 30px;
+}
+.ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
+#main .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-carousel .ostk-flexslider a,
+#main .ostk-element.ostk-carousel .ostk-flexslider a,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider a {
+  text-decoration: none;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides {
+  margin: 0;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides li,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li {
+  position: relative;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content {
+  padding: 0;
+}
+.ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img,
+#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img,
+#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.ostk-element.ostk-carousel .element-overlay p,
+#main .ostk-element.ostk-carousel .element-overlay p,
+#sidebar .ostk-element.ostk-carousel .element-overlay p {
+  text-align: center;
+}
+.ostk-element.ostk-carousel .element-overlay img,
+#main .ostk-element.ostk-carousel .element-overlay img,
+#sidebar .ostk-element.ostk-carousel .element-overlay img {
+  width: auto;
+}
+.ostk-element.ostk-carousel .element-overlay img.ostk-rating,
+#main .ostk-element.ostk-carousel .element-overlay img.ostk-rating,
+#sidebar .ostk-element.ostk-carousel .element-overlay img.ostk-rating {
+  margin: 0 auto 5px auto;
+  display: block;
+}
+.ostk-element.ostk-carousel .ostk-arrow,
+#main .ostk-element.ostk-carousel .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow {
+  background-image: url('../../images/overstock-arrows.png');
+  background-repeat: no-repeat;
+  outline: none;
+  height: 25px;
+  width: 25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left {
+  background-position: 0 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover {
+  background-position: 0 -25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right {
+  background-position: -25px 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover {
+  background-position: -25px -25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red {
+  background-position: -50px 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover {
+  background-position: -50px -25px;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red {
+  background-position: -75px 0;
+}
+.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover,
+#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover {
+  background-position: -75px -25px;
+}
+.ostk-element.ostk-carousel .custom-navigation a,
+#main .ostk-element.ostk-carousel .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel .custom-navigation a {
+  text-decoration: none;
+}
+.ostk-element.ostk-carousel .custom-navigation a.flex-prev,
+#main .ostk-element.ostk-carousel .custom-navigation a.flex-prev,
+#sidebar .ostk-element.ostk-carousel .custom-navigation a.flex-prev {
+  float: left;
+}
+.ostk-element.ostk-carousel .custom-navigation a.flex-next,
+#main .ostk-element.ostk-carousel .custom-navigation a.flex-next,
+#sidebar .ostk-element.ostk-carousel .custom-navigation a.flex-next {
+  float: right;
+}
+.ostk-element.ostk-carousel.mobile-size,
+#main .ostk-element.ostk-carousel.mobile-size,
+#sidebar .ostk-element.ostk-carousel.mobile-size {
+  /* Arrows Navigation */
+  /* .custom-navigation */
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation {
+  /* Thumbail Navigation */
+  /* .custom-controls-container */
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a {
+  position: absolute;
+  top: 50%;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev {
+  left: 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next {
+  right: 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow {
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left {
+  background-position: -50px 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover {
+  background-position: -50px -25px;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right {
+  background-position: -75px 0;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover {
+  background-position: -75px -25px;
+}
+.ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
+#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
+#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container {
+  display: none;
+}
+.ostk-element.ostk-carousel.desktop-size,
+#main .ostk-element.ostk-carousel.desktop-size,
+#sidebar .ostk-element.ostk-carousel.desktop-size {
+  /* Arrows Navigation */
+  /* custom-navigation */
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation {
+  max-width: 430px;
+  margin: 10px auto 0 auto;
+  /* Thumbail Navigation */
+  /* .custom-controls-container */
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation.count-4,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-4,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-4 {
+  max-width: 360px;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation.count-3,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-3,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-3 {
+  max-width: 280px;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation.count-2,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-2,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-2 {
+  max-width: 210px;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation a,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a {
+  border: solid 1px #aeaeae;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: #dddddd;
+  margin-top: 5px;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow {
+  margin: 20px 0;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover {
+  background: #f6f6f6;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container {
+  display: table;
+  margin: 0 auto;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol {
+  list-style: none;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li {
+  display: table-cell;
+  padding: 5px;
+  width: auto;
+  display: none;
+  list-style: none;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: solid 1px grey;
+  width: 65px;
+  height: 65px;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active {
+  border: solid 1px #c80f2e;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav {
+  list-style: none;
+}
+.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
+#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
+#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li {
+  list-style: none;
+}
+.ostk-element.ostk-stock-photo:hover .element-overlay,
+#main .ostk-element.ostk-stock-photo:hover .element-overlay,
+#sidebar .ostk-element.ostk-stock-photo:hover .element-overlay {
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.ostk-element.ostk-stock-photo.image-small,
+#main .ostk-element.ostk-stock-photo.image-small,
+#sidebar .ostk-element.ostk-stock-photo.image-small {
+  width: 200px;
+}
+.ostk-element.ostk-stock-photo.image-medium,
+#main .ostk-element.ostk-stock-photo.image-medium,
+#sidebar .ostk-element.ostk-stock-photo.image-medium {
+  width: 400px;
+}
+.ostk-element.ostk-stock-photo.img-large,
+#main .ostk-element.ostk-stock-photo.img-large,
+#sidebar .ostk-element.ostk-stock-photo.img-large {
+  width: 600px;
+}
+.ostk-element.ostk-stock-photo .element-overlay,
+#main .ostk-element.ostk-stock-photo .element-overlay,
+#sidebar .ostk-element.ostk-stock-photo .element-overlay {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-transition: all linear 500ms;
+  -moz-transition: all linear 500ms;
+  -ms-transition: all linear 500ms;
+  -o-transition: all linear 500ms;
+  transition: all linear 500ms;
+}
