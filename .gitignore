@@ -1,2 +1,4 @@
-css/node_modules
-js/node_modules
+css/src/node_modules
+js/src/node_modules
+api/css/src/node_modules
+api/js/src/node_modules

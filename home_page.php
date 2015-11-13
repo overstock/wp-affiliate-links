@@ -15,13 +15,6 @@ function ostk_admin_page() {
 		 	<h1>Welcome to Overstock.com's Affiliate Shortcode Plugin!</h1>
 		 	<p>We are honored that you would allow us to display some of our products on your blog. We spent a lot of time and effort creating the most beautiful embeddable objects on the internet :)</p>
 
-			<div class="icon icon-chevron-down"></div>
-			<i class="fa fa-envelope"></i>
-			<i class="fa fa-email-envelope"></i>
-			<i class="fa fa-o"></i>
-
-
-			
 		    <form action="options.php" method="post">
 		      <?php settings_fields('ostk_settings_group'); 
 		      ?>
