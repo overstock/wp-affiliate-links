@@ -22,24 +22,24 @@ $ostk_pages = array(
 
 add_action('admin_menu', 'ostk_theme_options_panel');
 add_action("admin_init", "ostk_register_settings");
-add_action('admin_print_styles', 'ostk_admin_css');
-add_action('admin_enqueue_scripts', 'ostk_admin_js');
+add_action('admin_print_styles', 'ostk_load_css');
+add_action('admin_enqueue_scripts', 'ostk_load_js');
 
 /**
 * Load css
 **/
-function ostk_admin_css() {
-	wp_enqueue_style( 'flexslider_script', plugins_url('flex-slider/flexslider.css', __FILE__));
-	wp_enqueue_style( 'ostk_script', plugins_url('css/dest/overstock-shortcodes.min.css', __FILE__));
+function ostk_load_css() {
+	wp_enqueue_style( 'ostk-embed-styles', plugins_url('api/css/overstock-embed.min.css', __FILE__));
+	wp_enqueue_style( 'ostk-plugin-styles', plugins_url('css/dist/overstock-plugin.min.css', __FILE__));
 }//ostk_admin_css
 
 /**
 * Load js
 **/
-function ostk_admin_js() {
+function ostk_load_js() {
 	wp_enqueue_script('jquery');
-	wp_enqueue_script( 'ostk-flex-slider', plugins_url('js/dest/overstock-shortcodes.min.js', __FILE__), array('jquery'), '1.0', true );
-	wp_enqueue_script( 'ostk-custom-jquery', plugins_url('flex-slider/jquery.flexslider-min.js', __FILE__), array('jquery'), '1.0', true );
+	wp_enqueue_script( 'ostk-embed-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
+	wp_enqueue_script( 'ostk-plugin-js', plugins_url('js/dist/overstock-plugin.min.js', __FILE__), array('jquery'), '1.0', true );
 }//ostk_admin_js
 
 function ostk_get_header($current_page){
