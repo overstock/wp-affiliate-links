@@ -18,6 +18,7 @@ include_once('patterns.php');
 include_once('home_page.php');
 include_once('sandbox_page.php');
 include_once('doc_page.php');
+include_once('contact_page.php');
 
 /* Patterns */
 $GLOBALS['developerId'] = get_option('ostk_settings');

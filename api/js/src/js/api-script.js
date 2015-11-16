@@ -24,6 +24,7 @@ function shortcode_atts(obj, atts){
  * 2) [overstock type="carousel" category="Pets" number_of_items="5"]
 **/
 function ostk_generateShortcodeWidgets(atts, _this, callback){
+  console.log('-- ostk_generateShortcodeWidgets --');
   var error = null;
   if(developerId == '' || developerId == null){
     error = ostk_formatError("Linkshare ID needs to be authenticated."); 

@@ -17,12 +17,22 @@
 /* Plugin Styles */
 /*----------------------------- General Styles -----------------------------*/
 .ostk-plugin-settings {
-  background: #FFFFFF;
+  /* section */
 }
 .ostk-plugin-settings .clearfix {
   clear: both;
 }
+.ostk-plugin-settings i.fa-check {
+  color: #007B17;
+}
+.ostk-plugin-settings li {
+  font-size: 16px;
+}
+.ostk-plugin-settings ol {
+  margin-left: 40px;
+}
 .ostk-plugin-settings p {
+  font-size: 16px;
   color: #7b7b7b;
 }
 .ostk-plugin-settings p.ostk-error {
@@ -39,9 +49,9 @@
 }
 .ostk-plugin-settings h2 {
   color: #c80f2e;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 42px;
-  margin: 0;
+  margin: 20px 0;
 }
 .ostk-plugin-settings h3 {
   color: #444444;
@@ -49,35 +59,62 @@
   line-height: 22px;
   margin: 10px 0;
 }
-.ostk-plugin-settings .btn {
-  background: #c80f2e;
-  border: none;
-  color: #FFFFFF;
+.ostk-plugin-settings form textarea,
+.ostk-plugin-settings form input[type='text'] {
+  padding: 10px;
+}
+.ostk-plugin-settings .ostk-btn,
+.ostk-plugin-settings .ostk-back-btn {
+  font-size: 16px;
   cursor: pointer;
-  padding: 5px 10px;
+  border: none;
+  text-decoration: none;
+  padding: 5px 20px;
 }
-.ostk-plugin-settings .btn:hover {
+.ostk-plugin-settings .ostk-btn i,
+.ostk-plugin-settings .ostk-back-btn i {
+  margin-right: 5px;
+}
+.ostk-plugin-settings .ostk-btn {
+  background: #c80f2e;
+  color: #FFFFFF;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  display: block;
+  text-align: center;
+}
+.ostk-plugin-settings .ostk-btn:hover,
+.ostk-plugin-settings .ostk-btn.active {
   background: #690818;
 }
-.ostk-plugin-settings .btn.active {
-  background: #690818;
+.ostk-plugin-settings .ostk-back-btn {
+  background: none;
+  color: #c80f2e;
+}
+.ostk-plugin-settings .ostk-back-btn:hover,
+.ostk-plugin-settings .ostk-back-btn.active {
+  color: #690818;
 }
 .ostk-plugin-settings .header {
   overflow: hidden;
+  background: #FFFFFF;
   border-bottom: solid 3px #c80f2e;
   padding: 10px 20px;
 }
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
   .ostk-plugin-settings .header img.logo {
-    display: background;
-    margin: 0 auot;
+    margin-bottom: 10px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1001px) {
   .ostk-plugin-settings .header img.logo {
     float: left;
     margin-right: 40px;
   }
+}
+.ostk-plugin-settings .header nav {
+  margin-top: 5px;
 }
 .ostk-plugin-settings .header nav ul {
   overflow: hidden;
@@ -86,42 +123,51 @@
   float: left;
   margin-right: 10px;
 }
-.ostk-plugin-settings .header nav ul li a.btn {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  display: block;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  padding: 5px 20px;
+@media (max-width: 1000px) {
+  .ostk-plugin-settings .header nav ul li {
+    margin-bottom: 10px;
+  }
 }
-.ostk-plugin-settings .ostk-page {
-  max-width: 1024px;
+.ostk-plugin-settings section {
   padding: 20px;
+  background: #FFFFFF;
+}
+.ostk-plugin-settings section .ostk-section-inner {
+  max-width: 1024px;
 }
 /*----------------------------- WP Plugin Home Page -----------------------------*/
-.ostk-home-page.ostk-page {
-  max-width: 700px;
+.ostk-home-page {
+  background: none;
+  padding: 0;
 }
-.ostk-home-page .ostk-notification-block {
-  padding: 10px;
+.ostk-home-page section {
+  position: relative;
+  /*		&.hidden {
+			display: block;
+		}
+*/
+  margin-bottom: 20px;
+  /* ostk-btns */
+}
+.ostk-home-page section .ostk-back-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+}
+.ostk-home-page section h2 {
+  margin: 0;
+}
+.ostk-home-page section .ostk-btns {
+  overflow: hidden;
+  margin-top: 20px;
+}
+.ostk-home-page section .ostk-btns .ostk-btn {
+  float: left;
+  margin-right: 10px;
+}
+.ostk-home-page section form input {
   margin: 10px 0;
-}
-.ostk-home-page .ostk-notification-block.ostk-notification-success {
-  background: #007B17;
-}
-.ostk-home-page .ostk-notification-block.ostk-notification-danger {
-  background: #c80f2e;
-}
-.ostk-home-page .ostk-notification-block p {
-  color: white;
-  margin: 0 0 5px 0;
-}
-.ostk-home-page .ostk-notification-block a {
-  color: white;
-  text-decoration: underline;
-  font-weight: bold;
 }
 /*----------------------------- WP Plugin Documentation Page -----------------------------*/
 .ostk-doc-page p.red,
@@ -189,7 +235,6 @@
 }
 .ostk-doc-page .atts ul li p {
   line-height: 18px;
-  font-size: 14px;
   margin: 10px 0 0 0;
 }
 @media (max-width: 767px) {
@@ -233,6 +278,9 @@
   display: block;
   margin: 0 auto;
 }
+.ostk-doc-page .shortcode-output p.ostk-error {
+  text-align: center;
+}
 .ostk-doc-page .shortcode-output a.ostk-element.ostk-search,
 .ostk-doc-page .shortcode-output a.ostk-element.ostk-link,
 .ostk-doc-page .shortcode-output a.ostk-element.ostk-product-link {
@@ -258,7 +306,7 @@
 .ostk-sandbox-page .shortcode-input textarea {
   width: 100%;
 }
-.ostk-sandbox-page .shortcode-input .btn {
+.ostk-sandbox-page .shortcode-input .ostk-btn {
   display: block;
   margin: 5px auto 0 auto;
   max-width: 100px;

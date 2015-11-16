@@ -1,68 +1,71 @@
 <?php
-function ostk_doc_page() {
+function ostk_documentation_page() {
+    global $OverstockPlugin;
     global $patterns;
 	ob_start(); 
 	?>
 	<div class="ostk-plugin-settings">
-		<?php echo ostk_get_header('doc');?>
-		<div class="ostk-page ostk-doc-page">
-			<h1>Documentation</h1>
-			<?php 
-			$pattern_counter = 1;
-			foreach($patterns as $pattern){
-                $current_pattern = false;
-                $url = '?page=ostk-doc';
-                if($pattern['slug'] == $_GET['pattern']){
-                    $current_pattern = true;                
-                }else{
-                    $url .= '&pattern='.$pattern['slug'];
-                }
-                echo '<div class="section-title">';
-                    echo '<a href="'.$url.'">';
-                        echo '<h2>'.$pattern_counter.') '.$pattern['name'].'</h2>';
-                    echo '</a>';
-                    if($current_pattern){
-                        echo '<h3>'.$pattern['description'].' This shortcode type is "'.$pattern['slug'].'."</h3>';
-                        if(isset($pattern['notes'])){
-                            foreach($pattern['notes'] as $pattern_note){
-                                echo '<p>'.$pattern_note.'</p>';
-                            }//foreach
-                        }
+        <?php echo $OverstockPlugin->get_header();?>
+        <section class="ostk-doc-page">
+            <div class="ostk-section-inner">
+    			<h1>Documentation</h1>
+    			<?php 
+    			$pattern_counter = 1;
+    			foreach($patterns as $pattern){
+                    $current_pattern = false;
+                    $url = '?page=ostk-documentation';
+                    if($pattern['slug'] == $_GET['pattern']){
+                        $current_pattern = true;                
+                    }else{
+                        $url .= '&pattern='.$pattern['slug'];
                     }
-                echo '</div><!-- section-title -->';
-                if($current_pattern){
-                    $shortcodes = ostk_getShortCode($pattern['example_shortcodes']);
-                    foreach($shortcodes as $shortcode){
-                        echo '<h3 class="center">'.$pattern['name'].' Sample Shortcode</h3>';
-                        echo '<code>'.$shortcode.'</code>';
-                        echo '<div class="shortcode-output">';
-                            echo do_shortcode($shortcode);
-                        echo '</div><!--.shortcode-output-->';
-                    }//foreach
-					echo '<div class="atts">';
-                        if(isset($pattern['required_attributes'])){
-                            echo '<h3>'.$pattern['name'].' Required Attributes</h3>';
+                    echo '<div class="section-title">';
+                        echo '<a href="'.$url.'">';
+                            echo '<h2>'.$pattern_counter.') '.$pattern['name'].'</h2>';
+                        echo '</a>';
+                        if($current_pattern){
+                            echo '<h3>'.$pattern['description'].' This shortcode type is "'.$pattern['slug'].'."</h3>';
+                            if(isset($pattern['notes'])){
+                                foreach($pattern['notes'] as $pattern_note){
+                                    echo '<p>'.$pattern_note.'</p>';
+                                }//foreach
+                            }
+                        }
+                    echo '</div><!-- section-title -->';
+                    if($current_pattern){
+                        $shortcodes = ostk_getShortCode($pattern['example_shortcodes']);
+                        foreach($shortcodes as $shortcode){
+                            echo '<h3 class="center">'.$pattern['name'].' Sample Shortcode</h3>';
+                            echo '<code>'.$shortcode.'</code>';
+                            echo '<div class="shortcode-output">';
+                                echo do_shortcode($shortcode);
+                            echo '</div><!--.shortcode-output-->';
+                        }//foreach
+    					echo '<div class="atts">';
+                            if(isset($pattern['required_attributes'])){
+                                echo '<h3>'.$pattern['name'].' Required Attributes</h3>';
+                                    echo '<ul>';
+                                        echo ostk_get_pattern_attributes($pattern['required_attributes']);
+                                echo '</ul>';
+                            }
+                            if(isset($pattern['optional_attributes'])){
+                            echo '<h3>'.$pattern['name'].' Optional Attributes</h3>';
                                 echo '<ul>';
-                                    echo ostk_get_pattern_attributes($pattern['required_attributes']);
-                            echo '</ul>';
-                        }
-                        if(isset($pattern['optional_attributes'])){
-                        echo '<h3>'.$pattern['name'].' Optional Attributes</h3>';
-                            echo '<ul>';
-								echo ostk_get_pattern_attributes($pattern['optional_attributes']);
-                            echo '</ul>';
-                        }
-					echo '</div><!--atts-->';
-				}
-				$pattern_counter++;
-			}//foreach			
-			?>
+    								echo ostk_get_pattern_attributes($pattern['optional_attributes']);
+                                echo '</ul>';
+                            }
+    					echo '</div><!--atts-->';
+    				}
+    				$pattern_counter++;
+    			}//foreach			
+    			?>
 
-		</div><!-- ostk-doc-page -->
+            </div><!-- ostk-section-inner -->
+        </section>
 	</div><!--.ostk-plugin-settings-->
 	<?php
 	echo ob_get_clean();
-}//ostk_doc_page
+}//ostk_documentation_page
 
 function ostk_getShortCode($example_shortcodes){
 	$output_array = array();
