@@ -51,7 +51,6 @@ var ostk_patterns = [
                     "Luggage & Bags",
                     "Crafts & Sewing",
                     "Baby",
-                    "Crafts & Sewing",
                     "Pet Supplies",
                     "Emergency Preparedness",
                     "Bedding & Bath"
@@ -295,7 +294,6 @@ var ostk_patterns = [
                     "Luggage & Bags",
                     "Crafts & Sewing",
                     "Baby",
-                    "Crafts & Sewing",
                     "Pet Supplies",
                     "Emergency Preparedness",
                     "Bedding & Bath"

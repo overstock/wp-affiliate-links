@@ -20,7 +20,7 @@ function ostk_check_jquery(){
 	} else { // jQuery was already loaded	
 		ostk_init_elements();
 	};
-}
+}//ostk_check_jquery
 
 function ostk_get_script(url, success) {
 	var script = document.createElement('script');
@@ -38,7 +38,7 @@ function ostk_get_script(url, success) {
 		};
 	};
 	head.appendChild(script);
-};
+}//ostk_get_script
 
 function ostk_init_elements(){
 	$ostk_jQuery = jQuery.noConflict();
@@ -104,8 +104,10 @@ function ostk_get_elements(){
 		for(var i = 0 ; i < attrs.length ; i++){
 			if (attrs[i]['name'].indexOf("data-") >= 0){
 				var name = attrs[i]['name'].split('data-')[1];
-				var value = attrs[i]['value'].split('&').join('');
-				data[name] = value;
+				var value = attrs[i]['value'];
+				if(name != 'tag'){
+					data[name] = value;
+				}
 			}
 		}//for
 		var response = ostk_generateShortcodeWidgets(data, _this, function(_this, data){

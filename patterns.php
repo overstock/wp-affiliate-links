@@ -53,7 +53,6 @@ $patterns = json_decode('
                     "Luggage & Bags",
                     "Crafts & Sewing",
                     "Baby",
-                    "Crafts & Sewing",
                     "Pet Supplies",
                     "Emergency Preparedness",
                     "Bedding & Bath"
@@ -297,7 +296,6 @@ $patterns = json_decode('
                     "Luggage & Bags",
                     "Crafts & Sewing",
                     "Baby",
-                    "Crafts & Sewing",
                     "Pet Supplies",
                     "Emergency Preparedness",
                     "Bedding & Bath"
