@@ -140,7 +140,10 @@ a img {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* Shortcode Elements */
+/* API Embed Styles */
+.ostk-error {
+  color: #c80f2e;
+}
 .ostk-loader {
   background: rgba(255, 255, 255, 0.6);
   padding: 10px;
@@ -292,17 +295,17 @@ a img {
 #sidebar .ostk-element .element-overlay p.price {
   font-weight: bold;
 }
-.ostk-element.ostk-rectangle,
-#main .ostk-element.ostk-rectangle,
-#sidebar .ostk-element.ostk-rectangle {
+.ostk-element.ostk-rectangle .ostk-element-inner,
+#main .ostk-element.ostk-rectangle .ostk-element-inner,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner {
   border: solid 2px #c80f2e;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
-.ostk-element.ostk-rectangle:hover .element-overlay,
-#main .ostk-element.ostk-rectangle:hover .element-overlay,
-#sidebar .ostk-element.ostk-rectangle:hover .element-overlay {
+.ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay,
+#main .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay {
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
@@ -310,60 +313,66 @@ a img {
 .ostk-element.ostk-leaderboard,
 #main .ostk-element.ostk-leaderboard,
 #sidebar .ostk-element.ostk-leaderboard {
+  /* .ostk-element-inner */
+}
+.ostk-element.ostk-leaderboard .ostk-element-inner,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner {
+  position: relative;
   border: solid 2px #c80f2e;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  width: 728px;
+  fwidth: 728px;
   height: 90px;
 }
-.ostk-element.ostk-leaderboard .item-holder,
-#main .ostk-element.ostk-leaderboard .item-holder,
-#sidebar .ostk-element.ostk-leaderboard .item-holder {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder {
   margin-right: 150px;
 }
-.ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content,
-#main .ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content,
-#sidebar .ostk-element.ostk-leaderboard .item-holder.item-count-2 .element-content {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .element-content,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .element-content,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .element-content {
   width: 50%;
   float: left;
 }
-.ostk-element.ostk-leaderboard .item-holder .element-content,
-#main .ostk-element.ostk-leaderboard .item-holder .element-content,
-#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content {
   padding: 0;
 }
-.ostk-element.ostk-leaderboard .item-holder .element-content p,
-#main .ostk-element.ostk-leaderboard .item-holder .element-content p,
-#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p {
   text-align: left;
 }
-.ostk-element.ostk-leaderboard .item-holder .element-content p.title,
-#main .ostk-element.ostk-leaderboard .item-holder .element-content p.title,
-#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p.title {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p.title,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p.title,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p.title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.ostk-element.ostk-leaderboard .item-holder .element-content p.description,
-#main .ostk-element.ostk-leaderboard .item-holder .element-content p.description,
-#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content p.description {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p.description,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p.description,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p.description {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 12px;
 }
-.ostk-element.ostk-leaderboard .item-holder .element-content img.product-image,
-#main .ostk-element.ostk-leaderboard .item-holder .element-content img.product-image,
-#sidebar .ostk-element.ostk-leaderboard .item-holder .element-content img.product-image {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content img.product-image,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content img.product-image,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content img.product-image {
   padding: 5px;
   float: left;
   margin: 0;
   max-height: 70px;
 }
-.ostk-element.ostk-leaderboard .branding,
-#main .ostk-element.ostk-leaderboard .branding,
-#sidebar .ostk-element.ostk-leaderboard .branding {
+.ostk-element.ostk-leaderboard .ostk-element-inner .branding,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .branding,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .branding {
   position: absolute;
   right: 0;
   width: 130px;
@@ -372,19 +381,24 @@ a img {
 .ostk-element.ostk-skyscraper,
 #main .ostk-element.ostk-skyscraper,
 #sidebar .ostk-element.ostk-skyscraper {
+  /* .ostk-element-inner */
+}
+.ostk-element.ostk-skyscraper .ostk-element-inner,
+#main .ostk-element.ostk-skyscraper .ostk-element-inner,
+#sidebar .ostk-element.ostk-skyscraper .ostk-element-inner {
   border: solid 2px #c80f2e;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
-.ostk-element.ostk-skyscraper .element-content p,
-#main .ostk-element.ostk-skyscraper .element-content p,
-#sidebar .ostk-element.ostk-skyscraper .element-content p {
+.ostk-element.ostk-skyscraper .ostk-element-inner .element-content p,
+#main .ostk-element.ostk-skyscraper .ostk-element-inner .element-content p,
+#sidebar .ostk-element.ostk-skyscraper .ostk-element-inner .element-content p {
   text-align: center;
 }
-.ostk-element.ostk-skyscraper .element-content img,
-#main .ostk-element.ostk-skyscraper .element-content img,
-#sidebar .ostk-element.ostk-skyscraper .element-content img {
+.ostk-element.ostk-skyscraper .ostk-element-inner .element-content img,
+#main .ostk-element.ostk-skyscraper .ostk-element-inner .element-content img,
+#sidebar .ostk-element.ostk-skyscraper .ostk-element-inner .element-content img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
@@ -392,224 +406,237 @@ a img {
 .ostk-element.ostk-carousel,
 #main .ostk-element.ostk-carousel,
 #sidebar .ostk-element.ostk-carousel {
+  border: solid 1px red;
+  /* .ostk-element-inner */
+}
+.ostk-element.ostk-carousel .ostk-element-inner,
+#main .ostk-element.ostk-carousel .ostk-element-inner,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner {
+  border: solid 1px blue;
   position: relative;
   /* flexslider */
   /* Arrows */
   /* Arrows Navigation */
+  /* custom-navigation */
   /* .ostk-carousel.desktop-size */
 }
-.ostk-element.ostk-carousel.mobile-size .ostk-flexslider,
-#main .ostk-element.ostk-carousel.mobile-size .ostk-flexslider,
-#sidebar .ostk-element.ostk-carousel.mobile-size .ostk-flexslider {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .ostk-flexslider,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .ostk-flexslider,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .ostk-flexslider {
   padding: 30px;
 }
-.ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
-#main .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider:hover .element-overlay {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider:hover .element-overlay,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider:hover .element-overlay,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider:hover .element-overlay {
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
 }
-.ostk-element.ostk-carousel .ostk-flexslider a,
-#main .ostk-element.ostk-carousel .ostk-flexslider a,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider a {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider a,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider a,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider a {
   text-decoration: none;
 }
-.ostk-element.ostk-carousel .ostk-flexslider ul.slides,
-#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides {
   margin: 0;
 }
-.ostk-element.ostk-carousel .ostk-flexslider ul.slides li,
-#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li {
   position: relative;
 }
-.ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content,
-#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content {
   padding: 0;
 }
-.ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img,
-#main .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img,
-#sidebar .ostk-element.ostk-carousel .ostk-flexslider ul.slides li .element-content img {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content img,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content img,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content img {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.ostk-element.ostk-carousel .element-overlay p,
-#main .ostk-element.ostk-carousel .element-overlay p,
-#sidebar .ostk-element.ostk-carousel .element-overlay p {
+.ostk-element.ostk-carousel .ostk-element-inner .element-overlay p,
+#main .ostk-element.ostk-carousel .ostk-element-inner .element-overlay p,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .element-overlay p {
   text-align: center;
 }
-.ostk-element.ostk-carousel .element-overlay img,
-#main .ostk-element.ostk-carousel .element-overlay img,
-#sidebar .ostk-element.ostk-carousel .element-overlay img {
+.ostk-element.ostk-carousel .ostk-element-inner .element-overlay img,
+#main .ostk-element.ostk-carousel .ostk-element-inner .element-overlay img,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .element-overlay img {
   width: auto;
 }
-.ostk-element.ostk-carousel .element-overlay img.ostk-rating,
-#main .ostk-element.ostk-carousel .element-overlay img.ostk-rating,
-#sidebar .ostk-element.ostk-carousel .element-overlay img.ostk-rating {
+.ostk-element.ostk-carousel .ostk-element-inner .element-overlay img.ostk-rating,
+#main .ostk-element.ostk-carousel .ostk-element-inner .element-overlay img.ostk-rating,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .element-overlay img.ostk-rating {
   margin: 0 auto 5px auto;
   display: block;
 }
-.ostk-element.ostk-carousel .ostk-arrow,
-#main .ostk-element.ostk-carousel .ostk-arrow,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow {
   background-image: url('../../images/overstock-arrows.png');
   background-repeat: no-repeat;
   outline: none;
   height: 25px;
   width: 25px;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left {
   background-position: 0 0;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left:hover {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left:hover {
   background-position: 0 -25px;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right {
   background-position: -25px 0;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right:hover {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right:hover {
   background-position: -25px -25px;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red {
   background-position: -50px 0;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-left-red:hover {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red:hover {
   background-position: -50px -25px;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red {
   background-position: -75px 0;
 }
-.ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover,
-#main .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-arrow.ostk-arrow-right-red:hover {
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red:hover {
   background-position: -75px -25px;
 }
-.ostk-element.ostk-carousel .custom-navigation a,
-#main .ostk-element.ostk-carousel .custom-navigation a,
-#sidebar .ostk-element.ostk-carousel .custom-navigation a {
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a,
+#main .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a {
   text-decoration: none;
 }
-.ostk-element.ostk-carousel .custom-navigation a.flex-prev,
-#main .ostk-element.ostk-carousel .custom-navigation a.flex-prev,
-#sidebar .ostk-element.ostk-carousel .custom-navigation a.flex-prev {
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-prev,
+#main .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-prev,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-prev {
   float: left;
 }
-.ostk-element.ostk-carousel .custom-navigation a.flex-next,
-#main .ostk-element.ostk-carousel .custom-navigation a.flex-next,
-#sidebar .ostk-element.ostk-carousel .custom-navigation a.flex-next {
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-next,
+#main .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-next,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-next {
   float: right;
 }
-.ostk-element.ostk-carousel.mobile-size,
-#main .ostk-element.ostk-carousel.mobile-size,
-#sidebar .ostk-element.ostk-carousel.mobile-size {
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation .flex-control-thumbs,
+#main .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation .flex-control-thumbs,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation .flex-control-thumbs {
+  margin: 0;
+}
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size {
   /* Arrows Navigation */
   /* .custom-navigation */
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation {
   /* Thumbail Navigation */
   /* .custom-controls-container */
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation a,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a {
   position: absolute;
   top: 50%;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-prev {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-prev,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-prev,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-prev {
   left: 0;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation a.flex-next {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-next,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-next,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-next {
   right: 0;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow {
   padding: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left {
   background-position: -50px 0;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover {
   background-position: -50px -25px;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right {
   background-position: -75px 0;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover {
   background-position: -75px -25px;
 }
-.ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
-#main .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container,
-#sidebar .ostk-element.ostk-carousel.mobile-size .custom-navigation .custom-controls-container {
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .custom-controls-container,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .custom-controls-container,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .custom-controls-container {
   display: none;
 }
-.ostk-element.ostk-carousel.desktop-size,
-#main .ostk-element.ostk-carousel.desktop-size,
-#sidebar .ostk-element.ostk-carousel.desktop-size {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size {
   /* Arrows Navigation */
   /* custom-navigation */
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation {
   max-width: 430px;
   margin: 10px auto 0 auto;
   /* Thumbail Navigation */
   /* .custom-controls-container */
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation.count-4,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-4,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-4 {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-4,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-4,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-4 {
   max-width: 360px;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation.count-3,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-3,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-3 {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-3,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-3,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-3 {
   max-width: 280px;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation.count-2,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-2,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation.count-2 {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-2,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-2,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-2 {
   max-width: 210px;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation a,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a {
   border: solid 1px #aeaeae;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -617,39 +644,39 @@ a img {
   background: #dddddd;
   margin-top: 5px;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a .ostk-arrow {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a .ostk-arrow,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a .ostk-arrow,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a .ostk-arrow {
   margin: 20px 0;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation a:hover {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a:hover,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a:hover,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a:hover {
   background: #f6f6f6;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container {
   display: table;
   margin: 0 auto;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol {
   list-style: none;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li {
   display: table-cell;
   padding: 5px;
   width: auto;
   display: none;
   list-style: none;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -657,46 +684,51 @@ a img {
   width: 65px;
   height: 65px;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active {
   border: solid 1px #c80f2e;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav {
   list-style: none;
 }
-.ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
-#main .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
-#sidebar .ostk-element.ostk-carousel.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li {
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
+#main .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li {
   list-style: none;
 }
-.ostk-element.ostk-stock-photo:hover .element-overlay,
-#main .ostk-element.ostk-stock-photo:hover .element-overlay,
-#sidebar .ostk-element.ostk-stock-photo:hover .element-overlay {
+.ostk-element.ostk-stock-photo,
+#main .ostk-element.ostk-stock-photo,
+#sidebar .ostk-element.ostk-stock-photo {
+  /* .ostk-element-inner */
+}
+.ostk-element.ostk-stock-photo .ostk-element-inner:hover .element-overlay,
+#main .ostk-element.ostk-stock-photo .ostk-element-inner:hover .element-overlay,
+#sidebar .ostk-element.ostk-stock-photo .ostk-element-inner:hover .element-overlay {
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
 }
-.ostk-element.ostk-stock-photo.image-small,
-#main .ostk-element.ostk-stock-photo.image-small,
-#sidebar .ostk-element.ostk-stock-photo.image-small {
+.ostk-element.ostk-stock-photo .ostk-element-inner.image-small,
+#main .ostk-element.ostk-stock-photo .ostk-element-inner.image-small,
+#sidebar .ostk-element.ostk-stock-photo .ostk-element-inner.image-small {
   width: 200px;
 }
-.ostk-element.ostk-stock-photo.image-medium,
-#main .ostk-element.ostk-stock-photo.image-medium,
-#sidebar .ostk-element.ostk-stock-photo.image-medium {
+.ostk-element.ostk-stock-photo .ostk-element-inner.image-medium,
+#main .ostk-element.ostk-stock-photo .ostk-element-inner.image-medium,
+#sidebar .ostk-element.ostk-stock-photo .ostk-element-inner.image-medium {
   width: 400px;
 }
-.ostk-element.ostk-stock-photo.img-large,
-#main .ostk-element.ostk-stock-photo.img-large,
-#sidebar .ostk-element.ostk-stock-photo.img-large {
+.ostk-element.ostk-stock-photo .ostk-element-inner.img-large,
+#main .ostk-element.ostk-stock-photo .ostk-element-inner.img-large,
+#sidebar .ostk-element.ostk-stock-photo .ostk-element-inner.img-large {
   width: 600px;
 }
-.ostk-element.ostk-stock-photo .element-overlay,
-#main .ostk-element.ostk-stock-photo .element-overlay,
-#sidebar .ostk-element.ostk-stock-photo .element-overlay {
+.ostk-element.ostk-stock-photo .ostk-element-inner .element-overlay,
+#main .ostk-element.ostk-stock-photo .ostk-element-inner .element-overlay,
+#sidebar .ostk-element.ostk-stock-photo .ostk-element-inner .element-overlay {
   background-color: rgba(255, 255, 255, 0.9);
   position: absolute;
   bottom: 0;

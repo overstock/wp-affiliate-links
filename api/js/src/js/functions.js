@@ -6,64 +6,60 @@ function ostk_generateAffiliateLink(murl){
 	return 'https://api.overstock.com/ads/deeplink?id='+developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+developerId);
 }//ostk_generateAffiliateLink
 
-
 function ostk_checkForMissingCommas(string){
 	return string.indexOf(" ") === -1 ? false : true;
 }//ostk_checkForMissingCommas
 
 function ostk_getTaxonomy(input){
 	if(input == null) { 
-		return ostk_formatError("category input was null");
+		return false;
 	} else {
 		switch (input) {
-			case (ostk_checkTaxonomy(input, "Home Garden") ? true : false):
+			case "Home & Garden":
 			  return "sto1";
 			  break;
-			case (ostk_checkTaxonomy(input, "Jewelry Watches") ? true : false):
+			case "Jewelry & Watches":
 			  return "sto4";
 			  break;
-			case (ostk_checkTaxonomy(input, "Sports Toys") ? true : false):
+			case "Sports & Toys":
 			  return "sto5";
 			  break;
-			case (ostk_checkTaxonomy(input, "Worldstock Fair Trade") ? true : false):
+			case "Worldstock Fair Trade":
 		      return "sto6";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Clothing Shoes") ? true : false):
+		    case "Clothing & Shoes":
 		      return "sto7";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Health Beauty") ? true : false):
+		    case "Health & Beauty":
 		      return "sto8";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Food Gifts") ? true : false):
+		    case "Food & Gifts":
 		      return "sto9";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Office Supplies") ? true : false):
+		    case "Office Supplies":
 		      return "sto22";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Luggage Bags") ? true : false):
+		    case "Luggage & Bags":
 		      return "sto33";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Crafts Sewing") ? true : false):
-		      return "sto34";
-		      break;
-		    case (ostk_checkTaxonomy(input, "Baby") ? true : false):
+		    case "Baby":
 		      return "sto35";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Crafts Sewing") ? true : false):
+		    case "Crafts & Sewing":
 		      return "sto34";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Pet Supplies") ? true : false):
+		    case "Pet Supplies":
 		      return "sto37";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Emergency Preparedness") ? true : false):
+		    case "Emergency Preparedness":
 		      return "sto42";
 		      break;
-		    case (ostk_checkTaxonomy(input, "Bedding Bath") ? true : false):
+		    case "Bedding & Bath":
 		      return "sto43";
 		      break;
-		    default :
+		    default:
 		      return false;
-		}
+		}//switch
 	}
 }//ostk_getTaxonomy
 	
@@ -108,6 +104,8 @@ function ostk_getSortOption(input){
 		case "New Arrivals".toLowerCase():
 			return "New+Arrivals";
 			break;
+		default:
+			return null;
 	}//switch
 }//ostk_getSortOption
 
@@ -276,8 +274,16 @@ function ostk_areAttributesValid(atts){
   var errorStr = '';
 
   var type = atts['type'];
+  if(!type){
+    return ostk_formatError('Type attribute is required');
+  }
+
   var keys = ostk_getKeyList(atts);
   var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
+  if(!item){
+    return ostk_formatError('Invalid type attribute');
+  }
+
   var required_attributes = ostk_getListByKey(item['required_attributes'], 'name');
   var optional_attributes = ostk_getListByKey(item['optional_attributes'], 'name');
 
@@ -285,15 +291,15 @@ function ostk_areAttributesValid(atts){
   var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(keys, required_attributes);
   if(missingRequiredAtts.length > 0){
     validShortCode = false;
-    return ostk_formatError('Missing required attributes: '.implode(', ', missingRequiredAtts));
+    return ostk_formatError('Missing required attributes: ' + missingRequiredAtts.join(', '));
   }
 
   //Fail if using undefined attributes
   if(validShortCode){
-    invalidExtraAtts = ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes);
+    var invalidExtraAtts = ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes);
     if(invalidExtraAtts.length > 0){
       validShortCode = false;
-      return ostk_formatError('The following are not valid attributes: '.implode(', ', invalidExtraAtts));
+      return ostk_formatError('The following are not valid attributes: ' + invalidExtraAtts.join(', '));
     }
   }
 
@@ -326,23 +332,35 @@ function ostk_lookForNullAtts(obj){
 /* Return an array of attributes that are not either in the list of required or optional attributes
 (ostk_areAttributesValid - helper function) */
 function ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes){
-  return ostk_array_diff(keys, required_attributes, optional_attributes);
+	var a = Array();
+	for (var i = 0 ; i < keys.length; i++) {
+		if(required_attributes.indexOf(keys[i]) == -1 && optional_attributes.indexOf(keys[i]) == -1){
+			a.push(keys[i]);
+		}
+	};
+	return a;
 }//ostk_lookForInvalidExtraAtts
 
 /* Return an array of the required attributes that are missing.
 (ostk_areAttributesValid - helper function) */
 function ostk_lookForMissingRequiredAttributes(keys, required_attributes){
-  return ostk_array_diff(required_attributes, keys);
+	var a = Array();
+	for (var i = 0 ; i < required_attributes.length; i++) {
+		if(keys.indexOf(required_attributes[i]) == -1){
+			a.push(required_attributes[i]);
+		}
+	};
+	return a;
 }//ostk_lookForMissingRequiredAttributes
 
 /* Return all keys of an object as an array
 (ostk_areAttributesValid - helper function) */
 function ostk_getKeyList(obj){
 	var array = Array();
-  for(var key in obj){
-    	array.push(key);
-  }//for
-  return array;
+	for(var key in obj){
+		array.push(key);
+	}//for
+	return array;
 }//ostk_getKeyList
 
 /* Iterate throught an array and return an array of the values of a specific keys
@@ -392,7 +410,7 @@ function ostk_isValidLinkTarget(atts){
 	  default:
 			return false;
 	}//switch
-}
+}//ostk_isValidLinkTarget
 
 function ostk_getLinkTarget(atts){
   var output = '_blank';
@@ -416,29 +434,6 @@ function ostk_isset(item){
 		return true;
 	}
 }//ostk_isset
-
-/* Find difference between arrays like php diff() */
-function ostk_array_diff(arr1) {
-  var retArr = {},
-    argl = arguments.length,
-    k1 = '',
-    i = 1,
-    k = '',
-    arr = {};
-  arr1keys: for (k1 in arr1) {
-    for (i = 1; i < argl; i++) {
-      arr = arguments[i];
-      for (k in arr) {
-        if (arr[k] === arr1[k1]) {
-          // If it reaches here, it was found in at least one array, so try next value
-          continue arr1keys;
-        }
-      }
-      retArr[k1] = arr1[k1];
-    }
-  }
-  return retArr;
-}//ostk_array_diff
 
 /* check to see if key exists like php array_key_exists() */
 function ostk_array_key_exists(key, search) {

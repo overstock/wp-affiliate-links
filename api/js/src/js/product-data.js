@@ -41,7 +41,18 @@ var ostk_SingleProductData = function(){
 			_this.developerId = developerId;
 			_this.description = productData['description'];
 			_this.price = productData['price'];
-			_this.imgUrl_large = (productData['imageLargeURL'] != null) ? productData['imageLargeURL'] : productData['imageURL'];
+/*
+
+			_this.imgUrl_large = productData['imageURL'];
+*/
+			if(productData['largeImageURL'] != null){
+				_this.imgUrl_large = productData['largeImageURL'];
+			}else if(productData['imageURL'] != null){
+				_this.imgUrl_large = productData['imageURL'];
+			}else if(productData['smallImageURL'] != null){
+				_this.imgUrl_large = productData['smallImageURL'];
+			}
+
 			_this.affiliateUrl = productData['url'];
 		    _this.averageReviewAsDecimal = productData['review']['stars'];
 		    if(productData['review']['stars']){

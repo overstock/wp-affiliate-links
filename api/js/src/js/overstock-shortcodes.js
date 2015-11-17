@@ -1,14 +1,12 @@
 $ostk_jQuery = jQuery.noConflict();
-$ostk_jQuery(window).load(function() {
-
-	ostk_load_carousels();
+$ostk_jQuery(window).load(function(){
 
 	/* Resize Window
 	-----------------------------------------------------*/
 	$ostk_jQuery(window).resize(function() {
 	    clearTimeout(window.resizedFinished);
 	    window.resizedFinished = setTimeout(function(){
-			resizeCarousel($ostk_jQuery(this));
+			resizeCarousel();
 	    }, 250);
 	});
 
@@ -19,7 +17,7 @@ function ostk_load_carousels(){
 		$ostk_jQuery('.ostk-carousel').each(function(){
 			var _this = $ostk_jQuery(this);
 			resizeCarousel(_this);
-			_this.children('.ostk-flexslider').flexslider({
+			_this.find('.ostk-flexslider').flexslider({
 				animation: "slide",
 				controlNav: "thumbnails",
 				customDirectionNav: _this.find(".custom-navigation a"),
@@ -42,18 +40,20 @@ function ostk_load_carousels(){
 
 /* Resize Flexslider
 -----------------------------------------------------*/
-function resizeCarousel(carousel){
+function resizeCarousel(){
 	var ostk_mobile_breakpoint = 500;
 	$ostk_jQuery('.ostk-carousel').each(function(){
+		var carousel = $ostk_jQuery(this);
+		var carousel_inner = carousel.find('.ostk-element-inner');
 		if(carousel.outerWidth() > ostk_mobile_breakpoint){
-			carousel.addClass('desktop-size');
-			carousel.removeClass('mobile-size');
+			carousel_inner.addClass('desktop-size');
+			carousel_inner.removeClass('mobile-size');
 		}else{
-			carousel.removeClass('desktop-size');
-			carousel.addClass('mobile-size');
+			carousel_inner.removeClass('desktop-size');
+			carousel_inner.addClass('mobile-size');
 		}
 	});
-}
+}//resizeCarousel
 
 /* Show Thumbnails
 -----------------------------------------------------*/
@@ -74,7 +74,7 @@ function showThumbnails(carousel, flexslider){
 			$ostk_jQuery(this).hide();
 		}
 	});
-}
+}//showThumbnails
 
 
 
