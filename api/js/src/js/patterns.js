@@ -490,5 +490,30 @@ var ostk_patterns = [
                 ]
             }
         ]
+    },
+    {
+        "name": "Sample Data",
+        "slug": "sample_data",
+        "description": "Print data form a given ID",
+        "notes": [],
+        "example_shortcodes": [
+            {
+                "type": "sample_data",
+                "id": "9659704"
+            }
+        ],
+        "required_attributes": [
+            {
+                "name": "type",
+                "description": "= \"sample_data\""
+            },
+            {
+                "name": "id",
+                "description": "Any product id",
+                "example": "10234427"
+            }
+        ],
+        "optional_attributes": [
+        ]
     }
 ];

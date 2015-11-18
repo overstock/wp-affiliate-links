@@ -406,13 +406,11 @@ a img {
 .ostk-element.ostk-carousel,
 #main .ostk-element.ostk-carousel,
 #sidebar .ostk-element.ostk-carousel {
-  border: solid 1px red;
   /* .ostk-element-inner */
 }
 .ostk-element.ostk-carousel .ostk-element-inner,
 #main .ostk-element.ostk-carousel .ostk-element-inner,
 #sidebar .ostk-element.ostk-carousel .ostk-element-inner {
-  border: solid 1px blue;
   position: relative;
   /* flexslider */
   /* Arrows */

@@ -1,18 +1,13 @@
-/**
- * SINGLE Product Data Class
- * takes a productId and returns specific product details
- * Usage:
- * 	 item = new ProductData(productId);
- *   name = item.getName();
- *   price = item.getPrice():
- *   ...
- * 
- *   IMPORTANT! - You should call item.isDeveloperIdSet()
- *                each time you generate an embed, and display something to the
- *                affiliate if it returns false, this will help them to debug. 
-**/ 
-
 var ostk_SingleProductData = function(){
+	/**
+	* SINGLE Product Data Class
+	* takes a productId and returns specific product details
+	*
+	* Usage:
+	* 	 item = new ProductData(productId);
+	*   name = item.getName();
+	*   price = item.getPrice():
+	**/ 
 	this.productId;
 	this.name;
 	this.price;
@@ -20,7 +15,6 @@ var ostk_SingleProductData = function(){
 	this.imgUrl_large;
 	this.imgUrl_medium;
 	this.imgUrl_thumbnail;
-	this.developerId;
 	this.affiliateUrl;
 	this.averageReviewAsDecimal;
 	this.averageReviewAsGif;
@@ -29,7 +23,7 @@ var ostk_SingleProductData = function(){
 	this.description;
 	this.validProductID;
 
-  this.__construct = function(productId, callback) {
+  this.constructor = function(productId, callback) {
 	var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + productId;
 	var _this = this;
 	$ostk_jQuery.get( url, function( productData ) {
@@ -41,30 +35,39 @@ var ostk_SingleProductData = function(){
 			_this.developerId = developerId;
 			_this.description = productData['description'];
 			_this.price = productData['price'];
-/*
-
-			_this.imgUrl_large = productData['imageURL'];
-*/
-			if(productData['largeImageURL'] != null){
-				_this.imgUrl_large = productData['largeImageURL'];
-			}else if(productData['imageURL'] != null){
-				_this.imgUrl_large = productData['imageURL'];
-			}else if(productData['smallImageURL'] != null){
-				_this.imgUrl_large = productData['smallImageURL'];
-			}
-
 			_this.affiliateUrl = productData['url'];
 		    _this.averageReviewAsDecimal = productData['review']['stars'];
 		    if(productData['review']['stars']){
 			    _this.averageReviewAsGif = "http://ak1.ostkcdn.com/img/mxc/stars"+String(productData['review']['stars']).split('.').join('_')+'.gif';
 		    }
+			_this.imgUrl_large = _this.getClosestImg(productData, 'largeImageURL');
+			_this.imgUrl_medium = _this.getClosestImg(productData, 'imageURL');
+			_this.imgUrl_thumbnail = _this.getClosestImg(productData, 'smallImageURL');
+
+			_this.imgUrl_large = productData['imageURL'];
+
 		}else{
 			_this.validProductID = false;
 		}
 		callback(_this);
 	});
-  }//__construct
+  }//constructor
 
+  this.getClosestImg = function(obj, str){
+  	//Array in order of largest to smallest images
+  	var imgArr = ['largeImageURL', 'imageURL', 'smallImageURL'];
+  	//Find the index of the requested image size
+  	var greatestIndex = imgArr.indexOf(str);
+  	//Loop through the array of images
+  	for(var i = greatestIndex ; i < imgArr.length ; i++){
+  		//Return the value of the largest image possible that is not null
+  		if(obj[imgArr[i]] !== null){
+			return obj[imgArr[i]];
+  		}
+  	}//for
+  	//If none of the images have a value return null
+ 	return null;
+  }
 
   this.isValidProductID = function(){
   	return this.validProductID;
@@ -127,34 +130,31 @@ var ostk_SingleProductData = function(){
   this.getDescription = function(){
   	return this.description;
   }
-  
-}
-
-/**
- * MULTIPLE Product Data Class
- * takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
- * & num (the number of ostk_SingleProductData objects to return)
- * Usage:
- *     products = new MultiProductData("http://www.overstock.com/api/search.json?moretop_sellers=Top+Sellers&taxonomy=sto4", 5);
- *     productList = products.getProductList();
- * 	   <img src= <? echo productList[0].getImage_Medium(); ?> />
- * 	   
- * Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
- * Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
- * and the class supports the general API call. 
- * 
- * num limit is 10
- * 
-**/
+}//ostk_SingleProductData
 
 var ostk_MultiProductDataFromArray = function(){
+	/**
+	 * MULTIPLE Product Data Class
+	 * takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
+	 * & num (the number of ostk_SingleProductData objects to return)
+	 * Usage:
+	 *     products = new MultiProductData("http://www.overstock.com/api/search.json?moretop_sellers=Top+Sellers&taxonomy=sto4", 5);
+	 *     productList = products.getProductList();
+	 * 	   <img src= <? echo productList[0].getImage_Medium(); ?> />
+	 * 	   
+	 * Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
+	 * Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
+	 * and the class supports the general API call. 
+	 * 
+	 * num limit is 10
+	 * 
+	**/
+	this.developerId = developerId;
 	this.productList = Array();
 	this.invalidProductIDs = Array();
 	this.allValidProductIDs = true;
 
-	/* hoki - js isn't liking the default null value. Make sure ok without it */
-	// this.__construct(productArray, limit = null) {
-	this.__construct = function(productArray, limit, callback) {
+	this.constructor = function(productArray, limit, callback) {
 		if(limit !== null){
 			productArray = ostk_limitArrayCount(productArray, limit);
 		}
@@ -163,7 +163,7 @@ var ostk_MultiProductDataFromArray = function(){
 		for(var i = 0 ; i < productArray.length ; i++){
 			var product = productArray[i];
 			var item = new ostk_SingleProductData();
-			item.__construct(product, function(the_item){
+			item.constructor(product, function(the_item){
 			    if(the_item.validProductID){
 					_this.productList.push(the_item);
 			    }else{
@@ -176,7 +176,7 @@ var ostk_MultiProductDataFromArray = function(){
 			    }
 			});
 		}//for
-	}//__construct
+	}//constructor
 
 	this.isAllValidProductIDs = function(){
 	    if(this.invalidProductIDs.length > 0){
@@ -195,13 +195,12 @@ var ostk_MultiProductDataFromArray = function(){
 	}//getProductList
 }//ostk_MultiProductDataFromArray
 
-
 var ostk_MultiProductDataFromQuery = function(){
-	var productList;
-	var invalidProductIDs = array();
-	var allValidProductIDs = true;
+	this.productList;
+	this.invalidProductIDs = array();
+	this.allValidProductIDs = true;
 
-	this.__construct = function(query, type, limit, callback) {
+	this.constructor = function(query, type, limit, callback) {
 		url = query;
 		json = file_get_contents(url);
 		productData = json_decode(json, true);
@@ -214,9 +213,9 @@ var ostk_MultiProductDataFromQuery = function(){
 			temp = limit;
 		}
 		for (i = 0; i < temp; i++) {
-		  this.productList[i] = new ostk_SingleProductData(productData[products][products][i][id]);
+		  this.productList[i] = new ostk_SingleProductData();
 		}//for
-	}//__construct
+	}//constructor
    
      this.getProductList = function(){
   	   return this.productList;
@@ -234,5 +233,4 @@ var ostk_MultiProductDataFromQuery = function(){
 	    	return true;
     	}
 	}//isAllValidProductIDs
-
 }//ostk_MultiProductDataFromQuery

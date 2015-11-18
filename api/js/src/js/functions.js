@@ -1,3 +1,22 @@
+function setDeveloperID(){
+	developerId = 'FKAJQ7bUdyM';
+}//setDeveloperID
+
+function shortcode_atts(obj, atts){
+  var output = Array();
+  /* hoki make sure this is working */
+  // foreach(pairs as name => default) {
+  for(var key in obj){
+  	var value = obj[key];
+    if (ostk_array_key_exists(key, atts)){
+      output[key] = atts[key];
+    }else{
+      output[key] = value;
+		}
+  }//for
+  return output;
+}//shortcode_atts
+
 function ostk_generateAffiliateLink(murl){
 	var symbol = '?';
 	if(murl.indexOf("?") > -1){
