@@ -1,130 +1,4 @@
 /* Less Variable */
-/**
- * Global Reset of all HTML Elements
- *
- * Resetting all of our HTML Elements ensures a smoother
- * visual transition between browsers. If you don't believe me,
- * try temporarily commenting out this block of code, then go
- * and look at Mozilla versus Safari, both good browsers with
- * a good implementation of CSS. The thing is, all browser CSS
- * defaults are different and at the end of the day if visual
- * consistency is what we're shooting for, then we need to
- * make sure we're resetting all spacing elements.
- *
- */
-html,
-body {
-  border: 0;
-  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-}
-div,
-span,
-object,
-iframe,
-img,
-table,
-caption,
-thead,
-tbody,
-tfoot,
-tr,
-tr,
-td,
-article,
-aside,
-canvas,
-details,
-figure,
-hgroup,
-menu,
-nav,
-footer,
-header,
-section,
-summary,
-mark,
-audio,
-video {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-address,
-cit,
-code,
-del,
-dfn,
-em,
-ins,
-q,
-samp,
-small,
-strong,
-sub,
-sup,
-b,
-i,
-hr,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-legend,
-label {
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  margin: 0;
-  padding: 0;
-}
-article,
-aside,
-canvas,
-figure,
-figure img,
-figcaption,
-hgroup,
-footer,
-header,
-nav,
-section,
-audio,
-video {
-  display: block;
-}
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-table caption,
-table th,
-table td {
-  text-align: left;
-  vertical-align: middle;
-}
-a img {
-  border: 0;
-}
-:focus {
-  outline: 0;
-}
 /* Widths */
 /* Colors */
 .noselect {
@@ -145,6 +19,19 @@ a img {
   color: #c80f2e;
 }
 .ostk-loader {
+  /**
+ * Global Reset of all HTML Elements
+ *
+ * Resetting all of our HTML Elements ensures a smoother
+ * visual transition between browsers. If you don't believe me,
+ * try temporarily commenting out this block of code, then go
+ * and look at Mozilla versus Safari, both good browsers with
+ * a good implementation of CSS. The thing is, all browser CSS
+ * defaults are different and at the end of the day if visual
+ * consistency is what we're shooting for, then we need to
+ * make sure we're resetting all spacing elements.
+ *
+ */
   background: rgba(255, 255, 255, 0.6);
   padding: 10px;
   -webkit-border-radius: 10px;
@@ -154,6 +41,119 @@ a img {
   margin: 10px auto;
   max-width: 140px;
   text-align: center;
+}
+.ostk-loader html,
+.ostk-loader body {
+  border: 0;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+.ostk-loader div,
+.ostk-loader span,
+.ostk-loader object,
+.ostk-loader iframe,
+.ostk-loader img,
+.ostk-loader table,
+.ostk-loader caption,
+.ostk-loader thead,
+.ostk-loader tbody,
+.ostk-loader tfoot,
+.ostk-loader tr,
+.ostk-loader tr,
+.ostk-loader td,
+.ostk-loader article,
+.ostk-loader aside,
+.ostk-loader canvas,
+.ostk-loader details,
+.ostk-loader figure,
+.ostk-loader hgroup,
+.ostk-loader menu,
+.ostk-loader nav,
+.ostk-loader footer,
+.ostk-loader header,
+.ostk-loader section,
+.ostk-loader summary,
+.ostk-loader mark,
+.ostk-loader audio,
+.ostk-loader video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.ostk-loader h1,
+.ostk-loader h2,
+.ostk-loader h3,
+.ostk-loader h4,
+.ostk-loader h5,
+.ostk-loader h6,
+.ostk-loader p,
+.ostk-loader blockquote,
+.ostk-loader pre,
+.ostk-loader a,
+.ostk-loader abbr,
+.ostk-loader address,
+.ostk-loader cit,
+.ostk-loader code,
+.ostk-loader del,
+.ostk-loader dfn,
+.ostk-loader em,
+.ostk-loader ins,
+.ostk-loader q,
+.ostk-loader samp,
+.ostk-loader small,
+.ostk-loader strong,
+.ostk-loader sub,
+.ostk-loader sup,
+.ostk-loader b,
+.ostk-loader i,
+.ostk-loader hr,
+.ostk-loader dl,
+.ostk-loader dt,
+.ostk-loader dd,
+.ostk-loader ol,
+.ostk-loader ul,
+.ostk-loader li,
+.ostk-loader fieldset,
+.ostk-loader legend,
+.ostk-loader label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+.ostk-loader article,
+.ostk-loader aside,
+.ostk-loader canvas,
+.ostk-loader figure,
+.ostk-loader figure img,
+.ostk-loader figcaption,
+.ostk-loader hgroup,
+.ostk-loader footer,
+.ostk-loader header,
+.ostk-loader nav,
+.ostk-loader section,
+.ostk-loader audio,
+.ostk-loader video {
+  display: block;
+}
+.ostk-loader table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.ostk-loader table caption,
+.ostk-loader table th,
+.ostk-loader table td {
+  text-align: left;
+  vertical-align: middle;
+}
+.ostk-loader a img {
+  border: 0;
+}
+.ostk-loader :focus {
+  outline: 0;
 }
 .ostk-loader img {
   display: block;
