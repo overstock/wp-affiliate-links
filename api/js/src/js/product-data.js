@@ -43,9 +43,6 @@ var ostk_SingleProductData = function(){
 			_this.imgUrl_large = _this.getClosestImg(productData, 'largeImageURL');
 			_this.imgUrl_medium = _this.getClosestImg(productData, 'imageURL');
 			_this.imgUrl_thumbnail = _this.getClosestImg(productData, 'smallImageURL');
-
-			_this.imgUrl_large = productData['imageURL'];
-
 		}else{
 			_this.validProductID = false;
 		}
