@@ -400,7 +400,7 @@
 #main .ostk-element.ostk-skyscraper .ostk-element-inner .element-content img,
 #sidebar .ostk-element.ostk-skyscraper .ostk-element-inner .element-content img {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
   max-width: 100%;
 }
 .ostk-element.ostk-carousel,

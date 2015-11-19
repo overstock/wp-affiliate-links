@@ -206,7 +206,7 @@ var ostk_MultiProductDataFromQuery = function(){
 	this.invalidProductIDs = array();
 	this.allValidProductIDs = true;
 
-	this.constructor = function(query, type, limit, callback) {
+	this.constructor = function(query, limit, callback, errorCallback) {
 		url = query;
 		json = file_get_contents(url);
 		productData = json_decode(json, true);

@@ -473,38 +473,26 @@ function ostk_Element(atts, obj){
 			error = "category="+atts['category']+" does not match our given categories, please check it.";
 		} else if (taxonomy == null && keywords == null && product_ids == null) {
 			error = "Some required fields are missing, (category or keywords) or (a list of product_ids)";
-		} else if (ostk_isset(product_ids)) {
+		}
+
+	  if(error){
+	    this.renderHTMLError(output);
+	  }else{
+		if (ostk_isset(product_ids)) {
 			for(id in product_ids) {
 		    	if(ostk_checkForMissingCommas(id) == true) {
 		    		error = ostk_formatError("Commas missing between ids, return ing...");
 		    	}
 		    }//for
 			products = new ostk_MultiProductDataFromArray();
-			products.init(
-				product_ids, 
-				atts['number_of_items'], 
-				//Success
-				function(){
-					output += '<div class="ostk-element ostk-carousel" '+ostk_getStyles(atts)+'>';
-						output += '<div class="ostk-element-inner">';
-							output += ostk_generateCarouselHTML('carousel', products.getProductList(), atts);
-						output += '</div><!-- ostk-element-inner -->';
-					output += '</div><!-- ostk-element -->';
-
-					// _this.renderHTML(output);
-					// output = $ostk_jQuery(output);
-					// _this.loadCarousel(output);						
-		    	},
-				// Error
-				function(error){
-					_this.renderHTMLError(error);
-				}		    	
-		    );
-	  } else {
-		var query = "http://www.overstock.com/api/search.json?"+keywords+taxonomy+sortOption;
-		products = new ostk_MultiProductDataFromQuery();
+			var param1 = product_ids;
+		} else {
+			var query = "http://www.overstock.com/api/search.json?"+keywords+taxonomy+sortOption;
+			products = new ostk_MultiProductDataFromQuery();
+			var param1 = query;
+		}
 		products.init(
-			query, 
+			param1,
 			atts['number_of_items'], 
 			//Success
 			function(){
@@ -513,18 +501,23 @@ function ostk_Element(atts, obj){
 						output += ostk_generateCarouselHTML('carousel', products.getProductList(), atts);
 					output += '</div><!-- ostk-element-inner -->';
 				output += '</div><!-- ostk-element -->';
+
+				output = $ostk_jQuery(output);
+				_this.loadCarousel(output);
 				_this.renderHTML(output);
-				// _this.loadCarousel();						
-			},
-			//Error
+				_this.resizeCarousel(output);
+				$ostk_jQuery(window).resize(function() {
+				    clearTimeout(window.resizedFinished);
+				    window.resizedFinished = setTimeout(function(){
+						_this.resizeCarousel(output);
+				    }, 250);
+				});
+	    	},
+			// Error
 			function(error){
 				_this.renderHTMLError(error);
 			}		    	
-		);
-	  }
-
-	  if(error){
-	    this.renderHTMLError(output);
+	    );
 	  }
 	};//generateCarouselWidget
 
@@ -692,7 +685,7 @@ function ostk_Element(atts, obj){
 				_this.renderHTMLError(error);
 			}
 		);
-	}//generateSampleData
+	};//generateSampleData
 
 	//Render HTML
 	this.renderHTML = function(data){
@@ -702,15 +695,14 @@ function ostk_Element(atts, obj){
 
 	//Render HTML Error
 	this.renderHTMLError = function(data){
-		throw new Error("(Overstock Plugin) " + data);
 		this.renderHTML(ostk_formatError(data));
-	}//renderHTMLError
+	};//renderHTMLError
 
 	// Load Carousel
 	this.loadCarousel = function(carousel){
 		var _this = this;
 		var _carousel = carousel;
-		_this.resizeCarousel(carousel);
+
 		carousel.find('.ostk-flexslider').flexslider({
 			animation: "slide",
 			controlNav: "thumbnails",
@@ -721,12 +713,6 @@ function ostk_Element(atts, obj){
 			start: function(carousel){
 				//Call on load
 				_this.showThumbnails(carousel, this);
-				$ostk_jQuery(window).resize(function() {
-				    clearTimeout(window.resizedFinished);
-				    window.resizedFinished = setTimeout(function(){
-						_this.resizeCarousel(_carousel);
-				    }, 250);
-				});
 			},
 			after: function(carousel){
 				//Call after changing the current img
