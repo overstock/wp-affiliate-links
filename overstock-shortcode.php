@@ -2,8 +2,8 @@
 /*
 * Plugin Name: Overstock Affiliate Shortcode Plugin
 * Description: Create monetized links to millions of products in seconds. We support 9 different SHORTCODE types including carousel, rectangle and skyscraper. 
-* Version: 1.0
-* Author: Reif Tauati and Travis Hoki
+* Version: 1.1
+* Author: reiftauati and travishoki
 * Author URI: http://www.overstock.com/affiliate-portal-homepage
 */
 

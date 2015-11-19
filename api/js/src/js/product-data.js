@@ -1,4 +1,4 @@
-var ostk_SingleProductData = function(){
+var ostk_SingleProductData = function(productId){
 	/**
 	* SINGLE Product Data Class
 	* takes a productId and returns specific product details
@@ -8,7 +8,7 @@ var ostk_SingleProductData = function(){
 	*   name = item.getName();
 	*   price = item.getPrice():
 	**/ 
-	this.productId;
+	this.productId = productId;
 	this.name;
 	this.price;
 	this.baseImageUrl;
@@ -21,15 +21,12 @@ var ostk_SingleProductData = function(){
 	this.numImages;
 	this.arrayOfAllProductImages;
 	this.description;
-	this.validProductID;
 
-  this.constructor = function(productId, callback) {
-	var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + productId;
-	var _this = this;
-	$ostk_jQuery.get( url, function( productData ) {
-		productData = productData['products'][0];
-		if(ostk_isset(productData['id'])){
-			_this.validProductID = true;
+	this.init = function(callback, errorCallback) {
+		var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
+		var _this = this;
+		$ostk_jQuery.get( url, function( productData ) {
+			productData = productData['products'][0];
 			_this.name = productData['name'];
 			_this.productId = productData['id'];
 			_this.developerId = developerId;
@@ -43,90 +40,90 @@ var ostk_SingleProductData = function(){
 			_this.imgUrl_large = _this.getClosestImg(productData, 'largeImageURL');
 			_this.imgUrl_medium = _this.getClosestImg(productData, 'imageURL');
 			_this.imgUrl_thumbnail = _this.getClosestImg(productData, 'smallImageURL');
-		}else{
-			_this.validProductID = false;
-		}
-		callback(_this);
-	});
-  }//constructor
+			callback(_this);
+		})
+		.fail(function() {
+			errorCallback('Invalid product id: ' + _this.productId);
+		});
+	}//init
 
-  this.getClosestImg = function(obj, str){
-  	//Array in order of largest to smallest images
-  	var imgArr = ['largeImageURL', 'imageURL', 'smallImageURL'];
-  	//Find the index of the requested image size
-  	var greatestIndex = imgArr.indexOf(str);
-  	//Loop through the array of images
-  	for(var i = greatestIndex ; i < imgArr.length ; i++){
-  		//Return the value of the largest image possible that is not null
-  		if(obj[imgArr[i]] !== null){
+	this.getClosestImg = function(obj, str){
+		//Array in order of largest to smallest images
+		var imgArr = ['largeImageURL', 'imageURL', 'smallImageURL'];
+		//Find the index of the requested image size
+		var greatestIndex = imgArr.indexOf(str);
+		//Loop through the array of images
+		for(var i = greatestIndex ; i < imgArr.length ; i++){
+			//Return the value of the largest image possible that is not null
+			if(obj[imgArr[i]] !== null){
 			return obj[imgArr[i]];
-  		}
-  	}//for
-  	//If none of the images have a value return null
- 	return null;
-  }
+			}
+		}//for
+		//If none of the images have a value return null
+		return null;
+	}
 
-  this.isValidProductID = function(){
-  	return this.validProductID;
-  }
+	this.isValidProductID = function(){
+		return this.validProductID;
+	}
 
-  this.getProductId = function(){
+	this.getProductId = function(){
 	return (ostk_isset(this.productId) ? this.productId : ostk_formatError("\productId is not set") );
-  }
+	}
 
-  this.getName = function(){
-    return (ostk_isset(this.name) ? this.name : ostk_formatError("\name is not set") );
-  }
+	this.getName = function(){
+	return (ostk_isset(this.name) ? this.name : ostk_formatError("\name is not set") );
+	}
 
-  this.getPrice = function(){
-    return (ostk_isset(this.price) ? this.price : ostk_formatError("\price is not set") );
-  }
+	this.getPrice = function(){
+	return (ostk_isset(this.price) ? this.price : ostk_formatError("\price is not set") );
+	}
 
-  this.getImageBaseUrl = function(){
-    return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("\baseImageUrl is not set") );
-  }
+	this.getImageBaseUrl = function(){
+	return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("\baseImageUrl is not set") );
+	}
 
-  this.getImage_Thumbnail = function(){
-    return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("\imgUrl_thumbnail is not set") );
-  }
+	this.getImage_Thumbnail = function(){
+	return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("\imgUrl_thumbnail is not set") );
+	}
 
-  this.getImage_Medium = function(){
-    return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("\imgUrl_medium is not set") );
-  }
+	this.getImage_Medium = function(){
+	return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("\imgUrl_medium is not set") );
+	}
 
-  this.getImage_Large = function(){
-    return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("\imgUrl_large is not set") );
-  }
+	this.getImage_Large = function(){
+	return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("\imgUrl_large is not set") );
+	}
 
-  this.getAffiliateUrl = function(){
+	this.getAffiliateUrl = function(){
 	return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("\affiliateUrl is not set") );
-  }
-  
-  this.getAverageReviewAsDecimal = function(){
-  	return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("\averageReviewAsDecimal is not set") );
-  }
-  
-  this.getAverageReviewAsGif = function(){
-  	return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("\averageReviewAsGif is not set") );
-  }
-  
-  this.getImageAtIndex = function(index){
-  	if(index == 1) {
-  		return this.getImage_Large(); 
-  	}
-  	else {
-      index = index - 1;
-  	  return this.arrayOfAllProductImages[index];
-  	}
-  }
-  
-  this.getArrayOfAllProductImages = function(){
-  	return this.arrayOfAllProductImages;
-  }
-  
-  this.getDescription = function(){
-  	return this.description;
-  }
+	}
+
+	this.getAverageReviewAsDecimal = function(){
+		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("\averageReviewAsDecimal is not set") );
+	}
+
+	this.getAverageReviewAsGif = function(){
+		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("\averageReviewAsGif is not set") );
+	}
+
+	this.getImageAtIndex = function(index){
+		if(index == 1) {
+			return this.getImage_Large(); 
+		}
+		else {
+	  index = index - 1;
+		  return this.arrayOfAllProductImages[index];
+		}
+	}
+
+	this.getArrayOfAllProductImages = function(){
+		return this.arrayOfAllProductImages;
+	}
+
+	this.getDescription = function(){
+		return this.description;
+	}
 }//ostk_SingleProductData
 
 var ostk_MultiProductDataFromArray = function(){
@@ -149,31 +146,43 @@ var ostk_MultiProductDataFromArray = function(){
 	this.developerId = developerId;
 	this.productList = Array();
 	this.invalidProductIDs = Array();
-	this.allValidProductIDs = true;
+	this.product_count_down = 0;
 
-	this.constructor = function(productArray, limit, callback) {
+	this.init = function(productArray, limit, callback, errorCallback) {
 		if(limit !== null){
 			productArray = ostk_limitArrayCount(productArray, limit);
 		}
 		var _this = this;
-		var _product_count_down = productArray.length;
+		this.product_count_down = productArray.length;
 		for(var i = 0 ; i < productArray.length ; i++){
 			var product = productArray[i];
-			var item = new ostk_SingleProductData();
-			item.constructor(product, function(the_item){
-			    if(the_item.validProductID){
+			var item = new ostk_SingleProductData(product);
+			item.init(
+				//Success
+				function(the_item){
 					_this.productList.push(the_item);
-			    }else{
+					_this.checkProductCompletion(callback, errorCallback);
+				},
+				//Error
+				function(error){
 					_this.invalidProductIDs.push(the_item['productId']);
-					allValidProductIDs = false;
-			    }
-			    _product_count_down--;
-			    if(_product_count_down === 0){
-				    callback();
-			    }
-			});
+					_this.checkProductCompletion(callback, errorCallback);
+				}
+			);
+
 		}//for
-	}//constructor
+	}//init
+
+	this.checkProductCompletion = function(callback, errorCallback){
+	    this.product_count_down--;
+	    if(this.product_count_down === 0){
+	    	if(this.invalidProductIDs.length > 0){
+				errorCallback();
+	    	}else{
+			    callback();
+	    	}
+	    }
+	};//checkProductCompletion
 
 	this.isAllValidProductIDs = function(){
 	    if(this.invalidProductIDs.length > 0){

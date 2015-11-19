@@ -1,6 +1,7 @@
 === Overstock Affiliate Links ===
-Contributors: reiftauati, Travis Hoki
+Contributors: reiftauati, travishoki
 Tested up to: 4.3.1
+Stable tag: 1.1
 Tags: overstock, affiliate, affiliates, affiliate integration, deeplink, affiliate links in post, affiliate posts, affiliate post, e-commerce, affiliate marketing, ads, WP e-commerce, wordpress affiliate, wordpress affiliate shortcode, wordpress affiliate plugin, linkshare, widget, shortcode, shortcode plugin, shortcode widget, sidebar widget, affiliate advertising, ad embed, embeddable ad, skyscraper, leaderboard
 
 == Description ==
@@ -74,9 +75,16 @@ You can email any additional questions, inquiries, or feedback to apisupport@ove
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0 =
 *Release Date - 21 October 2015*
 
 * Initial plugin deployment
+
+= 1.1 =
+*Release Date - 18 November 2015*
+
+* LinkShare ID Confirmation UX Enhancement
+* Bug Fixes
+
 
 

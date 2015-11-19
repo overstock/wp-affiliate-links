@@ -167,25 +167,6 @@ function ostk_generateSkyscraperHtmlOutput(products, atts){
   return output;
 }//ostk_generateSkyscraperHtmlOutput
 
-function ostk_generateRectangleHtmlOutput(product, atts){
-	var output = '';
-	output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-		output += '<div class="element-content">';
-			output += '<img src="'+product.getImage_Large()+'"/>';
-		output += '</div>';
-		output += '<div class="element-overlay">';
-		    output += '<div class="element-content">';
-					output += '<p class="title">'+product.getName()+'</p>';
-					if(product.averageReviewAsGif){
-						output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
-					}
-					output += '<p class="price">'+product.getPrice()+'</p>';
-			output += '</div>';
-		output += '</div>';
-	output += '</a>';
-  return output;
-}//ostk_generateRectangleHtmlOutput
-
 function ostk_generateStockPhotoHtmlOutput(product, atts){
 	var output = '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
 	    output += '<div class="element-content">';
@@ -305,6 +286,15 @@ function ostk_areAttributesValid(atts){
 
   var required_attributes = ostk_getListByKey(item['required_attributes'], 'name');
   var optional_attributes = ostk_getListByKey(item['optional_attributes'], 'name');
+
+  //Set default values if attributes are not already defined
+  for(var i = 0 ; i < item['optional_attributes'].length ; i++){
+  	if(typeof(atts[item['optional_attributes'][i]['name']]) === 'undefined'){
+  		if(typeof(item['optional_attributes'][i]['default']) !== 'undefined'){
+			atts[item['optional_attributes'][i]['name']] = item['optional_attributes'][i]['default']; 
+  		}
+  	}
+  }//for
 
   //Fail if missing any required attributes
   var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(keys, required_attributes);
