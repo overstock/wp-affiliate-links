@@ -126,7 +126,7 @@ var ostk_SingleProductData = function(productId){
 	}
 }//ostk_SingleProductData
 
-var ostk_MultiProductDataFromArray = function(){
+var ostk_MultiProductDataFromArray = function(productArray, limit){
 	/**
 	 * MULTIPLE Product Data Class
 	 * takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
@@ -143,12 +143,14 @@ var ostk_MultiProductDataFromArray = function(){
 	 * num limit is 10
 	 * 
 	**/
+	this.productArray = productArray;
+	this.limit = limit;
 	this.developerId = developerId;
 	this.productList = Array();
 	this.invalidProductIDs = Array();
 	this.product_count_down = 0;
 
-	this.init = function(productArray, limit, callback, errorCallback) {
+	this.init = function(callback, errorCallback) {
 		if(limit !== null){
 			productArray = ostk_limitArrayCount(productArray, limit);
 		}
@@ -165,7 +167,7 @@ var ostk_MultiProductDataFromArray = function(){
 				},
 				//Error
 				function(error){
-					_this.invalidProductIDs.push(the_item['productId']);
+					_this.invalidProductIDs.push(['hoki']);
 					_this.checkProductCompletion(callback, errorCallback);
 				}
 			);
@@ -201,31 +203,59 @@ var ostk_MultiProductDataFromArray = function(){
 	}//getProductList
 }//ostk_MultiProductDataFromArray
 
-var ostk_MultiProductDataFromQuery = function(){
-	this.productList;
-	this.invalidProductIDs = array();
+var ostk_MultiProductDataFromQuery = function(query, limit){
+	this.query = query;
+	this.limit = limit;
+	this.productList = Array();
+	this.invalidProductIDs = Array();
 	this.allValidProductIDs = true;
+	this.product_count_down = 0;
 
-	this.constructor = function(query, limit, callback, errorCallback) {
-		url = query;
-		json = file_get_contents(url);
-		productData = json_decode(json, true);
-		numResults = (count(productData[products][products]) > 0) ? count(productData[products][products]) : 0;
-		if (numResults == 0){
-		  return ostk_formatError("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
-		}
-		temp = numResults;
-		if(numResults > limit){
-			temp = limit;
-		}
-		for (i = 0; i < temp; i++) {
-		  this.productList[i] = new ostk_SingleProductData();
-		}//for
-	}//constructor
-   
-     this.getProductList = function(){
-  	   return this.productList;
-    }//getProductList
+	this.init = function(callback, errorCallback){
+		var _this = this;
+		$ostk_jQuery.get( query, function( productData ) {
+			var numResults = (productData['products'].length <= limit) ? productData['products'].length : limit;
+			_this.product_count_down = numResults;
+			if (numResults == 0){
+				errorCallback("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
+			}else{
+				for (i = 0; i < numResults; i++) {
+					var product_id = productData['products'][i]['id'];
+					var product = new ostk_SingleProductData(product_id);
+						product.init(
+						//Success
+						function(the_item){
+							_this.productList.push(the_item);
+							_this.checkProductCompletion(callback, errorCallback);
+						},
+						//Error
+						function(error){
+							_this.invalidProductIDs.push(the_item['productId']);
+							_this.checkProductCompletion(callback, errorCallback);
+						}
+					);
+				}//for
+			}
+		})
+		.fail(function() {
+			errorCallback('Invalid query: ' + query);
+		});
+	}//init
+
+	this.checkProductCompletion = function(callback, errorCallback){
+	    this.product_count_down--;
+	    if(this.product_count_down === 0){
+	    	if(this.invalidProductIDs.length > 0){
+				errorCallback();
+	    	}else{
+			    callback();
+	    	}
+	    }
+	};//checkProductCompletion
+
+	this.getProductList = function(){
+		return this.productList;
+	}//getProductList
 
 
 	this.isAllValidProductIDs = function(){

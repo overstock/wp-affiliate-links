@@ -146,9 +146,23 @@ var ostk_patterns = [
                 "description": "= \"rectangle\""
             },
             {
-                "name": "id",
-                "description": "A products id",
-                "example": "8231882"
+                "name": "rectangle-type",
+                "options": [
+                    {
+                        "name": "id",
+                        "description": "A products id",
+                        "example": "8231882"
+                    },
+                    {
+                        "name": "event",
+                        "description": "Events",
+                        "options": [
+                            "Flash Deals",
+                            "Product Chooser",
+                            "Promotions"
+                        ]
+                    }
+                ]
             }
         ],
         "optional_attributes": [
@@ -193,12 +207,31 @@ var ostk_patterns = [
                 "description": "= \"leaderboard\""
             },
             {
-                "name": "product_ids",
-                "description": "A list of product ids separated by commas.",
-                "notes": ["Required to have 1 or 2 product ids"]
+                "name": "rectangle-type",
+                "options": [
+                    {
+                        "name": "product_ids",
+                        "description": "A list of product ids separated by commas.",
+                        "notes": ["Required to have 1 or 2 product ids"]
+                    },
+                    {
+                        "name": "event",
+                        "description": "Events",
+                        "options": [
+                            "Flash Deals",
+                            "Product Chooser",
+                            "Promotions"
+                        ]
+                    }
+                ]
             }
         ],
         "optional_attributes": [
+            {
+                "name": "number_of_items",
+                "description": "Choose an item limit. By default it is unlimited.",
+                "example": "10"
+            },
             {
                 "name": "link_target",
                 "description": "Choose how to open the link.",
@@ -230,9 +263,23 @@ var ostk_patterns = [
                 "description": "= \"skyscraper\""
             },
             {
-                "name": "product_ids",
-                "description": "A list of product ids separated by commas.",
-                "notes": ["Required to have 1, 2, or 3 product ids."]
+                "name": "skyscraper-type",
+                "options": [
+                    {
+                        "name": "product_ids",
+                        "description": "A list of product ids separated by commas.",
+                        "notes": ["Required to have 1 or 2 product ids"]
+                    },
+                    {
+                        "name": "event",
+                        "description": "Events",
+                        "options": [
+                            "Flash Deals",
+                            "Product Chooser",
+                            "Promotions"
+                        ]
+                    }
+                ]
             }
         ],
         "optional_attributes": [
@@ -272,38 +319,43 @@ var ostk_patterns = [
             {
                 "name": "type",
                 "description": "= \"carousel\""
+            },
+            {
+                "name": "carousel-type",
+                "options": [
+                    {
+                        "name": "product_ids",
+                        "description": "<span class=\"red\">*</span> A list of product ids separated by commas."
+                    },
+                    {
+                        "name": "category",
+                        "description": "<span class=\"red\">*</span> Select items from a specific Overstock store.",
+                        "options": [
+                            "Home & Garden",
+                            "Jewelry & Watches",
+                            "Sports & Toys",
+                            "Worldstock Fair Trade",
+                            "Clothing & Shoes",
+                            "Health & Beauty",
+                            "Food & Gifts",
+                            "Office Supplies",
+                            "Luggage & Bags",
+                            "Crafts & Sewing",
+                            "Baby",
+                            "Pet Supplies",
+                            "Emergency Preparedness",
+                            "Bedding & Bath"
+                        ]
+                    },
+                    {
+                        "name": "keywords",
+                        "description": "<span class=\"red\">*</span> A keyword search",
+                        "example": "soccer shoes"
+                    }
+                ]
             }
         ],
         "optional_attributes": [
-            {
-                "name": "product_ids",
-                "description": "<span class=\"red\">*</span> A list of product ids separated by commas."
-            },
-            {
-                "name": "category",
-                "description": "<span class=\"red\">*</span> Select items from a specific Overstock store.",
-                "options": [
-                    "Home & Garden",
-                    "Jewelry & Watches",
-                    "Sports & Toys",
-                    "Worldstock Fair Trade",
-                    "Clothing & Shoes",
-                    "Health & Beauty",
-                    "Food & Gifts",
-                    "Office Supplies",
-                    "Luggage & Bags",
-                    "Crafts & Sewing",
-                    "Baby",
-                    "Pet Supplies",
-                    "Emergency Preparedness",
-                    "Bedding & Bath"
-                ]
-            },
-            {
-                "name": "keywords",
-                "description": "<span class=\"red\">*</span> A keyword search",
-                "example": "soccer shoes"
-            },
             {
                 "name": "number_of_items",
                 "description": "Choose an item limit. By default it is unlimited.",

@@ -25,10 +25,6 @@ function ostk_generateAffiliateLink(murl){
 	return 'https://api.overstock.com/ads/deeplink?id='+developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+developerId);
 }//ostk_generateAffiliateLink
 
-function ostk_checkForMissingCommas(string){
-	return string.indexOf(" ") === -1 ? false : true;
-}//ostk_checkForMissingCommas
-
 function ostk_getTaxonomy(input){
 	if(input == null) { 
 		return false;
@@ -128,43 +124,104 @@ function ostk_getSortOption(input){
 	}//switch
 }//ostk_getSortOption
 
+function ostk_getEventQuery(event){
+	var output = '';
+	switch(event){
+		case "Flash Deals":
+			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto1'
+			break;
+		case "Product Chooser":
+			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto4'
+			break;
+		case "Promotions":
+			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto5'
+			break;
+	}//switch
+	return output;
+}//ostk_getEventQuery
+
+
+function ostk_stringToList(str){
+	str = str.split(' ').join(','); //Replace spaces with commas
+	str = str.split(',,').join(','); //If the above replace caused ",," just make it 1 comma
+	return str.split(',');
+}//ostk_stringToList
+
+function ostk_generateRectangleHtmlOutput(product, atts){
+	var output = '';
+	output += '<div class="ostk-element ostk-'+atts['type']+'" '+ostk_getStyles(atts)+'>';
+		output += '<div class="ostk-element-inner">';
+			output += ostk_getBranding();
+			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+				output += '<div class="element-content">';
+					output += '<img src="'+product.getImage_Large()+'"/>';
+				output += '</div>';
+				output += '<div class="element-overlay">';
+				    output += '<div class="element-content">';
+						output += '<p class="title">'+product.getName()+'</p>';
+						if(product.averageReviewAsGif){
+							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
+						}
+						output += '<p class="price">'+product.getPrice()+'</p>';
+					output += '</div>';
+				output += '</div>';
+			output += '</a>';
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
+	return output;
+}//ostk_generateRectangleHtmlOutput
+
 function ostk_generateLeaderboardHtmlOutput(products, atts){
   var productList = products.getProductList();
   var output = '';
-	for(var i = 0 ; i < productList.length ; i++){
-		var product = productList[i];
-    output += '<div class="element-content">';
-		output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-			output += '<p class="title">'+product.getName()+'</p>';
-			output += '<p class="description">'+product.description+'</p>';
-			if(product.averageReviewAsGif){
-				output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-			}
-			output += '<p class="price">'+product.getPrice()+'</p>';
-		output += '</a>';
-	output += '</div>';
-  }//for
-  return output;
+	output += '<div class="ostk-element ostk-leaderboard">';
+		output += '<div class="ostk-element-inner">';
+			output += ostk_getBranding();
+			output += '<div class="item-holder item-count-'+productList.length+'">';
+				for(var i = 0 ; i < productList.length ; i++){
+					var product = productList[i];
+				    output += '<div class="element-content">';
+						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+							output += '<p class="title">'+product.getName()+'</p>';
+							output += '<p class="description">'+product.description+'</p>';
+							if(product.averageReviewAsGif){
+								output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+							}
+							output += '<p class="price">'+product.getPrice()+'</p>';
+						output += '</a>';
+					output += '</div>';
+				}//for
+			output += '</div>';
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
+	return output;
 }//ostk_generateLeaderboardHtmlOutput
 
 function ostk_generateSkyscraperHtmlOutput(products, atts){
-  var productList = products.getProductList();
-  var output = '';
-	for(var i = 0 ; i < productList.length ; i++){
-    var product = productList[i];
-    output += '<div class="element-content">';
-		output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-			output += '<p class="title">'+product.getName()+'</p>';
-			if(product.averageReviewAsGif){
-				output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-			}
-			output += '<p class="price">'+product.getPrice()+'</p>';
-		output += '</a>';
-	output += '</div>';
-  }//for
-  return output;
+	var productList = products.getProductList();
+	var output = '';
+	output += '<div class="ostk-element ostk-skyscraper" '+ostk_getStyles(atts)+'>';
+		output += '<div class="ostk-element-inner">';
+			output += ostk_getBranding();
+
+			for(var i = 0 ; i < productList.length ; i++){
+		    var product = productList[i];
+		    output += '<div class="element-content">';
+				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+					output += '<p class="title">'+product.getName()+'</p>';
+					if(product.averageReviewAsGif){
+						output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+					}
+					output += '<p class="price">'+product.getPrice()+'</p>';
+				output += '</a>';
+			output += '</div>';
+		  }//for
+
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
+	return output;
 }//ostk_generateSkyscraperHtmlOutput
 
 function ostk_generateStockPhotoHtmlOutput(product, atts){
@@ -260,7 +317,7 @@ function ostk_getCarouselListItems(product, productImg, atts){
 
 function ostk_limitArrayCount(product_ids, num){
 	if(product_ids.length > num){
-		return array_slice(product_ids, 0, num);
+		return product_ids.splice(0, num);
 	}else{
 		return product_ids;
 	}
@@ -270,58 +327,66 @@ function ostk_limitArrayCount(product_ids, num){
 Validate that the shortcode attributes are valid. return Boolean.
 */
 function ostk_areAttributesValid(atts){
-  var validShortCode = true;
-  var errorStr = '';
+  var error = null;
 
   var type = atts['type'];
   if(!type){
-    return ostk_formatError('Type attribute is required');
+  	error = 'Type attribute is required';
   }
 
-  var keys = ostk_getKeyList(atts);
-  var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
-  if(!item){
-    return ostk_formatError('Invalid type attribute');
+  if(!error){
+	  var keys = ostk_getKeyList(atts);
+	  var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
+	  if(!item){
+	    error = 'Invalid type attribute';
+	  }
   }
 
-  var required_attributes = ostk_getListByKey(item['required_attributes'], 'name');
-  var optional_attributes = ostk_getListByKey(item['optional_attributes'], 'name');
+  if(!error){
+	  var required_attributes = item['required_attributes'];
+	  var optional_attributes = item['optional_attributes'];
 
-  //Set default values if attributes are not already defined
-  for(var i = 0 ; i < item['optional_attributes'].length ; i++){
-  	if(typeof(atts[item['optional_attributes'][i]['name']]) === 'undefined'){
-  		if(typeof(item['optional_attributes'][i]['default']) !== 'undefined'){
-			atts[item['optional_attributes'][i]['name']] = item['optional_attributes'][i]['default']; 
-  		}
-  	}
-  }//for
+	  //Set default values if attributes are not already defined
+	  for(var i = 0 ; i < item['optional_attributes'].length ; i++){
+	  	if(typeof(atts[item['optional_attributes'][i]['name']]) === 'undefined'){
+	  		if(typeof(item['optional_attributes'][i]['default']) !== 'undefined'){
+				atts[item['optional_attributes'][i]['name']] = item['optional_attributes'][i]['default']; 
+	  		}
+	  	}
+	  }//for
+  }
 
   //Fail if missing any required attributes
-  var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(keys, required_attributes);
-  if(missingRequiredAtts.length > 0){
-    validShortCode = false;
-    return ostk_formatError('Missing required attributes: ' + missingRequiredAtts.join(', '));
+  if(!error){
+	  var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(atts, required_attributes);
+	  if(missingRequiredAtts.length > 0){
+	    error = 'Missing required attributes: ' + missingRequiredAtts.join(', ');
+	  }
   }
 
   //Fail if using undefined attributes
-  if(validShortCode){
-    var invalidExtraAtts = ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes);
+  if(!error){
+    var invalidExtraAtts = ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes);
     if(invalidExtraAtts.length > 0){
-      validShortCode = false;
-      return ostk_formatError('The following are not valid attributes: ' + invalidExtraAtts.join(', '));
+      error = 'The following are not valid attributes: ' + invalidExtraAtts.join(', ');
     }
   }
 
   //Fail if any null attributes
-  if(validShortCode){
+  if(error){
     nullAtts = ostk_lookForNullAtts(atts);
     if(nullAtts.length > 0){
       validShortCode = false;
-      return ostk_formatError('The following atts cannot be null: '.implode(', ', nullAtts));
+      error = 'The following atts cannot be null: '.implode(', ', nullAtts);
     }
   }
 
+  if(error){
+  	return error;
+  }else{
 	return true;
+  }
+
 }//areAttributesValid
 
 
@@ -340,25 +405,93 @@ function ostk_lookForNullAtts(obj){
 
 /* Return an array of attributes that are not either in the list of required or optional attributes
 (ostk_areAttributesValid - helper function) */
-function ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes){
+function ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes){
 	var a = Array();
+
+	// console.log('---- ostk_lookForInvalidAtts ----');
+
+	// console.log('keys');
+	// console.dir(keys);
+
+	// console.log('required_attributes');
+	// console.dir(required_attributes);
+
+	// console.log('optional_attributes');
+	// console.dir(optional_attributes);
+
+	// for (var i = 0 ; i < keys.length; i++) {
+	// 	for (var m = 0 ; m < required_attributes.length; m++) {
+	// 		if(required_attributes['options']){
+	// 			for (var k = 0 ; k < required_attributes['options'].length; k++) {
+
+	// 			}//for
+	// 		}else{
+	// 			if(required_attributes.indexOf(keys[m])){
+	// 				a.push(keys[i]);
+	// 			}
+	// 		}			
+	// 	}//for
+	// }//for
+
+/*
 	for (var i = 0 ; i < keys.length; i++) {
 		if(required_attributes.indexOf(keys[i]) == -1 && optional_attributes.indexOf(keys[i]) == -1){
 			a.push(keys[i]);
 		}
-	};
+	}
+*/
 	return a;
-}//ostk_lookForInvalidExtraAtts
+}//ostk_lookForInvalidAtts
 
 /* Return an array of the required attributes that are missing.
 (ostk_areAttributesValid - helper function) */
-function ostk_lookForMissingRequiredAttributes(keys, required_attributes){
+function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
 	var a = Array();
+/*
 	for (var i = 0 ; i < required_attributes.length; i++) {
-		if(keys.indexOf(required_attributes[i]) == -1){
-			a.push(required_attributes[i]);
+		var ra = required_attributes[i];
+		var missingAttr = false;
+		var subAtts = Array();
+
+		if(ra['options'] && ra['options'][0]['name']){
+			for(var m = 0 ; m < ra['options'].length ; m++){
+				subAtts.push(ra['options'][m]['name']);
+			}//for
 		}
-	};
+
+		if(typeof (atts[ra['name']]) === 'undefined'){
+			//Add the missing attribute name to the array
+			a.push(ra['name']);
+			missingAttr = true;
+		}
+		//If the required attribute has options and the options are object instead of just strings
+		if(subAtts.length){
+			//Make sure that one of the option names is present in the users given atts
+			if(missingAttr){
+				var invalidArray = Array();
+				var hasSubAttr = false;
+				//Loop through all of the options
+				for(var m = 0 ; m < ra['options'].length ; m++){
+					console.log('for');
+					//Add the names to an array
+					invalidArray.push(ra['options'][m]['name']);
+					if(typeof (atts[ra['options'][m]['name']]) !== 'undefined'){
+						console.log('has sub');
+						hasSubAttr = true;
+					}
+				}//for
+				//if there is no sub attribute
+				if(!hasSubAttr){
+					//Add the missing attribute name options as a string to the array
+					a.push(invalidArray.join(' or '));
+				}
+			//if the attr is present the check for a corresponding subattr
+			}else if(typeof (atts[atts[ra['name']]]) === 'undefined'){
+				a.push(atts[ra['name']]);
+			}
+		}
+	}//for
+*/
 	return a;
 }//ostk_lookForMissingRequiredAttributes
 
