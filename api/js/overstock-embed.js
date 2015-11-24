@@ -585,7 +585,7 @@ function setDeveloperID(){
 	developerId = 'FKAJQ7bUdyM';
 }//setDeveloperID
 
-function shortcode_atts(obj, atts){
+function ostk_shortcode_atts(obj, atts){
   var output = Array();
   /* hoki make sure this is working */
   // foreach(pairs as name => default) {
@@ -598,7 +598,7 @@ function shortcode_atts(obj, atts){
 		}
   }//for
   return output;
-}//shortcode_atts
+}//ostk_shortcode_atts
 
 function ostk_generateAffiliateLink(murl){
 	var symbol = '?';
@@ -1512,7 +1512,7 @@ function ostk_Element(atts, obj){
 		* 2) [overstock type="link" url="http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html" link_text="I want to buy this for my wife"]
 		**/
 		var output = '';
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 	    {
 	      'type': null,
 	      'url': 'http://www.overstock.com/', 
@@ -1582,7 +1582,7 @@ function ostk_Element(atts, obj){
 		var output = '';
 		var error = null;
 		var _this = this;
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'product_ids': null,
@@ -1636,7 +1636,7 @@ function ostk_Element(atts, obj){
 		var output = '';
 		var _this = this;
 		var error = '';
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'product_ids': null,
@@ -1693,7 +1693,7 @@ function ostk_Element(atts, obj){
 		var products;
 		var error = null;
 		var _this = this;
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'category': null, 
@@ -1766,7 +1766,7 @@ function ostk_Element(atts, obj){
 		**/
 		var output = '';
 		var _this = this;
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'id': null, 
@@ -1815,7 +1815,7 @@ function ostk_Element(atts, obj){
 		var output = '';
 		var _this = this;
 		var error = null;
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 			'id': null,
 			'display': null,
@@ -1854,7 +1854,7 @@ function ostk_Element(atts, obj){
 		* 1) [overstock type="product_carousel" id="6143359"]
 		**/
 		var output = '';
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 		'id': null,
 		'width': null,
@@ -1891,7 +1891,7 @@ function ostk_Element(atts, obj){
 		**/
 		var output = '';
 		var _this = this;
-		atts = shortcode_atts(
+		atts = ostk_shortcode_atts(
 		{
 			'id': ''
 		}, atts);
