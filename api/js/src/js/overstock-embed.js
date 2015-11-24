@@ -367,7 +367,6 @@ function ostk_Element(atts, obj){
 		// }, atts);
 		var limit = (parseInt(atts['number_of_items']) < 2) ? atts['number_of_items'] : 2;
 		if(this.atts['product_ids']){
-			console.log('FROM ARRAY');
 			var product_ids = ostk_stringToList(atts['product_ids']);
 			product_ids = ostk_limitArrayCount(product_ids, atts['number_of_items']);
 			var products = new ostk_MultiProductDataFromArray(product_ids, 2);

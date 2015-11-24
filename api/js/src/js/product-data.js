@@ -26,21 +26,8 @@ var ostk_SingleProductData = function(productId){
 		var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
 		var _this = this;
 
-		console.log('------------------');
-
-		console.log('-- url --');
-		console.dir(url);
-
 		$ostk_jQuery.get( url, function( productData ) {
-
-			console.log('-- productData --');
-			console.dir(productData);
-
 			productData = productData['products'][0];
-
-			console.log('-- productData --');
-			console.dir(productData);
-
 			_this.name = productData['name'];
 			_this.productId = productData['id'];
 			_this.developerId = developerId;
