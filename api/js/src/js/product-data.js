@@ -166,7 +166,7 @@ var ostk_MultiProductDataFromArray = function(productArray, limit){
 
 	this.init = function(callback, errorCallback) {
 		if(limit !== null){
-			productArray = ostk_limitArrayCount(productArray, limit);
+			productArray = ostk_limitArrayCount(this.productArray, limit);
 		}
 		var _this = this;
 		this.product_count_down = productArray.length;

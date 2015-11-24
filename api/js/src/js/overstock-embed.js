@@ -1,6 +1,6 @@
 var ostk_developerId;
-var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
-// var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+// var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
+var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 var ostk_plugin = new ostk_Plugin();
 
 function ostk_Plugin(){
@@ -235,7 +235,6 @@ function ostk_Element(atts, obj){
 		var sortOption = '';
 
 		var link_text = atts['link_text'];
-		// console.log('&&&&& ' + link_text + ' &&&&&');
 
 		if(!error){
 			if(keywords == null) {
@@ -287,13 +286,13 @@ function ostk_Element(atts, obj){
 		* 2) [overstock type="link" url="http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html" link_text="I want to buy this for my wife"]
 		**/
 		var output = '';
-		// atts = shortcode_atts(
-	 //    {
-	 //      'type': null,
-	 //      'url': 'http://www.overstock.com/', 
-	 //      'link_text': 'A link to Overstock.com',
-	 //      'link_target': 'new_tab'
-	 //    }, atts);
+		atts = shortcode_atts(
+	    {
+	      'type': null,
+	      'url': 'http://www.overstock.com/', 
+	      'link_text': 'A link to Overstock.com',
+	      'link_target': 'new_tab'
+	    }, atts);
 		var link_text = atts['link_text'];
 		var affiliateLink = ostk_generateAffiliateLink(atts['url']);
 		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
@@ -357,14 +356,14 @@ function ostk_Element(atts, obj){
 		var output = '';
 		var error = null;
 		var _this = this;
-		// atts = shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'product_ids': null,
-		// 	'event': null,
-		// 	'link_target': 'new_tab',
-		// 	'number_of_items': 2
-		// }, atts);
+		atts = shortcode_atts(
+		{
+			'type': null,
+			'product_ids': null,
+			'event': null,
+			'link_target': 'new_tab',
+			'number_of_items': 2
+		}, atts);
 		var limit = (parseInt(atts['number_of_items']) < 2) ? atts['number_of_items'] : 2;
 		if(this.atts['product_ids']){
 			var product_ids = ostk_stringToList(atts['product_ids']);
@@ -496,16 +495,12 @@ function ostk_Element(atts, obj){
 	    this.renderHTMLError(output);
 	  }else{
 		if (ostk_isset(product_ids)) {
-			products = new ostk_MultiProductDataFromArray();
-			var param1 = product_ids;
+			products = new ostk_MultiProductDataFromArray(product_ids, atts['number_of_items']);
 		}else{
 			var query = "https://api.overstock.com/ads/products?developerid=test&"+keywords+taxonomy+sortOption;
-			products = new ostk_MultiProductDataFromQuery();
-			var param1 = query;
+			products = new ostk_MultiProductDataFromQuery(query, atts['number_of_items']);
 		}
 		products.init(
-			param1,
-			atts['number_of_items'], 
 			//Success
 			function(){
 				output += '<div class="ostk-element ostk-carousel" '+ostk_getStyles(atts)+'>';
@@ -513,11 +508,12 @@ function ostk_Element(atts, obj){
 						output += ostk_generateCarouselHTML('carousel', products.getProductList(), atts);
 					output += '</div><!-- ostk-element-inner -->';
 				output += '</div><!-- ostk-element -->';
-
 				output = $ostk_jQuery(output);
+
 				_this.loadCarousel(output);
 				_this.renderHTML(output);
 				_this.resizeCarousel(output);
+
 				$ostk_jQuery(window).resize(function() {
 				    clearTimeout(window.resizedFinished);
 				    window.resizedFinished = setTimeout(function(){
@@ -527,7 +523,6 @@ function ostk_Element(atts, obj){
 	    	},
 			// Error
 			function(error){
-				console.log('error');
 				_this.renderHTMLError(error);
 			}		    	
 	    );
@@ -654,7 +649,7 @@ function ostk_Element(atts, obj){
 			  		output = ostk_formatError('Invalid product ID');
 			    }
 			    _this.renderHTML(output);
-				_this.loadCarousel(data);						
+				_this.loadCarousel(output);						
 			},
 			//Error
 			function(error){
@@ -714,8 +709,6 @@ function ostk_Element(atts, obj){
 	// Load Carousel
 	this.loadCarousel = function(carousel){
 		var _this = this;
-		var _carousel = carousel;
-
 		carousel.find('.ostk-flexslider').flexslider({
 			animation: "slide",
 			controlNav: "thumbnails",
@@ -751,7 +744,19 @@ function ostk_Element(atts, obj){
 	this.showThumbnails = function(carousel, flexslider){
 		var itemsPerPage = 5;
 		var currentSlide = carousel.currentSlide;
+
+		// console.log('-- showThumbnails --');
+
+		// console.log('carousel');
+		// console.dir(carousel);
+
+
+		// carousel.css('border', 'solid 5px red');
+		// carousel.controlsContainer.find("ol").css('border', 'solid 5px red');
+		// carousel.controlsContainer.find("ol li").css('border', 'solid 5px blue');
+
 		var items = carousel.controlsContainer.find("ol li");
+
 		var onBothSides = (itemsPerPage-1)/2;
 		items.each(function(index){
 			if( (index>=(currentSlide-onBothSides) && index<=(currentSlide+onBothSides) ) ||
