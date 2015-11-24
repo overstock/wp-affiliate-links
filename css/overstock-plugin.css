@@ -781,6 +781,7 @@
   border-radius: 20px;
   display: block;
   text-align: center;
+  outline: none;
 }
 .ostk-plugin-settings .ostk-btn:hover,
 .ostk-plugin-settings .ostk-btn.active {
@@ -1010,14 +1011,49 @@
   /* optional-objects */
   /* embed-output */
 }
+.ostk-generator-page form p,
+.ostk-generator-page form label {
+  line-height: 40px;
+}
 .ostk-generator-page form label {
   width: 140px;
   font-weight: bold;
   float: left;
   margin: 0;
 }
+.ostk-generator-page form select {
+  min-width: 170px;
+  height: 40px;
+}
 .ostk-generator-page .ostk-form-content ul li {
-  margin-top: 20px;
+  position: relative;
+  padding: 5px 0;
+  margin: 0;
+}
+.ostk-generator-page .ostk-form-content ul li.disabled label {
+  color: #cccccc;
+}
+.ostk-generator-page .ostk-form-content ul li.disabled select,
+.ostk-generator-page .ostk-form-content ul li.disabled input[type="text"] {
+  border: solid 1px #cccccc;
+  color: #cccccc;
+}
+.ostk-generator-page .ostk-form-content ul li input[type="radio"] {
+  margin: 12px 30px 0 0;
+  float: left;
+}
+.ostk-generator-page .ostk-form-content ul li .group-border {
+  border: solid 3px grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  border-right: none;
+}
+.ostk-generator-page .ostk-form-content ul li ul {
+  padding-left: 20px;
+  border-left: solid 1px #aaaaaa;
 }
 .ostk-generator-page .optional-objects {
   margin-left: 60px;

@@ -149,7 +149,6 @@ var ostk_patterns = [
                 "description": "= \"rectangle\""
             },
             {
-                "name": "rectangle-type",
                 "options": [
                     {
                         "name": "id",
@@ -210,7 +209,6 @@ var ostk_patterns = [
                 "description": "= \"leaderboard\""
             },
             {
-                "name": "rectangle-type",
                 "options": [
                     {
                         "name": "product_ids",
@@ -266,7 +264,6 @@ var ostk_patterns = [
                 "description": "= \"skyscraper\""
             },
             {
-                "name": "skyscraper-type",
                 "options": [
                     {
                         "name": "product_ids",
@@ -324,7 +321,6 @@ var ostk_patterns = [
                 "description": "= \"carousel\""
             },
             {
-                "name": "carousel-type",
                 "options": [
                     {
                         "name": "product_ids",

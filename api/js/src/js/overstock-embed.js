@@ -280,10 +280,6 @@ function ostk_Element(atts, obj){
 		* Link: lets you create links to any overstock page
 		* Generate a link to a predefined page on Overstock.com
 		* Specify the link_text with the link_text attribute
-		*	
-		* Usage example 
-		* 1) [overstock type="link" url="http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html"]
-		* 2) [overstock type="link" url="http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html" link_text="I want to buy this for my wife"]
 		**/
 		var output = '';
 		atts = ostk_shortcode_atts(
@@ -303,9 +299,6 @@ function ostk_Element(atts, obj){
 	this.generateRectangleWidget = function(){
 		/**
 		* Pattern 3 - Rectangle: Lets you create a rectangular banner for a SINGLE product
-		*	
-		* Usage example 
-		* 1) [overstock type="rectangle" id="10234427"]
 		**/
 		var output = '';
 		var _this = this;
@@ -348,10 +341,6 @@ function ostk_Element(atts, obj){
 	this.generateLeaderboardWidget = function(){
 		/**
 		* Leaderboard: Lets you create a leaderboard banner for up to two products
-		*	
-		* Usage Example
-		* 1) [overstock type="leaderboard" product_ids="8641092"]
-		* 2) [overstock type="leaderboard" product_ids="8641092, 9547029"]
 		**/
 		var output = '';
 		var error = null;
@@ -401,11 +390,6 @@ function ostk_Element(atts, obj){
 	this.generateSkyscraperWidget = function(){
 		/**
 		* Skyscraper: Lets you create a skyscraper banner for up to three products
-		*	
-		* Usage Example
-		* 1) [overstock type="skyscraper" product_ids="8641092"]
-		* 2) [overstock type="skyscraper" product_ids="8641092, 9547029"]
-		* 3) [overstock type="skyscraper" product_ids="8641092, 9547029, 9547023"]
 		*/
 		var output = '';
 		var _this = this;
@@ -457,11 +441,6 @@ function ostk_Element(atts, obj){
 		/**
 		* Carousel: Lets you create a carousel banner for up to five products
 		* Generate a carousel viewer for a number_of_products
-		*	
-		* Usage Example
-		* 1) [overstock type="carousel" product_ids="8641092, 9547029, 9547023"]
-		* 2) [overstock type="carousel" category="Pets" sort_by="Top Sellers"]
-		* 3) [overstock type="carousel" keywords="soccer shoes" number_of_items="6"]
 		**/
 		var output = '';
 		var products;
@@ -534,9 +513,6 @@ function ostk_Element(atts, obj){
 		/**
 		* Stock Photo: lets you create an image link to a product page (stock photo)
 		* Allow users to add stock photos to their posts (and get paid for it).
-		*	
-		* Example Usage:
-		* 1) [overstock type="stock_photo" id="8859234"]
 		**/
 		var output = '';
 		var _this = this;
@@ -583,8 +559,6 @@ function ostk_Element(atts, obj){
 	this.generateProductDetailsLinkWidget = function(){
 		/**
 		* Product Details Link : Allow users to create easy links to products they are showcasing.
-		* Example Usage:
-		* 1) [overstock type="product_link" id="8859234"]
 		**/
 		var output = '';
 		var _this = this;
@@ -624,8 +598,6 @@ function ostk_Element(atts, obj){
 	this.generateProductCarouselWidget = function(){
 		/**
 		* Product Carousel: Lets you create a carousel for a single product, it shows all product photos
-		* Usage Example
-		* 1) [overstock type="product_carousel" id="6143359"]
 		**/
 		var output = '';
 		atts = ostk_shortcode_atts(

@@ -23,8 +23,8 @@ module.exports = function(grunt) {
 					'libs/flexslider.min.js',
 					'js/patterns.js',
 					'js/functions.js',
-					'js/overstock-embed.js',
-					'js/product-data.js'
+					'js/product-data.js',
+					'js/overstock-embed.js'
 				],
 				dest: '../overstock-embed.js'
 			}
