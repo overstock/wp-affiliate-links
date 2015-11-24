@@ -1225,8 +1225,8 @@ function ostk_array_key_exists(key, search) {
   return key in search;
 }//ostk_array_key_exists
 var ostk_developerId;
-// var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
-var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
+// var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 var ostk_plugin = new ostk_Plugin();
 
 function ostk_Plugin(){
@@ -1593,7 +1593,6 @@ function ostk_Element(atts, obj){
 		// }, atts);
 		var limit = (parseInt(atts['number_of_items']) < 2) ? atts['number_of_items'] : 2;
 		if(this.atts['product_ids']){
-			console.log('FROM ARRAY');
 			var product_ids = ostk_stringToList(atts['product_ids']);
 			product_ids = ostk_limitArrayCount(product_ids, atts['number_of_items']);
 			var products = new ostk_MultiProductDataFromArray(product_ids, 2);
@@ -2031,21 +2030,8 @@ var ostk_SingleProductData = function(productId){
 		var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
 		var _this = this;
 
-		console.log('------------------');
-
-		console.log('-- url --');
-		console.dir(url);
-
 		$ostk_jQuery.get( url, function( productData ) {
-
-			console.log('-- productData --');
-			console.dir(productData);
-
 			productData = productData['products'][0];
-
-			console.log('-- productData --');
-			console.dir(productData);
-
 			_this.name = productData['name'];
 			_this.productId = productData['id'];
 			_this.developerId = developerId;
