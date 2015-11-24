@@ -1225,8 +1225,8 @@ function ostk_array_key_exists(key, search) {
   return key in search;
 }//ostk_array_key_exists
 var ostk_developerId;
-// var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
-var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/master/api/';
+// var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 var ostk_plugin = new ostk_Plugin();
 
 function ostk_Plugin(){
