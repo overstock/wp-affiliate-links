@@ -39,7 +39,10 @@ var ostk_patterns = [
             {
                 "name": "link_text",
                 "description": "The text that will show for the link",
-                "default": "\"query\" attribute text",
+                "default": {
+                    "text": "query attribute text",
+                    "value": "query"
+                },
                 "example": "Click to see these soccer shoes!",
                 "notes": [
                     "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."
@@ -155,9 +158,23 @@ var ostk_patterns = [
                 "description": "= \"rectangle\""
             },
             {
-                "name": "id",
-                "description": "A products id",
-                "example": "8231882"
+                "name": "rectangle-type",
+                "options": [
+                    {
+                        "name": "id",
+                        "description": "A products id",
+                        "example": "8231882"
+                    },
+                    {
+                        "name": "event",
+                        "description": "Events",
+                        "options": [
+                            "Flash Deals",
+                            "Product Chooser",
+                            "Promotions"
+                        ]
+                    }
+                ]
             }
         ],
         "optional_attributes": [
@@ -202,12 +219,31 @@ var ostk_patterns = [
                 "description": "= \"leaderboard\""
             },
             {
-                "name": "product_ids",
-                "description": "A list of product ids separated by commas.",
-                "notes": ["Required to have 1 or 2 product ids"]
+                "name": "rectangle-type",
+                "options": [
+                    {
+                        "name": "product_ids",
+                        "description": "A list of product ids separated by commas.",
+                        "notes": ["Required to have 1 or 2 product ids"]
+                    },
+                    {
+                        "name": "event",
+                        "description": "Events",
+                        "options": [
+                            "Flash Deals",
+                            "Product Chooser",
+                            "Promotions"
+                        ]
+                    }
+                ]
             }
         ],
         "optional_attributes": [
+            {
+                "name": "number_of_items",
+                "description": "Choose an item limit. By default it is unlimited.",
+                "example": "10"
+            },
             {
                 "name": "link_target",
                 "description": "Choose how to open the link.",
@@ -239,9 +275,23 @@ var ostk_patterns = [
                 "description": "= \"skyscraper\""
             },
             {
-                "name": "product_ids",
-                "description": "A list of product ids separated by commas.",
-                "notes": ["Required to have 1, 2, or 3 product ids."]
+                "name": "skyscraper-type",
+                "options": [
+                    {
+                        "name": "product_ids",
+                        "description": "A list of product ids separated by commas.",
+                        "notes": ["Required to have 1 or 2 product ids"]
+                    },
+                    {
+                        "name": "event",
+                        "description": "Events",
+                        "options": [
+                            "Flash Deals",
+                            "Product Chooser",
+                            "Promotions"
+                        ]
+                    }
+                ]
             }
         ],
         "optional_attributes": [
@@ -281,38 +331,43 @@ var ostk_patterns = [
             {
                 "name": "type",
                 "description": "= \"carousel\""
+            },
+            {
+                "name": "carousel-type",
+                "options": [
+                    {
+                        "name": "product_ids",
+                        "description": "<span class=\"red\">*</span> A list of product ids separated by commas."
+                    },
+                    {
+                        "name": "category",
+                        "description": "<span class=\"red\">*</span> Select items from a specific Overstock store.",
+                        "options": [
+                            "Home & Garden",
+                            "Jewelry & Watches",
+                            "Sports & Toys",
+                            "Worldstock Fair Trade",
+                            "Clothing & Shoes",
+                            "Health & Beauty",
+                            "Food & Gifts",
+                            "Office Supplies",
+                            "Luggage & Bags",
+                            "Crafts & Sewing",
+                            "Baby",
+                            "Pet Supplies",
+                            "Emergency Preparedness",
+                            "Bedding & Bath"
+                        ]
+                    },
+                    {
+                        "name": "keywords",
+                        "description": "<span class=\"red\">*</span> A keyword search",
+                        "example": "soccer shoes"
+                    }
+                ]
             }
         ],
         "optional_attributes": [
-            {
-                "name": "product_ids",
-                "description": "<span class=\"red\">*</span> A list of product ids separated by commas."
-            },
-            {
-                "name": "category",
-                "description": "<span class=\"red\">*</span> Select items from a specific Overstock store.",
-                "options": [
-                    "Home & Garden",
-                    "Jewelry & Watches",
-                    "Sports & Toys",
-                    "Worldstock Fair Trade",
-                    "Clothing & Shoes",
-                    "Health & Beauty",
-                    "Food & Gifts",
-                    "Office Supplies",
-                    "Luggage & Bags",
-                    "Crafts & Sewing",
-                    "Baby",
-                    "Pet Supplies",
-                    "Emergency Preparedness",
-                    "Bedding & Bath"
-                ]
-            },
-            {
-                "name": "keywords",
-                "description": "<span class=\"red\">*</span> A keyword search",
-                "example": "soccer shoes"
-            },
             {
                 "name": "number_of_items",
                 "description": "Choose an item limit. By default it is unlimited.",
@@ -530,20 +585,20 @@ function setDeveloperID(){
 	developerId = 'FKAJQ7bUdyM';
 }//setDeveloperID
 
-function shortcode_atts(obj, atts){
-  var output = Array();
-  /* hoki make sure this is working */
-  // foreach(pairs as name => default) {
-  for(var key in obj){
-  	var value = obj[key];
-    if (ostk_array_key_exists(key, atts)){
-      output[key] = atts[key];
-    }else{
-      output[key] = value;
-		}
-  }//for
-  return output;
-}//shortcode_atts
+// function shortcode_atts(obj, atts){
+//   var output = Array();
+//   /* hoki make sure this is working */
+//   // foreach(pairs as name => default) {
+//   for(var key in obj){
+//   	var value = obj[key];
+//     if (ostk_array_key_exists(key, atts)){
+//       output[key] = atts[key];
+//     }else{
+//       output[key] = value;
+// 		}
+//   }//for
+//   return output;
+// }//shortcode_atts
 
 function ostk_generateAffiliateLink(murl){
 	var symbol = '?';
@@ -552,10 +607,6 @@ function ostk_generateAffiliateLink(murl){
 	}
 	return 'https://api.overstock.com/ads/deeplink?id='+developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+developerId);
 }//ostk_generateAffiliateLink
-
-function ostk_checkForMissingCommas(string){
-	return string.indexOf(" ") === -1 ? false : true;
-}//ostk_checkForMissingCommas
 
 function ostk_getTaxonomy(input){
 	if(input == null) { 
@@ -656,43 +707,104 @@ function ostk_getSortOption(input){
 	}//switch
 }//ostk_getSortOption
 
+function ostk_getEventQuery(event){
+	var output = '';
+	switch(event){
+		case "Flash Deals":
+			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto1'
+			break;
+		case "Product Chooser":
+			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto4'
+			break;
+		case "Promotions":
+			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto5'
+			break;
+	}//switch
+	return output;
+}//ostk_getEventQuery
+
+
+function ostk_stringToList(str){
+	str = str.split(' ').join(','); //Replace spaces with commas
+	str = str.split(',,').join(','); //If the above replace caused ",," just make it 1 comma
+	return str.split(',');
+}//ostk_stringToList
+
+function ostk_generateRectangleHtmlOutput(product, atts){
+	var output = '';
+	output += '<div class="ostk-element ostk-'+atts['type']+'" '+ostk_getStyles(atts)+'>';
+		output += '<div class="ostk-element-inner">';
+			output += ostk_getBranding();
+			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+				output += '<div class="element-content">';
+					output += '<img src="'+product.getImage_Large()+'"/>';
+				output += '</div>';
+				output += '<div class="element-overlay">';
+				    output += '<div class="element-content">';
+						output += '<p class="title">'+product.getName()+'</p>';
+						if(product.averageReviewAsGif){
+							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
+						}
+						output += '<p class="price">'+product.getPrice()+'</p>';
+					output += '</div>';
+				output += '</div>';
+			output += '</a>';
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
+	return output;
+}//ostk_generateRectangleHtmlOutput
+
 function ostk_generateLeaderboardHtmlOutput(products, atts){
   var productList = products.getProductList();
   var output = '';
-	for(var i = 0 ; i < productList.length ; i++){
-		var product = productList[i];
-    output += '<div class="element-content">';
-		output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-			output += '<p class="title">'+product.getName()+'</p>';
-			output += '<p class="description">'+product.description+'</p>';
-			if(product.averageReviewAsGif){
-				output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-			}
-			output += '<p class="price">'+product.getPrice()+'</p>';
-		output += '</a>';
-	output += '</div>';
-  }//for
-  return output;
+	output += '<div class="ostk-element ostk-leaderboard">';
+		output += '<div class="ostk-element-inner">';
+			output += ostk_getBranding();
+			output += '<div class="item-holder item-count-'+productList.length+'">';
+				for(var i = 0 ; i < productList.length ; i++){
+					var product = productList[i];
+				    output += '<div class="element-content">';
+						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+							output += '<p class="title">'+product.getName()+'</p>';
+							output += '<p class="description">'+product.description+'</p>';
+							if(product.averageReviewAsGif){
+								output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+							}
+							output += '<p class="price">'+product.getPrice()+'</p>';
+						output += '</a>';
+					output += '</div>';
+				}//for
+			output += '</div>';
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
+	return output;
 }//ostk_generateLeaderboardHtmlOutput
 
 function ostk_generateSkyscraperHtmlOutput(products, atts){
-  var productList = products.getProductList();
-  var output = '';
-	for(var i = 0 ; i < productList.length ; i++){
-    var product = productList[i];
-    output += '<div class="element-content">';
-		output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-			output += '<p class="title">'+product.getName()+'</p>';
-			if(product.averageReviewAsGif){
-				output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-			}
-			output += '<p class="price">'+product.getPrice()+'</p>';
-		output += '</a>';
-	output += '</div>';
-  }//for
-  return output;
+	var productList = products.getProductList();
+	var output = '';
+	output += '<div class="ostk-element ostk-skyscraper" '+ostk_getStyles(atts)+'>';
+		output += '<div class="ostk-element-inner">';
+			output += ostk_getBranding();
+
+			for(var i = 0 ; i < productList.length ; i++){
+		    var product = productList[i];
+		    output += '<div class="element-content">';
+				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+					output += '<p class="title">'+product.getName()+'</p>';
+					if(product.averageReviewAsGif){
+						output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+					}
+					output += '<p class="price">'+product.getPrice()+'</p>';
+				output += '</a>';
+			output += '</div>';
+		  }//for
+
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
+	return output;
 }//ostk_generateSkyscraperHtmlOutput
 
 function ostk_generateStockPhotoHtmlOutput(product, atts){
@@ -788,7 +900,7 @@ function ostk_getCarouselListItems(product, productImg, atts){
 
 function ostk_limitArrayCount(product_ids, num){
 	if(product_ids.length > num){
-		return array_slice(product_ids, 0, num);
+		return product_ids.splice(0, num);
 	}else{
 		return product_ids;
 	}
@@ -798,97 +910,230 @@ function ostk_limitArrayCount(product_ids, num){
 Validate that the shortcode attributes are valid. return Boolean.
 */
 function ostk_areAttributesValid(atts){
-  var validShortCode = true;
-  var errorStr = '';
+	// console.log('---- ostk_areAttributesValid ----');
+	var error = null;
 
-  var type = atts['type'];
-  if(!type){
-    return ostk_formatError('Type attribute is required');
-  }
+	var type = atts['type'];
+	if(!type){
+		error = 'Type attribute is required';
+	}
 
-  var keys = ostk_getKeyList(atts);
-  var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
-  if(!item){
-    return ostk_formatError('Invalid type attribute');
-  }
-
-  var required_attributes = ostk_getListByKey(item['required_attributes'], 'name');
-  var optional_attributes = ostk_getListByKey(item['optional_attributes'], 'name');
-
-  //Set default values if attributes are not already defined
-  for(var i = 0 ; i < item['optional_attributes'].length ; i++){
-  	if(typeof(atts[item['optional_attributes'][i]['name']]) === 'undefined'){
-  		if(typeof(item['optional_attributes'][i]['default']) !== 'undefined'){
-			atts[item['optional_attributes'][i]['name']] = item['optional_attributes'][i]['default']; 
-  		}
-  	}
-  }//for
-
-  //Fail if missing any required attributes
-  var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(keys, required_attributes);
-  if(missingRequiredAtts.length > 0){
-    validShortCode = false;
-    return ostk_formatError('Missing required attributes: ' + missingRequiredAtts.join(', '));
-  }
-
-  //Fail if using undefined attributes
-  if(validShortCode){
-    var invalidExtraAtts = ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes);
-    if(invalidExtraAtts.length > 0){
-      validShortCode = false;
-      return ostk_formatError('The following are not valid attributes: ' + invalidExtraAtts.join(', '));
-    }
-  }
-
-  //Fail if any null attributes
-  if(validShortCode){
-    nullAtts = ostk_lookForNullAtts(atts);
-    if(nullAtts.length > 0){
-      validShortCode = false;
-      return ostk_formatError('The following atts cannot be null: '.implode(', ', nullAtts));
-    }
-  }
-
-	return true;
-}//areAttributesValid
-
-
-/* Return a list of the attribute names that have a null value 
-(ostk_areAttributesValid - helper function) */
-function ostk_lookForNullAtts(obj){
-  var array = Array();
-  for(var key in obj){
-  	var value = obj[key];
-    if(value == '' || value == null){
-    	array.push(key);
-    }
-  }//for
-  return array;
-}//ostk_lookForNullAtts
-
-/* Return an array of attributes that are not either in the list of required or optional attributes
-(ostk_areAttributesValid - helper function) */
-function ostk_lookForInvalidExtraAtts(keys, required_attributes, optional_attributes){
-	var a = Array();
-	for (var i = 0 ; i < keys.length; i++) {
-		if(required_attributes.indexOf(keys[i]) == -1 && optional_attributes.indexOf(keys[i]) == -1){
-			a.push(keys[i]);
+	if(!error){
+		var keys = ostk_getKeyList(atts);
+		var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
+		if(!item){
+	    	error = 'Invalid type attribute';
+		}else{
+			var required_attributes = item['required_attributes'];
+			var optional_attributes = item['optional_attributes'];
 		}
-	};
-	return a;
-}//ostk_lookForInvalidExtraAtts
+	}
+
+	//Fail if missing any required attributes
+	if(!error){
+		var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(atts, required_attributes);
+		if(missingRequiredAtts.length > 0){
+			error = 'Missing required attributes: ' + missingRequiredAtts.join(', ');
+		}
+	}
+
+	//Fail if using undefined attributes, null values, or a value that is not an option
+	if(!error){
+		var invalidExtraAtts = ostk_lookForInvalidAtts(atts, required_attributes, optional_attributes);
+		if(invalidExtraAtts.length > 0){
+			error = 'The following are not valid attributes: ' + invalidExtraAtts.join(', ');
+		}
+	}
+
+	if(error){
+		return error;
+	}else{
+		return true;
+	}
+
+}//areAttributesValid
 
 /* Return an array of the required attributes that are missing.
 (ostk_areAttributesValid - helper function) */
-function ostk_lookForMissingRequiredAttributes(keys, required_attributes){
-	var a = Array();
+function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
+	var missing_atts = Array();
+	//Loop through required attributes
 	for (var i = 0 ; i < required_attributes.length; i++) {
-		if(keys.indexOf(required_attributes[i]) == -1){
-			a.push(required_attributes[i]);
+		var ra = required_attributes[i];
+		var key = ra['name'];
+		if(!atts[key]){
+			//if the missing attribute has options
+			if(ra['options']){
+				var option_fulfilled = false;
+				//Loop through missing attributes' options
+				for(var k = 0 ; k < ra['options'].length ; k++){
+					var option_key = ra['options'][k]['name'];
+					//if one of the options is included in the atts
+					if(atts[option_key]){
+						option_fulfilled = true;
+					}
+				}//for
+				if(!option_fulfilled){
+					//None of the options where fullfilled
+					missing_atts.push('(' + ostk_getListByKey(ra['options'], 'name').join(' or ') + ')');
+				}
+			}else{
+				//Missing attribute doesn't have options so push it ot the missing array
+				missing_atts.push(key);
+			}
 		}
-	};
-	return a;
+	}//for
+	return missing_atts;
 }//ostk_lookForMissingRequiredAttributes
+
+/* Return an array of attributes that are not either in the list of required or optional attributes
+(ostk_areAttributesValid - helper function) */
+function ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes){
+	var invalid_atts = Array();
+
+
+
+	// invalid_atts = ostk_lookFoInvalidAttsInArray(keys, required_attributes);
+	// invalid_atts = ostk_lookFoInvalidAttsInArray(invalid_atts, optional_attributes);
+
+
+
+
+	// keys = {
+	// 	category: "Home & Garden"
+	// };
+	// invalid_atts = ostk_lookFoInvalidAttsInArray(keys, optional_attributes);
+
+
+	// var array = $ostk_jQuery.extend({}, required_attributes, optional_attributes);
+	var array = $ostk_jQuery.merge($ostk_jQuery.merge([], optional_attributes), required_attributes);
+
+	invalid_atts = ostk_lookFoInvalidAttsInArray(keys, array);
+
+	// console.log('keys');
+	// console.dir(keys);
+
+	// console.log('required_attributes');
+	// console.dir(required_attributes);
+
+	// console.log('optional_attributes');
+	// console.dir(optional_attributes);
+
+	// console.log('array');
+	// console.dir(array);
+
+
+
+	return ostk_getKeyList(invalid_atts);
+
+}//ostk_lookForInvalidAtts
+
+/* Return an array of attributes that are not in a given list
+used for both require and optional att arrays */
+function ostk_lookFoInvalidAttsInArray(keys, array){
+	var invalid_atts = {};
+	//Loop through keys
+
+	// console.log('------------------');
+	// console.log('keys');
+	// console.dir(keys);
+
+	for(var key in keys){
+		//not valid until finding that the key in the array 
+		var value = keys[key];
+		var is_valid = false;
+
+		// console.log('-------- '+key+' --------');
+
+		// //Loop throught the atts
+		// for(var k = 0 ; k < array.length ; k++){
+
+		// console.log('---------');
+
+		// console.log('array');
+		// console.dir(array);
+
+		for(var k = array.length-1 ; k >= 0 ; k--){
+		// for(var k = 0 ; k < array.length ; k++){
+			var a = array[k];
+			var a_key = a['name'];
+
+			// console.log('-- ' + a_key + ' --');
+			// console.log('a');
+			// console.dir(a);
+
+			//if the attribure has options dig deeper
+			if(a['options']){
+				// console.log('has options');
+				if(a['options'][0]['name']){
+					//options are objects not just strings
+					// console.log('is object array');
+					for(var z = 0 ; z < a['options'].length ; z++){
+						var a_op = a['options'][z];	
+						var a_op_key = a_op['name'];	
+						if(key === a_op_key){
+							is_valid = true;
+							break;
+						}
+					}//for
+				}else{
+					//options are just strings
+					// console.log('is string array');
+					if(key === a_key){
+						var found_it = false;
+						// console.log('key is valid');
+						for(var z = 0 ; z < a['options'].length ; z++){
+							var a_op_key = a['options'][z];
+							// console.log(value +' vs '+ a_op_key);
+							if(value === a_op_key){
+								// console.log('FOUND IT');
+								found_it = true;
+								break;
+							}
+						}//for	
+						if(found_it){
+							is_valid = true;
+							break;
+						}else{
+							is_valid = false;
+							// console.log('DIDNT FIND');
+						}
+					}else{
+						// console.log('DIDNT FIND');
+					}
+				}
+			}else{
+				// console.log('has NOT options');
+				// att does not have options
+				if(key === a_key){
+					// console.log(key +' vs '+ a_key); 
+					// console.dir(a[key]);
+					// delete array[key];
+					// delete array[k];
+					is_valid = true;
+					break;
+				}else{
+					// console.log('DIDNT FIND');
+				}
+			}
+		}//for
+
+		if(!is_valid){
+			// console.log('IS NOT VALID');
+			// console.log('key: ' + key);
+			// console.log('value: ' + value);
+			invalid_atts[key] = value;
+			array.splice(k, 1);
+		// }else{
+			// console.log('array');
+			// console.log('IS VALID');
+		}
+	}//for
+	// console.log('invalid_atts');
+	// console.dir(invalid_atts);
+	return invalid_atts
+}//ostk_lookFoInvalidAttsInArray
+
 
 /* Return all keys of an object as an array
 (ostk_areAttributesValid - helper function) */
@@ -980,8 +1225,8 @@ function ostk_array_key_exists(key, search) {
   return key in search;
 }//ostk_array_key_exists
 var ostk_developerId;
-var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
-// var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+// var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
+var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 var ostk_plugin = new ostk_Plugin();
 
 function ostk_Plugin(){
@@ -1126,30 +1371,42 @@ function ostk_Element(atts, obj){
 			error = ostk_formatError("Linkshare ID needs to be authenticated."); 
 		}
 
-		switch(this.atts['type']){
-			case 'stock_photo':
-			case 'product_carousel':
-				error = ostk_formatError("Invalid type attribute.");
-			break;
-		}//switch
-
-		if(ostk_areAttributesValid(this.atts) !== true){
-			this.renderHTML(ostk_areAttributesValid(this.atts));
-		}
-		if(this.atts['type'] == '' || this.atts['type'] == null){ 
-			error = ostk_formatError("Type parameter cannot be empty.");
-		}else if(ostk_isset(this.atts['link_target']) && !ostk_isValidLinkTarget(this.atts)){ 
-			error = ostk_formatError('"link_target" not found. Please check spelling and try again.');
+		if(!error){
+			switch(this.atts['type']){
+				case 'stock_photo':
+				case 'product_carousel':
+					error = ostk_formatError("Invalid type attribute.");
+				break;
+			}//switch
 		}
 
-		// hoki - check to make sure that this pregmatch is working
-		var regex = /^[1-9]\d*(px|%)/i;
-		if(ostk_isset(this.atts['width']) && !regex.exec(this.atts['width'])){
-			// if(ostk_isset(this.atts['width']) && !preg_match("/^[1-9]\d*(px|%)/i", this.atts['width'])){
-			error = ostk_formatError("Width requires % or px, and a value greater than 0.");
+		if(!error){
+			var areAttsValid = ostk_areAttributesValid(this.atts)
+			if(areAttsValid !== true){
+				error = areAttsValid;
+			}
 		}
 
-		if(error === null){
+		if(!error){
+			if(this.atts['type'] == '' || this.atts['type'] == null){ 
+				error = "Type parameter cannot be empty.";
+			}else if(ostk_isset(this.atts['link_target']) && !ostk_isValidLinkTarget(this.atts)){ 
+				error = '"link_target" not found. Please check spelling and try again.';
+			}
+		}
+
+		if(!error){
+			// hoki - check to make sure that this pregmatch is working
+			var regex = /^[1-9]\d*(px|%)/i;
+			if(ostk_isset(this.atts['width']) && !regex.exec(this.atts['width'])){
+				// if(ostk_isset(this.atts['width']) && !preg_match("/^[1-9]\d*(px|%)/i", this.atts['width'])){
+				error = ostk_formatError("Width requires % or px, and a value greater than 0.");
+			}
+		}
+
+		if(error){
+			this.renderHTMLError(error);
+		}else{
 			switch (this.atts['type']) {
 				case 'search':
 					this.generateSearcQueryWidget();
@@ -1182,8 +1439,6 @@ function ostk_Element(atts, obj){
 					this.generateSampleData();
 					break;
 			}//switch
-		}else{
-			this.renderHTML(error);
 		}
 	};//generateShortcodeWidgets
 
@@ -1204,6 +1459,9 @@ function ostk_Element(atts, obj){
 		var taxonomyParam = '';
 		var error = null;
 		var sortOption = '';
+
+		var link_text = atts['link_text'];
+		// console.log('&&&&& ' + link_text + ' &&&&&');
 
 		if(!error){
 			if(keywords == null) {
@@ -1255,13 +1513,13 @@ function ostk_Element(atts, obj){
 		* 2) [overstock type="link" url="http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html" link_text="I want to buy this for my wife"]
 		**/
 		var output = '';
-		atts = shortcode_atts(
-	    {
-	      'type': null,
-	      'url': 'http://www.overstock.com/', 
-	      'link_text': 'A link to Overstock.com',
-	      'link_target': 'new_tab'
-	    }, atts);
+		// atts = shortcode_atts(
+	 //    {
+	 //      'type': null,
+	 //      'url': 'http://www.overstock.com/', 
+	 //      'link_text': 'A link to Overstock.com',
+	 //      'link_target': 'new_tab'
+	 //    }, atts);
 		var link_text = atts['link_text'];
 		var affiliateLink = ostk_generateAffiliateLink(atts['url']);
 		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
@@ -1278,36 +1536,39 @@ function ostk_Element(atts, obj){
 		**/
 		var output = '';
 		var _this = this;
-		var item = new ostk_SingleProductData(this.atts['id']);
-		item.init(
-			//Success
-			function(){
-				output += '<div class="ostk-element ostk-'+_this.atts['type']+'" '+ostk_getStyles(_this.atts)+'>';
-					output += '<div class="ostk-element-inner">';
-						output += ostk_getBranding();
-						output += '<a href="'+item.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-							output += '<div class="element-content">';
-								output += '<img src="'+item.getImage_Large()+'"/>';
-							output += '</div>';
-							output += '<div class="element-overlay">';
-							    output += '<div class="element-content">';
-									output += '<p class="title">'+item.getName()+'</p>';
-									if(item.averageReviewAsGif){
-										output += '<img class="ostk-rating" src="'+item.getAverageReviewAsGif()+'"/>';
-									}
-									output += '<p class="price">'+item.getPrice()+'</p>';
-								output += '</div>';
-							output += '</div>';
-						output += '</a>';
-					output += '</div><!-- ostk-element-inner -->';
-				output += '</div><!-- ostk-element -->';
-				_this.renderHTML(output);
-			},
-			// Error
-			function(error){
-				_this.renderHTMLError(error);
-			}
-		);
+		if(this.atts['id']){
+			var product = new ostk_SingleProductData(this.atts['id']);
+			product.init(
+				//Success
+				function(){
+					output = ostk_generateRectangleHtmlOutput(product, atts);
+					_this.renderHTML(output);
+				},
+				// Error
+				function(error){
+					_this.renderHTMLError(error);
+				}
+			);
+		} else if(this.atts['event']){
+			var query = ostk_getEventQuery(this.atts['event']);
+			$ostk_jQuery.get( query, function( productData ) {
+				var product = new ostk_SingleProductData(productData['products'][0]['id']);
+				product.init(
+					//Success
+					function(){
+						output = ostk_generateRectangleHtmlOutput(product, atts);
+						_this.renderHTML(output);
+					},
+					// Error
+					function(error){
+						_this.renderHTMLError(error);
+					}
+				);
+			})
+			.fail(function() {
+				errorCallback('Invalid product id: ' + _this.productId);
+			});
+		}
 	};//generateRectangleWidget
 
 	// Pattern 4 - Generate Leaderboard Widget
@@ -1321,43 +1582,42 @@ function ostk_Element(atts, obj){
 		**/
 		var output = '';
 		var error = null;
-		atts = shortcode_atts(
-		{
-			'type': null,
-			'product_ids': null,
-			'link_target': 'new_tab'
-		}, atts);
-		//hoki make sure this is working     
-		// var product_ids = (ostk_isset(atts['product_ids']) ? array_map('trim', explode(',', atts['product_ids'])) : null);
-		var product_ids = (ostk_isset(atts['product_ids']) ? atts['product_ids'].split(',') : null);
-		for(id in product_ids) {
-			if(ostk_checkForMissingCommas(id) == true) {
-				error = "Commas missing between ids, returning...";
-			}
-		}//for
-
-		if(error){
-	    	this.renderHTMLError(error);
-		}else{
-			var product_ids = ostk_limitArrayCount(product_ids, 2);
-			var products = new ostk_MultiProductDataFromArray();
-			var _this = this;
+		var _this = this;
+		// atts = shortcode_atts(
+		// {
+		// 	'type': null,
+		// 	'product_ids': null,
+		// 	'event': null,
+		// 	'link_target': 'new_tab',
+		// 	'number_of_items': 2
+		// }, atts);
+		var limit = (parseInt(atts['number_of_items']) < 2) ? atts['number_of_items'] : 2;
+		if(this.atts['product_ids']){
+			console.log('FROM ARRAY');
+			var product_ids = ostk_stringToList(atts['product_ids']);
+			product_ids = ostk_limitArrayCount(product_ids, atts['number_of_items']);
+			var products = new ostk_MultiProductDataFromArray(product_ids, 2);
 			products.init(
-				product_ids, 
-				2, 
 				//Success
 				function(){
-					output += '<div class="ostk-element ostk-leaderboard">';
-						output += '<div class="ostk-element-inner">';
-							output += ostk_getBranding();
-							output += '<div class="item-holder item-count-'+product_ids.length+'">';
-								output += ostk_generateLeaderboardHtmlOutput(products, atts);
-							output += '</div>';
-						output += '</div><!-- ostk-element-inner -->';
-					output += '</div><!-- ostk-element -->';
+					output += ostk_generateLeaderboardHtmlOutput(products, atts);
 			    	_this.renderHTML(output);
 				},
 				//Error
+				function(error){
+					_this.renderHTMLError(error);
+				}
+			);
+		}else if(this.atts['event']){
+			var query = ostk_getEventQuery(this.atts['event']);
+			var product = new ostk_MultiProductDataFromQuery(query, limit);
+			product.init(
+				//Success
+				function(){
+					output += ostk_generateLeaderboardHtmlOutput(product, atts);
+			    	_this.renderHTML(output);
+				},
+				// Error
 				function(error){
 					_this.renderHTMLError(error);
 				}
@@ -1383,34 +1643,36 @@ function ostk_Element(atts, obj){
 			'type': null,
 			'product_ids': null,
 			'width': null,
-			'link_target': 'new_tab'
+			'link_target': 'new_tab',
+			'number_of_items': 3
 		}, atts);
 		var product_ids = (ostk_isset(atts['product_ids']) ? atts['product_ids'].split(',') : null);
-		for(id in product_ids) {
-			if(ostk_checkForMissingCommas(id) == true) {
-				error = ostk_formatError("Commas missing between ids, return ing...");
-			}
-		}//for
+		var limit = (parseInt(atts['number_of_items']) < 3) ? atts['number_of_items'] : 3;
 
-		if(error){
-		    this.renderHTMLError(output);
-		}else{
-			var product_ids = ostk_limitArrayCount(product_ids, 3);
-			var products = new ostk_MultiProductDataFromArray();
+		if(this.atts['product_ids']){
+			product_ids = ostk_limitArrayCount(product_ids, 3);
+			var products = new ostk_MultiProductDataFromArray(product_ids, 3);
 			products.init(
-				product_ids, 
-				3, 
 				//Success
 				function(){
-					output += '<div class="ostk-element ostk-skyscraper" '+ostk_getStyles(atts)+'>';
-						output += '<div class="ostk-element-inner">';
-							output += ostk_getBranding();
-							output += ostk_generateSkyscraperHtmlOutput(products, atts);
-						output += '</div><!-- ostk-element-inner -->';
-					output += '</div><!-- ostk-element -->';
+					output += ostk_generateSkyscraperHtmlOutput(products, atts);
 					_this.renderHTML(output);
 				},
 				//Error
+				function(error){
+					_this.renderHTMLError(error);
+				}
+			);
+		}else if(this.atts['event']){
+			var query = ostk_getEventQuery(this.atts['event']);
+			var product = new ostk_MultiProductDataFromQuery(query, limit);
+			product.init(
+				//Success
+				function(){
+					output += ostk_generateSkyscraperHtmlOutput(product, atts);
+			    	_this.renderHTML(output);
+				},
+				// Error
 				function(error){
 					_this.renderHTMLError(error);
 				}
@@ -1437,6 +1699,7 @@ function ostk_Element(atts, obj){
 		{
 			'type': null,
 			'category': null, 
+			'carousel-type': null, 
 			'number_of_items': 10,
 			'sort_by': null, 
 			'keywords': null,
@@ -1444,7 +1707,7 @@ function ostk_Element(atts, obj){
 			'width': null,
 			'link_target': 'new_tab'
 		}, atts);
-	  
+
 		var taxonomy = (ostk_isset(atts['category']) ? "&taxonomy=" + ostk_getTaxonomy(atts['category']) : null);
 		var sortOption = (ostk_isset(atts['sort_by']) ? "&sortOption=" + ostk_getSortOption(atts['sort_by']) : '');
 		var keywords = (ostk_isset(atts['keywords']) ? "keywords=" + str_replace(' ', '%20', atts['keywords']) : null);
@@ -1460,15 +1723,10 @@ function ostk_Element(atts, obj){
 	    this.renderHTMLError(output);
 	  }else{
 		if (ostk_isset(product_ids)) {
-			for(id in product_ids) {
-		    	if(ostk_checkForMissingCommas(id) == true) {
-		    		error = ostk_formatError("Commas missing between ids, return ing...");
-		    	}
-		    }//for
 			products = new ostk_MultiProductDataFromArray();
 			var param1 = product_ids;
-		} else {
-			var query = "http://www.overstock.com/api/search.json?"+keywords+taxonomy+sortOption;
+		}else{
+			var query = "https://api.overstock.com/ads/products?developerid=test&"+keywords+taxonomy+sortOption;
 			products = new ostk_MultiProductDataFromQuery();
 			var param1 = query;
 		}
@@ -1496,6 +1754,7 @@ function ostk_Element(atts, obj){
 	    	},
 			// Error
 			function(error){
+				console.log('error');
 				_this.renderHTMLError(error);
 			}		    	
 	    );
@@ -1771,8 +2030,22 @@ var ostk_SingleProductData = function(productId){
 	this.init = function(callback, errorCallback) {
 		var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
 		var _this = this;
+
+		console.log('------------------');
+
+		console.log('-- url --');
+		console.dir(url);
+
 		$ostk_jQuery.get( url, function( productData ) {
+
+			console.log('-- productData --');
+			console.dir(productData);
+
 			productData = productData['products'][0];
+
+			console.log('-- productData --');
+			console.dir(productData);
+
 			_this.name = productData['name'];
 			_this.productId = productData['id'];
 			_this.developerId = developerId;
@@ -1780,9 +2053,7 @@ var ostk_SingleProductData = function(productId){
 			_this.price = productData['price'];
 			_this.affiliateUrl = productData['url'];
 		    _this.averageReviewAsDecimal = productData['review']['stars'];
-		    if(productData['review']['stars']){
-			    _this.averageReviewAsGif = "http://ak1.ostkcdn.com/img/mxc/stars"+String(productData['review']['stars']).split('.').join('_')+'.gif';
-		    }
+		    _this.averageReviewAsGif = _this.getStars(productData['review']['stars']);
 			_this.imgUrl_large = _this.getClosestImg(productData, 'largeImageURL');
 			_this.imgUrl_medium = _this.getClosestImg(productData, 'imageURL');
 			_this.imgUrl_thumbnail = _this.getClosestImg(productData, 'smallImageURL');
@@ -1792,6 +2063,21 @@ var ostk_SingleProductData = function(productId){
 			errorCallback('Invalid product id: ' + _this.productId);
 		});
 	}//init
+
+	//Return star gif from float value
+	this.getStars = function(stars){
+    	//Add trailing ".0" if it doesn't alreay have it
+    	if(ostk_isset(stars)){
+    	    if(stars % 1 === 0){
+		    	stars = stars+'.0';
+		    }
+		    stars = String(stars);
+		    stars = stars.split('.').join('_');
+		    return "http://ak1.ostkcdn.com/img/mxc/stars"+stars+'.gif';
+    	}else{
+    		return null;
+    	}
+	}
 
 	this.getClosestImg = function(obj, str){
 		//Array in order of largest to smallest images
@@ -1872,7 +2158,7 @@ var ostk_SingleProductData = function(productId){
 	}
 }//ostk_SingleProductData
 
-var ostk_MultiProductDataFromArray = function(){
+var ostk_MultiProductDataFromArray = function(productArray, limit){
 	/**
 	 * MULTIPLE Product Data Class
 	 * takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
@@ -1889,12 +2175,14 @@ var ostk_MultiProductDataFromArray = function(){
 	 * num limit is 10
 	 * 
 	**/
+	this.productArray = productArray;
+	this.limit = limit;
 	this.developerId = developerId;
 	this.productList = Array();
 	this.invalidProductIDs = Array();
 	this.product_count_down = 0;
 
-	this.init = function(productArray, limit, callback, errorCallback) {
+	this.init = function(callback, errorCallback) {
 		if(limit !== null){
 			productArray = ostk_limitArrayCount(productArray, limit);
 		}
@@ -1911,7 +2199,7 @@ var ostk_MultiProductDataFromArray = function(){
 				},
 				//Error
 				function(error){
-					_this.invalidProductIDs.push(the_item['productId']);
+					_this.invalidProductIDs.push(['hoki']);
 					_this.checkProductCompletion(callback, errorCallback);
 				}
 			);
@@ -1947,31 +2235,59 @@ var ostk_MultiProductDataFromArray = function(){
 	}//getProductList
 }//ostk_MultiProductDataFromArray
 
-var ostk_MultiProductDataFromQuery = function(){
-	this.productList;
-	this.invalidProductIDs = array();
+var ostk_MultiProductDataFromQuery = function(query, limit){
+	this.query = query;
+	this.limit = limit;
+	this.productList = Array();
+	this.invalidProductIDs = Array();
 	this.allValidProductIDs = true;
+	this.product_count_down = 0;
 
-	this.constructor = function(query, limit, callback, errorCallback) {
-		url = query;
-		json = file_get_contents(url);
-		productData = json_decode(json, true);
-		numResults = (count(productData[products][products]) > 0) ? count(productData[products][products]) : 0;
-		if (numResults == 0){
-		  return ostk_formatError("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
-		}
-		temp = numResults;
-		if(numResults > limit){
-			temp = limit;
-		}
-		for (i = 0; i < temp; i++) {
-		  this.productList[i] = new ostk_SingleProductData();
-		}//for
-	}//constructor
-   
-     this.getProductList = function(){
-  	   return this.productList;
-    }//getProductList
+	this.init = function(callback, errorCallback){
+		var _this = this;
+		$ostk_jQuery.get( query, function( productData ) {
+			var numResults = (productData['products'].length <= limit) ? productData['products'].length : limit;
+			_this.product_count_down = numResults;
+			if (numResults == 0){
+				errorCallback("There were no results for your query. Try filtering by a category, or refining your search term. i.e. diamond bracelet instead of diamond.");
+			}else{
+				for (i = 0; i < numResults; i++) {
+					var product_id = productData['products'][i]['id'];
+					var product = new ostk_SingleProductData(product_id);
+						product.init(
+						//Success
+						function(the_item){
+							_this.productList.push(the_item);
+							_this.checkProductCompletion(callback, errorCallback);
+						},
+						//Error
+						function(error){
+							_this.invalidProductIDs.push(the_item['productId']);
+							_this.checkProductCompletion(callback, errorCallback);
+						}
+					);
+				}//for
+			}
+		})
+		.fail(function() {
+			errorCallback('Invalid query: ' + query);
+		});
+	}//init
+
+	this.checkProductCompletion = function(callback, errorCallback){
+	    this.product_count_down--;
+	    if(this.product_count_down === 0){
+	    	if(this.invalidProductIDs.length > 0){
+				errorCallback();
+	    	}else{
+			    callback();
+	    	}
+	    }
+	};//checkProductCompletion
+
+	this.getProductList = function(){
+		return this.productList;
+	}//getProductList
 
 
 	this.isAllValidProductIDs = function(){

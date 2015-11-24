@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 		//Compile embed API LESS to CSS
 		less: {
 			css: {
-				src: ['less/plugin-main.less'],
+				src: ['less/main.less'],
 				dest: '../overstock-plugin.css'
 			}
 		},

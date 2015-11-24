@@ -1,7 +1,27 @@
-/*----------------------------- General Styles -----------------------------*/
+/*----------------------------- WP Plugin General Styles -----------------------------*/
 .ostk-plugin-settings {
+	.row {
+		* {
+	    	box-sizing: border-box;
+	    }	
+	    & > div {
+			@media (max-width: @screen-sm-min) {
+				margin-top: 40px;
+				margin-bottom: 40px;
+			    padding-top: 40px;
+			    padding-bottom: 40px;
+				border-top: solid 2px @grey-lt;
+				h2 {
+					text-align: center;
+				}
+			}
+	    }
+	}/* row */
 	.clearfix {
 		clear: both;
+	}
+	.center {
+		text-align: center; 
 	}
 	i {
 		&.fa-check {
@@ -46,6 +66,12 @@
 		textarea,
 		input[type='text'] {
 			padding: 10px;
+		}
+		input[type='submit'] {
+			margin-top: 20px;
+		}
+		select {
+			min-width: 140px;
 		}
 	}
 	.ostk-btn,
@@ -109,8 +135,15 @@
 	section {
 		padding: 20px;		
 		background: @white;
-		.ostk-section-inner {
-			max-width: @width-lg;
-		}
+		overflow: hidden;
 	}/* section */
-}
+	code {
+		background-color: @grey-dk;
+		color: @white;
+		display: block;
+		margin: 10px auto;
+		max-width: @width-sm;
+		padding: 5px;
+		text-align: center;
+	}
+}/* ostk-plugin-settings */

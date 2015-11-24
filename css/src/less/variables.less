@@ -1,8 +1,10 @@
-/* Widths */
+/* Widths
+-----------------------------------------------------------------*/
 @width-sm: 400px;
 @width-lg: 1024px;
 
-/* Colors */
+/* Colors 
+-----------------------------------------------------------------*/
 @primary: #c80f2e;
 @primary-lt: lighten(@primary, 20%);
 @primary-dk: darken(@primary, 20%);
@@ -15,3 +17,15 @@
 @black: #000000;
 @green: #007B17;
 @orange: #D53805;
+
+.make-sm-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  (@gutter / 2);
+  padding-right: (@gutter / 2);
+
+  @media (min-width: @screen-sm-min) {
+    float: left;
+    width: percentage((@columns / @grid-columns));
+  }
+}

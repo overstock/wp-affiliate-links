@@ -12,7 +12,7 @@ add_action('admin_enqueue_scripts', 'ostk_load_js');
 
 $OverstockPlugin = new ostk_PluginSetttings();
 class ostk_PluginSetttings {
-	var $ostk_pages = array('home','documentation','sandbox','contact');
+	var $ostk_pages = array('home','generator','documentation','sandbox','contact');
 
 	/* Construct
 	-----------------------*/
@@ -46,8 +46,24 @@ class ostk_PluginSetttings {
 -----------------------*/
 function ostk_load_js() {
 	wp_enqueue_script('jquery');
-	wp_enqueue_script( 'ostk-embed-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
-	wp_enqueue_script( 'ostk-plugin-js', plugins_url('js/overstock-plugin.min.js', __FILE__), array('jquery'), '1.0', true );
+	// wp_enqueue_script( 'ostk-embed-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
+	// wp_enqueue_script( 'ostk-plugin-js', plugins_url('js/overstock-plugin.min.js', __FILE__), array('jquery'), '1.0', true );
+
+	/* Local API */
+	// wp_enqueue_script( 'ostk-plugin-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
+
+ 	/* Local js */
+	wp_enqueue_script( 'ostk-flexslider', plugins_url('api/js/src/libs/flexslider.min.js', __FILE__), array('jquery'), '1.0', true );
+
+	wp_enqueue_script( 'ostk-patterns', plugins_url('api/js/src/js/patterns.js', __FILE__), array('jquery'), '1.0', true );
+	wp_enqueue_script( 'ostk-function', plugins_url('api/js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
+	wp_enqueue_script( 'ostk-product-data', plugins_url('api/js/src/js/product-data.js', __FILE__), array('jquery'), '1.0', true );
+	wp_enqueue_script( 'ostk-overstock-embed', plugins_url('api/js/src/js/overstock-embed.js', __FILE__), array('jquery'), '1.0', true );
+	wp_enqueue_script( 'ostk-generation-function', plugins_url('js/src/js/generation-functions.js', __FILE__), array('jquery'), '1.0', true );
+
+	/* Generator Script */
+	wp_enqueue_script( 'ostk-page-generator', plugins_url('js/src/js/page-generator.js', __FILE__), array('jquery'), '1.0', true );
+
 }//ostk_admin_js
 
 /* Load CSS

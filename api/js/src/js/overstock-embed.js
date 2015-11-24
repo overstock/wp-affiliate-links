@@ -1,6 +1,6 @@
 var ostk_developerId;
-// var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
-var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/6ea285ce81b12fb56c8cebbabb6410256e066ada/api/';
+// var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 var ostk_plugin = new ostk_Plugin();
 
 function ostk_Plugin(){
@@ -234,6 +234,9 @@ function ostk_Element(atts, obj){
 		var error = null;
 		var sortOption = '';
 
+		var link_text = atts['link_text'];
+		// console.log('&&&&& ' + link_text + ' &&&&&');
+
 		if(!error){
 			if(keywords == null) {
 				error = '"query" parameter cannot be empty.';
@@ -284,13 +287,13 @@ function ostk_Element(atts, obj){
 		* 2) [overstock type="link" url="http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html" link_text="I want to buy this for my wife"]
 		**/
 		var output = '';
-		atts = shortcode_atts(
-	    {
-	      'type': null,
-	      'url': 'http://www.overstock.com/', 
-	      'link_text': 'A link to Overstock.com',
-	      'link_target': 'new_tab'
-	    }, atts);
+		// atts = shortcode_atts(
+	 //    {
+	 //      'type': null,
+	 //      'url': 'http://www.overstock.com/', 
+	 //      'link_text': 'A link to Overstock.com',
+	 //      'link_target': 'new_tab'
+	 //    }, atts);
 		var link_text = atts['link_text'];
 		var affiliateLink = ostk_generateAffiliateLink(atts['url']);
 		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
@@ -354,14 +357,14 @@ function ostk_Element(atts, obj){
 		var output = '';
 		var error = null;
 		var _this = this;
-		atts = shortcode_atts(
-		{
-			'type': null,
-			'product_ids': null,
-			'event': null,
-			'link_target': 'new_tab',
-			'number_of_items': 2
-		}, atts);
+		// atts = shortcode_atts(
+		// {
+		// 	'type': null,
+		// 	'product_ids': null,
+		// 	'event': null,
+		// 	'link_target': 'new_tab',
+		// 	'number_of_items': 2
+		// }, atts);
 		var limit = (parseInt(atts['number_of_items']) < 2) ? atts['number_of_items'] : 2;
 		if(this.atts['product_ids']){
 			console.log('FROM ARRAY');

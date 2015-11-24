@@ -2,20 +2,20 @@ function setDeveloperID(){
 	developerId = 'FKAJQ7bUdyM';
 }//setDeveloperID
 
-function shortcode_atts(obj, atts){
-  var output = Array();
-  /* hoki make sure this is working */
-  // foreach(pairs as name => default) {
-  for(var key in obj){
-  	var value = obj[key];
-    if (ostk_array_key_exists(key, atts)){
-      output[key] = atts[key];
-    }else{
-      output[key] = value;
-		}
-  }//for
-  return output;
-}//shortcode_atts
+// function shortcode_atts(obj, atts){
+//   var output = Array();
+//   /* hoki make sure this is working */
+//   // foreach(pairs as name => default) {
+//   for(var key in obj){
+//   	var value = obj[key];
+//     if (ostk_array_key_exists(key, atts)){
+//       output[key] = atts[key];
+//     }else{
+//       output[key] = value;
+// 		}
+//   }//for
+//   return output;
+// }//shortcode_atts
 
 function ostk_generateAffiliateLink(murl){
 	var symbol = '?';
@@ -327,88 +327,105 @@ function ostk_limitArrayCount(product_ids, num){
 Validate that the shortcode attributes are valid. return Boolean.
 */
 function ostk_areAttributesValid(atts){
-  var error = null;
+	// console.log('---- ostk_areAttributesValid ----');
+	var error = null;
 
-  var type = atts['type'];
-  if(!type){
-  	error = 'Type attribute is required';
-  }
+	var type = atts['type'];
+	if(!type){
+		error = 'Type attribute is required';
+	}
 
-  if(!error){
-	  var keys = ostk_getKeyList(atts);
-	  var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
-	  if(!item){
-	    error = 'Invalid type attribute';
-	  }
-  }
+	if(!error){
+		var keys = ostk_getKeyList(atts);
+		var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
+		if(!item){
+	    	error = 'Invalid type attribute';
+		}else{
+			var required_attributes = item['required_attributes'];
+			var optional_attributes = item['optional_attributes'];
+		}
+	}
 
-  if(!error){
-	  var required_attributes = item['required_attributes'];
-	  var optional_attributes = item['optional_attributes'];
+	//Fail if missing any required attributes
+	if(!error){
+		var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(atts, required_attributes);
+		if(missingRequiredAtts.length > 0){
+			error = 'Missing required attributes: ' + missingRequiredAtts.join(', ');
+		}
+	}
 
-	  //Set default values if attributes are not already defined
-	  for(var i = 0 ; i < item['optional_attributes'].length ; i++){
-	  	if(typeof(atts[item['optional_attributes'][i]['name']]) === 'undefined'){
-	  		if(typeof(item['optional_attributes'][i]['default']) !== 'undefined'){
-				atts[item['optional_attributes'][i]['name']] = item['optional_attributes'][i]['default']; 
-	  		}
-	  	}
-	  }//for
-  }
+	//Fail if using undefined attributes, null values, or a value that is not an option
+	if(!error){
+		var invalidExtraAtts = ostk_lookForInvalidAtts(atts, required_attributes, optional_attributes);
+		if(invalidExtraAtts.length > 0){
+			error = 'The following are not valid attributes: ' + invalidExtraAtts.join(', ');
+		}
+	}
 
-  //Fail if missing any required attributes
-  if(!error){
-	  var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(atts, required_attributes);
-	  if(missingRequiredAtts.length > 0){
-	    error = 'Missing required attributes: ' + missingRequiredAtts.join(', ');
-	  }
-  }
-
-  //Fail if using undefined attributes
-  if(!error){
-    var invalidExtraAtts = ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes);
-    if(invalidExtraAtts.length > 0){
-      error = 'The following are not valid attributes: ' + invalidExtraAtts.join(', ');
-    }
-  }
-
-  //Fail if any null attributes
-  if(error){
-    nullAtts = ostk_lookForNullAtts(atts);
-    if(nullAtts.length > 0){
-      validShortCode = false;
-      error = 'The following atts cannot be null: '.implode(', ', nullAtts);
-    }
-  }
-
-  if(error){
-  	return error;
-  }else{
-	return true;
-  }
+	if(error){
+		return error;
+	}else{
+		return true;
+	}
 
 }//areAttributesValid
 
-
-/* Return a list of the attribute names that have a null value 
+/* Return an array of the required attributes that are missing.
 (ostk_areAttributesValid - helper function) */
-function ostk_lookForNullAtts(obj){
-  var array = Array();
-  for(var key in obj){
-  	var value = obj[key];
-    if(value == '' || value == null){
-    	array.push(key);
-    }
-  }//for
-  return array;
-}//ostk_lookForNullAtts
+function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
+	var missing_atts = Array();
+	//Loop through required attributes
+	for (var i = 0 ; i < required_attributes.length; i++) {
+		var ra = required_attributes[i];
+		var key = ra['name'];
+		if(!atts[key]){
+			//if the missing attribute has options
+			if(ra['options']){
+				var option_fulfilled = false;
+				//Loop through missing attributes' options
+				for(var k = 0 ; k < ra['options'].length ; k++){
+					var option_key = ra['options'][k]['name'];
+					//if one of the options is included in the atts
+					if(atts[option_key]){
+						option_fulfilled = true;
+					}
+				}//for
+				if(!option_fulfilled){
+					//None of the options where fullfilled
+					missing_atts.push('(' + ostk_getListByKey(ra['options'], 'name').join(' or ') + ')');
+				}
+			}else{
+				//Missing attribute doesn't have options so push it ot the missing array
+				missing_atts.push(key);
+			}
+		}
+	}//for
+	return missing_atts;
+}//ostk_lookForMissingRequiredAttributes
 
 /* Return an array of attributes that are not either in the list of required or optional attributes
 (ostk_areAttributesValid - helper function) */
 function ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes){
-	var a = Array();
+	var invalid_atts = Array();
 
-	// console.log('---- ostk_lookForInvalidAtts ----');
+
+
+	// invalid_atts = ostk_lookFoInvalidAttsInArray(keys, required_attributes);
+	// invalid_atts = ostk_lookFoInvalidAttsInArray(invalid_atts, optional_attributes);
+
+
+
+
+	// keys = {
+	// 	category: "Home & Garden"
+	// };
+	// invalid_atts = ostk_lookFoInvalidAttsInArray(keys, optional_attributes);
+
+
+	// var array = $ostk_jQuery.extend({}, required_attributes, optional_attributes);
+	var array = $ostk_jQuery.merge($ostk_jQuery.merge([], optional_attributes), required_attributes);
+
+	invalid_atts = ostk_lookFoInvalidAttsInArray(keys, array);
 
 	// console.log('keys');
 	// console.dir(keys);
@@ -419,81 +436,121 @@ function ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes)
 	// console.log('optional_attributes');
 	// console.dir(optional_attributes);
 
-	// for (var i = 0 ; i < keys.length; i++) {
-	// 	for (var m = 0 ; m < required_attributes.length; m++) {
-	// 		if(required_attributes['options']){
-	// 			for (var k = 0 ; k < required_attributes['options'].length; k++) {
+	// console.log('array');
+	// console.dir(array);
 
-	// 			}//for
-	// 		}else{
-	// 			if(required_attributes.indexOf(keys[m])){
-	// 				a.push(keys[i]);
-	// 			}
-	// 		}			
-	// 	}//for
-	// }//for
 
-/*
-	for (var i = 0 ; i < keys.length; i++) {
-		if(required_attributes.indexOf(keys[i]) == -1 && optional_attributes.indexOf(keys[i]) == -1){
-			a.push(keys[i]);
-		}
-	}
-*/
-	return a;
+
+	return ostk_getKeyList(invalid_atts);
+
 }//ostk_lookForInvalidAtts
 
-/* Return an array of the required attributes that are missing.
-(ostk_areAttributesValid - helper function) */
-function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
-	var a = Array();
-/*
-	for (var i = 0 ; i < required_attributes.length; i++) {
-		var ra = required_attributes[i];
-		var missingAttr = false;
-		var subAtts = Array();
+/* Return an array of attributes that are not in a given list
+used for both require and optional att arrays */
+function ostk_lookFoInvalidAttsInArray(keys, array){
+	var invalid_atts = {};
+	//Loop through keys
 
-		if(ra['options'] && ra['options'][0]['name']){
-			for(var m = 0 ; m < ra['options'].length ; m++){
-				subAtts.push(ra['options'][m]['name']);
-			}//for
-		}
+	// console.log('------------------');
+	// console.log('keys');
+	// console.dir(keys);
 
-		if(typeof (atts[ra['name']]) === 'undefined'){
-			//Add the missing attribute name to the array
-			a.push(ra['name']);
-			missingAttr = true;
-		}
-		//If the required attribute has options and the options are object instead of just strings
-		if(subAtts.length){
-			//Make sure that one of the option names is present in the users given atts
-			if(missingAttr){
-				var invalidArray = Array();
-				var hasSubAttr = false;
-				//Loop through all of the options
-				for(var m = 0 ; m < ra['options'].length ; m++){
-					console.log('for');
-					//Add the names to an array
-					invalidArray.push(ra['options'][m]['name']);
-					if(typeof (atts[ra['options'][m]['name']]) !== 'undefined'){
-						console.log('has sub');
-						hasSubAttr = true;
+	for(var key in keys){
+		//not valid until finding that the key in the array 
+		var value = keys[key];
+		var is_valid = false;
+
+		// console.log('-------- '+key+' --------');
+
+		// //Loop throught the atts
+		// for(var k = 0 ; k < array.length ; k++){
+
+		// console.log('---------');
+
+		// console.log('array');
+		// console.dir(array);
+
+		for(var k = array.length-1 ; k >= 0 ; k--){
+		// for(var k = 0 ; k < array.length ; k++){
+			var a = array[k];
+			var a_key = a['name'];
+
+			// console.log('-- ' + a_key + ' --');
+			// console.log('a');
+			// console.dir(a);
+
+			//if the attribure has options dig deeper
+			if(a['options']){
+				// console.log('has options');
+				if(a['options'][0]['name']){
+					//options are objects not just strings
+					// console.log('is object array');
+					for(var z = 0 ; z < a['options'].length ; z++){
+						var a_op = a['options'][z];	
+						var a_op_key = a_op['name'];	
+						if(key === a_op_key){
+							is_valid = true;
+							break;
+						}
+					}//for
+				}else{
+					//options are just strings
+					// console.log('is string array');
+					if(key === a_key){
+						var found_it = false;
+						// console.log('key is valid');
+						for(var z = 0 ; z < a['options'].length ; z++){
+							var a_op_key = a['options'][z];
+							// console.log(value +' vs '+ a_op_key);
+							if(value === a_op_key){
+								// console.log('FOUND IT');
+								found_it = true;
+								break;
+							}
+						}//for	
+						if(found_it){
+							is_valid = true;
+							break;
+						}else{
+							is_valid = false;
+							// console.log('DIDNT FIND');
+						}
+					}else{
+						// console.log('DIDNT FIND');
 					}
-				}//for
-				//if there is no sub attribute
-				if(!hasSubAttr){
-					//Add the missing attribute name options as a string to the array
-					a.push(invalidArray.join(' or '));
 				}
-			//if the attr is present the check for a corresponding subattr
-			}else if(typeof (atts[atts[ra['name']]]) === 'undefined'){
-				a.push(atts[ra['name']]);
+			}else{
+				// console.log('has NOT options');
+				// att does not have options
+				if(key === a_key){
+					// console.log(key +' vs '+ a_key); 
+					// console.dir(a[key]);
+					// delete array[key];
+					// delete array[k];
+					is_valid = true;
+					break;
+				}else{
+					// console.log('DIDNT FIND');
+				}
 			}
+		}//for
+
+		if(!is_valid){
+			// console.log('IS NOT VALID');
+			// console.log('key: ' + key);
+			// console.log('value: ' + value);
+			invalid_atts[key] = value;
+			array.splice(k, 1);
+		// }else{
+			// console.log('array');
+			// console.log('IS VALID');
 		}
 	}//for
-*/
-	return a;
-}//ostk_lookForMissingRequiredAttributes
+	// console.log('invalid_atts');
+	// console.dir(invalid_atts);
+	return invalid_atts
+}//ostk_lookFoInvalidAttsInArray
+
 
 /* Return all keys of an object as an array
 (ostk_areAttributesValid - helper function) */

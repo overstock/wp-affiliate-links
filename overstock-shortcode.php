@@ -15,10 +15,11 @@ include_once('functions.php');
 include_once('patterns.php');
 
 /* include Pages */
-include_once('home_page.php');
-include_once('sandbox_page.php');
-include_once('doc_page.php');
-include_once('contact_page.php');
+include_once('pages/home-page.php');
+include_once('pages/generator-page.php');
+include_once('pages/documentation-page.php');
+include_once('pages/sandbox-page.php');
+include_once('pages/contact-page.php');
 
 /* Patterns */
 $GLOBALS['developerId'] = get_option('ostk_settings');

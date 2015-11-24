@@ -30,7 +30,10 @@ var ostk_patterns = [
             {
                 "name": "link_text",
                 "description": "The text that will show for the link",
-                "default": "\"query\" attribute text",
+                "default": {
+                    "text": "query attribute text",
+                    "value": "query"
+                },
                 "example": "Click to see these soccer shoes!",
                 "notes": [
                     "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."

@@ -25,8 +25,22 @@ var ostk_SingleProductData = function(productId){
 	this.init = function(callback, errorCallback) {
 		var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
 		var _this = this;
+
+		console.log('------------------');
+
+		console.log('-- url --');
+		console.dir(url);
+
 		$ostk_jQuery.get( url, function( productData ) {
+
+			console.log('-- productData --');
+			console.dir(productData);
+
 			productData = productData['products'][0];
+
+			console.log('-- productData --');
+			console.dir(productData);
+
 			_this.name = productData['name'];
 			_this.productId = productData['id'];
 			_this.developerId = developerId;
@@ -34,9 +48,7 @@ var ostk_SingleProductData = function(productId){
 			_this.price = productData['price'];
 			_this.affiliateUrl = productData['url'];
 		    _this.averageReviewAsDecimal = productData['review']['stars'];
-		    if(productData['review']['stars']){
-			    _this.averageReviewAsGif = "http://ak1.ostkcdn.com/img/mxc/stars"+String(productData['review']['stars']).split('.').join('_')+'.gif';
-		    }
+		    _this.averageReviewAsGif = _this.getStars(productData['review']['stars']);
 			_this.imgUrl_large = _this.getClosestImg(productData, 'largeImageURL');
 			_this.imgUrl_medium = _this.getClosestImg(productData, 'imageURL');
 			_this.imgUrl_thumbnail = _this.getClosestImg(productData, 'smallImageURL');
@@ -46,6 +58,21 @@ var ostk_SingleProductData = function(productId){
 			errorCallback('Invalid product id: ' + _this.productId);
 		});
 	}//init
+
+	//Return star gif from float value
+	this.getStars = function(stars){
+    	//Add trailing ".0" if it doesn't alreay have it
+    	if(ostk_isset(stars)){
+    	    if(stars % 1 === 0){
+		    	stars = stars+'.0';
+		    }
+		    stars = String(stars);
+		    stars = stars.split('.').join('_');
+		    return "http://ak1.ostkcdn.com/img/mxc/stars"+stars+'.gif';
+    	}else{
+    		return null;
+    	}
+	}
 
 	this.getClosestImg = function(obj, str){
 		//Array in order of largest to smallest images
