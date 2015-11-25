@@ -69,11 +69,12 @@ $ostk_jQuery(window).load(function() {
 	}
 });
 
-var ostk_step_counter = 0;
-var ostk_steps_array = Array('step1');
 
 /* Click Step Button
 -----------------------------------------------------*/
+var ostk_step_counter = 0;
+var ostk_steps_array = Array('step1');
+
 function ostk_showStep(section_name){
 	ostk_step_counter++;
 	ostk_steps_array[ostk_step_counter] = section_name;

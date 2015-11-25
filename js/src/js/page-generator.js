@@ -21,19 +21,53 @@ function ostk_Generator(platform){
 		    	.appendTo(ostk_select);
 		}//for
 
-		// var type = 'rectangle';
+		// var type = 'carousel';
 		// $ostk_jQuery('form.ostk-embed-builder select.ostk-type').val(type);
 		// ostk_changeType(type);
 	}//setupForm
 
+	this.createInputList = function(attrs, required){
+		var ul = $ostk_jQuery("<ul>");
+		for(var i = 0 ; i < attrs.length ; i++){
+			var attr = attrs[i];
+
+			var li = $ostk_jQuery("<li>")
+				.appendTo(ul);
+
+
+		    $ostk_jQuery("<div>")
+		    	.attr({
+		    		'class': 'group-border'
+		    	})
+		    	.appendTo(li);
+
+			this.create_attr(attr, required)
+				.appendTo(li);
+
+		}//for
+		return ul;
+	}//createInputs
+
 	//Create Attribute
 	this.create_attr = function(attr, required){
-		var div = $ostk_jQuery("<div>");
+		var container = $ostk_jQuery("<div>")
 
 		if(attr.name){
 			$ostk_jQuery("<label>")
 				.text(attr.name+':')
-				.appendTo(div);
+				.appendTo(container);
+		}
+
+		var div = $ostk_jQuery("<div>")
+			.attr({
+				'class': 'chunk'
+			})
+			.appendTo(container);
+
+		if(!attr.name){
+			div.attr({
+				'class': 'chunk no-label'
+			});
 		}
 
 		//Attribute has options
@@ -41,6 +75,11 @@ function ostk_Generator(platform){
 		    //Options are objects
 		    var option_is_object = (typeof attr.options[0]['name'] !== 'undefined') ? true : false;
 			if(option_is_object){
+
+
+				div.attr({
+					'class': 'chunk no-label with-options'
+				});
 
 			    $ostk_jQuery("<div>")
 			    	.attr({
@@ -53,7 +92,6 @@ function ostk_Generator(platform){
 
 
 				for(var i = 0 ; i < attr.options.length ; i++) {
-
 					var li_tiered = $ostk_jQuery("<li>")
 						.appendTo(ul_tiered);
 
@@ -91,8 +129,8 @@ function ostk_Generator(platform){
 				createText(ostk_selected_pattern['slug'])
 					.appendTo(div);
 			}else{
-				var input = $ostk_jQuery('<input>');
-				input.attr({
+				var input = $ostk_jQuery('<input>')
+				.attr({
 					type: 'text',
 					name: attr.name,
 					'attr': true
@@ -105,8 +143,51 @@ function ostk_Generator(platform){
 				input.appendTo(div);
 			}
 		}
-		return div;
+
+
+		if(attr.description || attr.example){
+			$ostk_jQuery("<i>")
+				.attr({
+					'class': 'fa fa-info-circle'
+				})
+				.appendTo(div);
+
+			var info = $ostk_jQuery("<div>")
+				.attr({
+					'class': 'info'
+				})
+				.appendTo(div);
+
+			if(attr.description){
+				this.attToString(attr, 'description')
+					.appendTo(info);
+			}
+			if(attr.example){
+				this.attToString(attr, 'example')
+					.appendTo(info);
+			}
+		}
+
+		return container;
+
 	}//create_attr
+
+	//Attribute to String
+	this.attToString = function(item, str){
+		item = item[str];
+		if(typeof item == 'string'){
+			return createText(str + ': ' + item);
+		}else{
+			var div = $ostk_jQuery("<div>");
+			createText(str+': ')
+				.appendTo(div);
+			for(var i = 0 ; i < item.length ; i++){
+				createText(item[i])
+					.appendTo(div);
+			}//for
+			return div;
+		}
+	};//attToString
 
 	//Change Type
 	this.ostk_changeType = function(type){
@@ -171,25 +252,16 @@ function ostk_Generator(platform){
 		}//for
 	}//findObjWhereKeyEquals
 
-	this.createInputList = function(attrs, required){
-		var ul = $ostk_jQuery("<ul>");
-		for(var i = 0 ; i < attrs.length ; i++){
-			var attr = attrs[i];
-
-			var li = $ostk_jQuery("<li>")
-				.appendTo(ul);
-
-			this.create_attr(attr, required)
-				.appendTo(li);
-
-		}//for
-		return ul;
-	}//createInputs
-
-
 	this.construct();
 }//ostk_generator
 
+
+/* Show Info
+--------------------------------------------------------------------------------*/
+$ostk_jQuery('form.ostk-embed-builder i.fa-info-circle').click(function(){
+	console.log('testing');
+	$ostk_jQuery(this).siblings('.info').slideToggle('slow');
+});
 
 /* Change Type
 --------------------------------------------------------------------------------*/

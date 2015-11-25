@@ -804,21 +804,26 @@ function ostk_generateSkyscraperHtmlOutput(products, atts){
 }//ostk_generateSkyscraperHtmlOutput
 
 function ostk_generateStockPhotoHtmlOutput(product, atts){
-	var output = '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-	    output += '<div class="element-content">';
-			output += '<img src="'+product.getImageAtIndex(atts['image_number'])+'" width="'+atts['width']+'" height="'+atts['height']+'" style="'+atts['custom_css']+'">';
-			output += '</div>';
-		    output += '<div class="element-overlay">';
+	var output = '';
+	output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(atts)+'>';
+		output += '<div class="ostk-element-inner">';
+			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
 			    output += '<div class="element-content">';
-					output += '<p class="title">'+product.getName()+'</p>';
-					if(product.averageReviewAsGif){
-						output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
-					}
-					output += '<p class="price">'+product.getPrice()+'</p>';
-					output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
-			output += '</div>';
-		output += '</div>';
-	output += '</a>';
+					output += '<img src="'+product.getImageAtIndex(atts['image_number']-1)+'" width="'+atts['width']+'" height="'+atts['height']+'" style="'+atts['custom_css']+'">';
+					output += '</div>';
+				    output += '<div class="element-overlay">';
+					    output += '<div class="element-content">';
+							output += '<p class="title">'+product.getName()+'</p>';
+							if(product.averageReviewAsGif){
+								output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
+							}
+							output += '<p class="price">'+product.getPrice()+'</p>';
+							output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
+					output += '</div>';
+				output += '</div>';
+			output += '</a>';
+		output += '</div><!-- ostk-element-inner -->';
+	output += '</div><!-- ostk-element -->';
   return output;
 }//ostk_generateStockPhotoHtmlOutput
 
@@ -1240,16 +1245,24 @@ var ostk_SingleProductData = function(productId){
 	this.affiliateUrl;
 	this.averageReviewAsDecimal;
 	this.averageReviewAsGif;
-	this.numImages;
 	this.arrayOfAllProductImages;
 	this.description;
 
 	this.init = function(callback, errorCallback) {
-		var url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
+		var url = '';
 		var _this = this;
+
+		// switch(){
+		// 	url = "https://api.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
+		// }else{
+			url = "https://api.test.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId + "&fetch_all_images=true";
+		// }
 
 		$ostk_jQuery.get( url, function( productData ) {
 			productData = productData['products'][0];
+			if(productData['images']){
+			    _this.arrayOfAllProductImages = _this.getImageList(productData['images']);
+			}
 			_this.name = productData['name'];
 			_this.productId = productData['id'];
 			_this.developerId = developerId;
@@ -1267,6 +1280,14 @@ var ostk_SingleProductData = function(productId){
 			errorCallback('Invalid product id: ' + _this.productId);
 		});
 	}//init
+
+	this.getImageList = function(images){
+		var a = Array();
+		for(var i = 0 ; i < images.length ; i++){
+			a.push(images[i]['scaledImages'][3]['url']);
+		}//for
+		return a;
+	}
 
 	//Return star gif from float value
 	this.getStars = function(stars){
@@ -1344,13 +1365,7 @@ var ostk_SingleProductData = function(productId){
 	}
 
 	this.getImageAtIndex = function(index){
-		if(index == 1) {
-			return this.getImage_Large(); 
-		}
-		else {
-	  index = index - 1;
-		  return this.arrayOfAllProductImages[index];
-		}
+	  return this.arrayOfAllProductImages[index];
 	}
 
 	this.getArrayOfAllProductImages = function(){
@@ -1652,15 +1667,6 @@ function ostk_Element(atts, obj){
 		var error = null;
 		if(!ostk_isset(developerId)){
 			error = ostk_formatError("Linkshare ID needs to be authenticated."); 
-		}
-
-		if(!error){
-			switch(this.atts['type']){
-				case 'stock_photo':
-				case 'product_carousel':
-					error = ostk_formatError("Invalid type attribute.");
-				break;
-			}//switch
 		}
 
 		if(!error){
@@ -2036,26 +2042,22 @@ function ostk_Element(atts, obj){
 			'link_target': 'new_tab'
 		}, atts);
 	    var item = new ostk_SingleProductData(atts['id']);
-	    item.constructor(
+	    item.init(
 	    	//Success
 	    	function(){
-				if(atts['image_number'] <= item.numImages){
-					output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(atts)+'>';
-						output += '<div class="ostk-element-inner">';
-							output += ostk_generateStockPhotoHtmlOutput(item, atts);
-						output += '</div><!-- ostk-element-inner -->';
-					output += '</div><!-- ostk-element -->';
+				if(atts['image_number'] <= item.arrayOfAllProductImages.length){
+					output = ostk_generateStockPhotoHtmlOutput(item, atts);
+					_this.renderHTML(output);
 				}else{
-					imageNumberError = 'Image number '+atts['image_number']+' is not available.';
-					if(item.numImages > 1){
-						imageNumberError += ' Image numbers from 1 to '+ item.numImages +' are available.';
+					var imageNumberError = 'Image number '+atts['image_number']+' is not available.';
+					if(item.arrayOfAllProductImages.length > 1){
+						imageNumberError += ' Image numbers from 1 to '+ item.arrayOfAllProductImages.length +' are available.';
 					}else{
 						imageNumberError += ' This image only has 1 available image.';
 					}
 					imageNumberError += ' Please change the image_number attribute and try again';
-					output = ostk_formatError(imageNumberError);
+					_this.renderHTMLError(imageNumberError);
 				}
-				_this.renderHTML(output);
 	    	},
 			//Error
 			function(error){

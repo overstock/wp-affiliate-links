@@ -11,13 +11,13 @@ function ostk_generator_page() {
 		<section class="ostk-generator-page">
 			<form class="ostk-embed-builder">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-md-6">
 						<h1>Generator</h1>
 						<p>Please select an embed type</p>
 						<select class="ostk-type" onSelect="selectType()"></select>
 						<div class="ostk-form-content"></div>
 					</div><!-- col -->
-					<div class="col-sm-6">
+					<div class="col-md-6">
 						<div class="embed-output">
 							<h3 class="center">Short Code</h3>
 							<code class="embed-code"></code>

@@ -3,7 +3,6 @@ var ostk_patterns = [
         "name": "Search Query",
         "slug": "search",
         "description": "The Search Query shortcode will create a link that will take a user to a Search Results Page on Overstock.com.",
-        "notes": [],
         "example_shortcodes": [
             {
                 "type": "search",
@@ -17,8 +16,7 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"search\""
+                "name": "type"
             },
             {
                 "name": "query",
@@ -35,9 +33,7 @@ var ostk_patterns = [
                     "value": "query"
                 },
                 "example": "Click to see these soccer shoes!",
-                "notes": [
-                    "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."
-                ]
+                "notes": "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."
             },
             {
                 "name": "category",
@@ -99,8 +95,7 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"link\""
+                "name": "type"
             },
             {
                 "name": "url",
@@ -114,9 +109,7 @@ var ostk_patterns = [
                 "description": "The text that will show for the link",
                 "default": "A link to Overstock.com",
                 "example": "A present for my wife",
-                "notes": [
-                    "If link_text parameter is left blank, the phrase \"A link to Overstock.com\" will be used as the link text."
-                ]
+                "notes": "If link_text parameter is left blank, the phrase \"A link to Overstock.com\" will be used as the link text."
             },
             {
                 "name": "link_target",
@@ -133,9 +126,7 @@ var ostk_patterns = [
         "name": "Rectangle",
         "slug": "rectangle",
         "description": "The rectangle shortcode lets you create a rectangular banner for a SINGLE product.",
-        "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>."
-        ],
+        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
         "example_shortcodes": [
             {
                 "type": "rectangle",
@@ -145,8 +136,7 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"rectangle\""
+                "name": "type"
             },
             {
                 "options": [
@@ -205,15 +195,14 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"leaderboard\""
+                "name": "type"
             },
             {
                 "options": [
                     {
                         "name": "product_ids",
                         "description": "A list of product ids separated by commas.",
-                        "notes": ["Required to have 1 or 2 product ids"]
+                        "notes": "Required to have 1 or 2 product ids"
                     },
                     {
                         "name": "event",
@@ -248,9 +237,7 @@ var ostk_patterns = [
         "name": "Skyscraper",
         "slug": "skyscraper",
         "description": "Lets you create a skyscraper banner for up to three products.",
-        "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>."
-        ],
+        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
         "example_shortcodes": [
             {
                 "type": "skyscraper",
@@ -260,15 +247,14 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"skyscraper\""
+                "name": "type"
             },
             {
                 "options": [
                     {
                         "name": "product_ids",
                         "description": "A list of product ids separated by commas.",
-                        "notes": ["Required to have 1 or 2 product ids"]
+                        "notes": "Required to have 1 or 2 product ids"
                     },
                     {
                         "name": "event",
@@ -304,10 +290,7 @@ var ostk_patterns = [
         "name": "Carousel",
         "slug": "carousel",
         "description": "Lets you create a carousel widget for up to 10 products. You will get the product ids from the product&apos;s URL on Overstock.com.",
-        "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-            "<span class=\"red\">At least one of the starred \"*\" optional attributes must be provided. For instance, a carousel can be created by EITHER a list of product ids, a category, or a keywords.</span>"
-        ],
+        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
         "example_shortcodes": [
             {
                 "type": "carousel",
@@ -317,18 +300,22 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"carousel\""
+                "name": "type"
             },
             {
                 "options": [
                     {
+                        "name": "id",
+                        "description": "Any product id",
+                        "example": "10234427"
+                    },
+                    {
                         "name": "product_ids",
-                        "description": "<span class=\"red\">*</span> A list of product ids separated by commas."
+                        "description": "A list of product ids separated by commas."
                     },
                     {
                         "name": "category",
-                        "description": "<span class=\"red\">*</span> Select items from a specific Overstock store.",
+                        "description": "Select items from a specific Overstock store.",
                         "options": [
                             "Home & Garden",
                             "Jewelry & Watches",
@@ -348,7 +335,7 @@ var ostk_patterns = [
                     },
                     {
                         "name": "keywords",
-                        "description": "<span class=\"red\">*</span> A keyword search",
+                        "description": "A keyword search",
                         "example": "soccer shoes"
                     }
                 ]
@@ -393,9 +380,7 @@ var ostk_patterns = [
         "name": "Stock Photo",
         "slug": "stock_photo",
         "description": "Use Overstock&apos;s product and lifestyle photos for your blog. Each one will link to its corresponding product page on Overstock.com.",
-        "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>."
-        ],
+        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
         "example_shortcodes": [
             {
                 "type": "stock_photo",
@@ -405,8 +390,7 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"stock_photo\""
+                "name": "type"
             },
             {
                 "name": "id",
@@ -428,9 +412,7 @@ var ostk_patterns = [
             {
                 "name": "height",
                 "description": "Height of the shortcode element. This attribute accepts \"px\"",
-                "notes": [
-                    "The height of the image will automatically adjust according to the width. The best practice would be to only set the height if it absolutely necessary ."
-                ],
+                "notes": "The height of the image will automatically adjust according to the width. The best practice would be to only set the height if it absolutely necessary .",
                 "default": "auto",
                 "example": "300px"
             },
@@ -454,9 +436,7 @@ var ostk_patterns = [
         "name": "Product Details Link",
         "slug": "product_link",
         "description": "Create simple links for a certain product. Each one will link to the product page on Overstock.com.",
-        "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>."
-        ],
+        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
         "example_shortcodes": [
             {
                 "type": "product_link",
@@ -466,8 +446,7 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"product_link\""
+                "name": "type"
             },
             {
                 "name": "id",
@@ -497,56 +476,9 @@ var ostk_patterns = [
         ]
     },
     {
-        "name": "Product Carousel",
-        "slug": "product_carousel",
-        "description": "Create a simple carousel viewer for a certain product. Each image will link to the product page on Overstock.com.",
-        "notes": [],
-        "example_shortcodes": [
-            {
-                "type": "product_carousel",
-                "id": "9659704",
-                "width": "400px"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type",
-                "description": "= \"product_carousel\""
-            },
-            {
-                "name": "id",
-                "description": "Any product id",
-                "example": "10234427"
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "number_of_items",
-                "description": "Choose an item limit. By default it is unlimited.",
-                "example": "10"
-            },
-            {
-                "name": "width",
-                "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
-                "default": "100%",
-                "example": "100%\" or \"300px"
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
         "name": "Sample Data",
         "slug": "sample_data",
         "description": "Print data form a given ID",
-        "notes": [],
         "example_shortcodes": [
             {
                 "type": "sample_data",
@@ -555,8 +487,7 @@ var ostk_patterns = [
         ],
         "required_attributes": [
             {
-                "name": "type",
-                "description": "= \"sample_data\""
+                "name": "type"
             },
             {
                 "name": "id",
