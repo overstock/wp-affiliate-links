@@ -260,31 +260,12 @@ function ostk_generateCarouselHTML(obj, atts, muliProduct){
 	var output = '';
 	var productList;
 	var product;
-
-	console.log('-- ostk_generateCarouselHTML --');
-
-	// console.log('atts');
-	// console.dir(atts);
-
 	if(muliProduct){
-		console.log('muliProduct true');
-		// productList = obj;
 		productList = obj.productList;
 	}else{
-		console.log('muliProduct false');
 		product = obj;
-
-		// console.log('product');
-		// console.dir(product);
-
 		productList = product.getArrayOfAllProductImages();
 	}
-
-
-	console.log('productList');
-	console.dir(productList);
-
-	// console.log('productList.length: ' + productList.length);
 
 	if(atts['number_of_items'] !== null){
 		productList = ostk_limitArrayCount(productList, atts['number_of_items']);
@@ -297,7 +278,6 @@ function ostk_generateCarouselHTML(obj, atts, muliProduct){
 				output += '<ul class="slides">';
 
 					if(muliProduct){
-						console.log('for below');
 						for(var i = 0 ; i < productList.length ; i++){
 							var product = productList[i];
 							productImg = product.getImage_Large();
@@ -353,6 +333,10 @@ function ostk_getCarouselListItems(product, productImg, atts){
 }//ostk_getCarouselListItems
 
 function ostk_limitArrayCount(product_ids, num){
+	if(typeof product_ids === 'string'){
+		product_ids = ostk_stringToList(product_ids);
+	}
+
 	if(product_ids.length > num){
 		return product_ids.splice(0, num);
 	}else{
@@ -364,10 +348,9 @@ function ostk_limitArrayCount(product_ids, num){
 Validate that the shortcode attributes are valid. return Boolean.
 */
 function ostk_areAttributesValid(atts){
-	// console.log('---- ostk_areAttributesValid ----');
 	var error = null;
-
 	var type = atts['type'];
+
 	if(!type){
 		error = 'Type attribute is required';
 	}
@@ -444,42 +427,9 @@ function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
 (ostk_areAttributesValid - helper function) */
 function ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes){
 	var invalid_atts = Array();
-
-
-
-	// invalid_atts = ostk_lookFoInvalidAttsInArray(keys, required_attributes);
-	// invalid_atts = ostk_lookFoInvalidAttsInArray(invalid_atts, optional_attributes);
-
-
-
-
-	// keys = {
-	// 	category: "Home & Garden"
-	// };
-	// invalid_atts = ostk_lookFoInvalidAttsInArray(keys, optional_attributes);
-
-
-	// var array = $ostk_jQuery.extend({}, required_attributes, optional_attributes);
 	var array = $ostk_jQuery.merge($ostk_jQuery.merge([], optional_attributes), required_attributes);
-
 	invalid_atts = ostk_lookFoInvalidAttsInArray(keys, array);
-
-	// console.log('keys');
-	// console.dir(keys);
-
-	// console.log('required_attributes');
-	// console.dir(required_attributes);
-
-	// console.log('optional_attributes');
-	// console.dir(optional_attributes);
-
-	// console.log('array');
-	// console.dir(array);
-
-
-
 	return ostk_getKeyList(invalid_atts);
-
 }//ostk_lookForInvalidAtts
 
 /* Return an array of attributes that are not in a given list
@@ -488,40 +438,18 @@ function ostk_lookFoInvalidAttsInArray(keys, array){
 	var invalid_atts = {};
 	//Loop through keys
 
-	// console.log('------------------');
-	// console.log('keys');
-	// console.dir(keys);
-
 	for(var key in keys){
 		//not valid until finding that the key in the array 
 		var value = keys[key];
 		var is_valid = false;
 
-		// console.log('-------- '+key+' --------');
-
-		// //Loop throught the atts
-		// for(var k = 0 ; k < array.length ; k++){
-
-		// console.log('---------');
-
-		// console.log('array');
-		// console.dir(array);
-
 		for(var k = array.length-1 ; k >= 0 ; k--){
-		// for(var k = 0 ; k < array.length ; k++){
 			var a = array[k];
 			var a_key = a['name'];
-
-			// console.log('-- ' + a_key + ' --');
-			// console.log('a');
-			// console.dir(a);
-
 			//if the attribure has options dig deeper
 			if(a['options']){
-				// console.log('has options');
 				if(a['options'][0]['name']){
 					//options are objects not just strings
-					// console.log('is object array');
 					for(var z = 0 ; z < a['options'].length ; z++){
 						var a_op = a['options'][z];	
 						var a_op_key = a_op['name'];	
@@ -532,15 +460,11 @@ function ostk_lookFoInvalidAttsInArray(keys, array){
 					}//for
 				}else{
 					//options are just strings
-					// console.log('is string array');
 					if(key === a_key){
 						var found_it = false;
-						// console.log('key is valid');
 						for(var z = 0 ; z < a['options'].length ; z++){
 							var a_op_key = a['options'][z];
-							// console.log(value +' vs '+ a_op_key);
 							if(value === a_op_key){
-								// console.log('FOUND IT');
 								found_it = true;
 								break;
 							}
@@ -550,41 +474,23 @@ function ostk_lookFoInvalidAttsInArray(keys, array){
 							break;
 						}else{
 							is_valid = false;
-							// console.log('DIDNT FIND');
 						}
-					}else{
-						// console.log('DIDNT FIND');
 					}
 				}
 			}else{
-				// console.log('has NOT options');
 				// att does not have options
 				if(key === a_key){
-					// console.log(key +' vs '+ a_key); 
-					// console.dir(a[key]);
-					// delete array[key];
-					// delete array[k];
 					is_valid = true;
 					break;
-				}else{
-					// console.log('DIDNT FIND');
 				}
 			}
 		}//for
 
 		if(!is_valid){
-			// console.log('IS NOT VALID');
-			// console.log('key: ' + key);
-			// console.log('value: ' + value);
 			invalid_atts[key] = value;
 			array.splice(k, 1);
-		// }else{
-			// console.log('array');
-			// console.log('IS VALID');
 		}
 	}//for
-	// console.log('invalid_atts');
-	// console.dir(invalid_atts);
 	return invalid_atts
 }//ostk_lookFoInvalidAttsInArray
 
