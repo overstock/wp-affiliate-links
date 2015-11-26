@@ -313,6 +313,8 @@
 .ostk-element.ostk-leaderboard,
 #main .ostk-element.ostk-leaderboard,
 #sidebar .ostk-element.ostk-leaderboard {
+  width: 728px;
+  height: 90px;
   /* .ostk-element-inner */
 }
 .ostk-element.ostk-leaderboard .ostk-element-inner,
@@ -323,8 +325,6 @@
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  width: 728px;
-  height: 90px;
 }
 .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder,
