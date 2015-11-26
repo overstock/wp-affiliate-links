@@ -1162,10 +1162,6 @@ var ostk_SingleProductData = function(){
 		this.imgUrl_large = this.getClosestImg(productData, 'largeImageURL');
 		this.imgUrl_medium = this.getClosestImg(productData, 'imageURL');
 		this.imgUrl_thumbnail = this.getClosestImg(productData, 'smallImageURL');
-
-		//hoki - remove this before prod
-		this.imgUrl_large = productData['imageURL'];
-
 		callback(this);
 	};//processData
 
