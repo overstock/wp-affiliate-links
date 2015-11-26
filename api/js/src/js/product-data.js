@@ -38,17 +38,15 @@ var ostk_SingleProductData = function(){
 				url = this.query;
 			}
 
-			// console.log(url);
 			$ostk_jQuery.get( url, function( productData ){
-				// console.log('jquery return success');
 				productData = productData['products'][0];
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
+				console.log('error in singleProduct');
 				errorCallback('Invalid product id: ' + _this.productId);
 			});
 		}
-
 	}//init
 
 	this.processData = function(productData, callback, errorCallback){
@@ -188,7 +186,6 @@ var ostk_MultiProductData = function(){
 	this.product_count_down = 0;
 
 	this.init = function(callback, errorCallback) {
-		console.log('-- ostk_MultiProductData - init --');
 		var _this = this;
 
 		if(this.productIds){
@@ -203,22 +200,13 @@ var ostk_MultiProductData = function(){
 			}//for
 		}else if(this.query){
 			$ostk_jQuery.get( this.query, function( productData ){
-				console.log('query');
-
-				console.log('productData');
-				console.dir(productData['products']);
-
-				console.log('_this.limit: ' + _this.limit);
-
 				if(_this.limit !== null){
 					productData['products'] = ostk_limitArrayCount(productData['products'], _this.limit);
 				}
-				console.log('product_count_down: ' + _this.product_count_down);
 				_this.product_count_down = _this.limit;
 				for(var i = 0 ; i < productData['products'].length ; i++){
-					console.log('for');
 					var item = new ostk_SingleProductData();
-					item.obj =  productData['products'][0];
+					item.obj =  productData['products'][i];
 					_this.createSingleObjects(item, callback, errorCallback);
 				}//for
 
@@ -234,13 +222,11 @@ var ostk_MultiProductData = function(){
 		item.init(
 			//Success
 			function(the_item){
-				console.log('single success');
 				_this.productList.push(the_item);
 				_this.checkProductCompletion(callback, errorCallback);
 			},
 			//Error
 			function(error){
-				console.log('error success');
 				_this.invalidProductIDs.push(['hoki']);
 				_this.checkProductCompletion(callback, errorCallback);
 			}
@@ -248,15 +234,11 @@ var ostk_MultiProductData = function(){
 	};//createSingleObjects
 
 	this.checkProductCompletion = function(callback, errorCallback){
-		console.log('checkProductCompletion');
-		console.log(this.product_count_down);
 	    this.product_count_down--;
 	    if(this.product_count_down === 0){
 	    	if(this.invalidProductIDs.length > 0){
-				console.log('done with fail');
 				errorCallback();
 	    	}else{
-				console.log('done with success');
 			    callback();
 	    	}
 	    }
