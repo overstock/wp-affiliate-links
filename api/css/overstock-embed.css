@@ -320,6 +320,8 @@
 .ostk-element.ostk-leaderboard .ostk-element-inner,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner,
 #sidebar .ostk-element.ostk-leaderboard .ostk-element-inner {
+  width: 728px;
+  height: 90px;
   position: relative;
   border: solid 2px #c80f2e;
   -webkit-border-radius: 8px;
@@ -373,6 +375,9 @@
 .ostk-element.ostk-leaderboard .ostk-element-inner .branding,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .branding,
 #sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .branding {
+  -webkit-border-radius: 0px 6px 6px 0px;
+  -moz-border-radius: 0px 6px 6px 0px;
+  border-radius: 0px 6px 6px 0px;
   position: absolute;
   right: 0;
   width: 130px;
