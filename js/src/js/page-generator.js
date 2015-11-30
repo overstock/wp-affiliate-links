@@ -15,6 +15,56 @@ function ostk_Generator(platform){
 		return str;
 	};//concatFormValues
 
+	this.optionObjectPrefix = function(index){
+		return $ostk_jQuery("<input>")
+			.attr({
+				'type': 'radio'
+			});
+	};//optionObjectPrefix
+
+	this.createOptions = function(attr){
+		var option_select = $ostk_jQuery('<select>')
+			.attr({
+				name: attr.name,
+				'attr': true
+			});
+
+	    createOption('Select', '?')
+	    	.appendTo(option_select);
+
+		for(var i = 0 ; i < attr.options.length ; i++) {
+			var opt = attr.options[i];
+			createOption(opt)
+		    	.appendTo(option_select);
+		}//for
+		return option_select;
+	};//createOptions
+
+	this.getInfo = function(attr){
+		var info_container = $ostk_jQuery("<i>")
+			.attr({
+				'class': 'fa fa-info-circle'
+			});
+
+		var info = $ostk_jQuery("<div>")
+			.attr({
+				'class': 'info'
+			})
+			.appendTo(info_container);
+
+		if(attr.description){
+			this.attToString(attr, 'description')
+				.appendTo(info);
+		}
+		if(attr.example){
+			this.attToString(attr, 'example')
+				.appendTo(info);
+		}
+		return info_container;
+	};//getInfo
+
+	this.construct();
+
 }//ostk_Generator
 
 var ostk_generator = ostk_Generator('wordpress');
@@ -54,7 +104,7 @@ $ostk_jQuery('form').on('change', '.ostk-form-content input[type="radio"]', func
 --------------------------------------------------------------------------------*/
 $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 	e.preventDefault();
-	var embed_code = $ostk_jQuery('.embed-code');
+	var embed_code = $ostk_jQuery('textarea.code');
 	var embed_sandbox = $ostk_jQuery('.embed-sandbox');
 	var attrs = '';
 
@@ -84,8 +134,8 @@ $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 		attrs2 += concatFormValues($ostk_jQuery(this));
 	});
 	embed_str = '<div data-tag="overstock" data-type="'+ostk_selected_pattern.slug+'" '+attrs2+'></div>';
-	createText(embed_str)
-		.appendTo(embed_code);
+	embed_code.html(embed_str); //clear div contents
+
 	embed_sandbox.html(embed_str);
 
 	ostk_plugin.get_elements();

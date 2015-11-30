@@ -832,11 +832,12 @@
   background: #FFFFFF;
   overflow: hidden;
 }
-.ostk-plugin-settings code {
+.ostk-plugin-settings textarea.code {
   background-color: #444444;
   color: #FFFFFF;
   display: block;
-  margin: 10px auto;
+  margin: 10px auto 40px auto!important;
+  width: 400px;
   max-width: 400px;
   padding: 5px;
   text-align: center;
@@ -1072,9 +1073,6 @@
 }
 .ostk-generator-page .embed-output {
   display: none;
-}
-.ostk-generator-page .embed-output code {
-  margin-bottom: 40px;
 }
 
 /*!

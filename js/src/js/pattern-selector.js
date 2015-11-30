@@ -91,11 +91,8 @@ function ostk_PatterSelector(platform){
 					var li_tiered = $ostk_jQuery("<li>")
 						.appendTo(ul_tiered);
 
-				    $ostk_jQuery("<input>")
-				    	.attr({
-				    		'type': 'radio'
-				    	})
-				    	.appendTo(li_tiered);
+					this.optionObjectPrefix(i)
+						.appendTo(li_tiered);
 
 					this.create_attr(attr.options[i], required)
 						.appendTo(li_tiered);
@@ -103,21 +100,8 @@ function ostk_PatterSelector(platform){
 
 		    //Options are strings
 			}else{
-				var option_select = $ostk_jQuery('<select>')
-					.attr({
-						name: attr.name,
-						'attr': true
-					})
+				this.createOptions(attr)
 					.appendTo(div);
-
-			    createOption('Select', '?')
-			    	.appendTo(option_select);
-
-				for(var i = 0 ; i < attr.options.length ; i++) {
-					var opt = attr.options[i];
-					createOption(opt)
-				    	.appendTo(option_select);
-				}//for
 			}
 		//Attribute does not have options
 		}else{
@@ -141,26 +125,8 @@ function ostk_PatterSelector(platform){
 		}
 
 		if(attr.description || attr.example){
-			$ostk_jQuery("<i>")
-				.attr({
-					'class': 'fa fa-info-circle'
-				})
+			this.getInfo(attr)
 				.appendTo(div);
-
-			var info = $ostk_jQuery("<div>")
-				.attr({
-					'class': 'info'
-				})
-				.appendTo(div);
-
-			if(attr.description){
-				this.attToString(attr, 'description')
-					.appendTo(info);
-			}
-			if(attr.example){
-				this.attToString(attr, 'example')
-					.appendTo(info);
-			}
 		}
 
 		return container;
@@ -232,7 +198,7 @@ function ostk_PatterSelector(platform){
 		}//for
 	}//findObjWhereKeyEquals
 
-	this.construct();
+	// this.construct();
 }//ostk_PatterSelector
 
 /* Change Type
