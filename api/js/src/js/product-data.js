@@ -452,7 +452,6 @@ function ostk_Carousel(atts, element){
 			if(!error){
 				this.obj = new ostk_MultiProductData();
 				this.obj.limit = atts['number_of_items'];
-				console.log('limit thing: ' + this.obj.limit);
 				if (ostk_isset(product_ids)) {
 					this.obj.productIds = product_ids;
 					this.initObject();
