@@ -1,5 +1,5 @@
-function ostk_setDeveloperID(){
-	developerId = 'FKAJQ7bUdyM';
+function ostk_setDeveloperID(id){
+	ostk_developerId = id;
 }//ostk_setDeveloperID
 
 function ostk_getTimeDiff(dealEndTime){
@@ -55,7 +55,7 @@ function ostk_generateAffiliateLink(murl){
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.overstock.com/ads/deeplink?id='+developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+developerId);
+	return 'https://api.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
 }//ostk_generateAffiliateLink
 
 function ostk_getTaxonomy(input){
@@ -172,7 +172,7 @@ function ostk_formatError(str){
 }//ostk_formatError
 
 function ostk_checkDeveloperId(){
-	return (ostk_isset(developerId) ? true : false);
+	return (ostk_isset(ostk_developerId) ? true : false);
 }//ostk_checkDeveloperId
 
 function ostk_limitArrayCount(product_ids, num){
