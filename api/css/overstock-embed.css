@@ -302,6 +302,7 @@
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
+  /* event-sales */
 }
 .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay,
 #main .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay,
@@ -309,6 +310,55 @@
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content {
+  overflow: hidden;
+  padding: 20px;
+  /* event-content */
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff {
+  float: left;
+  width: 50%;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p {
+  text-align: center;
+  color: #000000;
+  font-size: 30px;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p span.perc,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p span.perc,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p span.perc {
+  font-size: 60px;
+  display: block;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image {
+  float: left;
+  width: 50%;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image img,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image img,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image img {
+  width: 100%;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content p,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content p,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content p {
+  color: #000000;
+  font-size: 20px;
+  text-align: center;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content p.categoryLabel,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content p.categoryLabel,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content p.categoryLabel {
+  text-decoration: underline;
 }
 .ostk-element.ostk-leaderboard,
 #main .ostk-element.ostk-leaderboard,

@@ -156,25 +156,62 @@ function ostk_Rectangle(atts, element){
 			output += '<div class="ostk-element-inner">';
 				output += ostk_getBranding();
 				output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-					output += '<div class="element-content">';
-						output += '<img src="'+this.obj.getImage_Large()+'"/>';
-					output += '</div>';
-					output += '<div class="element-overlay">';
-					    output += '<div class="element-content">';
-							output += '<p class="title">'+this.obj.getName()+'</p>';
-							if(this.obj.averageReviewAsGif){
-								output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
+
+					if(ostk_isset(atts['event'])){
+						//Event
+						output += '<div class="event-content">'
+							if(atts['event'] == 'Flash Deals'){
+								//Flash Deals
+								output += '<img src="'+ostk_api_url+'images/overstock-flash-deals-logo.png'+'"/>';
 							}
-							output += '<p class="price">'+this.obj.getPrice()+'</p>';
+							output += '<div class="event-sales">';
+								output += '<div class="percentOff">';
+									output += '<p>up to <span class="perc">'+this.obj.percentOff+'%</span> off</p>';
+								output += '</div>';
+								output += '<div class="image">';
+									output += '<img src="'+this.obj.getImage_Large()+'"/>';
+								output += '</div>';
+							output += '</div>';
+							if(atts['event'] == 'Flash Deals'){
+								//Flash Deals
+								output += '<p class="dealEndTime"></p>';
+							}else{
+								output += '<p class="categoryLabel">'+this.obj.categoryLabel+'</p>';
+							}
+						output += '</div><!-- event-content -->';
+					}else{
+						//No Event
+						output += '<div class="element-content">';
+							output += '<img src="'+this.obj.getImage_Large()+'"/>';
 						output += '</div>';
-					output += '</div>';
+						output += '<div class="element-overlay">';
+						    output += '<div class="element-content">';
+								output += '<p class="title">'+this.obj.getName()+'</p>';
+								if(this.obj.averageReviewAsGif){
+									output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
+								}
+								output += '<p class="price">'+this.obj.getPrice()+'</p>';
+							output += '</div>';
+						output += '</div>';
+					}
 				output += '</a>';
 			output += '</div><!-- ostk-element-inner -->';
 		output += '</div><!-- ostk-element -->';
+
+		output = $ostk_jQuery(output);
+
 		this.renderHTML(output);
+
+		if(ostk_isset(atts['event'])){
+			if(atts['event'] == 'Flash Deals'){
+				ostk_flashDealsTimer(ostk_getTimeDiff(this.obj.dealEndTime), output.find('.dealEndTime'));
+			}
+		}
+
 	}//generateHtml
 
 	this.init();
+
 }//ostk_Reactagngle
 
 function ostk_Leaderboard(atts, element){
@@ -218,22 +255,35 @@ function ostk_Leaderboard(atts, element){
 		output += '<div class="ostk-element ostk-leaderboard">';
 			output += '<div class="ostk-element-inner">';
 				output += ostk_getBranding();
-				output += '<div class="item-holder item-count-'+productList.length+'">';
-					for(var i = 0 ; i < productList.length ; i++){
-						var product = productList[i];
-					    output += '<div class="element-content">';
-							output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-								output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-								output += '<p class="title">'+product.getName()+'</p>';
-								output += '<p class="description">'+product.description+'</p>';
-								if(product.averageReviewAsGif){
-									output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-								}
-								output += '<p class="price">'+product.getPrice()+'</p>';
-							output += '</a>';
-						output += '</div>';
-					}//for
-				output += '</div>';
+
+				if(ostk_isset(atts['event'])){
+					//Event
+					if(!this.obj.percentOff){
+						this.obj.percentOff = 0;
+					}
+					if(atts['event'] == 'Flash Deals'){
+						//Flash Deals
+					}
+				}else{
+					//No Event
+					output += '<div class="item-holder item-count-'+productList.length+'">';
+						for(var i = 0 ; i < productList.length ; i++){
+							var product = productList[i];
+						    output += '<div class="element-content">';
+								output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+									output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+									output += '<p class="title">'+product.getName()+'</p>';
+									output += '<p class="description">'+product.description+'</p>';
+									if(product.averageReviewAsGif){
+										output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+									}
+									output += '<p class="price">'+product.getPrice()+'</p>';
+								output += '</a>';
+							output += '</div>';
+						}//for
+					output += '</div>';
+				}
+
 			output += '</div><!-- ostk-element-inner -->';
 		output += '</div><!-- ostk-element -->';
 		this.renderHTML(output);
@@ -253,10 +303,11 @@ function ostk_Skyscraper(atts, element){
 		atts = ostk_shortcode_atts(
 		{
 			'type': null,
+			'event': null,
 			'product_ids': null,
 			'width': null,
 			'link_target': 'new_tab',
-			'number_of_items': 3
+			'number_of_items': 3,
 		}, atts);
 
 		var error = '';
@@ -282,24 +333,63 @@ function ostk_Skyscraper(atts, element){
 		output += '<div class="ostk-element ostk-skyscraper" '+ostk_getStyles(atts)+'>';
 			output += '<div class="ostk-element-inner">';
 				output += ostk_getBranding();
+				if(ostk_isset(atts['event'])){
+					//Event
+				    var product = productList[0];
 
-				for(var i = 0 ; i < productList.length ; i++){
-			    var product = productList[i];
-			    output += '<div class="element-content">';
-					output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-						output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-						output += '<p class="title">'+product.getName()+'</p>';
-						if(product.averageReviewAsGif){
-							output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-						}
-						output += '<p class="price">'+product.getPrice()+'</p>';
-					output += '</a>';
-				output += '</div>';
-			  }//for
+				    output += '<div class="element-content">';
+						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+
+							if(atts['event'] == 'Flash Deals'){
+								//Flash Deals
+								output += '<img src="'+ostk_api_url+'images/overstock-flash-deals-logo.png'+'"/>';
+							}
+
+							output += '<div class="percentOff">';
+								output += '<p>'+product.percentOff+'% off</p>';
+							output += '</div>';
+
+							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+
+							if(atts['event'] == 'Flash Deals'){
+								//Flash Deals
+								output += '<p>'+product.description+'</p>';
+								output += '<p class="dealEndTime"></p>';
+							}else{
+								output += '<p class="categoryLabel">'+product.categoryLabel+'</p>';
+							}
+
+						output += '</a>';
+					output += '</div>';
+				}else{
+					//No Event
+					for(var i = 0 ; i < productList.length ; i++){
+					    var product = productList[i];
+					    output += '<div class="element-content">';
+							output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+								output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+								output += '<p class="title">'+product.getName()+'</p>';
+								if(product.averageReviewAsGif){
+									output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+								}
+								output += '<p class="price">'+product.getPrice()+'</p>';
+							output += '</a>';
+						output += '</div>';
+					}//for
+				}
 
 			output += '</div><!-- ostk-element-inner -->';
 		output += '</div><!-- ostk-element -->';
+
+		output = $ostk_jQuery(output);
+
 		this.renderHTML(output);
+
+		if(ostk_isset(atts['event'])){
+			if(atts['event'] == 'Flash Deals'){
+				ostk_flashDealsTimer(ostk_getTimeDiff(product.dealEndTime), output.find('.dealEndTime'));
+			}
+		}
 	}//generateHtml
 
 	this.init();
@@ -362,6 +452,7 @@ function ostk_Carousel(atts, element){
 			if(!error){
 				this.obj = new ostk_MultiProductData();
 				this.obj.limit = atts['number_of_items'];
+				console.log('limit thing: ' + this.obj.limit);
 				if (ostk_isset(product_ids)) {
 					this.obj.productIds = product_ids;
 					this.initObject();

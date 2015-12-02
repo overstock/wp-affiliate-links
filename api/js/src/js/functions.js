@@ -1,6 +1,39 @@
-function setDeveloperID(){
+function ostk_setDeveloperID(){
 	developerId = 'FKAJQ7bUdyM';
-}//setDeveloperID
+}//ostk_setDeveloperID
+
+function ostk_getTimeDiff(dealEndTime){
+	var endTime = new Date(dealEndTime);
+	var currentTime = new Date();
+	return endTime - currentTime;
+}//ostk_getTimeDiff
+
+function ostk_timeDiffToString(timeDiff){
+	var msec = timeDiff;
+	var hh = Math.floor(msec / 1000 / 60 / 60);
+	msec -= hh * 1000 * 60 * 60;
+	var mm = Math.floor(msec / 1000 / 60);
+	msec -= mm * 1000 * 60;
+	var ss = Math.floor(msec / 1000);
+	msec -= ss * 1000;
+	return ostk_make_two_digits(hh) + ':' + ostk_make_two_digits(mm) + ':' + ostk_make_two_digits(ss);
+}//ostk_timeDiffToString
+
+function ostk_flashDealsTimer(timeDiff, obj){
+	obj.html(ostk_timeDiffToString(timeDiff));
+	setInterval(function(){
+		timeDiff -= 1000;
+		obj.html(ostk_timeDiffToString(timeDiff));
+	}, 1000);
+}//
+
+function ostk_make_two_digits(int){
+	if(int < 10){
+		return '0' + int;
+	}else{
+		return int;
+	}
+}//ostk_make_two_digits
 
 function ostk_shortcode_atts(obj, atts){
   var output = Array();
@@ -125,21 +158,8 @@ function ostk_getSortOption(input){
 }//ostk_getSortOption
 
 function ostk_getEventQuery(event){
-	var output = '';
-	switch(event){
-		case "Flash Deals":
-			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto1'
-			break;
-		case "Product Chooser":
-			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto4'
-			break;
-		case "Promotions":
-			output = 'https://api.overstock.com/ads/products?developerid=test&taxonomy=sto5'
-			break;
-	}//switch
-	return output;
+	return ostk_findObjWhereKeyEqualsValue(event_list, 'event', event).url;
 }//ostk_getEventQuery
-
 
 function ostk_stringToList(str){
 	str = str.split(' ').join(','); //Replace spaces with commas
@@ -316,7 +336,6 @@ function ostk_lookFoInvalidAttsInArray(keys, array){
 	}//for
 	return invalid_atts
 }//ostk_lookFoInvalidAttsInArray
-
 
 /* Return all keys of an object as an array
 (ostk_areAttributesValid - helper function) */

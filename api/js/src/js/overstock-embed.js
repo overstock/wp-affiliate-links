@@ -3,14 +3,28 @@ var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/master/a
 // var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 var ostk_plugin = new ostk_Plugin();
 
+var event_list = [
+	{
+		'event': 'Flash Deals',
+		'url': 'https://api.test.overstock.com/ads/products/deals?developerid=lMh2Xiq9xN0&sort=lowest_price'
+	},
+	{
+		'event': 'Sales',
+		'url': 'https://api.test.overstock.com/ads/sales?developerid=lMh2Xiq9xN0&limit=30&sale_type=sale'
+	},
+	{
+		'event': 'Promotions',
+		'url': 'https://api.test.overstock.com/ads/sales?developerid=lMh2Xiq9xN0&limit=30&sale_type=promotion'
+	}
+];
+
 function ostk_Plugin(){
 	/**
 	* OSTK PLUGIN Data Class
 	* Everything needed to create and render ostk widgets
 	**/ 
-
 	this.constructor = function(){
-		setDeveloperID('FKAJQ7bUdyM');
+		ostk_setDeveloperID('lMh2Xiq9xN0');
 		this.ostk_check_jquery();
 	};//constructor
 
@@ -195,25 +209,28 @@ function ostk_Element(atts, element){
 			}
 		}
 
+		if(!error){
+			if(ostk_isset(atts['number_of_items'])){
+				if(String(atts['number_of_items']) == '0'){
+					error = '"number_of_items" parameter must be at least 1.';
+				}
+			}			
+		}
+
 		if(error){
 			this.renderHTMLError(error);
 		}else{
-			// console.log('calling back');
-			// console.dir(this);
-			// callback();
 			this.initElement();
 		}
 	};//init
 
 	// Init Object
-	this.initObject = function(callback){
+	this.initObject = function(){
 		var _this = this;
 		this.obj.init(
 			//Success
 			function(){
 				_this.generateHtml();
-				// _this.renderHTML(callback(_this.obj, this.atts));
-				// _this.renderHTML(callback(_this.obj, atts));
 			},
 			// Error
 			function(error){
@@ -239,15 +256,10 @@ function ostk_Element(atts, element){
 }//ostk_Element
 
 var ostk_SingleProductData = function(){
-	/**
-	* SINGLE Product Data Class
-	* takes a productId and returns specific product details
-	*
-	* Usage:
-	* 	 item = new ProductData(productId);
-	*   name = item.getName();
-	*   price = item.getPrice():
-	**/ 
+	/*
+	SINGLE Product Data Class
+	takes a productId or query and returns specific product details
+	*/ 
 	this.productId;
 	this.name;
 	this.price;
@@ -277,9 +289,12 @@ var ostk_SingleProductData = function(){
 			}else if(this.query){
 				url = this.query;
 			}
-
 			$ostk_jQuery.get( url, function( productData ){
-				productData = productData['products'][0];
+				if(productData['products']){
+					productData = productData['products'][0];
+				}else if(productData['sales']){
+					productData = productData['sales'][0];
+				}
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
@@ -296,15 +311,47 @@ var ostk_SingleProductData = function(){
 		this.productId = productData['id'];
 		this.developerId = developerId;
 		this.description = productData['description'];
-		this.price = productData['price'];
-		this.affiliateUrl = productData['url'];
-	    this.averageReviewAsDecimal = productData['review']['stars'];
-	    this.averageReviewAsGif = this.getStars(productData['review']['stars']);
-		this.imgUrl_large = this.getClosestImg(productData, 'largeImageURL');
-		this.imgUrl_medium = this.getClosestImg(productData, 'imageURL');
-		this.imgUrl_thumbnail = this.getClosestImg(productData, 'smallImageURL');
+
+		if(productData['price']){
+			this.price = productData['price'];
+		}
+
+		if(productData['url']){
+			this.affiliateUrl = productData['url'];
+		}else if(productData['saleURL']){
+			this.affiliateUrl = productData['saleURL'];
+		}
+
+		if(productData['review']){
+			if(productData['review']['stars']){
+			    this.averageReviewAsDecimal = productData['review']['stars'];
+			    this.averageReviewAsGif = this.getStars(productData['review']['stars']);
+			}
+		}
+
+		if(productData['dealEndTime']){
+			this.dealEndTime = productData['dealEndTime'];
+		}
+
+		if(productData['categoryLabel']){
+			this.categoryLabel = this.getCategoryLabel(productData['categoryLabel']);
+		}
+
+		if('percentOff' in productData){
+			this.percentOff = productData['percentOff'] !== null ? productData['percentOff'] : 0;
+		}
+
+		this.imgUrl_large = (ostk_isset(productData['largeImageURL'])) ? productData['largeImageURL']: productData['imageURL'];
+		this.imgUrl_medium = productData['imageURL'];
+		this.imgUrl_thumbnail = productData['smallImageURL'];
+
 		callback(this);
 	};//processData
+
+	this.getCategoryLabel = function(str){
+		var array = str.split(' - ');
+		return array[array.length-1];
+	};
 
 	this.getImageList = function(images){
 		var a = Array();
@@ -329,64 +376,48 @@ var ostk_SingleProductData = function(){
     	}
 	}
 
-	this.getClosestImg = function(obj, str){
-		//Array in order of largest to smallest images
-		var imgArr = ['largeImageURL', 'imageURL', 'smallImageURL'];
-		//Find the index of the requested image size
-		var greatestIndex = imgArr.indexOf(str);
-		//Loop through the array of images
-		for(var i = greatestIndex ; i < imgArr.length ; i++){
-			//Return the value of the largest image possible that is not null
-			if(obj[imgArr[i]] !== null){
-			return obj[imgArr[i]];
-			}
-		}//for
-		//If none of the images have a value return null
-		return null;
-	}
-
 	this.isValidProductID = function(){
 		return this.validProductID;
 	}
 
 	this.getProductId = function(){
-	return (ostk_isset(this.productId) ? this.productId : ostk_formatError("\productId is not set") );
+	return (ostk_isset(this.productId) ? this.productId : ostk_formatError("productId is not set") );
 	}
 
 	this.getName = function(){
-	return (ostk_isset(this.name) ? this.name : ostk_formatError("\name is not set") );
+	return (ostk_isset(this.name) ? this.name : ostk_formatError("name is not set") );
 	}
 
 	this.getPrice = function(){
-	return (ostk_isset(this.price) ? this.price : ostk_formatError("\price is not set") );
+	return (ostk_isset(this.price) ? this.price : ostk_formatError("price is not set") );
 	}
 
 	this.getImageBaseUrl = function(){
-	return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("\baseImageUrl is not set") );
+	return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("baseImageUrl is not set") );
 	}
 
 	this.getImage_Thumbnail = function(){
-	return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("\imgUrl_thumbnail is not set") );
+	return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("imgUrl_thumbnail is not set") );
 	}
 
 	this.getImage_Medium = function(){
-	return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("\imgUrl_medium is not set") );
+	return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("imgUrl_medium is not set") );
 	}
 
 	this.getImage_Large = function(){
-	return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("\imgUrl_large is not set") );
+	return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("imgUrl_large is not set") );
 	}
 
 	this.getAffiliateUrl = function(){
-	return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("\affiliateUrl is not set") );
+	return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("affiliateUrl is not set") );
 	}
 
 	this.getAverageReviewAsDecimal = function(){
-		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("\averageReviewAsDecimal is not set") );
+		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("averageReviewAsDecimal is not set") );
 	}
 
 	this.getAverageReviewAsGif = function(){
-		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("\averageReviewAsGif is not set") );
+		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("averageReviewAsGif is not set") );
 	}
 
 	this.getImageAtIndex = function(index){
@@ -403,15 +434,15 @@ var ostk_SingleProductData = function(){
 }//ostk_SingleProductData
 
 var ostk_MultiProductData = function(){
-	/**
-	 * MULTIPLE Product Data Class
-	 * takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
-	 * & num (the number of ostk_SingleProductData objects to return)
-	 * 	   
-	 * Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
-	 * Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
-	 * and the class supports the general API call. 
-	**/
+	/*
+	MULTIPLE Product Data Class
+	takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
+	& num (the number of ostk_SingleProductData objects to return)
+		   
+	Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
+	Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
+	and the class supports the general API call. 
+	*/
 
 	this.productIds;
 	this.limit;
@@ -422,7 +453,6 @@ var ostk_MultiProductData = function(){
 
 	this.init = function(callback, errorCallback) {
 		var _this = this;
-
 		if(this.productIds){
 			if(this.limit !== null){
 				productIds = ostk_limitArrayCount(this.productIds, this.limit);
@@ -436,12 +466,25 @@ var ostk_MultiProductData = function(){
 		}else if(this.query){
 			if(this.limit !== null){
 				this.query += '&limit=' + this.limit;
+				console.log('limit: ' + this.limit);
 			}
+
+
+
+			console.log(this.query);
+
 			$ostk_jQuery.get( this.query, function( productData ){
-				_this.product_count_down = _this.limit;
-				for(var i = 0 ; i < productData['products'].length ; i++){
+				if(productData['products']){
+					productData = productData['products'];
+				}else if(productData['sales']){
+					productData = productData['sales'];
+				}
+
+				_this.product_count_down = productData.length;
+
+				for(var i = 0 ; i < productData.length ; i++){
 					var item = new ostk_SingleProductData();
-					item.obj =  productData['products'][i];
+					item.obj =  productData[i];
 					_this.createSingleObjects(item, callback, errorCallback);
 				}//for
 
@@ -462,7 +505,7 @@ var ostk_MultiProductData = function(){
 			},
 			//Error
 			function(error){
-				_this.invalidProductIDs.push(['hoki']);
+				_this.invalidProductIDs.push('');
 				_this.checkProductCompletion(callback, errorCallback);
 			}
 		);

@@ -106,26 +106,20 @@ $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 	e.preventDefault();
 	var embed_code = $ostk_jQuery('textarea.code');
 	var embed_sandbox = $ostk_jQuery('.embed-sandbox');
-	var attrs = '';
 
 	$ostk_jQuery('.embed-output').fadeIn('slow');
 	embed_code.html(''); //clear div contents
 
-	$ostk_jQuery('form.ostk-embed-builder input[attr="true"]:enabled, form.ostk-embed-builder select[attr="true"]:enabled').each(function(){
-		attrs += concatFormValues($ostk_jQuery(this));
-	});
-
-	// var embed_str = '';
 	// if(ostk_generator_platform == 'wordpress'){
-	// 	embed_str = '[overstock type="'+ostk_selected_pattern.slug+'" '+attrs+']';
 	// }else{
-	// 	embed_str = '<div data-tag="overstock" data-type="'+ostk_selected_pattern.slug+'" '+attrs+'></div>';
 	// }
 
 	//Shortcode
-	embed_str = '[overstock type="'+ostk_selected_pattern.slug+'" '+attrs+']';
-	createText(embed_str)
-		.appendTo(embed_code);
+	var attrs = '';
+	$ostk_jQuery('form.ostk-embed-builder input[attr="true"]:enabled, form.ostk-embed-builder select[attr="true"]:enabled').each(function(){
+		attrs += concatFormValues($ostk_jQuery(this));
+	});
+	var shortcode = '[overstock type="'+ostk_selected_pattern.slug+'" '+attrs+']';
 
 	//Embed
 	ostk_generator_platform = 'embed';
@@ -133,10 +127,11 @@ $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 	$ostk_jQuery('form.ostk-embed-builder input[attr="true"]:enabled, form.ostk-embed-builder select[attr="true"]:enabled').each(function(){
 		attrs2 += concatFormValues($ostk_jQuery(this));
 	});
-	embed_str = '<div data-tag="overstock" data-type="'+ostk_selected_pattern.slug+'" '+attrs2+'></div>';
-	embed_code.html(embed_str); //clear div contents
+	var embedcode = '<div data-tag="overstock" data-type="'+ostk_selected_pattern.slug+'" '+attrs2+'></div>';
 
-	embed_sandbox.html(embed_str);
+	embed_code.html(shortcode + embedcode);
+
+	embed_sandbox.html(embedcode);
 
 	ostk_plugin.get_elements();
 });
