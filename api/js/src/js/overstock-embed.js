@@ -466,12 +466,7 @@ var ostk_MultiProductData = function(){
 		}else if(this.query){
 			if(this.limit !== null){
 				this.query += '&limit=' + this.limit;
-				console.log('limit: ' + this.limit);
 			}
-
-
-
-			console.log(this.query);
 
 			$ostk_jQuery.get( this.query, function( productData ){
 				if(productData['products']){
