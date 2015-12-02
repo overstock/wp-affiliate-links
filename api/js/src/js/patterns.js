@@ -150,7 +150,7 @@ var ostk_patterns = [
                         "description": "Events",
                         "options": [
                             "Flash Deals",
-                            "Product Chooser",
+                            "Sales",
                             "Promotions"
                         ]
                     }
@@ -209,7 +209,7 @@ var ostk_patterns = [
                         "description": "Events",
                         "options": [
                             "Flash Deals",
-                            "Product Chooser",
+                            "Sales",
                             "Promotions"
                         ]
                     }
@@ -261,7 +261,7 @@ var ostk_patterns = [
                         "description": "Events",
                         "options": [
                             "Flash Deals",
-                            "Product Chooser",
+                            "Sales",
                             "Promotions"
                         ]
                     }

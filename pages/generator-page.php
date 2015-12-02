@@ -20,7 +20,7 @@ function ostk_generator_page() {
 					<div class="col-md-6">
 						<div class="embed-output">
 							<h3 class="center">Short Code</h3>
-							<code class="embed-code"></code>
+							<textarea class="code"></textarea>
 
 							<h3 class="center">Example</h3>
 							<div class="embed-sandbox"></div>

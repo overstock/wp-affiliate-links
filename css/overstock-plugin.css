@@ -832,13 +832,14 @@
   background: #FFFFFF;
   overflow: hidden;
 }
-.ostk-plugin-settings code {
+.ostk-plugin-settings textarea.code {
   background-color: #444444;
   color: #FFFFFF;
   display: block;
-  margin: 10px auto;
+  margin: 10px auto 40px auto!important;
+  width: 400px;
   max-width: 400px;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
 }
 /* ostk-plugin-settings */
@@ -878,111 +879,117 @@
   margin: 10px 0;
 }
 /*----------------------------- WP Plugin Documentation Page -----------------------------*/
-.ostk-doc-page p.red,
-.ostk-doc-page span.red {
-  color: #c80f2e;
+/*
+.ostk-doc-page {
+	p,
+	span {
+		&.red {
+			color: @primary;
+		}
+	}
+	.section-title {
+		margin: 50px 0 10px 0;
+		h3 {
+			font-size: 16px;
+		}
+		a {
+			text-decoration: none;			
+			&:hover {
+				h2 {
+					color: @primary-lt;
+				}
+			}
+		}
+	}
+	.atts {
+		ul {
+			margin: 0px 0 20px 0px;
+			@media (max-width: 767px) {
+				padding: 0 20px;
+			}
+			@media (min-width: 768px) {
+			}
+			li {
+				clear: both;
+				margin-bottom: 20px;
+				ul {
+					padding: 0 20px;
+					overflow: hidden;
+					@media (max-width: 767px) {
+						margin-left: 60px;
+					}
+					@media (min-width: 768px) {
+						margin-left: 180px;
+					}
+					li {
+						margin-bottom: 10px;
+						list-style: disc;
+						&.options-col-3 {
+							@media (min-width: 768px) {
+								float: left;
+								width: 30%;
+								clear: none;
+							}
+						}
+						&.options-col-2 {
+							@media (min-width: 768px) {
+								float: left;
+								width: 50%;
+								clear: none;
+							}
+						}
+					}
+				}
+				p {
+				    line-height: 18px;
+					margin: 10px 0 0 0;
+					@media (max-width: 767px) {
+						margin-left: 30px;
+					}
+					@media (min-width: 768px) {
+						margin-left: 150px;
+					}
+					&.title {
+						margin: 0;
+						font-weight: bold;
+						@media (max-width: 767px) {
+						}
+						@media (min-width: 768px) {
+							width: 120px;
+							float: left;
+							text-align: right;
+						}
+					}
+					span {
+						&.atts-subtitle {
+							font-weight: bold;
+							color: @grey;
+						}
+					}
+				}
+			}
+		}
+	}
+	.shortcode-output {
+		margin: 10px auto 50px auto;
+		.ostk-element {
+			display: block;
+			margin: 0 auto;
+		}
+		p.ostk-error {
+			text-align: center;
+		}
+		a.ostk-element {
+			&.ostk-search,
+			&.ostk-link,
+			&.ostk-product-link {
+				display: block;
+				text-align: center;
+			}
+		}
+	}
 }
-.ostk-doc-page .section-title {
-  margin: 50px 0 10px 0;
-}
-.ostk-doc-page .section-title h3 {
-  font-size: 16px;
-}
-.ostk-doc-page .section-title a {
-  text-decoration: none;
-}
-.ostk-doc-page .section-title a:hover h2 {
-  color: #f24b67;
-}
-.ostk-doc-page .atts ul {
-  margin: 0px 0 20px 0px;
-}
-@media (max-width: 767px) {
-  .ostk-doc-page .atts ul {
-    padding: 0 20px;
-  }
-}
-.ostk-doc-page .atts ul li {
-  clear: both;
-  margin-bottom: 20px;
-}
-.ostk-doc-page .atts ul li ul {
-  padding: 0 20px;
-  overflow: hidden;
-}
-@media (max-width: 767px) {
-  .ostk-doc-page .atts ul li ul {
-    margin-left: 60px;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-doc-page .atts ul li ul {
-    margin-left: 180px;
-  }
-}
-.ostk-doc-page .atts ul li ul li {
-  margin-bottom: 10px;
-  list-style: disc;
-}
-@media (min-width: 768px) {
-  .ostk-doc-page .atts ul li ul li.options-col-3 {
-    float: left;
-    width: 30%;
-    clear: none;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-doc-page .atts ul li ul li.options-col-2 {
-    float: left;
-    width: 50%;
-    clear: none;
-  }
-}
-.ostk-doc-page .atts ul li p {
-  line-height: 18px;
-  margin: 10px 0 0 0;
-}
-@media (max-width: 767px) {
-  .ostk-doc-page .atts ul li p {
-    margin-left: 30px;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-doc-page .atts ul li p {
-    margin-left: 150px;
-  }
-}
-.ostk-doc-page .atts ul li p.title {
-  margin: 0;
-  font-weight: bold;
-}
-@media (min-width: 768px) {
-  .ostk-doc-page .atts ul li p.title {
-    width: 120px;
-    float: left;
-    text-align: right;
-  }
-}
-.ostk-doc-page .atts ul li p span.atts-subtitle {
-  font-weight: bold;
-  color: #7b7b7b;
-}
-.ostk-doc-page .shortcode-output {
-  margin: 10px auto 50px auto;
-}
-.ostk-doc-page .shortcode-output .ostk-element {
-  display: block;
-  margin: 0 auto;
-}
-.ostk-doc-page .shortcode-output p.ostk-error {
-  text-align: center;
-}
-.ostk-doc-page .shortcode-output a.ostk-element.ostk-search,
-.ostk-doc-page .shortcode-output a.ostk-element.ostk-link,
-.ostk-doc-page .shortcode-output a.ostk-element.ostk-product-link {
-  display: block;
-  text-align: center;
-}
+*/
 /*----------------------------- WP Plugin Sandbox Page -----------------------------*/
 .ostk-sandbox-page .shortcode-input .inner,
 .ostk-sandbox-page .shortcode-output .inner {
@@ -1073,8 +1080,8 @@
 .ostk-generator-page .embed-output {
   display: none;
 }
-.ostk-generator-page .embed-output code {
-  margin-bottom: 40px;
+.ostk-generator-page .embed-output textarea {
+  min-height: 100px;
 }
 
 /*!

@@ -113,6 +113,42 @@
           .opacity(1);
         }
       }
+      .event-content {
+        overflow: hidden;
+        padding: 20px;
+        .event-sales {
+          .percentOff {
+            float: left;
+            width: 50%;
+            p {
+              text-align: center;
+              color: @black;
+              font-size: 30px;
+              span.perc {
+                font-size: 60px;
+                display: block;
+              }
+            }
+          }
+          .image {
+            float: left;
+            width: 50%;
+            img {
+              width: 100%;
+            }
+          }
+        }/* event-content */
+        p {
+          color: @black;
+          font-size: 20px;
+          text-align: center;
+          &.categoryLabel {
+            text-decoration: underline;
+          }
+          &.dealEndTime {
+          }
+        }
+      }/* event-sales */
     }
   }/* .ostk-rectangle  */
 
