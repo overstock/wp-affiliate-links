@@ -1866,7 +1866,7 @@ function ostk_Element(atts, element){
 		* then passes the rest of atts to other functions.
 		**/
 		var error = null;
-		if(!ostk_isset(developerId)){
+		if(!ostk_isset(ostk_developerId)){
 			error = "Linkshare ID needs to be authenticated."; 
 		}
 
@@ -1994,7 +1994,7 @@ var ostk_SingleProductData = function(){
 		}
 		this.name = productData['name'];
 		this.productId = productData['id'];
-		this.developerId = developerId;
+		this.developerId = ostk_developerId;
 		this.description = productData['description'];
 
 		if(productData['price']){
@@ -2131,7 +2131,7 @@ var ostk_MultiProductData = function(){
 
 	this.productIds;
 	this.limit;
-	this.developerId = developerId;
+	this.developerId = ostk_developerId;
 	this.productList = Array();
 	this.invalidProductIDs = Array();
 	this.product_count_down = 0;
