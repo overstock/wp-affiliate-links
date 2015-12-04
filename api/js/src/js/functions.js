@@ -19,14 +19,6 @@ function ostk_timeDiffToString(timeDiff){
 	return ostk_make_two_digits(hh) + ':' + ostk_make_two_digits(mm) + ':' + ostk_make_two_digits(ss);
 }//ostk_timeDiffToString
 
-function ostk_flashDealsTimer(timeDiff, obj){
-	obj.html(ostk_timeDiffToString(timeDiff));
-	setInterval(function(){
-		timeDiff -= 1000;
-		obj.html(ostk_timeDiffToString(timeDiff));
-	}, 1000);
-}//
-
 function ostk_make_two_digits(int){
 	if(int < 10){
 		return '0' + int;
@@ -192,7 +184,7 @@ Validate that the shortcode attributes are valid. return Boolean.
 */
 function ostk_areAttributesValid(atts){
 	var error = null;
-	var type = atts['type'];
+	var type = atts.type;
 
 	if(!type){
 		error = 'Type attribute is required';
@@ -380,14 +372,14 @@ function ostk_getBranding(){
 
 function ostk_getStyles(atts){
 	var output = '';
-	if(ostk_isset(atts['width'])){
-		output = 'width:'+atts['width']+';';
+	if(ostk_isset(atts.width)){
+		output = 'width:'+atts.width+';';
 	}
   return 'style="'+output+'"';
 }//ostk_getStyles
 
 function ostk_isValidLinkTarget(atts){
-	switch(atts['link_target']){
+	switch(atts.link_target){
 	  case 'new_tab':
 	  case 'current_tab':
 			return true;
@@ -398,8 +390,8 @@ function ostk_isValidLinkTarget(atts){
 
 function ostk_getLinkTarget(atts){
   var output = '_blank';
-	if(atts['link_target']){
-		switch(atts['link_target']){
+	if(atts.link_target){
+		switch(atts.link_target){
 		  case 'current_tab':
 		    output = '_self';
 		    break;

@@ -318,24 +318,29 @@
   padding: 20px;
   /* event-content */
 }
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p {
+  text-align: center;
+  color: #000000;
+  font-size: 30px;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p span.perc,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p span.perc,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p span.perc {
+  font-size: 60px;
+  display: block;
+}
+.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p.dealEndTime,
+#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p.dealEndTime,
+#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales p.dealEndTime {
+  clear: both;
+}
 .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff,
 #main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff,
 #sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff {
   float: left;
   width: 50%;
-}
-.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p,
-#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p,
-#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p {
-  text-align: center;
-  color: #000000;
-  font-size: 30px;
-}
-.ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p span.perc,
-#main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p span.perc,
-#sidebar .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .percentOff p span.perc {
-  font-size: 60px;
-  display: block;
 }
 .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image,
 #main .ostk-element.ostk-rectangle .ostk-element-inner .event-content .event-sales .image,
@@ -508,6 +513,7 @@
 .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content img,
 #main .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content img,
 #sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .element-content img {
+  width: 100%;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -531,51 +537,18 @@
 .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow,
 #main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow,
 #sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow {
-  background-image: url('../../images/overstock-arrows.png');
-  background-repeat: no-repeat;
   outline: none;
   height: 25px;
   width: 25px;
 }
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left {
-  background-position: 0 0;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left:hover,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left:hover {
-  background-position: 0 -25px;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right {
-  background-position: -25px 0;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right:hover,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right:hover {
-  background-position: -25px -25px;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red {
-  background-position: -50px 0;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red:hover,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-left-red:hover {
-  background-position: -50px -25px;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red {
-  background-position: -75px 0;
-}
-.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red:hover,
-#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow.ostk-arrow-right-red:hover {
-  background-position: -75px -25px;
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow i,
+#main .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow i,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow i {
+  text-align: center;
+  width: 100%;
+  line-height: 25px;
+  font-size: 20px;
+  color: #7b7b7b;
 }
 .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a,
 #main .ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a,
@@ -629,29 +602,11 @@
 #main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow,
 #sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow {
   padding: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
 }
-.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
-#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left {
-  background-position: -50px 0;
-}
-.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
-#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-left:hover {
-  background-position: -50px -25px;
-}
-.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
-#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right {
-  background-position: -75px 0;
-}
-.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
-#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover,
-#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow.ostk-arrow-right:hover {
-  background-position: -75px -25px;
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow i,
+#main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow i,
+#sidebar .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow i {
+  color: #c80f2e;
 }
 .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .custom-controls-container,
 #main .ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .custom-controls-container,
