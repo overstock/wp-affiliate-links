@@ -690,6 +690,9 @@
   /* row */
   /* section */
 }
+.ostk-plugin-settings * {
+  font-family: Helvetica, Arial, sans-serif;
+}
 .ostk-plugin-settings .row * {
   box-sizing: border-box;
 }
@@ -1079,9 +1082,6 @@
 }
 .ostk-generator-page .embed-output {
   display: none;
-}
-.ostk-generator-page .embed-output textarea {
-  min-height: 100px;
 }
 
 /*!

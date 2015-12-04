@@ -1,1 +1,1 @@
-var ostk_clickplatform = 'wordpress';
+var ostk_clickPlatform = 'wordpress';

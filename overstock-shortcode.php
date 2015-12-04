@@ -94,26 +94,25 @@ function ostk_load_js() {
   /* Local js */
   wp_enqueue_script( 'ostk-flexslider', plugins_url('api/js/src/libs/flexslider.min.js', __FILE__), array('jquery'), '1.0', true );
 
-  wp_enqueue_script( 'ostk-patterns', plugins_url('api/js/src/js/patterns.js', __FILE__), array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-function', plugins_url('api/js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-product-data', plugins_url('api/js/src/js/product-data.js', __FILE__), array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-overstock-embed', plugins_url('api/js/src/js/overstock-embed.js', __FILE__), array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-function', plugins_url('js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
+  //Api Files
+  wp_enqueue_script( 'ostk-api-patterns', plugins_url('api/js/src/js/patterns.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-api-function', plugins_url('api/js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-api-product-data', plugins_url('api/js/src/js/product-data.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-api-overstock-embed', plugins_url('api/js/src/js/overstock-embed.js', __FILE__), array('jquery'), '1.0', true );
 
-  wp_enqueue_script( 'ostk-pattern-selector', plugins_url('js/src/js/pattern-selector.js', __FILE__), array('jquery'), '1.0', true );
+  //Plugin JS
+  wp_enqueue_script( 'ostk-plugin-function', plugins_url('js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-plugin-pattern-selector', plugins_url('js/src/js/pattern-selector.js', __FILE__), array('jquery'), '1.0', true );
 
   // Page specific JS
   switch($_REQUEST['page']){
     case 'ostk-documentation':
-      /* Documentation Page */
       wp_enqueue_script( 'ostk-page-documentation', plugins_url('js/src/js/page-documentation.js', __FILE__), array('jquery'), '1.0', true );
       break;
     case 'ostk-generator':
-      /* Generator Page */
       wp_enqueue_script( 'ostk-page-generator', plugins_url('js/src/js/page-generator.js', __FILE__), array('jquery'), '1.0', true );
       break;      
     case 'ostk-home':
-      /* Documentation Page */
       wp_enqueue_script( 'ostk-page-home', plugins_url('js/src/js/page-home.js', __FILE__), array('jquery'), '1.0', true );
       break;
   }//switch
