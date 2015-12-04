@@ -18,9 +18,9 @@ function ostk_PatterSelector(platform){
 		    	.appendTo(ostk_select);
 		}//for
 
-		var type = 'carousel';
-		$ostk_jQuery('form.ostk-embed-builder select.ostk-type').val(type);
-		ostk_changeType(type);
+		// var type = 'carousel';
+		// $ostk_jQuery('form.ostk-embed-builder select.ostk-type').val(type);
+		// ostk_changeType(type);
 	}//setupForm
 
 	this.createInputList = function(attrs, required){
@@ -30,7 +30,6 @@ function ostk_PatterSelector(platform){
 
 			var li = $ostk_jQuery("<li>")
 				.appendTo(ul);
-
 
 		    $ostk_jQuery("<div>")
 		    	.attr({

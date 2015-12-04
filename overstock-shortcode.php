@@ -78,6 +78,10 @@ class ostk_PluginSettings {
 -----------------------*/
 function ostk_load_js() {
   wp_enqueue_script('jquery');
+
+  /* Initialize the plugin */
+  wp_enqueue_script( 'ostk-plugin', plugins_url('js/src/js/plugin.js', __FILE__), array('jquery'), '1.0', true );
+
   /*
   // Live API
   wp_enqueue_script( 'ostk-embed-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
@@ -94,7 +98,7 @@ function ostk_load_js() {
   wp_enqueue_script( 'ostk-function', plugins_url('api/js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
   wp_enqueue_script( 'ostk-product-data', plugins_url('api/js/src/js/product-data.js', __FILE__), array('jquery'), '1.0', true );
   wp_enqueue_script( 'ostk-overstock-embed', plugins_url('api/js/src/js/overstock-embed.js', __FILE__), array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-generation-function', plugins_url('js/src/js/generation-functions.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-function', plugins_url('js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
 
   wp_enqueue_script( 'ostk-pattern-selector', plugins_url('js/src/js/pattern-selector.js', __FILE__), array('jquery'), '1.0', true );
 

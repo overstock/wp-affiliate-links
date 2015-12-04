@@ -1,3 +1,6 @@
+var ostk_generator = ostk_Generator('wordpress');
+
+
 function ostk_Generator(platform){
 	ostk_PatterSelector.call(this, platform);
 
@@ -67,15 +70,12 @@ function ostk_Generator(platform){
 
 }//ostk_Generator
 
-var ostk_generator = ostk_Generator('wordpress');
-	
 
 /* Show Info
 --------------------------------------------------------------------------------*/
 $ostk_jQuery('form.ostk-embed-builder i.fa-info-circle').click(function(){
 	$ostk_jQuery(this).siblings('.info').slideToggle('slow');
 });
-
 
 /* Select Options
 --------------------------------------------------------------------------------*/
@@ -110,9 +110,9 @@ $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 	$ostk_jQuery('.embed-output').fadeIn('slow');
 	embed_code.html(''); //clear div contents
 
-	// if(ostk_generator_platform == 'wordpress'){
-	// }else{
-	// }
+	if(ostk_clickPlatform == 'wordpress'){
+	}else{
+	}
 
 	//Shortcode
 	var attrs = '';
