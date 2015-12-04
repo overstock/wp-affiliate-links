@@ -8,7 +8,7 @@ var ostk_plugin = new ostk_Plugin();
 
 var ostk_clickurl = window.location.href;
 
-var ostk_api_url = 'https://raw.githubusercontent.com/overstock/wp-affiliate-links/master/api/';
+var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
 
 //Localhost for testing
 if(ostk_clickurl === 'http://localhost/~thoki/ostk-example/'){
