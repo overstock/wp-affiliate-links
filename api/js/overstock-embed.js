@@ -1691,15 +1691,15 @@ var ostk_plugin = new ostk_Plugin();
 var event_list = [
 	{
 		'event': 'Flash Deals',
-		'url': 'https://api.test.overstock.com/ads/products/deals?developerid=lMh2Xiq9xN0&sort=lowest_price'
+		'url': 'https://api.test.overstock.com/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
 	},
 	{
 		'event': 'Sales',
-		'url': 'https://api.test.overstock.com/ads/sales?developerid=lMh2Xiq9xN0&limit=30&sale_type=sale'
+		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&limit=30&sale_type=sale'
 	},
 	{
 		'event': 'Promotions',
-		'url': 'https://api.test.overstock.com/ads/sales?developerid=lMh2Xiq9xN0&limit=30&sale_type=promotion'
+		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&limit=30&sale_type=promotion'
 	}
 ];
 

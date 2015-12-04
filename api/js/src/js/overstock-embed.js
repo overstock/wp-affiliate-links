@@ -5,16 +5,16 @@ var ostk_plugin = new ostk_Plugin();
 
 var event_list = [
 	{
-		'event': 'Flash Deals',
-		'url': 'https://api.test.overstock.com/ads/products/deals?developerid=lMh2Xiq9xN0&sort=lowest_price'
-	},
-	{
 		'event': 'Sales',
-		'url': 'https://api.test.overstock.com/ads/sales?developerid=lMh2Xiq9xN0&limit=30&sale_type=sale'
+		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
 	},
 	{
 		'event': 'Promotions',
-		'url': 'https://api.test.overstock.com/ads/sales?developerid=lMh2Xiq9xN0&limit=30&sale_type=promotion'
+		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=promotion'
+	},
+	{
+		'event': 'Flash Deals',
+		'url': 'https://api.test.overstock.com/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
 	}
 ];
 
@@ -193,9 +193,9 @@ function ostk_Element(atts, element){
 		}
 
 		if(!error){
-			if(this.atts['type'] == '' || this.atts['type'] == null){ 
+			if(this.atts.type == '' || this.atts.type == null){ 
 				error = "Type parameter cannot be empty.";
-			}else if(ostk_isset(this.atts['link_target']) && !ostk_isValidLinkTarget(this.atts)){ 
+			}else if(ostk_isset(this.atts.link_target) && !ostk_isValidLinkTarget(this.atts)){ 
 				error = '"link_target" not found. Please check spelling and try again.';
 			}
 		}
@@ -203,15 +203,14 @@ function ostk_Element(atts, element){
 		if(!error){
 			// hoki - check to make sure that this pregmatch is working
 			var regex = /^[1-9]\d*(px|%)/i;
-			if(ostk_isset(this.atts['width']) && !regex.exec(this.atts['width'])){
-				// if(ostk_isset(this.atts['width']) && !preg_match("/^[1-9]\d*(px|%)/i", this.atts['width'])){
+			if(ostk_isset(this.atts.width) && !regex.exec(this.atts.width)){
 				error = "Width requires % or px, and a value greater than 0.";
 			}
 		}
 
 		if(!error){
-			if(ostk_isset(atts['number_of_items'])){
-				if(String(atts['number_of_items']) == '0'){
+			if(ostk_isset(atts.number_of_items)){
+				if(String(atts.number_of_items) == '0'){
 					error = '"number_of_items" parameter must be at least 1.';
 				}
 			}			
@@ -239,11 +238,35 @@ function ostk_Element(atts, element){
 		);
 	};//initObject
 
+	this.setFlashDealsTimer = function(obj){
+		// var t = new Date();
+		// t.setSeconds(t.getSeconds() + 5);
+		// this.obj.dealEndTime = t;
+
+		console.log('-- setFlashDealsTimer --');
+
+		var _this = this;
+		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
+		console.log('dealEndTime: '+this.obj.dealEndTime);
+		console.log('timeDiff: '+timeDiff);
+
+		obj.html(ostk_timeDiffToString(timeDiff));
+		var flashDealsTimer = setInterval(function(){
+			if(timeDiff <= 1000){
+				clearInterval(flashDealsTimer);
+				_this.initObject();
+			}else{
+				timeDiff -= 1000;
+				obj.html(ostk_timeDiffToString(timeDiff));
+			}
+		}, 1000, true);
+	};//setFlashDealsTimer
+
 	//Render HTML
 	this.renderHTML = function(data){
 		this.element.fadeOut('slow');
-		data = $ostk_jQuery(data);
 		this.element.replaceWith(data);
+		this.element = data;
 		data.hide();
 		data.fadeIn('slow');
 	};//rederHTML
@@ -282,7 +305,7 @@ var ostk_SingleProductData = function(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
-				url = "https://api.test.overstock.com/ads/products?developerid="+developerId+"&product_ids=" + this.productId;
+				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";
 				}
