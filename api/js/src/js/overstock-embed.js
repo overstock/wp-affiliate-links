@@ -1,7 +1,19 @@
 var ostk_developerId;
-var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/master/api/';
-// var ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+
+if(!ostk_isset(ostk_clickplatform)){
+	var ostk_clickplatform = 'embed';
+}
+
 var ostk_plugin = new ostk_Plugin();
+
+var ostk_clickurl = window.location.href;
+
+var ostk_api_url = 'https://cdn.rawgit.com/overstock/wp-affiliate-links/master/api/';
+
+//Localhost for testing
+if(ostk_clickurl === 'http://localhost/~thoki/ostk-example/'){
+	ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+}
 
 var event_list = [
 	{
@@ -243,13 +255,8 @@ function ostk_Element(atts, element){
 		// t.setSeconds(t.getSeconds() + 5);
 		// this.obj.dealEndTime = t;
 
-		console.log('-- setFlashDealsTimer --');
-
 		var _this = this;
 		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
-		console.log('dealEndTime: '+this.obj.dealEndTime);
-		console.log('timeDiff: '+timeDiff);
-
 		obj.html(ostk_timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
 			if(timeDiff <= 1000){
@@ -312,11 +319,12 @@ var ostk_SingleProductData = function(){
 			}else if(this.query){
 				url = this.query;
 			}
+			url = ostk_addTrackingToUrl(url);	
 			$ostk_jQuery.get( url, function( productData ){
-				if(productData['products']){
-					productData = productData['products'][0];
-				}else if(productData['sales']){
-					productData = productData['sales'][0];
+				if(productData.products){
+					productData = productData.products[0];
+				}else if(productData.sales){
+					productData = productData.sales[0];
 				}
 				_this.processData(productData, callback, errorCallback);
 			})
@@ -327,46 +335,46 @@ var ostk_SingleProductData = function(){
 	}//init
 
 	this.processData = function(productData, callback, errorCallback){
-		if(productData['images']){
-		    this.arrayOfAllProductImages = this.getImageList(productData['images']);
+		if(productData.images){
+		    this.arrayOfAllProductImages = this.getImageList(productData.images);
 		}
-		this.name = productData['name'];
-		this.productId = productData['id'];
+		this.name = productData.name;
+		this.productId = productData.id;
 		this.developerId = ostk_developerId;
-		this.description = productData['description'];
+		this.description = productData.description;
 
-		if(productData['price']){
-			this.price = productData['price'];
+		if(productData.price){
+			this.price = productData.price;
 		}
 
-		if(productData['url']){
-			this.affiliateUrl = productData['url'];
-		}else if(productData['saleURL']){
-			this.affiliateUrl = productData['saleURL'];
+		if(productData.url){
+			this.affiliateUrl = productData.url;
+		}else if(productData.saleURL){
+			this.affiliateUrl = productData.saleURL;
 		}
 
-		if(productData['review']){
-			if(productData['review']['stars']){
-			    this.averageReviewAsDecimal = productData['review']['stars'];
-			    this.averageReviewAsGif = this.getStars(productData['review']['stars']);
+		if(productData.review){
+			if(productData.review.stars){
+			    this.averageReviewAsDecimal = productData.review.stars;
+			    this.averageReviewAsGif = this.getStars(productData.review.stars);
 			}
 		}
 
-		if(productData['dealEndTime']){
-			this.dealEndTime = productData['dealEndTime'];
+		if(productData.dealEndTime){
+			this.dealEndTime = productData.dealEndTime;
 		}
 
-		if(productData['categoryLabel']){
-			this.categoryLabel = this.getCategoryLabel(productData['categoryLabel']);
+		if(productData.categoryLabel){
+			this.categoryLabel = this.getCategoryLabel(productData.categoryLabel);
 		}
 
 		if('percentOff' in productData){
-			this.percentOff = productData['percentOff'] !== null ? productData['percentOff'] : 0;
+			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
 		}
 
-		this.imgUrl_large = (ostk_isset(productData['largeImageURL'])) ? productData['largeImageURL']: productData['imageURL'];
-		this.imgUrl_medium = productData['imageURL'];
-		this.imgUrl_thumbnail = productData['smallImageURL'];
+		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
+		this.imgUrl_medium = productData.imageURL;
+		this.imgUrl_thumbnail = productData.smallImageURL;
 
 		callback(this);
 	};//processData
@@ -490,12 +498,12 @@ var ostk_MultiProductData = function(){
 			if(this.limit !== null){
 				this.query += '&limit=' + this.limit;
 			}
-
+			this.query = ostk_addTrackingToUrl(this.query);	
 			$ostk_jQuery.get( this.query, function( productData ){
-				if(productData['products']){
-					productData = productData['products'];
-				}else if(productData['sales']){
-					productData = productData['sales'];
+				if(productData.products){
+					productData = productData.products;
+				}else if(productData.sales){
+					productData = productData.sales;
 				}
 
 				_this.product_count_down = productData.length;

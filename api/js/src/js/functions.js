@@ -1,3 +1,16 @@
+function l(key, value){
+	if(typeof value !== 'undefined'){
+		console.log(key+': '+value);
+	}else{
+		console.log(key);
+	}
+}
+
+function ostk_addTrackingToUrl(url){
+	return url + '&clickplatform='+ostk_clickplatform + '&clickurl='+ostk_clickurl;
+};//ostk_addTrackingToUrl
+
+
 function ostk_setDeveloperID(id){
 	ostk_developerId = id;
 }//ostk_setDeveloperID
