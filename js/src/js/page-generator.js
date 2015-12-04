@@ -5,12 +5,12 @@ function ostk_Generator(platform){
 	ostk_PatterSelector.call(this, platform);
 
 	//Concat Form Values
-	this.concatFormValues = function(obj){
+	this.concatFormValues = function(obj, platform){
 		var str = '';
 		var key = obj[0].name;
 		var value = obj[0].value;
 		if(value !== '' && value !== '?'){ //if blank or if ostk_select is on the first option (?)
-			if(this.generator_platform !== 'wordpress'){
+			if(platform !== 'wordpress'){
 				key = 'data-'+key;
 			}
 			str = ' '+ key + '="' + value + '"';
@@ -110,26 +110,22 @@ $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 	$ostk_jQuery('.embed-output').fadeIn('slow');
 	embed_code.html(''); //clear div contents
 
-	if(ostk_clickPlatform == 'wordpress'){
-	}else{
-	}
-
 	//Shortcode
 	var attrs = '';
 	$ostk_jQuery('form.ostk-embed-builder input[attr="true"]:enabled, form.ostk-embed-builder select[attr="true"]:enabled').each(function(){
-		attrs += concatFormValues($ostk_jQuery(this));
+		attrs += concatFormValues($ostk_jQuery(this), 'wordpress');
 	});
 	var shortcode = '[overstock type="'+ostk_selected_pattern.slug+'" '+attrs+']';
 
 	//Embed
-	ostk_generator_platform = 'embed';
 	var attrs2 = '';
 	$ostk_jQuery('form.ostk-embed-builder input[attr="true"]:enabled, form.ostk-embed-builder select[attr="true"]:enabled').each(function(){
-		attrs2 += concatFormValues($ostk_jQuery(this));
+		attrs2 += concatFormValues($ostk_jQuery(this), 'embed');
 	});
 	var embedcode = '<div data-tag="overstock" data-type="'+ostk_selected_pattern.slug+'" '+attrs2+'></div>';
 
-	embed_code.html(shortcode + embedcode);
+	console.log(embedcode);
+	embed_code.html(shortcode);
 
 	embed_sandbox.html(embedcode);
 

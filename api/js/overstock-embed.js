@@ -517,9 +517,8 @@ function l(key, value){
 }
 
 function ostk_addTrackingToUrl(url){
-	return url + '&clickplatform='+ostk_clickplatform + '&clickurl='+ostk_clickurl;
+	return url + '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
 };//ostk_addTrackingToUrl
-
 
 function ostk_setDeveloperID(id){
 	ostk_developerId = id;
@@ -1722,8 +1721,8 @@ function ostk_SampleData(atts, element){
 
 var ostk_developerId;
 
-if(!ostk_isset(ostk_clickplatform)){
-	var ostk_clickplatform = 'embed';
+if(!ostk_isset(ostk_clickPlatform)){
+	var ostk_clickPlatform = 'embed';
 }
 
 var ostk_plugin = new ostk_Plugin();
@@ -1993,6 +1992,7 @@ function ostk_Element(atts, element){
 
 	//Render HTML
 	this.renderHTML = function(data){
+		data = $ostk_jQuery(data);
 		this.element.fadeOut('slow');
 		this.element.replaceWith(data);
 		this.element = data;

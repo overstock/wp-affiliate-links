@@ -18,6 +18,9 @@
 .ostk-error {
   color: #c80f2e;
 }
+.ostk-error * {
+  font-family: Helvetica, Arial, sans-serif;
+}
 .ostk-loader {
   /**
  * Global Reset of all HTML Elements
@@ -155,6 +158,9 @@
 .ostk-loader :focus {
   outline: 0;
 }
+.ostk-loader * {
+  font-family: Helvetica, Arial, sans-serif;
+}
 .ostk-loader img {
   display: block;
   margin: 10px auto;
@@ -193,6 +199,7 @@
 .ostk-element *,
 #main .ostk-element *,
 #sidebar .ostk-element * {
+  font-family: Helvetica, Arial, sans-serif;
   box-sizing: border-box;
 }
 .ostk-element a,
@@ -397,7 +404,7 @@
 .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content,
 #sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content {
-  padding: 0;
+  padding: 7px 0px;
 }
 .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .element-content p,
