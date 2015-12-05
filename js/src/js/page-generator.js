@@ -1,11 +1,11 @@
-var ostk_generator = ostk_Generator('wordpress');
+var ostk_generator = ostk_Generator();
 
 
-function ostk_Generator(platform){
-	ostk_PatterSelector.call(this, platform);
+function ostk_Generator(){
+	ostk_PatterSelector.call(this);
 
 	//Concat Form Values
-	this.concatFormValues = function(obj, platform){
+	this.concatFormValues = function(obj){
 		var str = '';
 		var key = obj[0].name;
 		var value = obj[0].value;
@@ -92,8 +92,12 @@ $ostk_jQuery('form').on('change', '.ostk-form-content input[type="radio"]', func
 	var sibs = li.siblings('li');
 	sibs.addClass('disabled');
 
-	//Disable other options input or select box
+	//Disable other option's input or select box
 	sibs.find('input[attr="true"], select[attr="true"]').prop('disabled', true);
+	//Clear other option's input
+	sibs.find('input[attr="true"]').val('');
+	//Clear other option's select box
+	sibs.find('select[attr="true"]').prop('selectedIndex', 0);
 
 	//Uncheck other options radio buttons
 	sibs.find('input[type="radio"]').prop('checked', false);

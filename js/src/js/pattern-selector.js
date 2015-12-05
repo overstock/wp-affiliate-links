@@ -1,7 +1,6 @@
 var ostk_selected_pattern;
 
-function ostk_PatterSelector(platform){
-	this.platform = platform;
+function ostk_PatterSelector(){
 
 	this.construct = function(){
 		this.setupForm(ostk_patterns);

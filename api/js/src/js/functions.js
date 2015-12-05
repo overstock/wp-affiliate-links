@@ -5,14 +5,13 @@ function l(key, value){
 		console.log(key);
 	}
 }
+function d(obj){
+	console.dir(obj);
+}
 
 function ostk_addTrackingToUrl(url){
 	return url + '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
 };//ostk_addTrackingToUrl
-
-function ostk_setDeveloperID(id){
-	ostk_developerId = id;
-}//ostk_setDeveloperID
 
 function ostk_getTimeDiff(dealEndTime){
 	var endTime = new Date(dealEndTime);
