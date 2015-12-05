@@ -1,4 +1,4 @@
-var ostk_developerId;
+var ostk_developerId = null;
 
 if(!ostk_isset(ostk_clickPlatform)){
 	var ostk_clickPlatform = 'embed';
@@ -9,6 +9,30 @@ var ostk_plugin = new ostk_Plugin();
 var ostk_clickurl = window.location.href;
 
 var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
+
+// var query = window.location;
+// l('query', query);
+
+var scripts = document.getElementsByTagName('script');
+for(var i = 0 ; i < scripts.length ; i++){
+	if(scripts[i].src.indexOf("overstock-embed") > -1){
+		var ostk_src = scripts[i].src;
+		var params = ostk_src.split('?')[1];
+		var param_items = params.split('&');
+		for(var k = 0 ; k < param_items.length ; k++){
+			var param_pieces = param_items[k].split('=');
+			var key = param_pieces[0];
+			var value = param_pieces[1];
+			if(key == 'id'){
+				ostk_developerId = value;
+				break;
+			}
+		}//for
+		break;
+	}//for	
+}//for
+
+l('ostk_developerId', ostk_developerId);
 
 //Localhost for testing
 if(ostk_clickurl === 'http://localhost/~thoki/ostk-example/'){
@@ -31,12 +55,11 @@ var event_list = [
 ];
 
 function ostk_Plugin(){
-	/**
-	* OSTK PLUGIN Data Class
-	* Everything needed to create and render ostk widgets
-	**/ 
+	/*
+	OSTK PLUGIN Data Class
+	Everything needed to create and render ostk widgets
+	*/ 
 	this.constructor = function(){
-		ostk_setDeveloperID('lMh2Xiq9xN0');
 		this.ostk_check_jquery();
 	};//constructor
 
