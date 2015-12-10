@@ -190,6 +190,8 @@ function ostk_areAttributesValid(atts){
 	var error = null;
 	var type = atts.type;
 
+	var ostk_patterns = ostk_plugin.ostk_patterns;
+
 	if(!type){
 		error = 'Type attribute is required';
 	}
