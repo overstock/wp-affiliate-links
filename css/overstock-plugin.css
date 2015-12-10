@@ -1083,6 +1083,10 @@
 .ostk-generator-page .embed-output {
   display: none;
 }
+.ostk-generator-page .embed-output .ostk-element {
+  margin: 0 auto;
+  display: block;
+}
 
 /*!
  *  Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome

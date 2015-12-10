@@ -3,6 +3,7 @@
 
 1) Install all dependant libraries:
 	npm install grunt
+	npm install load-grunt-tasks --save-dev
 	npm install grunt-contrib-less --save-dev
 	npm install grunt-contrib-concat --save-dev
 	npm install grunt-contrib-cssmin --save-dev
@@ -11,6 +12,9 @@
 	grunt
 */
 module.exports = function(grunt) {
+
+	//Load Tasks
+	require('load-grunt-tasks')(grunt);
 
 	// Project configuration.
 	grunt.initConfig({
@@ -46,11 +50,6 @@ module.exports = function(grunt) {
 		}
 
 	});
-
-	//Enable plugins
-	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 	//Default task
 	grunt.registerTask('default', ['less', 'concat', 'cssmin']);

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: helvetica-neue-bold;
+    src: url(../fonts/helvetica-neue-bold.ttf);
+}
+
 .ostk-error {
   color: @primary;
   * {
@@ -38,69 +43,168 @@
   position: relative;
   overflow: hidden;
   * {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: helvetica-neue-bold, Helvetica, Arial, sans-serif;
     box-sizing: border-box;
   }
-  a {
-    text-decoration: none;
-    outline: 0;
-    .box-shadow (none);
-    &:focus {
-      outline: 0;
-    }
-  }
-  img {
-    max-width: 100%;
-  }
-  .branding {
-    background: @primary;    
-    padding: 5px 0;
-    img {
-      margin: 0 auto;
-      display: block;
-    }
-  }
-  .element-content {
-    padding: 10px;
+  .ostk-element-inner {
+    border: solid 2px @primary;
     position: relative;
-    .border-radius(2px);
-    p {
-      font-size: 16px;
-      margin: 0;
-      &.title {
-        color: @primary;
-      }
-      &.price {
-        color: @grey-dk;
+    height: 100%;
+    .border-radius(8px);
+    a {
+      text-decoration: none;
+      outline: 0;
+      .box-shadow (none);
+      &:focus {
+        outline: 0;
       }
     }
-  }
-  .element-overlay {
-    background-color: rgba(255, 255, 255, .9);
-    position: absolute;    
-    bottom: 0;
-    width: 100%;
-    .opacity(0);
-    padding: 10px;
-    .transition(all linear 500ms);
+    p {
+      color: @black;
+    }
     img {
-      width: auto; 
-      &.ostk-logo {
-        float: right;
+      max-width: 100%;
+    }
+    .branding {
+      background: @primary;    
+      padding: 5px 0;
+      img {
+        margin: 0 auto;
+        display: block;
       }
     }
-    p {
-      font-size: 16px;
-      margin: 0 0 5px 0;
-      &.title {
-        font-weight: bold;
-        color: @primary;
-      }
-      &.price {
-        font-weight: bold;
+    .ostk-element-content {
+      padding: 10px;
+      position: relative;
+      .border-radius(2px);
+      overflow: hidden;
+      p {
+        font-size: 16px;
+        margin: 0;
+        &.title {
+          color: @primary;
+        }
+        &.price {
+          color: @grey-dk;
+        }
       }
     }
-  }
+    .element-overlay {
+      background-color: rgba(255, 255, 255, .9);
+      position: absolute;    
+      bottom: 0;
+      width: 100%;
+      .opacity(0);
+      padding: 10px;
+      .transition(all linear 500ms);
+      img {
+        width: auto; 
+        &.ostk-logo {
+          float: right;
+        }
+      }
+      p {
+        font-size: 16px;
+        margin: 0 0 5px 0;
+        &.title {
+          font-weight: bold;
+          color: @primary;
+        }
+      }
+    }
+  }/* .ostk-element-inner */
+
+  /*----------------------------- Sales Event -----------------------------*/
+  &.sales-event {
+    .ostk-element-inner {
+      .ostk-element-content {
+        .product-info {
+          p {
+            &.title {
+              font-size: 16px;
+              border-bottom: solid 1px @grey-lt;
+              margin-bottom: 5px;
+              padding-bottom: 5px;
+              color: @black;
+              .truncate;
+            }
+            &.price {
+              color: @primary;
+              font-size: 18px;
+            }
+            &.savings {
+              color: @grey;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }/* salse-event */
+
+  /*----------------------------- Flash Deals -----------------------------*/
+  &.flash-deals {
+    .ostk-element-inner {
+      background: @flash-deal-yellow;
+      .border-radius(0px);
+      border: 2px solid @grey-lt;
+      .dealEndTime {
+        p {
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          margin: 0;
+        }
+        span {
+          font-size: 10px;
+        }
+        .single-line {
+          p {
+            line-height: 30px;          
+          }
+        }
+        .double-line {
+          margin: 10px 0;
+          p.bottom-line {
+            font-size: 10px;
+            span {
+              line-height: 10px;
+              margin: 0 7px;
+            }
+          }
+        }
+      }
+      .branding {
+        background: @white;
+        img {
+          width: 170px;
+        }
+      }
+      .ostk-element-header {
+        background: @white;
+      }
+      .ostk-element-content {
+        background: @white;
+        .border-radius(5px);
+        border: solid 1px @grey-lt;
+        margin: 0px 10px 10px 10px;
+      }
+      .ostk-element-footer {
+        background: @white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid @grey-lt;
+        .branding {
+          img {
+            width: 100px;
+          }
+        }
+      }
+    }
+  }/* flash-deals */
 
   /*----------------------------- Pattern 1 - search -----------------------------*/
   &.ostk-search {
@@ -111,55 +215,42 @@
   }/* .ostk-link  */
 
   /*----------------------------- Pattern 3 - rectangle -----------------------------*/
+  /* Default rectangle
+  -----------------------------------*/
   &.ostk-rectangle {
     .ostk-element-inner {
-      border: solid 2px @primary;
-      .border-radius(8px);
       &:hover {
         .element-overlay {
           .opacity(1);
         }
       }
-      .event-content {
-        overflow: hidden;
-        padding: 20px;
-        .event-sales {
-          p {
-            text-align: center;
-            color: @black;
-            font-size: 30px;
-            span.perc {
-              font-size: 60px;
-              display: block;
-            }
-            &.dealEndTime {
-              clear: both;
-            }
-          }
-          .percentOff {
+    }/* .ostk-element-inner */
+  }/* .ostk-rectangle  */
+
+  /* Sales Events
+  -----------------------------------*/
+  &.ostk-rectangle {
+    &.sales-event {
+      width: 300px;
+      height: 250px;
+      .ostk-element-inner {
+        .ostk-element-header {
+          border-bottom: 1px solid @grey-lt;
+        }
+        .ostk-element-content {
+          height: 135px;
+          .product-image {
             float: left;
-            width: 50%;
+            width: 90px;
           }
-          .image {
-            float: left;
-            width: 50%;
-            img {
-              width: 100%;
-            }
-          }
-        }/* event-content */
-        p {
-          color: @black;
-          font-size: 20px;
-          text-align: center;
-          &.categoryLabel {
-            text-decoration: underline;
-          }
-          &.dealEndTime {
+          .product-info {
+            float: right;
+            width: 150px;
+            margin-top: 10px;
           }
         }
-      }/* event-sales */
-    }
+      }/* .ostk-element-inner */
+    }/* sales-event */
   }/* .ostk-rectangle  */
 
   /*----------------------------- Pattern 4 - leaderboard -----------------------------*/
@@ -175,12 +266,12 @@
       .item-holder {
         margin-right: 150px;
         &.item-count-2 {
-          .element-content {
+          .ostk-element-content {
             width: 50%;  
             float: left;
           }
         }
-        .element-content {
+        .ostk-element-content {
           padding: 7px 0px;
           p {
             text-align: left;
@@ -213,9 +304,7 @@
   /*----------------------------- Pattern 5 - skyscraper -----------------------------*/
   &.ostk-skyscraper {
     .ostk-element-inner {
-      border: solid 2px @primary;
-      .border-radius(8px);
-      .element-content {
+      .ostk-element-content {
         p {
           text-align: center;
         }
@@ -226,6 +315,26 @@
         }
       }
     }/* .ostk-element-inner */
+  }/* .ostk-skyscraper  */
+
+
+  &.ostk-skyscraper {
+    &.sales-event {
+      width: 160px;
+      height: 600px;
+      .ostk-element-inner {
+        p {
+          &.dealEndTime {
+            margin-bottom: 15px;
+          }
+        }
+        .ostk-element-content {
+          p {
+            text-align: left;
+          }
+        }
+      }/* .ostk-element-inner */
+    }/* sales-event */
   }/* .ostk-skyscraper  */
 
   /*----------------------------- Pattern 6 - carousel -----------------------------*/
@@ -250,7 +359,7 @@
           margin: 0;
           li {
             position: relative;
-            .element-content {
+            .ostk-element-content {
               padding: 0;
               img {
                 width: 100%;
@@ -404,7 +513,7 @@
       &.img-large {
         width: 600px;
       }
-      .element-content {
+      .ostk-element-content {
       }
       .element-overlay {
         background-color: rgba(255, 255, 255, .9);

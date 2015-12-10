@@ -9,25 +9,25 @@ function ostk_generator_page() {
 	<div class="ostk-plugin-settings">
 		<?php echo $OverstockPlugin->get_header();?>
 		<section class="ostk-generator-page">
-			<form class="ostk-embed-builder">
-				<div class="row">
-					<div class="col-md-6">
-						<h1>Generator</h1>
-						<p>Please select an embed type</p>
+			<div class="row">
+				<div class="col-md-6">
+					<h1>Generator</h1>
+					<p>Please select an embed type</p>
+					<form class="ostk-embed-builder">
 						<select class="ostk-type" onSelect="selectType()"></select>
 						<div class="ostk-form-content"></div>
-					</div><!-- col -->
-					<div class="col-md-6">
-						<div class="embed-output">
-							<h3 class="center">Short Code</h3>
-							<textarea class="code"></textarea>
+					</form>
+				</div><!-- col -->
+				<div class="col-md-6">
+					<div class="embed-output">
+						<h3 class="center">Short Code</h3>
+						<textarea class="code"></textarea>
 
-							<h3 class="center">Example</h3>
-							<div class="embed-sandbox"></div>
-						</div>
-					</div><!-- col -->
-				</div>
-			</form>
+						<h3 class="center">Example</h3>
+						<div class="embed-sandbox"></div>
+					</div>
+				</div><!-- col -->
+			</div>
 			<div class="clearfix"></div>
 		</section>
 	</div><!-- ostk-plugin-settings -->
