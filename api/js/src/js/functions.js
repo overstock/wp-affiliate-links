@@ -9,6 +9,10 @@ function d(obj){
 	console.dir(obj);
 }
 
+function ostk_getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}//ostk_getRandomInt
+
 function ostk_addTrackingToUrl(url){
 	return url + '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
 };//ostk_addTrackingToUrl
@@ -18,17 +22,6 @@ function ostk_getTimeDiff(dealEndTime){
 	var currentTime = new Date();
 	return endTime - currentTime;
 }//ostk_getTimeDiff
-
-function ostk_timeDiffToString(timeDiff){
-	var msec = timeDiff;
-	var hh = Math.floor(msec / 1000 / 60 / 60);
-	msec -= hh * 1000 * 60 * 60;
-	var mm = Math.floor(msec / 1000 / 60);
-	msec -= mm * 1000 * 60;
-	var ss = Math.floor(msec / 1000);
-	msec -= ss * 1000;
-	return ostk_make_two_digits(hh) + ':' + ostk_make_two_digits(mm) + ':' + ostk_make_two_digits(ss);
-}//ostk_timeDiffToString
 
 function ostk_make_two_digits(int){
 	if(int < 10){
@@ -372,14 +365,6 @@ function ostk_findObjWhereKeyEqualsValue(obj, key_1, value_1){
   }//for
   return null;
 }//findObjWhereKeyEquals
-
-function ostk_getBranding(){
-	var output = '';
-	output = '<div class="branding">';
-		output += '<img src="'+ostk_api_url+'images/overstock-logo-white.png" width="110" height="30"/>';
-	output += '</div>';
-	return output;
-}//ostk_getBranding
 
 function ostk_getStyles(atts){
 	var output = '';

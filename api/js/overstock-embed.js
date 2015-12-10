@@ -529,17 +529,6 @@ function ostk_getTimeDiff(dealEndTime){
 	return endTime - currentTime;
 }//ostk_getTimeDiff
 
-function ostk_timeDiffToString(timeDiff){
-	var msec = timeDiff;
-	var hh = Math.floor(msec / 1000 / 60 / 60);
-	msec -= hh * 1000 * 60 * 60;
-	var mm = Math.floor(msec / 1000 / 60);
-	msec -= mm * 1000 * 60;
-	var ss = Math.floor(msec / 1000);
-	msec -= ss * 1000;
-	return ostk_make_two_digits(hh) + ':' + ostk_make_two_digits(mm) + ':' + ostk_make_two_digits(ss);
-}//ostk_timeDiffToString
-
 function ostk_make_two_digits(int){
 	if(int < 10){
 		return '0' + int;
@@ -883,14 +872,6 @@ function ostk_findObjWhereKeyEqualsValue(obj, key_1, value_1){
   return null;
 }//findObjWhereKeyEquals
 
-function ostk_getBranding(){
-	var output = '';
-	output = '<div class="branding">';
-		output += '<img src="'+ostk_api_url+'images/overstock-logo-white.png" width="110" height="30"/>';
-	output += '</div>';
-	return output;
-}//ostk_getBranding
-
 function ostk_getStyles(atts){
 	var output = '';
 	if(ostk_isset(atts.width)){
@@ -1093,70 +1074,55 @@ function ostk_Rectangle(atts, element){
 	// Generate Html
 	this.generateHtml = function(){
 		var output = '';
-
-		output += '<div class="ostk-element ostk-'+atts.type+'" '+ostk_getStyles(atts)+'>';
-			output += '<div class="ostk-element-inner">';
-				output += ostk_getBranding();
-				output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-
-					if(ostk_isset(atts.event)){
-						//Event
-
-						output += '<div class="event-content">'
-							if(atts.event == 'Flash Deals'){
-								//Flash Deals
-								output += '<img src="'+ostk_api_url+'images/overstock-flash-deals-logo.png'+'"/>';
-							}
-							output += '<div class="event-sales">';
-								output += '<div class="percentOff">';
-									output += '<p>up to <span class="perc">'+this.obj.percentOff+'%</span> off</p>';
-								output += '</div>';
-								output += '<div class="image">';
-									output += '<img src="'+this.obj.getImage_Large()+'"/>';
-								output += '</div>';
-								if(atts.event == 'Flash Deals'){
-									//Flash Deals
-									output += '<p class="dealEndTime"></p>';
-								}else{
-									output += '<p class="categoryLabel">'+this.obj.categoryLabel+'</p>';
-								}
-							output += '</div>';
-						output += '</div>';
-					}else{
-						//No Event
-						output += '<div class="element-content">';
-							output += '<img src="'+this.obj.getImage_Large()+'"/>';
-						output += '</div>';
-						output += '<div class="element-overlay">';
-						    output += '<div class="element-content">';
-								output += '<p class="title">'+this.obj.getName()+'</p>';
-								if(this.obj.averageReviewAsGif){
-									output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
-								}
-								output += '<p class="price">'+this.obj.getPrice()+'</p>';
-							output += '</div>';
-						output += '</div>';
-					}
-				output += '</a>';
-			output += '</div>';
-		output += '</div>';
-
-		output = $ostk_jQuery(output);
+		var product_name = '';
 
 		if(ostk_isset(atts.event)){
 			if(atts.event == 'Flash Deals'){
-				this.setFlashDealsTimer(output.find('.dealEndTime'));
+				product_name = this.obj.name;
+			}else{
+				product_name = this.obj.categoryLabel;
 			}
 		}
 
-		this.renderHTML(output);
+		output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+			if(ostk_isset(atts.event)){
+				//Sales Event
+				output += '<div class="ostk-element-content">'
+					output += '<img src="'+this.obj.getImage_Large()+'" class="product-image"/>';
+					output += '<div class="product-info">';
+						output += '<p class="product-name">'+product_name+'</p>';
+						if(atts.event == 'Flash Deals'){
+							output += '<p class="price">$'+this.obj.price+'</p>';
+						}
+						output += '<p class="savings">Save '+this.obj.percentOff+'%</p>';
+					output += '</div>';
+				output += '</div>';
+			}else{
+				//No Event
+				output += '<div class="ostk-element-content">';
+					output += '<img src="'+this.obj.getImage_Large()+'"/>';
+				output += '</div>';
+				output += '<div class="element-overlay">';
+				    output += '<div class="ostk-element-content">';
+						output += '<p class="title">'+this.obj.getName()+'</p>';
+						if(this.obj.averageReviewAsGif){
+							output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
+						}
+						output += '<p class="price">'+this.obj.getPrice()+'</p>';
+					output += '</div>';
+				output += '</div>';
+			}
+		output += '</a>';
+
+
+		this.renderElement(output);
 
 	}//generateHtml
 
 	this.init();
 }//ostk_Reactagngle
 
-function ostk_Leaderboard(atts, element){
+function ostk_Leaderboard(atts, element){'white'
 	/* 
 	Leaderboard: Lets you create a leaderboard banner for up to two products 
 	*/
@@ -1196,12 +1162,12 @@ function ostk_Leaderboard(atts, element){
 		var output = '';
 		output += '<div class="ostk-element ostk-leaderboard">';
 			output += '<div class="ostk-element-inner">';
-				output += ostk_getBranding();
+				output += this.getBranding('white');
 
 				if(ostk_isset(atts.event)){
 				    var product = productList[0];
 
-				    output += '<div class="element-content">';
+				    output += '<div class="ostk-element-content">';
 						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
 
 							if(atts.event == 'Flash Deals'){
@@ -1230,7 +1196,7 @@ function ostk_Leaderboard(atts, element){
 					output += '<div class="item-holder item-count-'+productList.length+'">';
 						for(var i = 0 ; i < productList.length ; i++){
 							var product = productList[i];
-						    output += '<div class="element-content">';
+						    output += '<div class="ostk-element-content">';
 								output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
 									output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
 									output += '<p class="title">'+product.getName()+'</p>';
@@ -1274,10 +1240,14 @@ function ostk_Skyscraper(atts, element){
 		var error = '';
 		atts.number_of_items = (parseInt(atts.number_of_items) > 3) ? 3 : atts.number_of_items;
 
-		if(ostk_isset(atts.event) || atts.number_of_items == 1){
-			this.obj = new ostk_SingleProductData();
-		}else{
+		if(ostk_isset(atts.event)){
+			atts.number_of_items = 2;
+		}
+
+		if(atts.number_of_items > 1){
 			this.obj = new ostk_MultiProductData();
+		}else{
+			this.obj = new ostk_SingleProductData();
 		}
 		this.obj.limit = atts.number_of_items;
 
@@ -1290,74 +1260,53 @@ function ostk_Skyscraper(atts, element){
 		this.initObject();
 	};//initElement
 
-
 	// Generate Html
 	this.generateHtml = function(){
 		var productList = Array();
-		if(ostk_isset(atts.event) || atts.number_of_items == 1){
-			productList.push(this.obj);
-		}else{
-			productList = this.obj.getProductList();
-		}
 		var output = '';
-		output += '<div class="ostk-element ostk-skyscraper" '+ostk_getStyles(atts)+'>';
-			output += '<div class="ostk-element-inner">';
-				output += ostk_getBranding();
-				if(ostk_isset(atts.event)){
-					//Event
-				    var product = productList[0];
-				    output += '<div class="element-content">';
-						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+		var product_name = '';
 
-							if(atts.event == 'Flash Deals'){
-								//Flash Deals
-								output += '<img src="'+ostk_api_url+'images/overstock-flash-deals-logo.png'+'"/>';
-							}
-
-							output += '<div class="percentOff">';
-								output += '<p>'+product.percentOff+'% off</p>';
-							output += '</div>';
-
-							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-
-							if(atts.event == 'Flash Deals'){
-								//Flash Deals
-								output += '<p>'+product.name+'</p>';
-								output += '<p class="dealEndTime"></p>';
-							}else{
-								output += '<p class="categoryLabel">'+product.categoryLabel+'</p>';
-							}
-
-						output += '</a>';
-					output += '</div>';
-				}else{
-					//No Event
-					for(var i = 0 ; i < productList.length ; i++){
-					    var product = productList[i];
-					    output += '<div class="element-content">';
-							output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-								output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-								output += '<p class="title">'+product.getName()+'</p>';
-								if(product.averageReviewAsGif){
-									output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-								}
-								output += '<p class="price">'+product.getPrice()+'</p>';
-							output += '</a>';
-						output += '</div>';
-					}//for
-				}
-			output += '</div>';
-		output += '</div>';
-
-		output = $ostk_jQuery(output);
-
-		if(ostk_isset(atts.event)){
-			if(atts.event == 'Flash Deals'){
-				this.setFlashDealsTimer(output.find('.dealEndTime'));
-			}
+		if(atts.number_of_items > 1){
+			productList = this.obj.getProductList();
+		}else{
+			productList.push(this.obj);
 		}
 
-		this.renderHTML(output);
+		for(var i = 0 ; i < productList.length ; i++){
+		    var product = productList[i];
+		    output += '<div class="ostk-element-content">';
+				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+					if(ostk_isset(atts.event)){
+						//Sales Event
+						if(ostk_isset(atts.event)){
+							if(atts.event == 'Flash Deals'){
+								product_name = product.name;
+							}else{
+								product_name = product.categoryLabel;
+							}
+						}
+
+						output += '<div class="product-info">';
+							output += '<p class="product-name">'+product_name+'</p>';
+							if(atts.event == 'Flash Deals'){
+								output += '<p class="price">$'+product.price+'</p>';
+							}
+							output += '<p class="savings">Save '+product.percentOff+'%</p>';
+						output += '</div>';
+					}else{
+						//No Event
+						output += '<p class="title">'+product.getName()+'</p>';
+						if(product.averageReviewAsGif){
+							output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
+						}
+						output += '<p class="price">'+product.getPrice()+'</p>';
+					}
+				output += '</a>';
+			output += '</div>';
+		}//for
+
+		this.renderElement(output);
 
 	}//generateHtml
 
@@ -1524,7 +1473,7 @@ function ostk_Carousel(atts, element){
 		var output = '';
 		output += '<li data-thumb="'+productImg+'">';
 			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			    output += '<div class="element-content">';
+			    output += '<div class="ostk-element-content">';
 					output += '<img src="'+productImg+'"/>';
 				output += '</div>';
 			    output += '<div class="element-overlay">';
@@ -1651,11 +1600,11 @@ function ostk_Stockphoto(atts, element){
 			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(atts)+'>';
 				output += '<div class="ostk-element-inner">';
 					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-					    output += '<div class="element-content">';
+					    output += '<div class="ostk-element-content">';
 							output += '<img src="'+this.obj.getImageAtIndex(atts.image_number-1)+'" width="'+atts.width+'" height="'+atts.height+'" style="'+atts.custom_css+'">';
 							output += '</div>';
 						    output += '<div class="element-overlay">';
-							    output += '<div class="element-content">';
+							    output += '<div class="ostk-element-content">';
 									output += '<p class="title">'+this.obj.getName()+'</p>';
 									if(this.obj.averageReviewAsGif){
 										output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
@@ -1730,29 +1679,28 @@ var ostk_clickurl = window.location.href;
 
 var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
 
-// var query = window.location;
-// l('query', query);
+
 
 var scripts = document.getElementsByTagName('script');
 for(var i = 0 ; i < scripts.length ; i++){
 	if(scripts[i].src.indexOf("overstock-embed") > -1){
 		var ostk_src = scripts[i].src;
-		var params = ostk_src.split('?')[1];
-		var param_items = params.split('&');
-		for(var k = 0 ; k < param_items.length ; k++){
-			var param_pieces = param_items[k].split('=');
-			var key = param_pieces[0];
-			var value = param_pieces[1];
-			if(key == 'id'){
-				ostk_developerId = value;
-				break;
-			}
-		}//for
-		break;
+		if(ostk_src.indexOf("?") > -1){
+			var params = ostk_src.split('?')[1];
+			var param_items = params.split('&');
+			for(var k = 0 ; k < param_items.length ; k++){
+				var param_pieces = param_items[k].split('=');
+				var key = param_pieces[0];
+				var value = param_pieces[1];
+				if(key == 'id'){
+					ostk_developerId = value;
+					break;
+				}
+			}//for
+			break;
+		}
 	}//for	
 }//for
-
-l('ostk_developerId', ostk_developerId);
 
 //Localhost for testing
 if(ostk_clickurl === 'http://localhost/~thoki/ostk-example/'){
@@ -2000,17 +1948,45 @@ function ostk_Element(atts, element){
 
 		var _this = this;
 		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
-		obj.html(ostk_timeDiffToString(timeDiff));
+
+		obj.html(this.timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
 			if(timeDiff <= 1000){
 				clearInterval(flashDealsTimer);
 				_this.initObject();
 			}else{
 				timeDiff -= 1000;
-				obj.html(ostk_timeDiffToString(timeDiff));
+				obj.html(_this.timeDiffToString(timeDiff));
 			}
 		}, 1000, true);
 	};//setFlashDealsTimer
+
+	this.timeDiffToString = function(timeDiff){
+		var msec = timeDiff;
+		var hh = Math.floor(msec / 1000 / 60 / 60);
+		msec -= hh * 1000 * 60 * 60;
+		var mm = Math.floor(msec / 1000 / 60);
+		msec -= mm * 1000 * 60;
+		var ss = Math.floor(msec / 1000);
+		msec -= ss * 1000;
+
+		if(this.atts.type === 'skyscraper'){
+			return '<div class="double-line">' + 
+				'<p>'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
+				'<p class="bottom-line">' +
+					'<span>HR</span>' +
+					'<span>MIN</span>' +
+					'<span>SEC</span>';
+				'</p>';	
+			'</div>';	
+		}else{
+			return '<div class="single-line">' + 
+				'<p class="single-line">'+ostk_make_two_digits(hh) + ' <span>HR</span> : ' + ostk_make_two_digits(mm) + ' <span>MIN</span> : ' + ostk_make_two_digits(ss) + ' <span>SEC</span>' + '</p>' +
+			'</div>';	
+		}
+
+	}//timeDiffToString
+
 
 	//Render HTML
 	this.renderHTML = function(data){
@@ -2021,6 +1997,83 @@ function ostk_Element(atts, element){
 		data.hide();
 		data.fadeIn('slow');
 	};//rederHTML
+
+	this.getBranding = function(brand){
+		var output = '';
+		var img_url = '';		
+
+		if(!ostk_isset(brand)){
+			brand = 'overstock';
+		}
+
+		switch(brand){
+			case 'flash-deals':
+				img_url = 'overstock-flash-deals-logo.png';		
+				break;
+			case 'white':
+				img_url = 'overstock-logo-white.png';		
+				break;
+			default:
+				img_url = 'overstock-logo.png';		
+		}//switch
+
+		output = '<div class="branding">';
+			output += '<img src="'+ostk_api_url+'images/'+img_url+'"/>';
+		output += '</div>';
+
+		return output;
+	};//getBranding
+
+	this.renderElement = function(elment_contents){
+		var output = '';
+		var eventClass = '';
+		var styles = '';
+		var brand_img = 'white';
+
+		if(ostk_isset(atts.event)){
+			eventClass += ' sales-event';
+			if(atts.event == 'Flash Deals'){
+				eventClass += ' flash-deals';
+				brand_img = 'flash-deals';
+			}
+		}else {
+			styles = ostk_getStyles(atts);
+		}
+
+
+		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
+			output += '<div class="ostk-element-inner">';
+
+				output += '<div class="ostk-element-header">';
+					output += this.getBranding(brand_img);
+				output += '</div>';
+
+				if(atts.event == 'Flash Deals'){
+					output += '<div class="dealEndTime"></div>';
+				}
+
+				output += elment_contents;
+
+				if(atts.event == 'Flash Deals'){
+					output += '<div class="ostk-element-footer">';
+		    			output += this.getBranding();
+					output += '</div>';
+				}
+										
+			output += '</div>';
+		output += '</div>';
+
+		output = $ostk_jQuery(output);
+
+		if(ostk_isset(atts.event)){
+			if(atts.event == 'Flash Deals'){
+				this.setFlashDealsTimer(output.find('.dealEndTime'));
+			}
+		}
+
+		this.renderHTML(output);
+	};//renderElement
+
 
 	//Render HTML Error
 	this.renderHTMLError = function(data){
@@ -2272,10 +2325,15 @@ var ostk_MultiProductData = function(){
 			function(the_item){
 				_this.productList.push(the_item);
 				_this.checkProductCompletion(callback, errorCallback);
+
+				//Flash deals end time
+				if(the_item.dealEndTime){
+					_this.dealEndTime = the_item.dealEndTime;
+				}
 			},
 			//Error
 			function(error){
-				_this.invalidProductIDs.push('');
+				_this.invalidProductIDs.push('hoki');
 				_this.checkProductCompletion(callback, errorCallback);
 			}
 		);

@@ -3,6 +3,7 @@
 
 1) Install all dependant libraries:
 	npm install grunt
+	npm install load-grunt-tasks --save-dev
 	npm install grunt-contrib-concat --save-dev
 	npm install grunt-contrib-uglify --save-dev
 
@@ -10,6 +11,9 @@
 	grunt
 */
 module.exports = function(grunt) {
+
+	//Load Tasks
+	require('load-grunt-tasks')(grunt);
 
 	// Project configuration.
 	grunt.initConfig({
@@ -39,10 +43,6 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-
-	//Enable plugins
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	//Default task
 	grunt.registerTask('default', ['concat', 'uglify']);

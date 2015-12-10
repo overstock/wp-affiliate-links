@@ -102,15 +102,18 @@ function ostk_load_js() {
   // Page specific JS
   switch($_REQUEST['page']){
     case 'ostk-documentation':
-      wp_enqueue_script( 'ostk-page-documentation', plugins_url('js/src/js/page-documentation.js', __FILE__), array('jquery'), '1.0', true );
+      $ostk_pageJs = 'page-documentation';
       break;
     case 'ostk-generator':
-      wp_enqueue_script( 'ostk-page-generator', plugins_url('js/src/js/page-generator.js', __FILE__), array('jquery'), '1.0', true );
+      $ostk_pageJs = 'page-generator';
       break;      
     case 'ostk-home':
-      wp_enqueue_script( 'ostk-page-home', plugins_url('js/src/js/page-home.js', __FILE__), array('jquery'), '1.0', true );
+      $ostk_pageJs = 'page-home';
       break;
   }//switch
+  if(isset($ostk_pageJs)){
+    wp_enqueue_script( 'ostk-'.$ostk_pageJs, plugins_url('js/src/js/'.$ostk_pageJs.'.js', __FILE__), array('jquery'), '1.0', true );
+  }
 
 
 }//ostk_admin_js

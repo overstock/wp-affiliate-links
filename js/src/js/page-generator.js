@@ -5,7 +5,7 @@ function ostk_Generator(){
 	ostk_PatterSelector.call(this);
 
 	//Concat Form Values
-	this.concatFormValues = function(obj){
+	this.concatFormValues = function(obj, platform){
 		var str = '';
 		var key = obj[0].name;
 		var value = obj[0].value;

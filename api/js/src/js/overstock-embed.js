@@ -10,32 +10,34 @@ var ostk_clickurl = window.location.href;
 
 var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
 
-// var query = window.location;
-// l('query', query);
+
 
 var scripts = document.getElementsByTagName('script');
 for(var i = 0 ; i < scripts.length ; i++){
 	if(scripts[i].src.indexOf("overstock-embed") > -1){
 		var ostk_src = scripts[i].src;
-		var params = ostk_src.split('?')[1];
-		var param_items = params.split('&');
-		for(var k = 0 ; k < param_items.length ; k++){
-			var param_pieces = param_items[k].split('=');
-			var key = param_pieces[0];
-			var value = param_pieces[1];
-			if(key == 'id'){
-				ostk_developerId = value;
-				break;
-			}
-		}//for
-		break;
+		if(ostk_src.indexOf("?") > -1){
+			var params = ostk_src.split('?')[1];
+			var param_items = params.split('&');
+			for(var k = 0 ; k < param_items.length ; k++){
+				var param_pieces = param_items[k].split('=');
+				var key = param_pieces[0];
+				var value = param_pieces[1];
+				if(key == 'id'){
+					ostk_developerId = value;
+					break;
+				}
+			}//for
+			break;
+		}
 	}//for	
 }//for
 
-l('ostk_developerId', ostk_developerId);
-
 //Localhost for testing
-if(ostk_clickurl === 'http://localhost/~thoki/ostk-example/'){
+if(
+ostk_clickurl === 'http://localhost/~thoki/ostk-example/' ||
+ostk_clickurl === 'http://localhost/~thoki/ostk-gui/'
+){
 	ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
 }
 
@@ -280,17 +282,45 @@ function ostk_Element(atts, element){
 
 		var _this = this;
 		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
-		obj.html(ostk_timeDiffToString(timeDiff));
+
+		obj.html(this.timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
 			if(timeDiff <= 1000){
 				clearInterval(flashDealsTimer);
 				_this.initObject();
 			}else{
 				timeDiff -= 1000;
-				obj.html(ostk_timeDiffToString(timeDiff));
+				obj.html(_this.timeDiffToString(timeDiff));
 			}
 		}, 1000, true);
 	};//setFlashDealsTimer
+
+	this.timeDiffToString = function(timeDiff){
+		var msec = timeDiff;
+		var hh = Math.floor(msec / 1000 / 60 / 60);
+		msec -= hh * 1000 * 60 * 60;
+		var mm = Math.floor(msec / 1000 / 60);
+		msec -= mm * 1000 * 60;
+		var ss = Math.floor(msec / 1000);
+		msec -= ss * 1000;
+
+		if(this.atts.type === 'skyscraper'){
+			return '<div class="double-line">' + 
+				'<p>'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
+				'<p class="bottom-line">' +
+					'<span>HR</span>' +
+					'<span>MIN</span>' +
+					'<span>SEC</span>';
+				'</p>';	
+			'</div>';	
+		}else{
+			return '<div class="single-line">' + 
+				'<p class="single-line">'+ostk_make_two_digits(hh) + ' <span>HR</span> : ' + ostk_make_two_digits(mm) + ' <span>MIN</span> : ' + ostk_make_two_digits(ss) + ' <span>SEC</span>' + '</p>' +
+			'</div>';	
+		}
+
+	}//timeDiffToString
+
 
 	//Render HTML
 	this.renderHTML = function(data){
@@ -301,6 +331,83 @@ function ostk_Element(atts, element){
 		data.hide();
 		data.fadeIn('slow');
 	};//rederHTML
+
+	this.getBranding = function(brand){
+		var output = '';
+		var img_url = '';		
+
+		if(!ostk_isset(brand)){
+			brand = 'overstock';
+		}
+
+		switch(brand){
+			case 'flash-deals':
+				img_url = 'overstock-flash-deals-logo.png';		
+				break;
+			case 'white':
+				img_url = 'overstock-logo-white.png';		
+				break;
+			default:
+				img_url = 'overstock-logo.png';		
+		}//switch
+
+		output = '<div class="branding">';
+			output += '<img src="'+ostk_api_url+'images/'+img_url+'"/>';
+		output += '</div>';
+
+		return output;
+	};//getBranding
+
+	this.renderElement = function(elment_contents){
+		var output = '';
+		var eventClass = '';
+		var styles = '';
+		var brand_img = 'white';
+
+		if(ostk_isset(atts.event)){
+			eventClass += ' sales-event';
+			if(atts.event == 'Flash Deals'){
+				eventClass += ' flash-deals';
+				brand_img = 'flash-deals';
+			}
+		}else {
+			styles = ostk_getStyles(atts);
+		}
+
+
+		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
+			output += '<div class="ostk-element-inner">';
+
+				output += '<div class="ostk-element-header">';
+					output += this.getBranding(brand_img);
+				output += '</div>';
+
+				if(atts.event == 'Flash Deals'){
+					output += '<div class="dealEndTime"></div>';
+				}
+
+				output += elment_contents;
+
+				if(atts.event == 'Flash Deals'){
+					output += '<div class="ostk-element-footer">';
+		    			output += this.getBranding();
+					output += '</div>';
+				}
+										
+			output += '</div>';
+		output += '</div>';
+
+		output = $ostk_jQuery(output);
+
+		if(ostk_isset(atts.event)){
+			if(atts.event == 'Flash Deals'){
+				this.setFlashDealsTimer(output.find('.dealEndTime'));
+			}
+		}
+
+		this.renderHTML(output);
+	};//renderElement
+
 
 	//Render HTML Error
 	this.renderHTMLError = function(data){
@@ -346,7 +453,8 @@ var ostk_SingleProductData = function(){
 			url = ostk_addTrackingToUrl(url);	
 			$ostk_jQuery.get( url, function( productData ){
 				if(productData.products){
-					productData = productData.products[0];
+					var randInt = ostk_getRandomInt(0, productData.products.length-1);
+					productData = productData.products[randInt];
 				}else if(productData.sales){
 					productData = productData.sales[0];
 				}
@@ -362,7 +470,7 @@ var ostk_SingleProductData = function(){
 		if(productData.images){
 		    this.arrayOfAllProductImages = this.getImageList(productData.images);
 		}
-		this.name = productData.name;
+		this.name = this.setName(productData);
 		this.productId = productData.id;
 		this.developerId = ostk_developerId;
 		this.description = productData.description;
@@ -388,10 +496,6 @@ var ostk_SingleProductData = function(){
 			this.dealEndTime = productData.dealEndTime;
 		}
 
-		if(productData.categoryLabel){
-			this.categoryLabel = this.getCategoryLabel(productData.categoryLabel);
-		}
-
 		if('percentOff' in productData){
 			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
 		}
@@ -402,11 +506,6 @@ var ostk_SingleProductData = function(){
 
 		callback(this);
 	};//processData
-
-	this.getCategoryLabel = function(str){
-		var array = str.split(' - ');
-		return array[array.length-1];
-	};
 
 	this.getImageList = function(images){
 		var a = Array();
@@ -436,35 +535,43 @@ var ostk_SingleProductData = function(){
 	}
 
 	this.getProductId = function(){
-	return (ostk_isset(this.productId) ? this.productId : ostk_formatError("productId is not set") );
+		return (ostk_isset(this.productId) ? this.productId : ostk_formatError("productId is not set") );
 	}
 
 	this.getName = function(){
-	return (ostk_isset(this.name) ? this.name : ostk_formatError("name is not set") );
+		return (ostk_isset(this.name) ? this.name : ostk_formatError("name is not set") );
+	}
+
+	this.setName = function(productData){
+		if(ostk_isset(productData.name)){
+			return productData.name;
+		}else if(ostk_isset(productData.detailMsg)){
+			return productData.detailMsg;
+		}
 	}
 
 	this.getPrice = function(){
-	return (ostk_isset(this.price) ? this.price : ostk_formatError("price is not set") );
+		return (ostk_isset(this.price) ? this.price : ostk_formatError("price is not set") );
 	}
 
 	this.getImageBaseUrl = function(){
-	return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("baseImageUrl is not set") );
+		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("baseImageUrl is not set") );
 	}
 
 	this.getImage_Thumbnail = function(){
-	return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("imgUrl_thumbnail is not set") );
+		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("imgUrl_thumbnail is not set") );
 	}
 
 	this.getImage_Medium = function(){
-	return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("imgUrl_medium is not set") );
+		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("imgUrl_medium is not set") );
 	}
 
 	this.getImage_Large = function(){
-	return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("imgUrl_large is not set") );
+		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("imgUrl_large is not set") );
 	}
 
 	this.getAffiliateUrl = function(){
-	return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("affiliateUrl is not set") );
+		return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("affiliateUrl is not set") );
 	}
 
 	this.getAverageReviewAsDecimal = function(){
@@ -476,7 +583,7 @@ var ostk_SingleProductData = function(){
 	}
 
 	this.getImageAtIndex = function(index){
-	  return this.arrayOfAllProductImages[index];
+		return this.arrayOfAllProductImages[index];
 	}
 
 	this.getArrayOfAllProductImages = function(){
@@ -552,10 +659,15 @@ var ostk_MultiProductData = function(){
 			function(the_item){
 				_this.productList.push(the_item);
 				_this.checkProductCompletion(callback, errorCallback);
+
+				//Flash deals end time
+				if(the_item.dealEndTime){
+					_this.dealEndTime = the_item.dealEndTime;
+				}
 			},
 			//Error
 			function(error){
-				_this.invalidProductIDs.push('');
+				_this.invalidProductIDs.push('hoki');
 				_this.checkProductCompletion(callback, errorCallback);
 			}
 		);
