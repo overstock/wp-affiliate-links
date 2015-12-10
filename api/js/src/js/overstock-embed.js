@@ -9,8 +9,10 @@ var ostk_plugin = new ostk_Plugin();
 var ostk_clickurl = window.location.href;
 
 var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
-
-
+//Localhost for testing
+if(ostk_clickurl.indexOf('http://localhost/~thoki') > -1){
+	ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+}
 
 var scripts = document.getElementsByTagName('script');
 for(var i = 0 ; i < scripts.length ; i++){
@@ -33,13 +35,6 @@ for(var i = 0 ; i < scripts.length ; i++){
 	}//for	
 }//for
 
-//Localhost for testing
-if(
-ostk_clickurl === 'http://localhost/~thoki/ostk-example/' ||
-ostk_clickurl === 'http://localhost/~thoki/ostk-gui/'
-){
-	ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
-}
 
 var event_list = [
 	{
@@ -84,11 +79,18 @@ function ostk_Plugin(){
 		$ostk_jQuery = jQuery.noConflict();
 		$ostk_jQuery(document).ready(function() {
 			_this.load_css();
-			_this.get_elements();
 			_this.ostk_preloaders();
-
+			_this.getPatterns();
 		});
 	};//ostk_init_elements
+
+	this.getPatterns = function(){
+		var _this = this;
+		$ostk_jQuery.getJSON(ostk_api_url + "patterns.json", function(ostk_patterns) {
+			_this.ostk_patterns = ostk_patterns;
+			_this.get_elements();
+		});
+	};//getPatterns
 
 	this.ostk_get_script = function(url, success) {
 		var script = document.createElement('script');
@@ -211,6 +213,7 @@ function ostk_Element(atts, element){
 	this.atts = atts;
 	this.element = element;
 
+
 	//Init
 	this.init = function(){
 		/**
@@ -275,6 +278,7 @@ function ostk_Element(atts, element){
 		);
 	};//initObject
 
+	//Set Flash Deals Timer
 	this.setFlashDealsTimer = function(obj){
 		// var t = new Date();
 		// t.setSeconds(t.getSeconds() + 5);
@@ -295,6 +299,7 @@ function ostk_Element(atts, element){
 		}, 1000, true);
 	};//setFlashDealsTimer
 
+	// Time Difference to String
 	this.timeDiffToString = function(timeDiff){
 		var msec = timeDiff;
 		var hh = Math.floor(msec / 1000 / 60 / 60);
@@ -318,20 +323,9 @@ function ostk_Element(atts, element){
 				'<p class="single-line">'+ostk_make_two_digits(hh) + ' <span>HR</span> : ' + ostk_make_two_digits(mm) + ' <span>MIN</span> : ' + ostk_make_two_digits(ss) + ' <span>SEC</span>' + '</p>' +
 			'</div>';	
 		}
-
 	}//timeDiffToString
 
-
-	//Render HTML
-	this.renderHTML = function(data){
-		data = $ostk_jQuery(data);
-		this.element.fadeOut('slow');
-		this.element.replaceWith(data);
-		this.element = data;
-		data.hide();
-		data.fadeIn('slow');
-	};//rederHTML
-
+	//Get Branding
 	this.getBranding = function(brand){
 		var output = '';
 		var img_url = '';		
@@ -374,17 +368,12 @@ function ostk_Element(atts, element){
 			styles = ostk_getStyles(atts);
 		}
 
-
 		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
 			output += '<div class="ostk-element-inner">';
 
 				output += '<div class="ostk-element-header">';
 					output += this.getBranding(brand_img);
 				output += '</div>';
-
-				if(atts.event == 'Flash Deals'){
-					output += '<div class="dealEndTime"></div>';
-				}
 
 				output += elment_contents;
 
@@ -409,298 +398,19 @@ function ostk_Element(atts, element){
 	};//renderElement
 
 
+	//Render HTML
+	this.renderHTML = function(data){
+		data = $ostk_jQuery(data);
+		this.element.fadeOut('slow');
+		this.element.replaceWith(data);
+		this.element = data;
+		data.hide();
+		data.fadeIn('slow');
+	};//rederHTML
+
 	//Render HTML Error
 	this.renderHTMLError = function(data){
 
 		this.renderHTML(ostk_formatError(data));
 	};//renderHTMLError
 }//ostk_Element
-
-var ostk_SingleProductData = function(){
-	/*
-	SINGLE Product Data Class
-	takes a productId or query and returns specific product details
-	*/ 
-	this.productId;
-	this.name;
-	this.price;
-	this.baseImageUrl;
-	this.imgUrl_large;
-	this.imgUrl_medium;
-	this.imgUrl_thumbnail;
-	this.affiliateUrl;
-	this.averageReviewAsDecimal;
-	this.averageReviewAsGif;
-	this.arrayOfAllProductImages;
-	this.description;
-	this.multiImages = false;
-
-	this.init = function(callback, errorCallback){
-		var _this = this;
-		var url = '';
-
-		if(this.obj){
-			_this.processData(this.obj, callback, errorCallback);
-		}else{
-			if(this.productId){
-				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
-				if(this.multiImages){
-					url +=	"&fetch_all_images=true";
-				}
-			}else if(this.query){
-				url = this.query;
-			}
-			url = ostk_addTrackingToUrl(url);	
-			$ostk_jQuery.get( url, function( productData ){
-				if(productData.products){
-					var randInt = ostk_getRandomInt(0, productData.products.length-1);
-					productData = productData.products[randInt];
-				}else if(productData.sales){
-					productData = productData.sales[0];
-				}
-				_this.processData(productData, callback, errorCallback);
-			})
-			.fail(function(){
-				errorCallback('Invalid product id: ' + _this.productId);
-			});
-		}
-	}//init
-
-	this.processData = function(productData, callback, errorCallback){
-		if(productData.images){
-		    this.arrayOfAllProductImages = this.getImageList(productData.images);
-		}
-		this.name = this.setName(productData);
-		this.productId = productData.id;
-		this.developerId = ostk_developerId;
-		this.description = productData.description;
-
-		if(productData.price){
-			this.price = productData.price;
-		}
-
-		if(productData.url){
-			this.affiliateUrl = productData.url;
-		}else if(productData.saleURL){
-			this.affiliateUrl = productData.saleURL;
-		}
-
-		if(productData.review){
-			if(productData.review.stars){
-			    this.averageReviewAsDecimal = productData.review.stars;
-			    this.averageReviewAsGif = this.getStars(productData.review.stars);
-			}
-		}
-
-		if(productData.dealEndTime){
-			this.dealEndTime = productData.dealEndTime;
-		}
-
-		if('percentOff' in productData){
-			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
-		}
-
-		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
-		this.imgUrl_medium = productData.imageURL;
-		this.imgUrl_thumbnail = productData.smallImageURL;
-
-		callback(this);
-	};//processData
-
-	this.getImageList = function(images){
-		var a = Array();
-		for(var i = 0 ; i < images.length ; i++){
-			a.push(images[i]['scaledImages'][3]['url']);
-		}//for
-		return a;
-	}
-
-	//Return star gif from float value
-	this.getStars = function(stars){
-    	//Add trailing ".0" if it doesn't alreay have it
-    	if(ostk_isset(stars)){
-    	    if(stars % 1 === 0){
-		    	stars = stars+'.0';
-		    }
-		    stars = String(stars);
-		    stars = stars.split('.').join('_');
-		    return "http://ak1.ostkcdn.com/img/mxc/stars"+stars+'.gif';
-    	}else{
-    		return null;
-    	}
-	}
-
-	this.isValidProductID = function(){
-		return this.validProductID;
-	}
-
-	this.getProductId = function(){
-		return (ostk_isset(this.productId) ? this.productId : ostk_formatError("productId is not set") );
-	}
-
-	this.getName = function(){
-		return (ostk_isset(this.name) ? this.name : ostk_formatError("name is not set") );
-	}
-
-	this.setName = function(productData){
-		if(ostk_isset(productData.name)){
-			return productData.name;
-		}else if(ostk_isset(productData.detailMsg)){
-			return productData.detailMsg;
-		}
-	}
-
-	this.getPrice = function(){
-		return (ostk_isset(this.price) ? this.price : ostk_formatError("price is not set") );
-	}
-
-	this.getImageBaseUrl = function(){
-		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("baseImageUrl is not set") );
-	}
-
-	this.getImage_Thumbnail = function(){
-		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("imgUrl_thumbnail is not set") );
-	}
-
-	this.getImage_Medium = function(){
-		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("imgUrl_medium is not set") );
-	}
-
-	this.getImage_Large = function(){
-		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("imgUrl_large is not set") );
-	}
-
-	this.getAffiliateUrl = function(){
-		return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("affiliateUrl is not set") );
-	}
-
-	this.getAverageReviewAsDecimal = function(){
-		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("averageReviewAsDecimal is not set") );
-	}
-
-	this.getAverageReviewAsGif = function(){
-		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("averageReviewAsGif is not set") );
-	}
-
-	this.getImageAtIndex = function(index){
-		return this.arrayOfAllProductImages[index];
-	}
-
-	this.getArrayOfAllProductImages = function(){
-		return this.arrayOfAllProductImages;
-	}
-
-	this.getDescription = function(){
-		return this.description;
-	}
-}//ostk_SingleProductData
-
-var ostk_MultiProductData = function(){
-	/*
-	MULTIPLE Product Data Class
-	takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
-	& num (the number of ostk_SingleProductData objects to return)
-		   
-	Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
-	Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
-	and the class supports the general API call. 
-	*/
-
-	this.productIds;
-	this.limit;
-	this.developerId = ostk_developerId;
-	this.productList = Array();
-	this.invalidProductIDs = Array();
-	this.product_count_down = 0;
-
-	this.init = function(callback, errorCallback) {
-		var _this = this;
-		if(this.productIds){
-			if(this.limit !== null){
-				productIds = ostk_limitArrayCount(this.productIds, this.limit);
-			}
-			this.product_count_down = productIds.length;
-			for(var i = 0 ; i < productIds.length ; i++){
-				var item = new ostk_SingleProductData();
-				item.productId = productIds[i];
-				this.createSingleObjects(item, callback, errorCallback);
-			}//for
-		}else if(this.query){
-			if(this.limit !== null){
-				this.query += '&limit=' + this.limit;
-			}
-			this.query = ostk_addTrackingToUrl(this.query);	
-			$ostk_jQuery.get( this.query, function( productData ){
-				if(productData.products){
-					productData = productData.products;
-				}else if(productData.sales){
-					productData = productData.sales;
-				}
-
-				_this.product_count_down = productData.length;
-
-				for(var i = 0 ; i < productData.length ; i++){
-					var item = new ostk_SingleProductData();
-					item.obj =  productData[i];
-					_this.createSingleObjects(item, callback, errorCallback);
-				}//for
-
-			})
-			.fail(function(){
-				errorCallback('Invalid query');
-			});
-		}
-	}//init
-
-	this.createSingleObjects = function(item, callback, errorCallback){
-		var _this = this;
-		item.init(
-			//Success
-			function(the_item){
-				_this.productList.push(the_item);
-				_this.checkProductCompletion(callback, errorCallback);
-
-				//Flash deals end time
-				if(the_item.dealEndTime){
-					_this.dealEndTime = the_item.dealEndTime;
-				}
-			},
-			//Error
-			function(error){
-				_this.invalidProductIDs.push('hoki');
-				_this.checkProductCompletion(callback, errorCallback);
-			}
-		);
-	};//createSingleObjects
-
-	this.checkProductCompletion = function(callback, errorCallback){
-	    this.product_count_down--;
-	    if(this.product_count_down === 0){
-	    	if(this.invalidProductIDs.length > 0){
-				errorCallback();
-	    	}else{
-			    callback();
-	    	}
-	    }
-	};//checkProductCompletion
-
-	this.isAllValidProductIDs = function(){
-	    if(this.invalidProductIDs.length > 0){
-	    	multiMarker = '';
-		    if(this.invalidProductIDs.length > 1){
-		    	multiMarker = 's';
-	    	}
-	    	return false;
-    	}else{
-	    	return true;
-    	}
-	}//isAllValidProductIDs
-
-	this.getProductList = function(){
-
-		return this.productList;
-	}//getProductList
-}//ostk_MultiProductData
-
-
-

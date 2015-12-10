@@ -1,4 +1,4 @@
-var ostk_patterns = [
+[
     {
         "name": "Search Query",
         "slug": "search",
@@ -28,10 +28,7 @@ var ostk_patterns = [
             {
                 "name": "link_text",
                 "description": "The text that will show for the link",
-                "default": {
-                    "text": "query attribute text",
-                    "value": "query"
-                },
+                "default": "query attribute text",
                 "example": "Click to see these soccer shoes!",
                 "notes": "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."
             },
@@ -147,7 +144,7 @@ var ostk_patterns = [
                     },
                     {
                         "name": "event",
-                        "description": "Events",
+                        "description": "Sales event elements",
                         "options": [
                             "Flash Deals",
                             "Sales",
@@ -206,7 +203,7 @@ var ostk_patterns = [
                     },
                     {
                         "name": "event",
-                        "description": "Events",
+                        "description": "Sales event elements",
                         "options": [
                             "Flash Deals",
                             "Sales",
@@ -258,7 +255,7 @@ var ostk_patterns = [
                     },
                     {
                         "name": "event",
-                        "description": "Events",
+                        "description": "Sales event elements",
                         "options": [
                             "Flash Deals",
                             "Sales",
@@ -498,4 +495,4 @@ var ostk_patterns = [
         "optional_attributes": [
         ]
     }
-];
+]

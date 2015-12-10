@@ -85,9 +85,9 @@ function ostk_load_js() {
   wp_enqueue_script( 'ostk-flexslider', plugins_url('api/js/src/libs/flexslider.min.js', __FILE__), array('jquery'), '1.0', true );
 
   //Api Files
-  wp_enqueue_script( 'ostk-api-patterns', plugins_url('api/js/src/js/patterns.js', __FILE__), array('jquery'), '1.0', true );
   wp_enqueue_script( 'ostk-api-function', plugins_url('api/js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
   wp_enqueue_script( 'ostk-api-product-data', plugins_url('api/js/src/js/product-data.js', __FILE__), array('jquery'), '1.0', true );
+  wp_enqueue_script( 'ostk-api-embed-shortcodes', plugins_url('api/js/src/js/embed-shortcodes.js', __FILE__), array('jquery'), '1.0', true );
 
   $ostk_option_settings = get_option('ostk_settings');
   if(!empty($ostk_option_settings)){
@@ -97,13 +97,9 @@ function ostk_load_js() {
 
   //Plugin JS
   wp_enqueue_script( 'ostk-plugin-function', plugins_url('js/src/js/functions.js', __FILE__), array('jquery'), '1.0', true );
-  wp_enqueue_script( 'ostk-plugin-pattern-selector', plugins_url('js/src/js/pattern-selector.js', __FILE__), array('jquery'), '1.0', true );
 
   // Page specific JS
   switch($_REQUEST['page']){
-    case 'ostk-documentation':
-      $ostk_pageJs = 'page-documentation';
-      break;
     case 'ostk-generator':
       $ostk_pageJs = 'page-generator';
       break;      
@@ -114,7 +110,6 @@ function ostk_load_js() {
   if(isset($ostk_pageJs)){
     wp_enqueue_script( 'ostk-'.$ostk_pageJs, plugins_url('js/src/js/'.$ostk_pageJs.'.js', __FILE__), array('jquery'), '1.0', true );
   }
-
 
 }//ostk_admin_js
 
@@ -139,4 +134,14 @@ function ostk_theme_options_panel(){
     }
   }//foreach
 }
+
+
+function getPatterns(){
+  $json_url = plugins_url("api/patterns.json", __FILE__);
+  $json = file_get_contents($json_url);
+  return json_decode($json, true);
+}
+$ostk_patterns = getPatterns();
+
+
 ?>
