@@ -215,6 +215,14 @@
         ],
         "optional_attributes": [
             {
+                "name": "version",
+                "options": [
+                    "v1",
+                    "v2",
+                    "v3"
+                ]
+            },
+            {
                 "name": "number_of_items",
                 "description": "Choose an item limit. By default it is unlimited.",
                 "example": "10"

@@ -7,507 +7,6 @@ void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?voi
  * Copyright 2012 WooThemes
  * Contributing Author: Tyler Smith
  */!function($){$.flexslider=function(e,t){var a=$(e);a.vars=$.extend({},$.flexslider.defaults,t);var n=a.vars.namespace,i=window.navigator&&window.navigator.msPointerEnabled&&window.MSGesture,s=("ontouchstart"in window||i||window.DocumentTouch&&document instanceof DocumentTouch)&&a.vars.touch,r="click touchend MSPointerUp keyup",o="",l,c="vertical"===a.vars.direction,d=a.vars.reverse,u=a.vars.itemWidth>0,v="fade"===a.vars.animation,p=""!==a.vars.asNavFor,m={},f=!0;$.data(e,"flexslider",a),m={init:function(){a.animating=!1,a.currentSlide=parseInt(a.vars.startAt?a.vars.startAt:0,10),isNaN(a.currentSlide)&&(a.currentSlide=0),a.animatingTo=a.currentSlide,a.atEnd=0===a.currentSlide||a.currentSlide===a.last,a.containerSelector=a.vars.selector.substr(0,a.vars.selector.search(" ")),a.slides=$(a.vars.selector,a),a.container=$(a.containerSelector,a),a.count=a.slides.length,a.syncExists=$(a.vars.sync).length>0,"slide"===a.vars.animation&&(a.vars.animation="swing"),a.prop=c?"top":"marginLeft",a.args={},a.manualPause=!1,a.stopped=!1,a.started=!1,a.startTimeout=null,a.transitions=!a.vars.video&&!v&&a.vars.useCSS&&function(){var e=document.createElement("div"),t=["perspectiveProperty","WebkitPerspective","MozPerspective","OPerspective","msPerspective"];for(var n in t)if(void 0!==e.style[t[n]])return a.pfx=t[n].replace("Perspective","").toLowerCase(),a.prop="-"+a.pfx+"-transform",!0;return!1}(),a.ensureAnimationEnd="",""!==a.vars.controlsContainer&&(a.controlsContainer=$(a.vars.controlsContainer).length>0&&$(a.vars.controlsContainer)),""!==a.vars.manualControls&&(a.manualControls=$(a.vars.manualControls).length>0&&$(a.vars.manualControls)),""!==a.vars.customDirectionNav&&(a.customDirectionNav=2===$(a.vars.customDirectionNav).length&&$(a.vars.customDirectionNav)),a.vars.randomize&&(a.slides.sort(function(){return Math.round(Math.random())-.5}),a.container.empty().append(a.slides)),a.doMath(),a.setup("init"),a.vars.controlNav&&m.controlNav.setup(),a.vars.directionNav&&m.directionNav.setup(),a.vars.keyboard&&(1===$(a.containerSelector).length||a.vars.multipleKeyboard)&&$(document).bind("keyup",function(e){var t=e.keyCode;if(!a.animating&&(39===t||37===t)){var n=39===t?a.getTarget("next"):37===t?a.getTarget("prev"):!1;a.flexAnimate(n,a.vars.pauseOnAction)}}),a.vars.mousewheel&&a.bind("mousewheel",function(e,t,n,i){e.preventDefault();var s=a.getTarget(0>t?"next":"prev");a.flexAnimate(s,a.vars.pauseOnAction)}),a.vars.pausePlay&&m.pausePlay.setup(),a.vars.slideshow&&a.vars.pauseInvisible&&m.pauseInvisible.init(),a.vars.slideshow&&(a.vars.pauseOnHover&&a.hover(function(){a.manualPlay||a.manualPause||a.pause()},function(){a.manualPause||a.manualPlay||a.stopped||a.play()}),a.vars.pauseInvisible&&m.pauseInvisible.isHidden()||(a.vars.initDelay>0?a.startTimeout=setTimeout(a.play,a.vars.initDelay):a.play())),p&&m.asNav.setup(),s&&a.vars.touch&&m.touch(),(!v||v&&a.vars.smoothHeight)&&$(window).bind("resize orientationchange focus",m.resize),a.find("img").attr("draggable","false"),setTimeout(function(){a.vars.start(a)},200)},asNav:{setup:function(){a.asNav=!0,a.animatingTo=Math.floor(a.currentSlide/a.move),a.currentItem=a.currentSlide,a.slides.removeClass(n+"active-slide").eq(a.currentItem).addClass(n+"active-slide"),i?(e._slider=a,a.slides.each(function(){var e=this;e._gesture=new MSGesture,e._gesture.target=e,e.addEventListener("MSPointerDown",function(e){e.preventDefault(),e.currentTarget._gesture&&e.currentTarget._gesture.addPointer(e.pointerId)},!1),e.addEventListener("MSGestureTap",function(e){e.preventDefault();var t=$(this),n=t.index();$(a.vars.asNavFor).data("flexslider").animating||t.hasClass("active")||(a.direction=a.currentItem<n?"next":"prev",a.flexAnimate(n,a.vars.pauseOnAction,!1,!0,!0))})})):a.slides.on(r,function(e){e.preventDefault();var t=$(this),i=t.index(),s=t.offset().left-$(a).scrollLeft();0>=s&&t.hasClass(n+"active-slide")?a.flexAnimate(a.getTarget("prev"),!0):$(a.vars.asNavFor).data("flexslider").animating||t.hasClass(n+"active-slide")||(a.direction=a.currentItem<i?"next":"prev",a.flexAnimate(i,a.vars.pauseOnAction,!1,!0,!0))})}},controlNav:{setup:function(){a.manualControls?m.controlNav.setupManual():m.controlNav.setupPaging()},setupPaging:function(){var e="thumbnails"===a.vars.controlNav?"control-thumbs":"control-paging",t=1,i,s;if(a.controlNavScaffold=$('<ol class="'+n+"control-nav "+n+e+'"></ol>'),a.pagingCount>1)for(var l=0;l<a.pagingCount;l++){if(s=a.slides.eq(l),i="thumbnails"===a.vars.controlNav?'<img src="'+s.attr("data-thumb")+'"/>':"<a>"+t+"</a>","thumbnails"===a.vars.controlNav&&!0===a.vars.thumbCaptions){var c=s.attr("data-thumbcaption");""!==c&&void 0!==c&&(i+='<span class="'+n+'caption">'+c+"</span>")}a.controlNavScaffold.append("<li>"+i+"</li>"),t++}a.controlsContainer?$(a.controlsContainer).append(a.controlNavScaffold):a.append(a.controlNavScaffold),m.controlNav.set(),m.controlNav.active(),a.controlNavScaffold.delegate("a, img",r,function(e){if(e.preventDefault(),""===o||o===e.type){var t=$(this),i=a.controlNav.index(t);t.hasClass(n+"active")||(a.direction=i>a.currentSlide?"next":"prev",a.flexAnimate(i,a.vars.pauseOnAction))}""===o&&(o=e.type),m.setToClearWatchedEvent()})},setupManual:function(){a.controlNav=a.manualControls,m.controlNav.active(),a.controlNav.bind(r,function(e){if(e.preventDefault(),""===o||o===e.type){var t=$(this),i=a.controlNav.index(t);t.hasClass(n+"active")||(a.direction=i>a.currentSlide?"next":"prev",a.flexAnimate(i,a.vars.pauseOnAction))}""===o&&(o=e.type),m.setToClearWatchedEvent()})},set:function(){var e="thumbnails"===a.vars.controlNav?"img":"a";a.controlNav=$("."+n+"control-nav li "+e,a.controlsContainer?a.controlsContainer:a)},active:function(){a.controlNav.removeClass(n+"active").eq(a.animatingTo).addClass(n+"active")},update:function(e,t){a.pagingCount>1&&"add"===e?a.controlNavScaffold.append($("<li><a>"+a.count+"</a></li>")):1===a.pagingCount?a.controlNavScaffold.find("li").remove():a.controlNav.eq(t).closest("li").remove(),m.controlNav.set(),a.pagingCount>1&&a.pagingCount!==a.controlNav.length?a.update(t,e):m.controlNav.active()}},directionNav:{setup:function(){var e=$('<ul class="'+n+'direction-nav"><li class="'+n+'nav-prev"><a class="'+n+'prev" href="#">'+a.vars.prevText+'</a></li><li class="'+n+'nav-next"><a class="'+n+'next" href="#">'+a.vars.nextText+"</a></li></ul>");a.customDirectionNav?a.directionNav=a.customDirectionNav:a.controlsContainer?($(a.controlsContainer).append(e),a.directionNav=$("."+n+"direction-nav li a",a.controlsContainer)):(a.append(e),a.directionNav=$("."+n+"direction-nav li a",a)),m.directionNav.update(),a.directionNav.bind(r,function(e){e.preventDefault();var t;(""===o||o===e.type)&&(t=a.getTarget($(this).hasClass(n+"next")?"next":"prev"),a.flexAnimate(t,a.vars.pauseOnAction)),""===o&&(o=e.type),m.setToClearWatchedEvent()})},update:function(){var e=n+"disabled";1===a.pagingCount?a.directionNav.addClass(e).attr("tabindex","-1"):a.vars.animationLoop?a.directionNav.removeClass(e).removeAttr("tabindex"):0===a.animatingTo?a.directionNav.removeClass(e).filter("."+n+"prev").addClass(e).attr("tabindex","-1"):a.animatingTo===a.last?a.directionNav.removeClass(e).filter("."+n+"next").addClass(e).attr("tabindex","-1"):a.directionNav.removeClass(e).removeAttr("tabindex")}},pausePlay:{setup:function(){var e=$('<div class="'+n+'pauseplay"><a></a></div>');a.controlsContainer?(a.controlsContainer.append(e),a.pausePlay=$("."+n+"pauseplay a",a.controlsContainer)):(a.append(e),a.pausePlay=$("."+n+"pauseplay a",a)),m.pausePlay.update(a.vars.slideshow?n+"pause":n+"play"),a.pausePlay.bind(r,function(e){e.preventDefault(),(""===o||o===e.type)&&($(this).hasClass(n+"pause")?(a.manualPause=!0,a.manualPlay=!1,a.pause()):(a.manualPause=!1,a.manualPlay=!0,a.play())),""===o&&(o=e.type),m.setToClearWatchedEvent()})},update:function(e){"play"===e?a.pausePlay.removeClass(n+"pause").addClass(n+"play").html(a.vars.playText):a.pausePlay.removeClass(n+"play").addClass(n+"pause").html(a.vars.pauseText)}},touch:function(){function t(t){t.stopPropagation(),a.animating?t.preventDefault():(a.pause(),e._gesture.addPointer(t.pointerId),w=0,p=c?a.h:a.w,f=Number(new Date),l=u&&d&&a.animatingTo===a.last?0:u&&d?a.limit-(a.itemW+a.vars.itemMargin)*a.move*a.animatingTo:u&&a.currentSlide===a.last?a.limit:u?(a.itemW+a.vars.itemMargin)*a.move*a.currentSlide:d?(a.last-a.currentSlide+a.cloneOffset)*p:(a.currentSlide+a.cloneOffset)*p)}function n(t){t.stopPropagation();var a=t.target._slider;if(a){var n=-t.translationX,i=-t.translationY;return w+=c?i:n,m=w,y=c?Math.abs(w)<Math.abs(-n):Math.abs(w)<Math.abs(-i),t.detail===t.MSGESTURE_FLAG_INERTIA?void setImmediate(function(){e._gesture.stop()}):void((!y||Number(new Date)-f>500)&&(t.preventDefault(),!v&&a.transitions&&(a.vars.animationLoop||(m=w/(0===a.currentSlide&&0>w||a.currentSlide===a.last&&w>0?Math.abs(w)/p+2:1)),a.setProps(l+m,"setTouch"))))}}function s(e){e.stopPropagation();var t=e.target._slider;if(t){if(t.animatingTo===t.currentSlide&&!y&&null!==m){var a=d?-m:m,n=t.getTarget(a>0?"next":"prev");t.canAdvance(n)&&(Number(new Date)-f<550&&Math.abs(a)>50||Math.abs(a)>p/2)?t.flexAnimate(n,t.vars.pauseOnAction):v||t.flexAnimate(t.currentSlide,t.vars.pauseOnAction,!0)}r=null,o=null,m=null,l=null,w=0}}var r,o,l,p,m,f,g,h,S,y=!1,x=0,b=0,w=0;i?(e.style.msTouchAction="none",e._gesture=new MSGesture,e._gesture.target=e,e.addEventListener("MSPointerDown",t,!1),e._slider=a,e.addEventListener("MSGestureChange",n,!1),e.addEventListener("MSGestureEnd",s,!1)):(g=function(t){a.animating?t.preventDefault():(window.navigator.msPointerEnabled||1===t.touches.length)&&(a.pause(),p=c?a.h:a.w,f=Number(new Date),x=t.touches[0].pageX,b=t.touches[0].pageY,l=u&&d&&a.animatingTo===a.last?0:u&&d?a.limit-(a.itemW+a.vars.itemMargin)*a.move*a.animatingTo:u&&a.currentSlide===a.last?a.limit:u?(a.itemW+a.vars.itemMargin)*a.move*a.currentSlide:d?(a.last-a.currentSlide+a.cloneOffset)*p:(a.currentSlide+a.cloneOffset)*p,r=c?b:x,o=c?x:b,e.addEventListener("touchmove",h,!1),e.addEventListener("touchend",S,!1))},h=function(e){x=e.touches[0].pageX,b=e.touches[0].pageY,m=c?r-b:r-x,y=c?Math.abs(m)<Math.abs(x-o):Math.abs(m)<Math.abs(b-o);var t=500;(!y||Number(new Date)-f>t)&&(e.preventDefault(),!v&&a.transitions&&(a.vars.animationLoop||(m/=0===a.currentSlide&&0>m||a.currentSlide===a.last&&m>0?Math.abs(m)/p+2:1),a.setProps(l+m,"setTouch")))},S=function(t){if(e.removeEventListener("touchmove",h,!1),a.animatingTo===a.currentSlide&&!y&&null!==m){var n=d?-m:m,i=a.getTarget(n>0?"next":"prev");a.canAdvance(i)&&(Number(new Date)-f<550&&Math.abs(n)>50||Math.abs(n)>p/2)?a.flexAnimate(i,a.vars.pauseOnAction):v||a.flexAnimate(a.currentSlide,a.vars.pauseOnAction,!0)}e.removeEventListener("touchend",S,!1),r=null,o=null,m=null,l=null},e.addEventListener("touchstart",g,!1))},resize:function(){!a.animating&&a.is(":visible")&&(u||a.doMath(),v?m.smoothHeight():u?(a.slides.width(a.computedW),a.update(a.pagingCount),a.setProps()):c?(a.viewport.height(a.h),a.setProps(a.h,"setTotal")):(a.vars.smoothHeight&&m.smoothHeight(),a.newSlides.width(a.computedW),a.setProps(a.computedW,"setTotal")))},smoothHeight:function(e){if(!c||v){var t=v?a:a.viewport;e?t.animate({height:a.slides.eq(a.animatingTo).height()},e):t.height(a.slides.eq(a.animatingTo).height())}},sync:function(e){var t=$(a.vars.sync).data("flexslider"),n=a.animatingTo;switch(e){case"animate":t.flexAnimate(n,a.vars.pauseOnAction,!1,!0);break;case"play":t.playing||t.asNav||t.play();break;case"pause":t.pause()}},uniqueID:function(e){return e.filter("[id]").add(e.find("[id]")).each(function(){var e=$(this);e.attr("id",e.attr("id")+"_clone")}),e},pauseInvisible:{visProp:null,init:function(){var e=m.pauseInvisible.getHiddenProp();if(e){var t=e.replace(/[H|h]idden/,"")+"visibilitychange";document.addEventListener(t,function(){m.pauseInvisible.isHidden()?a.startTimeout?clearTimeout(a.startTimeout):a.pause():a.started?a.play():a.vars.initDelay>0?setTimeout(a.play,a.vars.initDelay):a.play()})}},isHidden:function(){var e=m.pauseInvisible.getHiddenProp();return e?document[e]:!1},getHiddenProp:function(){var e=["webkit","moz","ms","o"];if("hidden"in document)return"hidden";for(var t=0;t<e.length;t++)if(e[t]+"Hidden"in document)return e[t]+"Hidden";return null}},setToClearWatchedEvent:function(){clearTimeout(l),l=setTimeout(function(){o=""},3e3)}},a.flexAnimate=function(e,t,i,r,o){if(a.vars.animationLoop||e===a.currentSlide||(a.direction=e>a.currentSlide?"next":"prev"),p&&1===a.pagingCount&&(a.direction=a.currentItem<e?"next":"prev"),!a.animating&&(a.canAdvance(e,o)||i)&&a.is(":visible")){if(p&&r){var l=$(a.vars.asNavFor).data("flexslider");if(a.atEnd=0===e||e===a.count-1,l.flexAnimate(e,!0,!1,!0,o),a.direction=a.currentItem<e?"next":"prev",l.direction=a.direction,Math.ceil((e+1)/a.visible)-1===a.currentSlide||0===e)return a.currentItem=e,a.slides.removeClass(n+"active-slide").eq(e).addClass(n+"active-slide"),!1;a.currentItem=e,a.slides.removeClass(n+"active-slide").eq(e).addClass(n+"active-slide"),e=Math.floor(e/a.visible)}if(a.animating=!0,a.animatingTo=e,t&&a.pause(),a.vars.before(a),a.syncExists&&!o&&m.sync("animate"),a.vars.controlNav&&m.controlNav.active(),u||a.slides.removeClass(n+"active-slide").eq(e).addClass(n+"active-slide"),a.atEnd=0===e||e===a.last,a.vars.directionNav&&m.directionNav.update(),e===a.last&&(a.vars.end(a),a.vars.animationLoop||a.pause()),v)s?(a.slides.eq(a.currentSlide).css({opacity:0,zIndex:1}),a.slides.eq(e).css({opacity:1,zIndex:2}),a.wrapup(f)):(a.slides.eq(a.currentSlide).css({zIndex:1}).animate({opacity:0},a.vars.animationSpeed,a.vars.easing),a.slides.eq(e).css({zIndex:2}).animate({opacity:1},a.vars.animationSpeed,a.vars.easing,a.wrapup));else{var f=c?a.slides.filter(":first").height():a.computedW,g,h,S;u?(g=a.vars.itemMargin,S=(a.itemW+g)*a.move*a.animatingTo,h=S>a.limit&&1!==a.visible?a.limit:S):h=0===a.currentSlide&&e===a.count-1&&a.vars.animationLoop&&"next"!==a.direction?d?(a.count+a.cloneOffset)*f:0:a.currentSlide===a.last&&0===e&&a.vars.animationLoop&&"prev"!==a.direction?d?0:(a.count+1)*f:d?(a.count-1-e+a.cloneOffset)*f:(e+a.cloneOffset)*f,a.setProps(h,"",a.vars.animationSpeed),a.transitions?(a.vars.animationLoop&&a.atEnd||(a.animating=!1,a.currentSlide=a.animatingTo),a.container.unbind("webkitTransitionEnd transitionend"),a.container.bind("webkitTransitionEnd transitionend",function(){clearTimeout(a.ensureAnimationEnd),a.wrapup(f)}),clearTimeout(a.ensureAnimationEnd),a.ensureAnimationEnd=setTimeout(function(){a.wrapup(f)},a.vars.animationSpeed+100)):a.container.animate(a.args,a.vars.animationSpeed,a.vars.easing,function(){a.wrapup(f)})}a.vars.smoothHeight&&m.smoothHeight(a.vars.animationSpeed)}},a.wrapup=function(e){v||u||(0===a.currentSlide&&a.animatingTo===a.last&&a.vars.animationLoop?a.setProps(e,"jumpEnd"):a.currentSlide===a.last&&0===a.animatingTo&&a.vars.animationLoop&&a.setProps(e,"jumpStart")),a.animating=!1,a.currentSlide=a.animatingTo,a.vars.after(a)},a.animateSlides=function(){!a.animating&&f&&a.flexAnimate(a.getTarget("next"))},a.pause=function(){clearInterval(a.animatedSlides),a.animatedSlides=null,a.playing=!1,a.vars.pausePlay&&m.pausePlay.update("play"),a.syncExists&&m.sync("pause")},a.play=function(){a.playing&&clearInterval(a.animatedSlides),a.animatedSlides=a.animatedSlides||setInterval(a.animateSlides,a.vars.slideshowSpeed),a.started=a.playing=!0,a.vars.pausePlay&&m.pausePlay.update("pause"),a.syncExists&&m.sync("play")},a.stop=function(){a.pause(),a.stopped=!0},a.canAdvance=function(e,t){var n=p?a.pagingCount-1:a.last;return t?!0:p&&a.currentItem===a.count-1&&0===e&&"prev"===a.direction?!0:p&&0===a.currentItem&&e===a.pagingCount-1&&"next"!==a.direction?!1:e!==a.currentSlide||p?a.vars.animationLoop?!0:a.atEnd&&0===a.currentSlide&&e===n&&"next"!==a.direction?!1:a.atEnd&&a.currentSlide===n&&0===e&&"next"===a.direction?!1:!0:!1},a.getTarget=function(e){return a.direction=e,"next"===e?a.currentSlide===a.last?0:a.currentSlide+1:0===a.currentSlide?a.last:a.currentSlide-1},a.setProps=function(e,t,n){var i=function(){var n=e?e:(a.itemW+a.vars.itemMargin)*a.move*a.animatingTo,i=function(){if(u)return"setTouch"===t?e:d&&a.animatingTo===a.last?0:d?a.limit-(a.itemW+a.vars.itemMargin)*a.move*a.animatingTo:a.animatingTo===a.last?a.limit:n;switch(t){case"setTotal":return d?(a.count-1-a.currentSlide+a.cloneOffset)*e:(a.currentSlide+a.cloneOffset)*e;case"setTouch":return d?e:e;case"jumpEnd":return d?e:a.count*e;case"jumpStart":return d?a.count*e:e;default:return e}}();return-1*i+"px"}();a.transitions&&(i=c?"translate3d(0,"+i+",0)":"translate3d("+i+",0,0)",n=void 0!==n?n/1e3+"s":"0s",a.container.css("-"+a.pfx+"-transition-duration",n),a.container.css("transition-duration",n)),a.args[a.prop]=i,(a.transitions||void 0===n)&&a.container.css(a.args),a.container.css("transform",i)},a.setup=function(e){if(v)a.slides.css({width:"100%","float":"left",marginRight:"-100%",position:"relative"}),"init"===e&&(s?a.slides.css({opacity:0,display:"block",webkitTransition:"opacity "+a.vars.animationSpeed/1e3+"s ease",zIndex:1}).eq(a.currentSlide).css({opacity:1,zIndex:2}):0==a.vars.fadeFirstSlide?a.slides.css({opacity:0,display:"block",zIndex:1}).eq(a.currentSlide).css({zIndex:2}).css({opacity:1}):a.slides.css({opacity:0,display:"block",zIndex:1}).eq(a.currentSlide).css({zIndex:2}).animate({opacity:1},a.vars.animationSpeed,a.vars.easing)),a.vars.smoothHeight&&m.smoothHeight();else{var t,i;"init"===e&&(a.viewport=$('<div class="'+n+'viewport"></div>').css({overflow:"hidden",position:"relative"}).appendTo(a).append(a.container),a.cloneCount=0,a.cloneOffset=0,d&&(i=$.makeArray(a.slides).reverse(),a.slides=$(i),a.container.empty().append(a.slides))),a.vars.animationLoop&&!u&&(a.cloneCount=2,a.cloneOffset=1,"init"!==e&&a.container.find(".clone").remove(),a.container.append(m.uniqueID(a.slides.first().clone().addClass("clone")).attr("aria-hidden","true")).prepend(m.uniqueID(a.slides.last().clone().addClass("clone")).attr("aria-hidden","true"))),a.newSlides=$(a.vars.selector,a),t=d?a.count-1-a.currentSlide+a.cloneOffset:a.currentSlide+a.cloneOffset,c&&!u?(a.container.height(200*(a.count+a.cloneCount)+"%").css("position","absolute").width("100%"),setTimeout(function(){a.newSlides.css({display:"block"}),a.doMath(),a.viewport.height(a.h),a.setProps(t*a.h,"init")},"init"===e?100:0)):(a.container.width(200*(a.count+a.cloneCount)+"%"),a.setProps(t*a.computedW,"init"),setTimeout(function(){a.doMath(),a.newSlides.css({width:a.computedW,"float":"left",display:"block"}),a.vars.smoothHeight&&m.smoothHeight()},"init"===e?100:0))}u||a.slides.removeClass(n+"active-slide").eq(a.currentSlide).addClass(n+"active-slide"),a.vars.init(a)},a.doMath=function(){var e=a.slides.first(),t=a.vars.itemMargin,n=a.vars.minItems,i=a.vars.maxItems;a.w=void 0===a.viewport?a.width():a.viewport.width(),a.h=e.height(),a.boxPadding=e.outerWidth()-e.width(),u?(a.itemT=a.vars.itemWidth+t,a.minW=n?n*a.itemT:a.w,a.maxW=i?i*a.itemT-t:a.w,a.itemW=a.minW>a.w?(a.w-t*(n-1))/n:a.maxW<a.w?(a.w-t*(i-1))/i:a.vars.itemWidth>a.w?a.w:a.vars.itemWidth,a.visible=Math.floor(a.w/a.itemW),a.move=a.vars.move>0&&a.vars.move<a.visible?a.vars.move:a.visible,a.pagingCount=Math.ceil((a.count-a.visible)/a.move+1),a.last=a.pagingCount-1,a.limit=1===a.pagingCount?0:a.vars.itemWidth>a.w?a.itemW*(a.count-1)+t*(a.count-1):(a.itemW+t)*a.count-a.w-t):(a.itemW=a.w,a.pagingCount=a.count,a.last=a.count-1),a.computedW=a.itemW-a.boxPadding},a.update=function(e,t){a.doMath(),u||(e<a.currentSlide?a.currentSlide+=1:e<=a.currentSlide&&0!==e&&(a.currentSlide-=1),a.animatingTo=a.currentSlide),a.vars.controlNav&&!a.manualControls&&("add"===t&&!u||a.pagingCount>a.controlNav.length?m.controlNav.update("add"):("remove"===t&&!u||a.pagingCount<a.controlNav.length)&&(u&&a.currentSlide>a.last&&(a.currentSlide-=1,a.animatingTo-=1),m.controlNav.update("remove",a.last))),a.vars.directionNav&&m.directionNav.update()},a.addSlide=function(e,t){var n=$(e);a.count+=1,a.last=a.count-1,c&&d?void 0!==t?a.slides.eq(a.count-t).after(n):a.container.prepend(n):void 0!==t?a.slides.eq(t).before(n):a.container.append(n),a.update(t,"add"),a.slides=$(a.vars.selector+":not(.clone)",a),a.setup(),a.vars.added(a)},a.removeSlide=function(e){var t=isNaN(e)?a.slides.index($(e)):e;a.count-=1,a.last=a.count-1,isNaN(e)?$(e,a.slides).remove():c&&d?a.slides.eq(a.last).remove():a.slides.eq(e).remove(),a.doMath(),a.update(t,"remove"),a.slides=$(a.vars.selector+":not(.clone)",a),a.setup(),a.vars.removed(a)},m.init()},$(window).blur(function(e){focused=!1}).focus(function(e){focused=!0}),$.flexslider.defaults={namespace:"flex-",selector:".slides > li",animation:"fade",easing:"swing",direction:"horizontal",reverse:!1,animationLoop:!0,smoothHeight:!1,startAt:0,slideshow:!0,slideshowSpeed:7e3,animationSpeed:600,initDelay:0,randomize:!1,fadeFirstSlide:!0,thumbCaptions:!1,pauseOnAction:!0,pauseOnHover:!1,pauseInvisible:!0,useCSS:!0,touch:!0,video:!1,controlNav:!0,directionNav:!0,prevText:"Previous",nextText:"Next",keyboard:!0,multipleKeyboard:!1,mousewheel:!1,pausePlay:!1,pauseText:"Pause",playText:"Play",controlsContainer:"",manualControls:"",customDirectionNav:"",sync:"",asNavFor:"",itemWidth:0,itemMargin:0,minItems:1,maxItems:0,move:0,allowOneSlide:!0,start:function(){},before:function(){},after:function(){},end:function(){},added:function(){},removed:function(){},init:function(){}},$.fn.flexslider=function(e){if(void 0===e&&(e={}),"object"==typeof e)return this.each(function(){var t=$(this),a=e.selector?e.selector:".slides > li",n=t.find(a);1===n.length&&e.allowOneSlide===!0||0===n.length?(n.fadeIn(400),e.start&&e.start(t)):void 0===t.data("flexslider")&&new $.flexslider(this,e)});var t=$(this).data("flexslider");switch(e){case"play":t.play();break;case"pause":t.pause();break;case"stop":t.stop();break;case"next":t.flexAnimate(t.getTarget("next"),!0);break;case"prev":case"previous":t.flexAnimate(t.getTarget("prev"),!0);break;default:"number"==typeof e&&t.flexAnimate(e,!0)}}}(jQuery);
-var ostk_patterns = [
-    {
-        "name": "Search Query",
-        "slug": "search",
-        "description": "The Search Query shortcode will create a link that will take a user to a Search Results Page on Overstock.com.",
-        "example_shortcodes": [
-            {
-                "type": "search",
-                "query": "soccer shoes"
-            },
-            {
-                "type": "search",
-                "query": "soccer shoes",
-                "link_text": "Overstock has great soccer shoes"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "name": "query",
-                "description": "Product search terms",
-                "example": "soccer shoes"
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "link_text",
-                "description": "The text that will show for the link",
-                "default": {
-                    "text": "query attribute text",
-                    "value": "query"
-                },
-                "example": "Click to see these soccer shoes!",
-                "notes": "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."
-            },
-            {
-                "name": "category",
-                "description": "Filter results by store",
-                "options": [
-                    "Home & Garden",
-                    "Jewelry & Watches",
-                    "Sports & Toys",
-                    "Worldstock Fair Trade",
-                    "Clothing & Shoes",
-                    "Health & Beauty",
-                    "Food & Gifts",
-                    "Office Supplies",
-                    "Luggage & Bags",
-                    "Crafts & Sewing",
-                    "Baby",
-                    "Pet Supplies",
-                    "Emergency Preparedness",
-                    "Bedding & Bath"
-                ]
-            },
-            {
-                "name": "sort_by",
-                "description": "Sort results in different ways",
-                "options": [
-                    "Relevance", 
-                    "Recommended",
-                    "Reviews", 
-                    "Lowest Price", 
-                    "Highest Price", 
-                    "New Arrivals"
-                ]
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Link",
-        "slug": "link",
-        "description": "The URL link shortcode lets you create links to any page on Overstock.com.",
-        "example_shortcodes": [
-            {
-                "type": "link",
-                "url": "http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html"
-            },
-            {
-                "type": "link",
-                "url": "http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html",
-                "link_text": "I want to buy this for my wife"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "name": "url",
-                "description": "A link to an Overstock page",
-                "example": "http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html"
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "link_text",
-                "description": "The text that will show for the link",
-                "default": "A link to Overstock.com",
-                "example": "A present for my wife",
-                "notes": "If link_text parameter is left blank, the phrase \"A link to Overstock.com\" will be used as the link text."
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Rectangle",
-        "slug": "rectangle",
-        "description": "The rectangle shortcode lets you create a rectangular banner for a SINGLE product.",
-        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-        "example_shortcodes": [
-            {
-                "type": "rectangle",
-                "id": "9747008",
-                "width": "300px"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "options": [
-                    {
-                        "name": "id",
-                        "description": "A products id",
-                        "example": "8231882"
-                    },
-                    {
-                        "name": "event",
-                        "description": "Events",
-                        "options": [
-                            "Flash Deals",
-                            "Sales",
-                            "Promotions"
-                        ]
-                    }
-                ]
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "width",
-                "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
-                "default": "100%",
-                "example": "100%\" or \"300px"
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Leaderboard",
-        "slug": "leaderboard",
-        "description": "Lets you create a leaderboard banner for up to two products.",
-        "notes": [
-            "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-            "Leaderboard is set to 728px by 90px"
-        ],
-        "example_shortcodes": [
-            {
-                "type": "leaderboard",
-                "product_ids": "8641092"
-            },
-            {
-                "type": "leaderboard",
-                "product_ids": "8641092, 9547029"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "options": [
-                    {
-                        "name": "product_ids",
-                        "description": "A list of product ids separated by commas.",
-                        "notes": "Required to have 1 or 2 product ids"
-                    },
-                    {
-                        "name": "event",
-                        "description": "Events",
-                        "options": [
-                            "Flash Deals",
-                            "Sales",
-                            "Promotions"
-                        ]
-                    }
-                ]
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "number_of_items",
-                "description": "Choose an item limit. By default it is unlimited.",
-                "example": "10"
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Skyscraper",
-        "slug": "skyscraper",
-        "description": "Lets you create a skyscraper banner for up to three products.",
-        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-        "example_shortcodes": [
-            {
-                "type": "skyscraper",
-                "product_ids": "8641092, 9547029",
-                "width": "160px"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "options": [
-                    {
-                        "name": "product_ids",
-                        "description": "A list of product ids separated by commas.",
-                        "notes": "Required to have 1 or 2 product ids"
-                    },
-                    {
-                        "name": "event",
-                        "description": "Events",
-                        "options": [
-                            "Flash Deals",
-                            "Sales",
-                            "Promotions"
-                        ]
-                    }
-                ]
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "width",
-                "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
-                "default": "100%",
-                "example": "100%\" or \"300px"
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Carousel",
-        "slug": "carousel",
-        "description": "Lets you create a carousel widget for up to 10 products. You will get the product ids from the product&apos;s URL on Overstock.com.",
-        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-        "example_shortcodes": [
-            {
-                "type": "carousel",
-                "product_ids": "9659704,6753542,5718385,5735179",
-                "width": "400px"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "options": [
-                    {
-                        "name": "id",
-                        "description": "Any product id",
-                        "example": "10234427"
-                    },
-                    {
-                        "name": "product_ids",
-                        "description": "A list of product ids separated by commas."
-                    },
-                    {
-                        "name": "category",
-                        "description": "Select items from a specific Overstock store.",
-                        "options": [
-                            "Home & Garden",
-                            "Jewelry & Watches",
-                            "Sports & Toys",
-                            "Worldstock Fair Trade",
-                            "Clothing & Shoes",
-                            "Health & Beauty",
-                            "Food & Gifts",
-                            "Office Supplies",
-                            "Luggage & Bags",
-                            "Crafts & Sewing",
-                            "Baby",
-                            "Pet Supplies",
-                            "Emergency Preparedness",
-                            "Bedding & Bath"
-                        ]
-                    },
-                    {
-                        "name": "keywords",
-                        "description": "A keyword search",
-                        "example": "soccer shoes"
-                    }
-                ]
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "number_of_items",
-                "description": "Choose an item limit. By default it is unlimited.",
-                "example": "10"
-            },
-            {
-                "name": "sort_by",
-                "description": "Choose a sort option",
-                "options": [
-                    "Relevance", 
-                    "Recommended",
-                    "Reviews",
-                    "Lowest Price", 
-                    "Highest Price", 
-                    "New Arrivals"
-                ]
-            },
-            {
-                "name": "width",
-                "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
-                "default": "100%",
-                "example": "100%\" or \"300px"
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Stock Photo",
-        "slug": "stock_photo",
-        "description": "Use Overstock&apos;s product and lifestyle photos for your blog. Each one will link to its corresponding product page on Overstock.com.",
-        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-        "example_shortcodes": [
-            {
-                "type": "stock_photo",
-                "id": "8859234",
-                "width": "300px"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "name": "id",
-                "example": "10234427",
-                "description": "Choose an attribute to display"
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "image_number",
-                "description": "Choose an image number, images are numbered from left to right on the product page, 1,2,3, ect."
-            },
-            {
-                "name": "width",
-                "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
-                "default": "100%",
-                "example": "100%\" or \"300px"
-            },
-            {
-                "name": "height",
-                "description": "Height of the shortcode element. This attribute accepts \"px\"",
-                "notes": "The height of the image will automatically adjust according to the width. The best practice would be to only set the height if it absolutely necessary .",
-                "default": "auto",
-                "example": "300px"
-            },
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            },
-            {
-                "name": "custom_css",
-                "description": "Add custom CSS to the image element.",
-                "example": "border:solid 1px red;"
-            }
-        ]
-    },
-    {
-        "name": "Product Details Link",
-        "slug": "product_link",
-        "description": "Create simple links for a certain product. Each one will link to the product page on Overstock.com.",
-        "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
-        "example_shortcodes": [
-            {
-                "type": "product_link",
-                "display": "name",
-                "id": "8859234"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "name": "id",
-                "example": "10234427",
-                "description": "Choose an attribute to display"
-            },
-            {
-                "name": "display",
-                "description": "Choose an attribute to display",
-                "options": [
-                    "name",
-                    "price",
-                    "description"
-                ]
-            }
-        ],
-        "optional_attributes": [
-            {
-                "name": "link_target",
-                "description": "Choose how to open the link.",
-                "default": "new_tab",
-                "options": [
-                    "new_tab", 
-                    "current_tab"
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Sample Data",
-        "slug": "sample_data",
-        "description": "Print data form a given ID",
-        "example_shortcodes": [
-            {
-                "type": "sample_data",
-                "id": "9659704"
-            }
-        ],
-        "required_attributes": [
-            {
-                "name": "type"
-            },
-            {
-                "name": "id",
-                "description": "Any product id",
-                "example": "10234427"
-            }
-        ],
-        "optional_attributes": [
-        ]
-    }
-];
 function l(key, value){
 	if(typeof value !== 'undefined'){
 		console.log(key+': '+value);
@@ -518,6 +17,10 @@ function l(key, value){
 function d(obj){
 	console.dir(obj);
 }
+
+function ostk_getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}//ostk_getRandomInt
 
 function ostk_addTrackingToUrl(url){
 	return url + '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
@@ -695,6 +198,8 @@ Validate that the shortcode attributes are valid. return Boolean.
 function ostk_areAttributesValid(atts){
 	var error = null;
 	var type = atts.type;
+
+	var ostk_patterns = ostk_plugin.ostk_patterns;
 
 	if(!type){
 		error = 'Type attribute is required';
@@ -920,751 +425,291 @@ function ostk_array_key_exists(key, search) {
   }
   return key in search;
 }//ostk_array_key_exists
-function ostk_SearchQuery(atts, element){
+var ostk_SingleProductData = function(){
 	/*
-	Search Query: takes you to search results page
-	Generate a link to a search results page
-	Query is link text if link_text parameter is empty
-	*/
-	ostk_Element.call(this, atts, element);
+	SINGLE Product Data Class
+	takes a productId or query and returns specific product details
+	*/ 
+	this.productId;
+	this.name;
+	this.price;
+	this.baseImageUrl;
+	this.imgUrl_large;
+	this.imgUrl_medium;
+	this.imgUrl_thumbnail;
+	this.affiliateUrl;
+	this.averageReviewAsDecimal;
+	this.averageReviewAsGif;
+	this.arrayOfAllProductImages;
+	this.description;
+	this.multiImages = false;
 
-	// Generate Html
-	this.initElement = function(){
-		var output = '';
-		var keywords = (ostk_isset(atts.query) ? "keywords=" + atts.query.split(" ").join("%20") : null);
-		var taxonomy = '';
-		var taxonomyParam = '';
-		var error = null;
-		var sortOption = '';
-		var link_text = atts.link_text;
-
-		if(!error){
-			if(keywords == null) {
-				error = '"query" parameter cannot be empty.';
-			}
-		}
-
-		if(error){
-			if(ostk_isset(atts.category)){
-				taxonomyParam = ostk_getTaxonomy(atts.category);
-				if(!taxonomyParam){
-					error = '"category" not found. Please check spelling and try again.';
-				} else {
-					taxonomy = "&taxonomy=" + taxonomyParam; 
-				}
-			}
-		}
-
-		if(error){
-			if(ostk_isset(atts.sort_by)){
-				sortOptionParam = ostk_getSortOption(atts.sort_by);
-				if(!sortOptionParam){
-					error = '"sort_by" not found. Please check spelling and try again.';
-				} else {
-					sortOption = "&sortOption=" + sortOptionParam; 
-				}
-			}
-		}
-
-		if(error){
-			this.renderHTMLError(error);
-		}else{
-			var affiliateLink = ostk_generateAffiliateLink("http://www.overstock.com/search?"+keywords+taxonomy+sortOption);
-			link_text = (atts.link_text != null ? atts.link_text : atts.query);
-			output = '<a href="'+affiliateLink+'" class="ostk-element ostk-search" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
-			this.renderHTML(output);
-		}
-	};//initElement
-
-	this.init();
-}//ostk_SearchQuery
-
-function ostk_Link(atts, element){
-	/*
-	Link: lets you create links to any overstock page
-	Generate a link to a predefined page on Overstock.com
-	Specify the link_text with the link_text attribute
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Generate Html
-	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-	    {
-	      'type': null,
-	      'url': 'http://www.overstock.com/', 
-	      'link_text': 'A link to Overstock.com',
-	      'link_target': 'new_tab'
-	    }, atts);
-
-		var output = '';
-		var link_text = atts.link_text;
-		var affiliateLink = ostk_generateAffiliateLink(atts.url);
-
-		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
-
-		this.renderHTML(output);
-	};//initElement
-
-	this.init();
-}//ostk_Link
-
-function ostk_ProductDetailsLink(atts, element){
-	/*
-	Product Details Link : Allow users to create easy links to products they are showcasing.
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Generate Html
-	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-		{
-			'id': null,
-			'display': null,
-			'link_target': 'new_tab'
-		}, atts);
-
-		this.obj = new ostk_SingleProductData();
-		this.obj.productId = atts.id
-
-		this.initObject();
-	};//initElement
-
-	// Generate Html
-	this.generateHtml = function(){
-		var output = '';
-				switch (atts.display) {
-					case 'name':
-						output = this.obj.getName();
-						break;
-					case "price":
-						output = this.obj.getPrice();
-						break;
-					case 'description':
-						output = this.obj.getDescription();
-						break;
-				}//switch
-		output = '<a href="'+this.obj.getAffiliateUrl()+'" class="ostk-element ostk-product-link" '+ostk_getLinkTarget(atts)+'>'+output+'</a>';
-		this.renderHTML(output);
-	}//generateHtml
-
-	this.init();
-}//ostk_ProductLink
-
-function ostk_Rectangle(atts, element){
-	/* 
-	Rectangle: Lets you create a rectangular banner for a SINGLE product 
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Init Html
-	this.initElement = function(){
-		this.obj = new ostk_SingleProductData();
-
-		if(this.atts.id){
-			this.obj.productId = this.atts.id;
-		}else if(this.atts.event){
-			var query = ostk_getEventQuery(this.atts.event);
-			this.obj.query = query;
-		}
-
-		this.initObject();
-	};//initElement
-
-	// Generate Html
-	this.generateHtml = function(){
-		var output = '';
-		var product_name = '';
-
-		if(ostk_isset(atts.event)){
-			if(atts.event == 'Flash Deals'){
-				product_name = this.obj.name;
-			}else{
-				product_name = this.obj.categoryLabel;
-			}
-		}
-
-		output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			if(ostk_isset(atts.event)){
-				//Sales Event
-				output += '<div class="ostk-element-content">'
-					output += '<img src="'+this.obj.getImage_Large()+'" class="product-image"/>';
-					output += '<div class="product-info">';
-						output += '<p class="product-name">'+product_name+'</p>';
-						if(atts.event == 'Flash Deals'){
-							output += '<p class="price">$'+this.obj.price+'</p>';
-						}
-						output += '<p class="savings">Save '+this.obj.percentOff+'%</p>';
-					output += '</div>';
-				output += '</div>';
-			}else{
-				//No Event
-				output += '<div class="ostk-element-content">';
-					output += '<img src="'+this.obj.getImage_Large()+'"/>';
-				output += '</div>';
-				output += '<div class="element-overlay">';
-				    output += '<div class="ostk-element-content">';
-						output += '<p class="title">'+this.obj.getName()+'</p>';
-						if(this.obj.averageReviewAsGif){
-							output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
-						}
-						output += '<p class="price">'+this.obj.getPrice()+'</p>';
-					output += '</div>';
-				output += '</div>';
-			}
-		output += '</a>';
-
-
-		this.renderElement(output);
-
-	}//generateHtml
-
-	this.init();
-}//ostk_Reactagngle
-
-function ostk_Leaderboard(atts, element){'white'
-	/* 
-	Leaderboard: Lets you create a leaderboard banner for up to two products 
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Init Element
-	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-		{
-			'type': null,
-			'product_ids': null,
-			'event': null,
-			'link_target': 'new_tab',
-			'number_of_items': 2
-		}, atts);
-
-		var output = '';
-		var error = null;
+	this.init = function(callback, errorCallback){
 		var _this = this;
-		var limit = (parseInt(atts.number_of_items) < 2) ? atts.number_of_items : 2;
+		var url = '';
 
-		this.obj = new ostk_MultiProductData();
-		this.obj.limit = limit;
-
-		if(this.atts.product_ids){
-			this.obj.productIds = atts.product_ids;
-		}else if(this.atts.event){
-			this.obj.query = ostk_getEventQuery(this.atts.event);
-		}
-
-		this.initObject();
-	};//initElement
-
-	// Generate Html
-	this.generateHtml = function(){
-		var productList = this.obj.getProductList();
-		var output = '';
-		output += '<div class="ostk-element ostk-leaderboard">';
-			output += '<div class="ostk-element-inner">';
-				output += this.getBranding('white');
-
-				if(ostk_isset(atts.event)){
-				    var product = productList[0];
-
-				    output += '<div class="ostk-element-content">';
-						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-
-							if(atts.event == 'Flash Deals'){
-								//Flash Deals
-								output += '<img src="'+ostk_api_url+'images/overstock-flash-deals-logo.png'+'"/>';
-							}
-
-							output += '<div class="percentOff">';
-								output += '<p>'+product.percentOff+'% off</p>';
-							output += '</div>';
-
-							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-
-							if(atts.event == 'Flash Deals'){
-								//Flash Deals
-								output += '<p>'+product.description+'</p>';
-								output += '<p class="dealEndTime"></p>';
-							}else{
-								output += '<p class="categoryLabel">'+product.categoryLabel+'</p>';
-							}
-
-						output += '</a>';
-					output += '</div>';
-				}else{
-					//No Event
-					output += '<div class="item-holder item-count-'+productList.length+'">';
-						for(var i = 0 ; i < productList.length ; i++){
-							var product = productList[i];
-						    output += '<div class="ostk-element-content">';
-								output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-									output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-									output += '<p class="title">'+product.getName()+'</p>';
-									output += '<p class="description">'+product.description+'</p>';
-									if(product.averageReviewAsGif){
-										output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-									}
-									output += '<p class="price">'+product.getPrice()+'</p>';
-								output += '</a>';
-							output += '</div>';
-						}//for
-					output += '</div>';
+		if(this.obj){
+			_this.processData(this.obj, callback, errorCallback);
+		}else{
+			if(this.productId){
+				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
+				if(this.multiImages){
+					url +=	"&fetch_all_images=true";
 				}
+			}else if(this.query){
+				url = this.query;
+			}
+			url = ostk_addTrackingToUrl(url);	
+			$ostk_jQuery.get( url, function( productData ){
+				if(productData.products){
+					var randInt = ostk_getRandomInt(0, productData.products.length-1);
+					productData = productData.products[randInt];
+				}else if(productData.sales){
+					productData = productData.sales[0];
+				}
+				_this.processData(productData, callback, errorCallback);
+			})
+			.fail(function(){
+				errorCallback('Invalid product id: ' + _this.productId);
+			});
+		}
+	}//init
 
-			output += '</div>';
-		output += '</div>';
-		this.renderHTML(output);
-	}//generateHtml
+	this.processData = function(productData, callback, errorCallback){
+		if(productData.images){
+		    this.arrayOfAllProductImages = this.getImageList(productData.images);
+		}
+		this.name = this.setName(productData);
+		this.productId = productData.id;
+		this.developerId = ostk_developerId;
+		this.description = productData.description;
 
-	this.init();
-}//ostk_Leaderboard
-
-function ostk_Skyscraper(atts, element){
-	/* 
-	Skyscraper: Lets you create a skyscraper banner for up to three products
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Init Element
-	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-		{
-			'type': null,
-			'event': null,
-			'product_ids': null,
-			'width': null,
-			'link_target': 'new_tab',
-			'number_of_items': 3,
-		}, atts);
-
-		var error = '';
-		atts.number_of_items = (parseInt(atts.number_of_items) > 3) ? 3 : atts.number_of_items;
-
-		if(ostk_isset(atts.event)){
-			atts.number_of_items = 2;
+		if(productData.price){
+			this.price = productData.price;
 		}
 
-		if(atts.number_of_items > 1){
-			this.obj = new ostk_MultiProductData();
-		}else{
-			this.obj = new ostk_SingleProductData();
-		}
-		this.obj.limit = atts.number_of_items;
-
-		if(this.atts.product_ids){
-			this.obj.productIds = atts.product_ids;
-		}else if(this.atts.event){
-			this.obj.query = ostk_getEventQuery(this.atts.event);
+		if(productData.url){
+			this.affiliateUrl = productData.url;
+		}else if(productData.saleURL){
+			this.affiliateUrl = productData.saleURL;
 		}
 
-		this.initObject();
-	};//initElement
-
-	// Generate Html
-	this.generateHtml = function(){
-		var productList = Array();
-		var output = '';
-		var product_name = '';
-
-		if(atts.number_of_items > 1){
-			productList = this.obj.getProductList();
-		}else{
-			productList.push(this.obj);
+		if(productData.review){
+			if(productData.review.stars){
+			    this.averageReviewAsDecimal = productData.review.stars;
+			    this.averageReviewAsGif = this.getStars(productData.review.stars);
+			}
 		}
 
-		for(var i = 0 ; i < productList.length ; i++){
-		    var product = productList[i];
-		    output += '<div class="ostk-element-content">';
-				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
-					if(ostk_isset(atts.event)){
-						//Sales Event
-						if(ostk_isset(atts.event)){
-							if(atts.event == 'Flash Deals'){
-								product_name = product.name;
-							}else{
-								product_name = product.categoryLabel;
-							}
-						}
+		if(productData.dealEndTime){
+			this.dealEndTime = productData.dealEndTime;
+		}
 
-						output += '<div class="product-info">';
-							output += '<p class="product-name">'+product_name+'</p>';
-							if(atts.event == 'Flash Deals'){
-								output += '<p class="price">$'+product.price+'</p>';
-							}
-							output += '<p class="savings">Save '+product.percentOff+'%</p>';
-						output += '</div>';
-					}else{
-						//No Event
-						output += '<p class="title">'+product.getName()+'</p>';
-						if(product.averageReviewAsGif){
-							output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
-						}
-						output += '<p class="price">'+product.getPrice()+'</p>';
-					}
-				output += '</a>';
-			output += '</div>';
+		if('percentOff' in productData){
+			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
+		}
+
+		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
+		this.imgUrl_medium = productData.imageURL;
+		this.imgUrl_thumbnail = productData.smallImageURL;
+
+		callback(this);
+	};//processData
+
+	this.getImageList = function(images){
+		var a = Array();
+		for(var i = 0 ; i < images.length ; i++){
+			a.push(images[i]['scaledImages'][3]['url']);
 		}//for
+		return a;
+	}
 
-		this.renderElement(output);
+	//Return star gif from float value
+	this.getStars = function(stars){
+    	//Add trailing ".0" if it doesn't alreay have it
+    	if(ostk_isset(stars)){
+    	    if(stars % 1 === 0){
+		    	stars = stars+'.0';
+		    }
+		    stars = String(stars);
+		    stars = stars.split('.').join('_');
+		    return "http://ak1.ostkcdn.com/img/mxc/stars"+stars+'.gif';
+    	}else{
+    		return null;
+    	}
+	}
 
-	}//generateHtml
+	this.isValidProductID = function(){
+		return this.validProductID;
+	}
 
-	this.init();
-}//ostk_Skyscraper
+	this.getProductId = function(){
+		return (ostk_isset(this.productId) ? this.productId : '' );
+	}
 
-function ostk_Carousel(atts, element){
+	this.getName = function(){
+		return (ostk_isset(this.name) ? this.name : '' );
+	}
+
+	this.setName = function(productData){
+		if(ostk_isset(productData.name)){
+			return productData.name;
+		}else if(ostk_isset(productData.detailMsg)){
+			return productData.detailMsg;
+		}
+	}
+
+	this.getPrice = function(){
+		return (ostk_isset(this.price) ? this.price : '' );
+	}
+
+	this.getImageBaseUrl = function(){
+		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : '' );
+	}
+
+	this.getImage_Thumbnail = function(){
+		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : '' );
+	}
+
+	this.getImage_Medium = function(){
+		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : '' );
+	}
+
+	this.getImage_Large = function(){
+		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : '' );
+	}
+
+	this.getAffiliateUrl = function(){
+		return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : '' );
+	}
+
+	this.getAverageReviewAsDecimal = function(){
+		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : '' );
+	}
+
+	this.getAverageReviewAsGif = function(){
+		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : '' );
+	}
+
+	this.getImageAtIndex = function(index){
+		return this.arrayOfAllProductImages[index];
+	}
+
+	this.getArrayOfAllProductImages = function(){
+		return this.arrayOfAllProductImages;
+	}
+
+	this.getDescription = function(){
+		return this.description;
+	}
+}//ostk_SingleProductData
+
+var ostk_MultiProductData = function(){
 	/*
-	Carousel: Lets you create a carousel banner for up to five products
-	Generate a carousel viewer for a number_of_products
+	MULTIPLE Product Data Class
+	takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
+	& num (the number of ostk_SingleProductData objects to return)
+		   
+	Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
+	Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
+	and the class supports the general API call. 
 	*/
-	ostk_Element.call(this, atts, element);
 
-	// Init Element
-	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-		{
-			'id': null,
-			'type': null,
-			'category': null, 
-			'carousel-type': null, 
-			'number_of_items': 10,
-			'sort_by': null, 
-			'keywords': null,
-			'product_ids': null,
-			'width': null,
-			'link_target': 'new_tab'
-		}, atts);
+	this.productIds;
+	this.limit;
+	this.developerId = ostk_developerId;
+	this.productList = Array();
+	this.invalidProductIDs = Array();
+	this.product_count_down = 0;
 
-		var output = '';
-		var error = null;
+	this.init = function(callback, errorCallback) {
 		var _this = this;
-		this.muliProduct = true;
-		var img_count = 0;
-
-		if(atts.id){
-			this.muliProduct = false;
-
-			this.obj = new ostk_SingleProductData();
-			this.obj.productId = atts.id;
-			this.obj.multiImages = true;
-			this.initObject();
-		}else{
-			var taxonomy = '';
-			var sortOption = '';
-			var keywords = '';
-			if(atts.product_ids){
-				var product_ids = atts.product_ids.split(',');
-			}else if(atts.category){
-				taxonomy = "&taxonomy=" + ostk_getTaxonomy(atts.category);
-				sortOption = (ostk_isset(atts.sort_by) ? "&sortOption=" + ostk_getSortOption(atts.sort_by) : '');
-				if (ostk_isset(taxonomy) && ostk_getTaxonomy(atts.category) == false) {
-					error = "category="+atts.category+" does not match our given categories, please check it.";
-				} 
-			}else if(atts.keywords){
-				keywords = "keywords=" + atts.keywords.split(' ').join('%20');
-			}else {
-				error = "Required field is missing; category, keywords, id or a list of product_ids.";
+		if(this.productIds){
+			if(this.limit !== null){
+				productIds = ostk_limitArrayCount(this.productIds, this.limit);
 			}
-
-			if(!error){
-				this.obj = new ostk_MultiProductData();
-				this.obj.limit = atts.number_of_items;
-				if (ostk_isset(product_ids)) {
-					this.obj.productIds = product_ids;
-					this.initObject();
-				}else{
-					var query = "https://api.overstock.com/ads/products?developerid=test&"+keywords+taxonomy+sortOption;
-					this.obj.query = query;
-					this.initObject();
+			this.product_count_down = productIds.length;
+			for(var i = 0 ; i < productIds.length ; i++){
+				var item = new ostk_SingleProductData();
+				item.productId = productIds[i];
+				this.createSingleObjects(item, callback, errorCallback);
+			}//for
+		}else if(this.query){
+			if(this.limit !== null){
+				this.query += '&limit=' + this.limit;
+			}
+			this.query = ostk_addTrackingToUrl(this.query);	
+			$ostk_jQuery.get( this.query, function( productData ){
+				if(productData.products){
+					productData = productData.products;
+				}else if(productData.sales){
+					productData = productData.sales;
 				}
-			}
-		}
 
-		if(error){
-			this.renderHTMLError(error);
-		}
-	};//initElement
+				_this.product_count_down = productData.length;
 
-	// Generate Html
-	this.generateHtml = function(){
-		var output = '';
-		var productList;
-		var product;		
-		var img_count = 0;
+				for(var i = 0 ; i < productData.length ; i++){
+					var item = new ostk_SingleProductData();
+					item.obj =  productData[i];
+					_this.createSingleObjects(item, callback, errorCallback);
+				}//for
+
+			})
+			.fail(function(){
+				errorCallback('Invalid query');
+			});
+		}
+	}//init
+
+	this.createSingleObjects = function(item, callback, errorCallback){
 		var _this = this;
+		item.init(
+			//Success
+			function(the_item){
+				_this.productList.push(the_item);
+				_this.checkProductCompletion(callback, errorCallback);
 
-		if(this.muliProduct){
-			productList = this.obj.productList;
-		}else{
-			product = this.obj;
-			productList = product.getArrayOfAllProductImages();
-		}
-
-		if(atts.number_of_items !== null){
-			productList = ostk_limitArrayCount(productList, atts.number_of_items);
-		}
-
-		output += '<div class="ostk-element ostk-carousel" '+ostk_getStyles(atts)+'>';
-	        output += '<div class="ostk-element-inner">';
-				output += '<div class="ostk-flexslider">';
-					output += '<ul class="slides">';
-
-						if(this.muliProduct){
-							for(var i = 0 ; i < productList.length ; i++){
-								var product = productList[i];
-								productImg = product.getImage_Large();
-								output += this.getCarouselListItems(product, productImg);
-							}//foreach
-						}else{
-							for(var i = 0 ; i < productList.length ; i++){
-								var productImg = productList[i];
-								output += this.getCarouselListItems(product, productImg);
-							}//foreach
-						}
-
-					output += '</ul>';
-				output += '</div>';
-
-				if(productList.length > 1){
-					//only show thumbnail navigation if more than 1 item
-					output +=  '<div class="custom-navigation count-'+productList.length+'">';
-						output += '<a href="#" class="flex-prev">';
-							output += '<div class="ostk-arrow">';
-								output += '<i class="fa fa-chevron-left"></i>';
-							output += '</div>';
-						output += '</a>';
-						output += '<a href="#" class="flex-next">';
-							output += '<div class="ostk-arrow">';
-								output += '<i class="fa fa-chevron-right"></i>';
-							output += '</div>';
-						output += '</a>';
-						output += '<div class="custom-controls-container"></div>';
-					output += '</div>';
+				//Flash deals end time
+				if(the_item.dealEndTime){
+					_this.dealEndTime = the_item.dealEndTime;
 				}
-			output += '</div>';
-		output += '</div>';
-
-		output = $ostk_jQuery(output);
-
-		if(this.obj.multiImages){
-			img_count = this.obj.arrayOfAllProductImages.length;
-		}else{
-			if(this.muliProduct){
-				img_count = this.obj.productList.length;
-			}
-		}
-
-		if(img_count > 1){
-			this.loadCarousel(output);
-		}
-		this.renderHTML(output);
-		this.resizeCarousel(output);
-
-		$ostk_jQuery(window).resize(function() {
-		    clearTimeout(window.resizedFinished);
-		    window.resizedFinished = setTimeout(function(){
-				_this.resizeCarousel(output);
-		    }, 250);
-		});
-	}//generateHtml
-
-	this.getCarouselListItems = function(product, productImg){
-		var output = '';
-		output += '<li data-thumb="'+productImg+'">';
-			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-			    output += '<div class="ostk-element-content">';
-					output += '<img src="'+productImg+'"/>';
-				output += '</div>';
-			    output += '<div class="element-overlay">';
-						output += '<p class="title">'+product.getName()+'</p>';
-						if(product.averageReviewAsGif){
-							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
-						}
-						output += '<p class="price">'+product.getPrice()+'</p>';
-						output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
-				output += '</div>';
-			output += '</a>';
-		output += '</li>';
-		return output;
-	};//getCarouselListItems
-
-	// Load Carousel
-	this.loadCarousel = function(carousel){
-		var _this = this;
-
-		carousel.find('.ostk-flexslider').flexslider({
-			animation: "slide",
-			controlNav: "thumbnails",
-			customDirectionNav: carousel.find(".custom-navigation a"),
-			controlsContainer: carousel.find(".custom-controls-container"),
-			touch: true,
-			slideshow: false,
-			start: function(carousel){
-				//Call on load
-				_this.showThumbnails(carousel, this);
 			},
-			after: function(carousel){
-				//Call after changing the current img
-				_this.showThumbnails(carousel, this);
+			//Error
+			function(error){
+				_this.invalidProductIDs.push('hoki');
+				_this.checkProductCompletion(callback, errorCallback);
 			}
-		});
-	};//loadCarousel
+		);
+	};//createSingleObjects
 
-	// Resize Flexslider
-	this.resizeCarousel = function(carousel){
-		var ostk_mobile_breakpoint = 500;
-		var carousel_inner = carousel.find('.ostk-element-inner');
-		if(carousel.outerWidth() > ostk_mobile_breakpoint){
-			carousel_inner.addClass('desktop-size');
-			carousel_inner.removeClass('mobile-size');
-		}else{
-			carousel_inner.removeClass('desktop-size');
-			carousel_inner.addClass('mobile-size');
-		}
-	};//resizeCarousel
+	this.checkProductCompletion = function(callback, errorCallback){
+	    this.product_count_down--;
+	    if(this.product_count_down === 0){
+	    	if(this.invalidProductIDs.length > 0){
+				errorCallback();
+	    	}else{
+			    callback();
+	    	}
+	    }
+	};//checkProductCompletion
 
-	// Show Thumbnails
-	this.showThumbnails = function(carousel, flexslider){
-		var itemsPerPage = 5;
-		var currentSlide = carousel.currentSlide;
-		var items = carousel.controlsContainer.find("ol li");
-		var onBothSides = (itemsPerPage-1)/2;
+	this.isAllValidProductIDs = function(){
+	    if(this.invalidProductIDs.length > 0){
+	    	multiMarker = '';
+		    if(this.invalidProductIDs.length > 1){
+		    	multiMarker = 's';
+	    	}
+	    	return false;
+    	}else{
+	    	return true;
+    	}
+	}//isAllValidProductIDs
 
-		items.each(function(index){
-			if( (index>=(currentSlide-onBothSides) && index<=(currentSlide+onBothSides) ) ||
-				// The items on either side of the current item will show 
-				(currentSlide < onBothSides && index < itemsPerPage) ||
-				// If at the beginning
-				(items.length-currentSlide <= onBothSides && items.length-index <= itemsPerPage) ){
-				// If at the end
-				$ostk_jQuery(this).show();
-			}else{
-				$ostk_jQuery(this).hide();
-			}
-		});
-	};//showThumbnails
+	this.getProductList = function(){
 
-	this.init();
-}//ostk_Skyscraper
-
-function ostk_Stockphoto(atts, element){
-	/*
-	Stock Photo: lets you create an image link to a product page (stock photo)
-	Allow users to add stock photos to their posts (and get paid for it).
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Init Element
-	this.initElement = function(){
-		var output = '';
-		var _this = this;
-		atts = ostk_shortcode_atts(
-		{
-			'type': null,
-			'id': null, 
-			'height': null, 
-			'width': null, 
-			'image_number': '1', 
-			'custom_css': null,
-			'link_target': 'new_tab'
-		}, atts);
-
-	    this.obj = new ostk_SingleProductData();
-	    this.obj.productId = atts.id;
-		this.obj.multiImages = true;
-
-		this.initObject();
-	};//initElement
-
-	// Generate Html
-	this.generateHtml = function(){
-		var output = '';
-		var error = null;
-
-		if(atts.image_number){
-			if(this.obj.arrayOfAllProductImages.length < atts.image_number){
-				error = 'Image number '+atts.image_number+' is not available.';
-				if(this.obj.arrayOfAllProductImages.length > 1){
-					error += ' Image numbers from 1 to '+ this.obj.arrayOfAllProductImages.length +' are available.';
-				}else{
-					error += ' This image only has 1 available image.';
-				}
-				error += ' Please change the image_number attribute and try again';
-			}
-		}
-
-		if(error){
-			this.renderHTMLError(error);
-		}else{
-			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(atts)+'>';
-				output += '<div class="ostk-element-inner">';
-					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
-					    output += '<div class="ostk-element-content">';
-							output += '<img src="'+this.obj.getImageAtIndex(atts.image_number-1)+'" width="'+atts.width+'" height="'+atts.height+'" style="'+atts.custom_css+'">';
-							output += '</div>';
-						    output += '<div class="element-overlay">';
-							    output += '<div class="ostk-element-content">';
-									output += '<p class="title">'+this.obj.getName()+'</p>';
-									if(this.obj.averageReviewAsGif){
-										output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
-									}
-									output += '<p class="price">'+this.obj.getPrice()+'</p>';
-									output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
-							output += '</div>';
-						output += '</div>';
-					output += '</a>';
-				output += '</div>';
-			output += '</div>';
-		}
-
-		this.renderHTML(output);
-	}//generateHtml
-
-	this.init();
-}//ostk_Stockphoto
-
-function ostk_SampleData(atts, element){
-	/*
-	Sample Widget: takes productId returns ProductData object
-	*/
-	ostk_Element.call(this, atts, element);
-
-	// Generate Html
-	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-		{
-			'id': ''
-		}, atts);
-
-		this.obj = new ostk_SingleProductData(atts.id);
-		this.obj.productId = this.atts.id;
-
-		this.initObject();
-	};//initElement
-
-	// Generate Html
-	this.generateHtml = function(){
-		var output = '';
-		output += '<p>The name is <strong>'+this.obj.getName()+'</strong></p><br/>';
-		output += '<p>The price is <strong>'+this.obj.getPrice()+'</strong></p><br/>';
-		output += '<p>The rating (as decimal is) <strong>'+this.obj.getAverageReviewAsDecimal()+'</strong></p><br/>';
-		output += '<p>The rating (as gif is)... see below</p><br/>';
-		output += '<img src= "'+this.obj.getAverageReviewAsGif()+'"/><br/>';
-		output += '<p> <strong>Large image:</strong></p><br/>';
-		output += '<a href="'+this.obj.getAffiliateUrl()+'"><img src= '+this.obj.getImage_Large()+' /></a><br/>';
-		output += '<p> <strong>Medium image:</strong></p><br/>';
-		output += '<a href="'+this.obj.getAffiliateUrl()+'"><img src= '+this.obj.getImage_Medium()+' /></a><br/>';
-		output += '<p> <strong>Small image:</strong></p><br/>';
-		output += '<a href="'+this.obj.getAffiliateUrl()+'"><img src= '+this.obj.getImage_Thumbnail()+' /></a><br/>';
-		output += '<p>The url link is <a href="'+this.obj.getAffiliateUrl()+'"><strong>here, click me!</strong></a></p><br/>';
-		output += '<p>Also, all photos are clickable.<p><br/>';
-		this.renderHTML(output);
-	};//generateHtml
-
-	this.init();
-}//ostk_SampleData
-
+		return this.productList;
+	}//getProductList
+}//ostk_MultiProductData
 
 
 var ostk_developerId = null;
@@ -1678,8 +723,10 @@ var ostk_plugin = new ostk_Plugin();
 var ostk_clickurl = window.location.href;
 
 var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
-
-
+//Localhost for testing
+if(ostk_clickurl.indexOf('http://localhost/~thoki') > -1){
+	ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+}
 
 var scripts = document.getElementsByTagName('script');
 for(var i = 0 ; i < scripts.length ; i++){
@@ -1702,23 +749,19 @@ for(var i = 0 ; i < scripts.length ; i++){
 	}//for	
 }//for
 
-//Localhost for testing
-if(ostk_clickurl === 'http://localhost/~thoki/ostk-example/'){
-	ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
-}
 
 var event_list = [
 	{
-		'event': 'Sales',
-		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
+		'event': 'Flash Deals',
+		'url': 'https://api.test.overstock.com/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
 	},
 	{
 		'event': 'Promotions',
 		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=promotion'
 	},
 	{
-		'event': 'Flash Deals',
-		'url': 'https://api.test.overstock.com/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
+		'event': 'Sales',
+		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
 	}
 ];
 
@@ -1750,11 +793,18 @@ function ostk_Plugin(){
 		$ostk_jQuery = jQuery.noConflict();
 		$ostk_jQuery(document).ready(function() {
 			_this.load_css();
-			_this.get_elements();
 			_this.ostk_preloaders();
-
+			_this.getPatterns();
 		});
 	};//ostk_init_elements
+
+	this.getPatterns = function(){
+		var _this = this;
+		$ostk_jQuery.getJSON(ostk_api_url + "patterns.json", function(ostk_patterns) {
+			_this.ostk_patterns = ostk_patterns;
+			_this.get_elements();
+		});
+	};//getPatterns
 
 	this.ostk_get_script = function(url, success) {
 		var script = document.createElement('script');
@@ -1877,6 +927,7 @@ function ostk_Element(atts, element){
 	this.atts = atts;
 	this.element = element;
 
+
 	//Init
 	this.init = function(){
 		/**
@@ -1941,6 +992,7 @@ function ostk_Element(atts, element){
 		);
 	};//initObject
 
+	//Set Flash Deals Timer
 	this.setFlashDealsTimer = function(obj){
 		// var t = new Date();
 		// t.setSeconds(t.getSeconds() + 5);
@@ -1948,6 +1000,15 @@ function ostk_Element(atts, element){
 
 		var _this = this;
 		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
+
+		// console.log('dealEndTime: ' + this.obj.dealEndTime);
+		// console.log('dealEndTime: ' + this.obj.dealEndTime);
+
+		console.log('this.obj');
+		console.dir(this.obj);
+
+		console.log(this.obj.dealEndTime);
+
 
 		obj.html(this.timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
@@ -1961,6 +1022,7 @@ function ostk_Element(atts, element){
 		}, 1000, true);
 	};//setFlashDealsTimer
 
+	// Time Difference to String
 	this.timeDiffToString = function(timeDiff){
 		var msec = timeDiff;
 		var hh = Math.floor(msec / 1000 / 60 / 60);
@@ -1970,7 +1032,7 @@ function ostk_Element(atts, element){
 		var ss = Math.floor(msec / 1000);
 		msec -= ss * 1000;
 
-		if(this.atts.type === 'skyscraper'){
+		if(this.atts.type === 'skyscraper' || this.atts.type === 'leaderboard'){
 			return '<div class="double-line">' + 
 				'<p>'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
 				'<p class="bottom-line">' +
@@ -1984,20 +1046,9 @@ function ostk_Element(atts, element){
 				'<p class="single-line">'+ostk_make_two_digits(hh) + ' <span>HR</span> : ' + ostk_make_two_digits(mm) + ' <span>MIN</span> : ' + ostk_make_two_digits(ss) + ' <span>SEC</span>' + '</p>' +
 			'</div>';	
 		}
-
 	}//timeDiffToString
 
-
-	//Render HTML
-	this.renderHTML = function(data){
-		data = $ostk_jQuery(data);
-		this.element.fadeOut('slow');
-		this.element.replaceWith(data);
-		this.element = data;
-		data.hide();
-		data.fadeIn('slow');
-	};//rederHTML
-
+	//Get Branding
 	this.getBranding = function(brand){
 		var output = '';
 		var img_url = '';		
@@ -2030,31 +1081,48 @@ function ostk_Element(atts, element){
 		var styles = '';
 		var brand_img = 'white';
 
+		if(ostk_isset(atts.version)){
+			eventClass += ' '+atts.version;
+		}
 		if(ostk_isset(atts.event)){
-			eventClass += ' sales-event';
+			var eventName = atts.event.split(' ').join('-').toLowerCase();
+			eventClass += ' sales-event '+eventName;
 			if(atts.event == 'Flash Deals'){
-				eventClass += ' flash-deals';
 				brand_img = 'flash-deals';
 			}
 		}else {
 			styles = ostk_getStyles(atts);
 		}
 
-
 		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
 			output += '<div class="ostk-element-inner">';
 
-				output += '<div class="ostk-element-header">';
-					output += this.getBranding(brand_img);
-				output += '</div>';
-
-				if(atts.event == 'Flash Deals'){
-					output += '<div class="dealEndTime"></div>';
+				if(atts.type !== 'leaderboard'){
+					output += '<div class="ostk-element-header">';
+						output += this.getBranding(brand_img);
+					output += '</div>';
 				}
 
 				output += elment_contents;
 
-				if(atts.event == 'Flash Deals'){
+				if(atts.type === 'leaderboard'){
+					if(atts.event == 'Flash Deals'){
+						output += '<div class="ostk-element-footer">';
+			    			output += this.getBranding('flash-deals');
+							if(atts.version === 'v1'){
+								output += '<div class="dealEndTime"></div>';
+							}
+							if(atts.version === 'v2'){
+								output += '<div class="dealEndTime"></div>';
+							}
+			    			output += this.getBranding();
+						output += '</div>';
+					}else{
+						output += '<div class="ostk-element-footer">';
+			    			output += this.getBranding('white');
+						output += '</div>';
+					}
+				}else if(atts.event == 'Flash Deals'){
 					output += '<div class="ostk-element-footer">';
 		    			output += this.getBranding();
 					output += '</div>';
@@ -2075,298 +1143,19 @@ function ostk_Element(atts, element){
 	};//renderElement
 
 
+	//Render HTML
+	this.renderHTML = function(data){
+		data = $ostk_jQuery(data);
+		this.element.fadeOut('slow');
+		this.element.replaceWith(data);
+		this.element = data;
+		data.hide();
+		data.fadeIn('slow');
+	};//rederHTML
+
 	//Render HTML Error
 	this.renderHTMLError = function(data){
 
 		this.renderHTML(ostk_formatError(data));
 	};//renderHTMLError
 }//ostk_Element
-
-var ostk_SingleProductData = function(){
-	/*
-	SINGLE Product Data Class
-	takes a productId or query and returns specific product details
-	*/ 
-	this.productId;
-	this.name;
-	this.price;
-	this.baseImageUrl;
-	this.imgUrl_large;
-	this.imgUrl_medium;
-	this.imgUrl_thumbnail;
-	this.affiliateUrl;
-	this.averageReviewAsDecimal;
-	this.averageReviewAsGif;
-	this.arrayOfAllProductImages;
-	this.description;
-	this.multiImages = false;
-
-	this.init = function(callback, errorCallback){
-		var _this = this;
-		var url = '';
-
-		if(this.obj){
-			_this.processData(this.obj, callback, errorCallback);
-		}else{
-			if(this.productId){
-				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
-				if(this.multiImages){
-					url +=	"&fetch_all_images=true";
-				}
-			}else if(this.query){
-				url = this.query;
-			}
-			url = ostk_addTrackingToUrl(url);	
-			$ostk_jQuery.get( url, function( productData ){
-				if(productData.products){
-					productData = productData.products[0];
-				}else if(productData.sales){
-					productData = productData.sales[0];
-				}
-				_this.processData(productData, callback, errorCallback);
-			})
-			.fail(function(){
-				errorCallback('Invalid product id: ' + _this.productId);
-			});
-		}
-	}//init
-
-	this.processData = function(productData, callback, errorCallback){
-		if(productData.images){
-		    this.arrayOfAllProductImages = this.getImageList(productData.images);
-		}
-		this.name = productData.name;
-		this.productId = productData.id;
-		this.developerId = ostk_developerId;
-		this.description = productData.description;
-
-		if(productData.price){
-			this.price = productData.price;
-		}
-
-		if(productData.url){
-			this.affiliateUrl = productData.url;
-		}else if(productData.saleURL){
-			this.affiliateUrl = productData.saleURL;
-		}
-
-		if(productData.review){
-			if(productData.review.stars){
-			    this.averageReviewAsDecimal = productData.review.stars;
-			    this.averageReviewAsGif = this.getStars(productData.review.stars);
-			}
-		}
-
-		if(productData.dealEndTime){
-			this.dealEndTime = productData.dealEndTime;
-		}
-
-		if(productData.categoryLabel){
-			this.categoryLabel = this.getCategoryLabel(productData.categoryLabel);
-		}
-
-		if('percentOff' in productData){
-			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
-		}
-
-		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
-		this.imgUrl_medium = productData.imageURL;
-		this.imgUrl_thumbnail = productData.smallImageURL;
-
-		callback(this);
-	};//processData
-
-	this.getCategoryLabel = function(str){
-		var array = str.split(' - ');
-		return array[array.length-1];
-	};
-
-	this.getImageList = function(images){
-		var a = Array();
-		for(var i = 0 ; i < images.length ; i++){
-			a.push(images[i]['scaledImages'][3]['url']);
-		}//for
-		return a;
-	}
-
-	//Return star gif from float value
-	this.getStars = function(stars){
-    	//Add trailing ".0" if it doesn't alreay have it
-    	if(ostk_isset(stars)){
-    	    if(stars % 1 === 0){
-		    	stars = stars+'.0';
-		    }
-		    stars = String(stars);
-		    stars = stars.split('.').join('_');
-		    return "http://ak1.ostkcdn.com/img/mxc/stars"+stars+'.gif';
-    	}else{
-    		return null;
-    	}
-	}
-
-	this.isValidProductID = function(){
-		return this.validProductID;
-	}
-
-	this.getProductId = function(){
-	return (ostk_isset(this.productId) ? this.productId : ostk_formatError("productId is not set") );
-	}
-
-	this.getName = function(){
-	return (ostk_isset(this.name) ? this.name : ostk_formatError("name is not set") );
-	}
-
-	this.getPrice = function(){
-	return (ostk_isset(this.price) ? this.price : ostk_formatError("price is not set") );
-	}
-
-	this.getImageBaseUrl = function(){
-	return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("baseImageUrl is not set") );
-	}
-
-	this.getImage_Thumbnail = function(){
-	return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("imgUrl_thumbnail is not set") );
-	}
-
-	this.getImage_Medium = function(){
-	return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("imgUrl_medium is not set") );
-	}
-
-	this.getImage_Large = function(){
-	return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("imgUrl_large is not set") );
-	}
-
-	this.getAffiliateUrl = function(){
-	return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("affiliateUrl is not set") );
-	}
-
-	this.getAverageReviewAsDecimal = function(){
-		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("averageReviewAsDecimal is not set") );
-	}
-
-	this.getAverageReviewAsGif = function(){
-		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("averageReviewAsGif is not set") );
-	}
-
-	this.getImageAtIndex = function(index){
-	  return this.arrayOfAllProductImages[index];
-	}
-
-	this.getArrayOfAllProductImages = function(){
-		return this.arrayOfAllProductImages;
-	}
-
-	this.getDescription = function(){
-		return this.description;
-	}
-}//ostk_SingleProductData
-
-var ostk_MultiProductData = function(){
-	/*
-	MULTIPLE Product Data Class
-	takes query (a API call on the search.json API . https://confluence.overstock.com/display/EP/Search)
-	& num (the number of ostk_SingleProductData objects to return)
-		   
-	Each item in the productList array is a ostk_SingleProductData object, so you can call those instance methods on them.
-	Writing a class that generated the url dynamically would just increase complexity, instead the url is generated on a widget-by-widget basis
-	and the class supports the general API call. 
-	*/
-
-	this.productIds;
-	this.limit;
-	this.developerId = ostk_developerId;
-	this.productList = Array();
-	this.invalidProductIDs = Array();
-	this.product_count_down = 0;
-
-	this.init = function(callback, errorCallback) {
-		var _this = this;
-		if(this.productIds){
-			if(this.limit !== null){
-				productIds = ostk_limitArrayCount(this.productIds, this.limit);
-			}
-			this.product_count_down = productIds.length;
-			for(var i = 0 ; i < productIds.length ; i++){
-				var item = new ostk_SingleProductData();
-				item.productId = productIds[i];
-				this.createSingleObjects(item, callback, errorCallback);
-			}//for
-		}else if(this.query){
-			if(this.limit !== null){
-				this.query += '&limit=' + this.limit;
-			}
-			this.query = ostk_addTrackingToUrl(this.query);	
-			$ostk_jQuery.get( this.query, function( productData ){
-				if(productData.products){
-					productData = productData.products;
-				}else if(productData.sales){
-					productData = productData.sales;
-				}
-
-				_this.product_count_down = productData.length;
-
-				for(var i = 0 ; i < productData.length ; i++){
-					var item = new ostk_SingleProductData();
-					item.obj =  productData[i];
-					_this.createSingleObjects(item, callback, errorCallback);
-				}//for
-
-			})
-			.fail(function(){
-				errorCallback('Invalid query');
-			});
-		}
-	}//init
-
-	this.createSingleObjects = function(item, callback, errorCallback){
-		var _this = this;
-		item.init(
-			//Success
-			function(the_item){
-				_this.productList.push(the_item);
-				_this.checkProductCompletion(callback, errorCallback);
-
-				//Flash deals end time
-				if(the_item.dealEndTime){
-					_this.dealEndTime = the_item.dealEndTime;
-				}
-			},
-			//Error
-			function(error){
-				_this.invalidProductIDs.push('hoki');
-				_this.checkProductCompletion(callback, errorCallback);
-			}
-		);
-	};//createSingleObjects
-
-	this.checkProductCompletion = function(callback, errorCallback){
-	    this.product_count_down--;
-	    if(this.product_count_down === 0){
-	    	if(this.invalidProductIDs.length > 0){
-				errorCallback();
-	    	}else{
-			    callback();
-	    	}
-	    }
-	};//checkProductCompletion
-
-	this.isAllValidProductIDs = function(){
-	    if(this.invalidProductIDs.length > 0){
-	    	multiMarker = '';
-		    if(this.invalidProductIDs.length > 1){
-		    	multiMarker = 's';
-	    	}
-	    	return false;
-    	}else{
-	    	return true;
-    	}
-	}//isAllValidProductIDs
-
-	this.getProductList = function(){
-
-		return this.productList;
-	}//getProductList
-}//ostk_MultiProductData
-
-
-

@@ -38,16 +38,16 @@ for(var i = 0 ; i < scripts.length ; i++){
 
 var event_list = [
 	{
-		'event': 'Sales',
-		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
+		'event': 'Flash Deals',
+		'url': 'https://api.test.overstock.com/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
 	},
 	{
 		'event': 'Promotions',
 		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=promotion'
 	},
 	{
-		'event': 'Flash Deals',
-		'url': 'https://api.test.overstock.com/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
+		'event': 'Sales',
+		'url': 'https://api.test.overstock.com/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
 	}
 ];
 
@@ -287,6 +287,15 @@ function ostk_Element(atts, element){
 		var _this = this;
 		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
 
+		// console.log('dealEndTime: ' + this.obj.dealEndTime);
+		// console.log('dealEndTime: ' + this.obj.dealEndTime);
+
+		console.log('this.obj');
+		console.dir(this.obj);
+
+		console.log(this.obj.dealEndTime);
+
+
 		obj.html(this.timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
 			if(timeDiff <= 1000){
@@ -309,7 +318,7 @@ function ostk_Element(atts, element){
 		var ss = Math.floor(msec / 1000);
 		msec -= ss * 1000;
 
-		if(this.atts.type === 'skyscraper'){
+		if(this.atts.type === 'skyscraper' || this.atts.type === 'leaderboard'){
 			return '<div class="double-line">' + 
 				'<p>'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
 				'<p class="bottom-line">' +
@@ -358,10 +367,13 @@ function ostk_Element(atts, element){
 		var styles = '';
 		var brand_img = 'white';
 
+		if(ostk_isset(atts.version)){
+			eventClass += ' '+atts.version;
+		}
 		if(ostk_isset(atts.event)){
-			eventClass += ' sales-event';
+			var eventName = atts.event.split(' ').join('-').toLowerCase();
+			eventClass += ' sales-event '+eventName;
 			if(atts.event == 'Flash Deals'){
-				eventClass += ' flash-deals';
 				brand_img = 'flash-deals';
 			}
 		}else {
@@ -371,13 +383,32 @@ function ostk_Element(atts, element){
 		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
 			output += '<div class="ostk-element-inner">';
 
-				output += '<div class="ostk-element-header">';
-					output += this.getBranding(brand_img);
-				output += '</div>';
+				if(atts.type !== 'leaderboard'){
+					output += '<div class="ostk-element-header">';
+						output += this.getBranding(brand_img);
+					output += '</div>';
+				}
 
 				output += elment_contents;
 
-				if(atts.event == 'Flash Deals'){
+				if(atts.type === 'leaderboard'){
+					if(atts.event == 'Flash Deals'){
+						output += '<div class="ostk-element-footer">';
+			    			output += this.getBranding('flash-deals');
+							if(atts.version === 'v1'){
+								output += '<div class="dealEndTime"></div>';
+							}
+							if(atts.version === 'v2'){
+								output += '<div class="dealEndTime"></div>';
+							}
+			    			output += this.getBranding();
+						output += '</div>';
+					}else{
+						output += '<div class="ostk-element-footer">';
+			    			output += this.getBranding('white');
+						output += '</div>';
+					}
+				}else if(atts.event == 'Flash Deals'){
 					output += '<div class="ostk-element-footer">';
 		    			output += this.getBranding();
 					output += '</div>';
