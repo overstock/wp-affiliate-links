@@ -117,11 +117,11 @@ var ostk_SingleProductData = function(){
 	}
 
 	this.getProductId = function(){
-		return (ostk_isset(this.productId) ? this.productId : ostk_formatError("productId is not set") );
+		return (ostk_isset(this.productId) ? this.productId : '' );
 	}
 
 	this.getName = function(){
-		return (ostk_isset(this.name) ? this.name : ostk_formatError("name is not set") );
+		return (ostk_isset(this.name) ? this.name : '' );
 	}
 
 	this.setName = function(productData){
@@ -133,35 +133,35 @@ var ostk_SingleProductData = function(){
 	}
 
 	this.getPrice = function(){
-		return (ostk_isset(this.price) ? this.price : ostk_formatError("price is not set") );
+		return (ostk_isset(this.price) ? this.price : '' );
 	}
 
 	this.getImageBaseUrl = function(){
-		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : ostk_formatError("baseImageUrl is not set") );
+		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : '' );
 	}
 
 	this.getImage_Thumbnail = function(){
-		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : ostk_formatError("imgUrl_thumbnail is not set") );
+		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : '' );
 	}
 
 	this.getImage_Medium = function(){
-		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : ostk_formatError("imgUrl_medium is not set") );
+		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : '' );
 	}
 
 	this.getImage_Large = function(){
-		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : ostk_formatError("imgUrl_large is not set") );
+		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : '' );
 	}
 
 	this.getAffiliateUrl = function(){
-		return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : ostk_formatError("affiliateUrl is not set") );
+		return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : '' );
 	}
 
 	this.getAverageReviewAsDecimal = function(){
-		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : ostk_formatError("averageReviewAsDecimal is not set") );
+		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : '' );
 	}
 
 	this.getAverageReviewAsGif = function(){
-		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : ostk_formatError("averageReviewAsGif is not set") );
+		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : '' );
 	}
 
 	this.getImageAtIndex = function(index){

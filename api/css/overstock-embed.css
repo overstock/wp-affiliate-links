@@ -188,21 +188,17 @@
   /* salse-event */
   /*----------------------------- Flash Deals -----------------------------*/
   /* flash-deals */
+  /*----------------------------- Sales and Promotions -----------------------------*/
+  /* sales and promotions */
   /*----------------------------- Pattern 1 - search -----------------------------*/
   /* .ostk-search  */
   /*----------------------------- Pattern 2 - link -----------------------------*/
   /* .ostk-link  */
   /*----------------------------- Pattern 3 - rectangle -----------------------------*/
-  /* Default rectangle
-  -----------------------------------*/
-  /* .ostk-rectangle  */
-  /* Sales Events
-  -----------------------------------*/
   /* .ostk-rectangle  */
   /*----------------------------- Pattern 4 - leaderboard -----------------------------*/
   /* .ostk-leaderboard  */
   /*----------------------------- Pattern 5 - skyscraper -----------------------------*/
-  /* .ostk-skyscraper  */
   /* .ostk-skyscraper  */
   /*----------------------------- Pattern 6 - carousel -----------------------------*/
   /* .ostk-carousel */
@@ -332,10 +328,8 @@
 #main .ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.title,
 #sidebar .ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.title {
   font-size: 16px;
-  border-bottom: solid 1px #aaaaaa;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  color: #000000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -420,6 +414,12 @@
   border: solid 1px #aaaaaa;
   margin: 0px 10px 10px 10px;
 }
+.ostk-element.flash-deals .ostk-element-inner .ostk-element-content .product-info p.title,
+#main .ostk-element.flash-deals .ostk-element-inner .ostk-element-content .product-info p.title,
+#sidebar .ostk-element.flash-deals .ostk-element-inner .ostk-element-content .product-info p.title {
+  border-bottom: solid 1px #aaaaaa;
+  color: #000000;
+}
 .ostk-element.flash-deals .ostk-element-inner .ostk-element-footer,
 #main .ostk-element.flash-deals .ostk-element-inner .ostk-element-footer,
 #sidebar .ostk-element.flash-deals .ostk-element-inner .ostk-element-footer {
@@ -436,10 +436,24 @@
 #sidebar .ostk-element.flash-deals .ostk-element-inner .ostk-element-footer .branding img {
   width: 100px;
 }
+.ostk-element.sales .ostk-element-inner .ostk-element-content .product-info p.savings,
+#main .ostk-element.sales .ostk-element-inner .ostk-element-content .product-info p.savings,
+#sidebar .ostk-element.sales .ostk-element-inner .ostk-element-content .product-info p.savings,
+.ostk-element.promotions .ostk-element-inner .ostk-element-content .product-info p.savings,
+#main .ostk-element.promotions .ostk-element-inner .ostk-element-content .product-info p.savings,
+#sidebar .ostk-element.promotions .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 30px;
+  color: #c80f2e;
+}
 .ostk-element.ostk-rectangle,
 #main .ostk-element.ostk-rectangle,
 #sidebar .ostk-element.ostk-rectangle {
+  /* Default
+    -----------------------------------*/
   /* .ostk-element-inner */
+  /* Sales Events
+    -----------------------------------*/
+  /* sales-event */
 }
 .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay,
 #main .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay,
@@ -447,11 +461,6 @@
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
-}
-.ostk-element.ostk-rectangle,
-#main .ostk-element.ostk-rectangle,
-#sidebar .ostk-element.ostk-rectangle {
-  /* sales-event */
 }
 .ostk-element.ostk-rectangle.sales-event,
 #main .ostk-element.ostk-rectangle.sales-event,
@@ -488,7 +497,17 @@
 #sidebar .ostk-element.ostk-leaderboard {
   width: 728px;
   height: 90px;
+  /* Default
+    -----------------------------------*/
   /* .ostk-element-inner */
+  /* Sales Event
+    -----------------------------------*/
+  /* Version 1
+    -----------------------------------*/
+  /* Version 2
+    -----------------------------------*/
+  /* Version 3
+    -----------------------------------*/
 }
 .ostk-element.ostk-leaderboard .ostk-element-inner,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner,
@@ -496,19 +515,15 @@
   width: 728px;
   height: 90px;
   position: relative;
-  border: solid 2px #c80f2e;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
 }
 .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder,
 #sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder {
   margin-right: 150px;
 }
-.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-element-content,
-#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-element-content,
-#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-element-content {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-item,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-item,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-item {
   width: 50%;
   float: left;
 }
@@ -517,49 +532,225 @@
 #sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content {
   padding: 7px 0px;
 }
-.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p,
-#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p,
-#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p {
   text-align: left;
 }
-.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p.title,
-#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p.title,
-#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p.title {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.title,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.title,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p.description,
-#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p.description,
-#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content p.description {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.description,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.description,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.description {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 12px;
 }
-.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content img.product-image,
-#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content img.product-image,
-#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content img.product-image {
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-image,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-image,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-image {
   padding: 5px;
   float: left;
   margin: 0;
   max-height: 70px;
 }
-.ostk-element.ostk-leaderboard .ostk-element-inner .branding,
-#main .ostk-element.ostk-leaderboard .ostk-element-inner .branding,
-#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .branding {
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer {
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 0;
   -webkit-border-radius: 0px 6px 6px 0px;
   -moz-border-radius: 0px 6px 6px 0px;
   border-radius: 0px 6px 6px 0px;
   position: absolute;
-  right: 0;
   width: 130px;
-  padding: 30px 0;
+  background: #c80f2e;
+}
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 22px;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-content,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-content,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-content {
+  margin: 5px;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer {
+  background: #FFFFFF;
+  border: none;
+  border-left: 1px solid #aaaaaa;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding img {
+  display: block;
+  margin: 0 auto;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line {
+  margin: 0;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p {
+  font-size: 16px;
+}
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line span,
+#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line span,
+#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line span {
+  font-size: 8px;
+  line-height: 8px;
+}
+.ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content,
+#main .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content,
+#sidebar .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content {
+  height: 75px;
+}
+.ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.title,
+#main .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.title,
+#sidebar .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 14px;
+}
+.ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.price,
+#main .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.price,
+#sidebar .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.price,
+.ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.savings,
+#main .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.savings,
+#sidebar .ostk-element.ostk-leaderboard.v1 .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 15px;
+}
+.ostk-element.ostk-leaderboard.v2,
+#main .ostk-element.ostk-leaderboard.v2,
+#sidebar .ostk-element.ostk-leaderboard.v2 {
+  width: 498px;
+  height: 60px;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner {
+  width: 498px;
+  height: 60px;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content {
+  margin: 2px;
+  height: 50px;
+  width: 230px;
+  float: left;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.title,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.title,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 14px;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.price,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.price,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.price {
+  float: left;
+  border-right: solid 1px #7b7b7b;
+  padding-right: 3px;
+  margin-right: 3px;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.price,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.price,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.price,
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.savings,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.savings,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 13px;
+  line-height: 13px;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-image,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-image,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .ostk-element-content .product-image {
+  max-height: 40px;
+}
+.ostk-element.ostk-leaderboard.v2 .ostk-element-inner .dealEndTime,
+#main .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .dealEndTime,
+#sidebar .ostk-element.ostk-leaderboard.v2 .ostk-element-inner .dealEndTime {
+  float: left;
+  width: 50px;
+}
+.ostk-element.ostk-leaderboard.v3,
+#main .ostk-element.ostk-leaderboard.v3,
+#sidebar .ostk-element.ostk-leaderboard.v3 {
+  width: 320px;
+  height: 50px;
+}
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner {
+  width: 320px;
+  height: 50px;
+}
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content {
+  padding: 0;
+  margin: 2px;
+  height: 40px;
+  width: 180px;
+}
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.title,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.title,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 12px;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.price,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.price,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.price {
+  float: left;
+  border-right: solid 1px #7b7b7b;
+  padding-right: 3px;
+  margin-right: 3px;
+}
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.price,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.price,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.price,
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.savings,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.savings,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 13px;
+  line-height: 13px;
+}
+.ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-image,
+#main .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-image,
+#sidebar .ostk-element.ostk-leaderboard.v3 .ostk-element-inner .ostk-element-content .product-image {
+  max-height: 40px;
 }
 .ostk-element.ostk-skyscraper,
 #main .ostk-element.ostk-skyscraper,
 #sidebar .ostk-element.ostk-skyscraper {
+  /* Default
+    -----------------------------------*/
   /* .ostk-element-inner */
+  /* Sales Event
+    -----------------------------------*/
+  /* sales-event */
 }
 .ostk-element.ostk-skyscraper .ostk-element-inner .ostk-element-content p,
 #main .ostk-element.ostk-skyscraper .ostk-element-inner .ostk-element-content p,
@@ -573,11 +764,6 @@
   margin: 0 auto 10px auto;
   max-width: 100%;
 }
-.ostk-element.ostk-skyscraper,
-#main .ostk-element.ostk-skyscraper,
-#sidebar .ostk-element.ostk-skyscraper {
-  /* sales-event */
-}
 .ostk-element.ostk-skyscraper.sales-event,
 #main .ostk-element.ostk-skyscraper.sales-event,
 #sidebar .ostk-element.ostk-skyscraper.sales-event {
@@ -589,11 +775,6 @@
 #main .ostk-element.ostk-skyscraper.sales-event .ostk-element-inner p.dealEndTime,
 #sidebar .ostk-element.ostk-skyscraper.sales-event .ostk-element-inner p.dealEndTime {
   margin-bottom: 15px;
-}
-.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .ostk-element-content p,
-#main .ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .ostk-element-content p,
-#sidebar .ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .ostk-element-content p {
-  text-align: left;
 }
 .ostk-element.ostk-carousel,
 #main .ostk-element.ostk-carousel,

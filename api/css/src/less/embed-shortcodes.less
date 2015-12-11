@@ -122,10 +122,8 @@
           p {
             &.title {
               font-size: 16px;
-              border-bottom: solid 1px @grey-lt;
               margin-bottom: 5px;
               padding-bottom: 5px;
-              color: @black;
               .truncate;
             }
             &.price {
@@ -188,6 +186,14 @@
         .border-radius(5px);
         border: solid 1px @grey-lt;
         margin: 0px 10px 10px 10px;
+        .product-info {
+          p {
+            &.title {
+              border-bottom: solid 1px @grey-lt;
+              color: @black;
+            }
+          }
+        }
       }
       .ostk-element-footer {
         background: @white;
@@ -205,6 +211,24 @@
       }
     }
   }/* flash-deals */
+
+  /*----------------------------- Sales and Promotions -----------------------------*/
+  &.sales,
+  &.promotions {
+    .ostk-element-inner {
+      .ostk-element-content {
+        .product-info {
+          p {
+            &.savings {
+              font-size: 30px;
+              color: @primary;
+            }
+          }
+        }
+      }
+    }
+  }/* sales and promotions */
+
 
   /*----------------------------- Pattern 1 - search -----------------------------*/
   &.ostk-search {
@@ -255,33 +279,35 @@
   &.ostk-leaderboard {
     width: 728px;
     height: 90px;
+    /* Default
+    -----------------------------------*/
     .ostk-element-inner {
       width: 728px;
       height: 90px;
       position: relative;
-      border: solid 2px @primary;
-      .border-radius(8px);
       .item-holder {
         margin-right: 150px;
         &.item-count-2 {
-          .ostk-element-content {
+          .ostk-item {
             width: 50%;  
             float: left;
           }
         }
         .ostk-element-content {
           padding: 7px 0px;
-          p {
-            text-align: left;
-            &.title {
-              .truncate;
-            }
-            &.description {
-              .truncate;
-              font-size: 12px;
+          .product-info {
+            p {
+              text-align: left;
+              &.title {
+                .truncate;
+              }
+              &.description {
+                .truncate;
+                font-size: 12px;
+              }
             }
           }
-          img.product-image {
+          .product-image {
             padding: 5px;
             float: left;
             margin: 0;
@@ -289,14 +315,161 @@
           }
         }
       }
-      .branding {
+      .ostk-element-footer {
+        top: 0;
+        bottom: 0;
+        left: auto;
+        right: 0;
         .border-radius(0px 6px 6px 0px);
         position: absolute;
-        right: 0;
         width: 130px;          
-        padding: 30px 0;
+        background: @primary;
+        .branding {
+          img {
+            margin-top: 22px;
+          }
+        }
       }
     }/* .ostk-element-inner */
+
+    /* Sales Event
+    -----------------------------------*/
+    &.sales-event {
+      .ostk-element-inner {
+        .ostk-element-content {
+          margin: 5px;
+        }
+        .ostk-element-footer {
+          background: @white;
+          border: none;
+          border-left: 1px solid @grey-lt;
+          .branding {
+            .border-radius(0px);
+            img {
+              display: block;
+              margin: 0 auto;
+            }
+          }
+          .dealEndTime {
+            .double-line {
+              margin: 0;
+              p {
+                font-size: 16px;
+              }
+              span {
+                font-size: 8px;
+                line-height: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* Version 1
+    -----------------------------------*/
+    &.v1 {    
+      .ostk-element-inner {
+        .ostk-element-content {
+          height: 75px;
+          .product-info {
+            p {
+              &.title {
+                font-size: 14px;
+              }
+              &.price,
+              &.savings {
+                font-size: 15px;
+              }
+            }
+          }        
+        }        
+      }
+    }
+
+    /* Version 2
+    -----------------------------------*/
+    &.v2 {    
+      width: 498px;
+      height: 60px;
+      .ostk-element-inner {
+        width: 498px;
+        height: 60px;
+        .ostk-element-content {
+          margin: 2px;
+          height: 50px;
+          width: 230px;
+          float: left;
+          .product-info {
+            p {
+              &.title {
+                font-size: 14px;
+                padding-bottom: 3px;
+                margin-bottom: 3px;
+              }
+              &.price {
+                float: left;
+                border-right: solid 1px @grey;
+                padding-right: 3px;
+                margin-right: 3px;
+              }
+              &.price,
+              &.savings {
+                font-size: 13px;
+                line-height: 13px;
+              }
+            }
+          }        
+          .product-image {
+            max-height: 40px;
+          }
+        }      
+        .dealEndTime {
+          float: left;
+          width: 50px;
+        }
+      }
+    }
+
+    /* Version 3
+    -----------------------------------*/
+    &.v3 {    
+      width: 320px;
+      height: 50px;
+      .ostk-element-inner {
+        width: 320px;
+        height: 50px;
+        .ostk-element-content {
+          padding: 0;
+          margin: 2px;
+          height: 40px;
+          width: 180px;
+          .product-info {
+            p {
+              &.title {
+                font-size: 12px;
+                padding-bottom: 3px;
+                margin-bottom: 3px;
+              }
+              &.price {
+                float: left;
+                border-right: solid 1px @grey;
+                padding-right: 3px;
+                margin-right: 3px;
+              }
+              &.price,
+              &.savings {
+                font-size: 13px;
+                line-height: 13px;
+              }
+            }
+          }
+          .product-image {
+            max-height: 40px;
+          }
+        }        
+      }
+    }
   }/* .ostk-leaderboard  */
 
   /*----------------------------- Pattern 5 - skyscraper -----------------------------*/
@@ -327,13 +500,9 @@
             margin-bottom: 15px;
           }
         }
-        .ostk-element-content {
-          p {
-            text-align: left;
-          }
-        }
       }/* .ostk-element-inner */
     }/* sales-event */
+
   }/* .ostk-skyscraper  */
 
   /*----------------------------- Pattern 6 - carousel -----------------------------*/
