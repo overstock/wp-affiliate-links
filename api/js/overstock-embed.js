@@ -14,9 +14,7 @@ Class: 			ostk_Carousel
 Extends: 		ostk_Widget
 Description: 	Lets you create a carousel banner
 */
-function ostk_Carousel(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Carousel(){
 
 	// Init Element
 	this.initElement = function(){
@@ -243,7 +241,6 @@ function ostk_Carousel(atts, element){
 		});
 	};//showThumbnails
 
-	this.init();
 }//ostk_Skyscraper
 
 /* 
@@ -253,13 +250,11 @@ Class: 			ostk_Leaderboard
 Extends: 		ostk_Widget
 Description: 	Lets you create a leaderboard banner for up to two products 
 */
-function ostk_Leaderboard(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'product_ids': null,
@@ -267,23 +262,23 @@ function ostk_Leaderboard(atts, element){
 			'link_target': 'new_tab',
 			'number_of_items': 2,
 			'version': 'v1'
-		}, atts);
+		}, this.atts);
 
 		var output = '';
 		var error = null;
 		var _this = this;
 
-		if(ostk_isset(atts.version) && atts.version !== 'v1'){
-			atts.number_of_items = 1;
+		if(ostk_isset(this.atts.version) && this.atts.version !== 'v1'){
+			this.atts.number_of_items = 1;
 		}
 
-		var limit = (parseInt(atts.number_of_items) < 2) ? atts.number_of_items : 2;
+		var limit = (parseInt(this.atts.number_of_items) < 2) ? this.atts.number_of_items : 2;
 
 		this.obj = new ostk_MultiProductData();
 		this.obj.limit = limit;
 
 		if(this.atts.product_ids){
-			this.obj.productIds = atts.product_ids;
+			this.obj.productIds = this.atts.product_ids;
 		}else if(this.atts.event){
 			this.obj.query = ostk_getEventQuery(this.atts.event);
 		}
@@ -302,12 +297,12 @@ function ostk_Leaderboard(atts, element){
 
 			    output += '<div class="ostk-item">';
 				    output += '<div class="ostk-element-content">';
-						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
 
 						    output += '<div class="product-info">';
 								output += '<p class="title">'+product.getName()+'</p>';
-								if(!ostk_isset(atts.event)){
+								if(!ostk_isset(this.atts.event)){
 									output += '<p class="description">'+product.description+'</p>';
 									if(product.averageReviewAsGif){
 										output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
@@ -315,8 +310,8 @@ function ostk_Leaderboard(atts, element){
 								}
 
 								output += '<p class="price">$'+product.getPrice()+'</p>';
-								if(ostk_isset(atts.event)){
-									if(atts.event == 'Flash Deals'){
+								if(ostk_isset(this.atts.event)){
+									if(this.atts.event == 'Flash Deals'){
 										output += '<p class="savings">Save: '+product.percentOff+'%</p>';
 									}else{
 										output += '<p class="savings">'+product.percentOff+' OFF</p>';
@@ -333,7 +328,6 @@ function ostk_Leaderboard(atts, element){
 		this.renderElement(output);
 	}//generateHtml
 
-	this.init();
 }//ostk_Leaderboard
 
 /* 
@@ -345,30 +339,27 @@ Description: 	Lets you create links to any overstock page
 				Specify the link_text with the link_text attribute
 				Generate a link to a predefined page on Overstock.com
 */
-function ostk_Link(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Link(){
 
 	// Generate Html
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 	    {
 	      'type': null,
 	      'url': 'http://www.overstock.com/', 
 	      'link_text': 'A link to Overstock.com',
 	      'link_target': 'new_tab'
-	    }, atts);
+	    }, this.atts);
 
 		var output = '';
-		var link_text = atts.link_text;
-		var affiliateLink = ostk_generateAffiliateLink(atts.url);
+		var link_text = this.atts.link_text;
+		var affiliateLink = ostk_generateAffiliateLink(this.atts.url);
 
-		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
+		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(this.atts)+'>'+link_text+'</a>';
 
 		this.renderHTML(output);
 	};//initElement
 
-	this.init();
 }//ostk_Link
 
 /* 
@@ -378,21 +369,19 @@ Class: 			ostk_ProductDetailsLink
 Extends: 		ostk_Widget
 Description: 	Allow users to create easy links to products they are showcasing
 */
-function ostk_ProductDetailsLink(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_ProductDetailsLink(){
 
 	// Generate Html
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'id': null,
 			'display': null,
 			'link_target': 'new_tab'
-		}, atts);
+		}, this.atts);
 
 		this.obj = new ostk_SingleProductData();
-		this.obj.productId = atts.id
+		this.obj.productId = this.atts.id
 
 		this.initObject();
 	};//initElement
@@ -400,7 +389,7 @@ function ostk_ProductDetailsLink(atts, element){
 	// Generate Html
 	this.generateHtml = function(){
 		var output = '';
-				switch (atts.display) {
+				switch (this.atts.display) {
 					case 'name':
 						output = this.obj.getName();
 						break;
@@ -411,11 +400,10 @@ function ostk_ProductDetailsLink(atts, element){
 						output = this.obj.getDescription();
 						break;
 				}//switch
-		output = '<a href="'+this.obj.getAffiliateUrl()+'" class="ostk-element ostk-product-link" '+ostk_getLinkTarget(atts)+'>'+output+'</a>';
+		output = '<a href="'+this.obj.getAffiliateUrl()+'" class="ostk-element ostk-product-link" '+ostk_getLinkTarget(this.atts)+'>'+output+'</a>';
 		this.renderHTML(output);
 	}//generateHtml
 
-	this.init();
 }//ostk_ProductLink
 
 /* 
@@ -425,9 +413,7 @@ Class: 			ostk_Rectangle
 Extends: 		ostk_Widget
 Description: 	Lets you create a rectangular banner for a SINGLE product
 */
-function ostk_Rectangle(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Rectangle(){
 
 	// Init Html
 	this.initElement = function(){
@@ -448,13 +434,13 @@ function ostk_Rectangle(atts, element){
 		var output = '';
 		var product_name = '';
 
-		output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+		output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 
 			output += '<div class="dealEndTime"></div>';
 
 			output += '<div class="ostk-element-content">';
 				output += '<img src="'+this.obj.getImage_Large()+'" class="product-image"/>';
-				if(ostk_isset(atts.event)){
+				if(ostk_isset(this.atts.event)){
 					//Sales Event
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.getName()+'</p>';
@@ -469,7 +455,7 @@ function ostk_Rectangle(atts, element){
 				}
 			output += '</div>';
 
-			if(!ostk_isset(atts.event)){
+			if(!ostk_isset(this.atts.event)){
 				output += '<div class="element-overlay">';
 				    output += '<div class="ostk-element-content">';
 						output += '<p class="title">'+this.obj.getName()+'</p>';
@@ -486,7 +472,6 @@ function ostk_Rectangle(atts, element){
 
 	}//generateHtml
 
-	this.init();
 }//ostk_Reactagngle
 
 /* 
@@ -496,18 +481,16 @@ Class: 			ostk_SampleData
 Extends: 		ostk_Widget
 Description: 	Takes productId returns ProductData object
 */
-function ostk_SampleData(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_SampleData(){
 
 	// Generate Html
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'id': ''
-		}, atts);
+		}, this.atts);
 
-		this.obj = new ostk_SingleProductData(atts.id);
+		this.obj = new ostk_SingleProductData(this.atts.id);
 		this.obj.productId = this.atts.id;
 
 		this.initObject();
@@ -532,7 +515,6 @@ function ostk_SampleData(atts, element){
 		this.renderHTML(output);
 	};//generateHtml
 
-	this.init();
 }//ostk_SampleData
 
 /* 
@@ -544,19 +526,17 @@ Description: 	Takes you to search results page
 				Generate a link to a search results page
 				Query is link text if link_text parameter is empty
 */
-function ostk_SearchQuery(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_SearchQuery(){
 
 	// Generate Html
 	this.initElement = function(){
 		var output = '';
-		var keywords = (ostk_isset(atts.query) ? "keywords=" + atts.query.split(" ").join("%20") : null);
+		var keywords = (ostk_isset(this.atts.query) ? "keywords=" + this.atts.query.split(" ").join("%20") : null);
 		var taxonomy = '';
 		var taxonomyParam = '';
 		var error = null;
 		var sortOption = '';
-		var link_text = atts.link_text;
+		var link_text = this.atts.link_text;
 
 		if(!error){
 			if(keywords == null) {
@@ -565,8 +545,8 @@ function ostk_SearchQuery(atts, element){
 		}
 
 		if(error){
-			if(ostk_isset(atts.category)){
-				taxonomyParam = ostk_getTaxonomy(atts.category);
+			if(ostk_isset(this.atts.category)){
+				taxonomyParam = ostk_getTaxonomy(this.atts.category);
 				if(!taxonomyParam){
 					error = '"category" not found. Please check spelling and try again.';
 				} else {
@@ -576,8 +556,8 @@ function ostk_SearchQuery(atts, element){
 		}
 
 		if(error){
-			if(ostk_isset(atts.sort_by)){
-				sortOptionParam = ostk_getSortOption(atts.sort_by);
+			if(ostk_isset(this.atts.sort_by)){
+				sortOptionParam = ostk_getSortOption(this.atts.sort_by);
 				if(!sortOptionParam){
 					error = '"sort_by" not found. Please check spelling and try again.';
 				} else {
@@ -590,13 +570,12 @@ function ostk_SearchQuery(atts, element){
 			this.renderHTMLError(error);
 		}else{
 			var affiliateLink = ostk_generateAffiliateLink("http://www.overstock.com/search?"+keywords+taxonomy+sortOption);
-			link_text = (atts.link_text != null ? atts.link_text : atts.query);
-			output = '<a href="'+affiliateLink+'" class="ostk-element ostk-search" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
+			link_text = (this.atts.link_text != null ? this.atts.link_text : this.atts.query);
+			output = '<a href="'+affiliateLink+'" class="ostk-element ostk-search" '+ostk_getLinkTarget(this.atts)+'>'+link_text+'</a>';
 			this.renderHTML(output);
 		}
 	};//initElement
 
-	this.init();
 }//ostk_SearchQuery
 
 /* 
@@ -606,13 +585,11 @@ Class: 			ostk_Skyscraper
 Extends: 		ostk_Widget
 Description: 	Lets you create a skyscraper banner for up to three products
 */
-function ostk_Skyscraper(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Skyscraper(){
 
 	// Init Element
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'event': null,
@@ -620,24 +597,24 @@ function ostk_Skyscraper(atts, element){
 			'width': null,
 			'link_target': 'new_tab',
 			'number_of_items': 3,
-		}, atts);
+		}, this.atts);
 
 		var error = '';
-		atts.number_of_items = (parseInt(atts.number_of_items) > 3) ? 3 : atts.number_of_items;
+		this.atts.number_of_items = (parseInt(this.atts.number_of_items) > 3) ? 3 : this.atts.number_of_items;
 
-		if(ostk_isset(atts.event)){
-			atts.number_of_items = 2;
+		if(ostk_isset(this.atts.event)){
+			this.atts.number_of_items = 2;
 		}
 
-		if(atts.number_of_items > 1){
+		if(this.atts.number_of_items > 1){
 			this.obj = new ostk_MultiProductData();
 		}else{
 			this.obj = new ostk_SingleProductData();
 		}
-		this.obj.limit = atts.number_of_items;
+		this.obj.limit = this.atts.number_of_items;
 
 		if(this.atts.product_ids){
-			this.obj.productIds = atts.product_ids;
+			this.obj.productIds = this.atts.product_ids;
 		}else if(this.atts.event){
 			this.obj.query = ostk_getEventQuery(this.atts.event);
 		}
@@ -651,7 +628,7 @@ function ostk_Skyscraper(atts, element){
 		var output = '';
 		var product_name = '';
 
-		if(atts.number_of_items > 1){
+		if(this.atts.number_of_items > 1){
 			productList = this.obj.getProductList();
 		}else{
 			productList.push(this.obj);
@@ -662,25 +639,25 @@ function ostk_Skyscraper(atts, element){
 		for(var i = 0 ; i < productList.length ; i++){
 		    var product = productList[i];
 		    output += '<div class="ostk-element-content">';
-				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
 
 					output += '<div class="product-info">';
 
 						output += '<p class="title">'+product.getName()+'</p>';
 
-						if(!ostk_isset(atts.event)){
+						if(!ostk_isset(this.atts.event)){
 							if(product.averageReviewAsGif){
 								output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
 							}
 						}
 
-						if(!ostk_isset(atts.event) || atts.event == 'Flash Deals'){
+						if(!ostk_isset(this.atts.event) || this.atts.event == 'Flash Deals'){
 							output += '<p class="price">$'+product.getPrice()+'</p>';
 						}
 
-						if(ostk_isset(atts.event)){
-							if(atts.event == 'flash-deals'){
+						if(ostk_isset(this.atts.event)){
+							if(this.atts.event == 'flash-deals'){
 								output += '<p class="savings">Save: '+product.percentOff+'%</p>';
 							}else{
 								output += '<p class="savings">'+product.percentOff+'% OFF</p>';
@@ -696,7 +673,6 @@ function ostk_Skyscraper(atts, element){
 
 	}//generateHtml
 
-	this.init();
 }//ostk_Skyscraper
 
 /* 
@@ -707,15 +683,13 @@ Extends: 		ostk_Widget
 Description: 	Lets you create an image link to a product page (stock photo)
 				Allow users to add stock photos to their posts (and get paid for it)
 */
-function ostk_Stockphoto(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Stockphoto(){
 
 	// Init Element
 	this.initElement = function(){
 		var output = '';
 		var _this = this;
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'id': null, 
@@ -724,10 +698,10 @@ function ostk_Stockphoto(atts, element){
 			'image_number': '1', 
 			'custom_css': null,
 			'link_target': 'new_tab'
-		}, atts);
+		}, this.atts);
 
 	    this.obj = new ostk_SingleProductData();
-	    this.obj.productId = atts.id;
+	    this.obj.productId = this.atts.id;
 		this.obj.multiImages = true;
 
 		this.initObject();
@@ -738,9 +712,9 @@ function ostk_Stockphoto(atts, element){
 		var output = '';
 		var error = null;
 
-		if(atts.image_number){
-			if(this.obj.arrayOfAllProductImages.length < atts.image_number){
-				error = 'Image number '+atts.image_number+' is not available.';
+		if(this.atts.image_number){
+			if(this.obj.arrayOfAllProductImages.length < this.atts.image_number){
+				error = 'Image number '+this.atts.image_number+' is not available.';
 				if(this.obj.arrayOfAllProductImages.length > 1){
 					error += ' Image numbers from 1 to '+ this.obj.arrayOfAllProductImages.length +' are available.';
 				}else{
@@ -753,11 +727,11 @@ function ostk_Stockphoto(atts, element){
 		if(error){
 			this.renderHTMLError(error);
 		}else{
-			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(atts)+'>';
+			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(this.atts)+'>';
 				output += '<div class="ostk-element-inner">';
-					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 					    output += '<div class="ostk-element-content">';
-							output += '<img src="'+this.obj.getImageAtIndex(atts.image_number-1)+'" width="'+atts.width+'" height="'+atts.height+'" style="'+atts.custom_css+'">';
+							output += '<img src="'+this.obj.getImageAtIndex(this.atts.image_number-1)+'" width="'+this.atts.width+'" height="'+this.atts.height+'" style="'+this.atts.custom_css+'">';
 							output += '</div>';
 						    output += '<div class="element-overlay">';
 							    output += '<div class="ostk-element-content">';
@@ -777,7 +751,6 @@ function ostk_Stockphoto(atts, element){
 		this.renderHTML(output);
 	}//generateHtml
 
-	this.init();
 }//ostk_Stockphoto
 
 /*
@@ -1654,35 +1627,44 @@ function ostk_Plugin(){
 				}
 			}//for
 
+			var item;
+			var is_widget = true;
 			switch (data['type']) {
 				case 'search':
-					var item = new ostk_SearchQuery(data, element);
+					item = new ostk_SearchQuery();
 					break;
 				case 'link':
-					var item = new ostk_Link(data, element);
+					item = new ostk_Link();
 					break;
 				case 'rectangle':
-					var item = new ostk_Rectangle(data, element);
+					item = new ostk_Rectangle();
 					break;
 				case 'leaderboard':
-					var item = new ostk_Leaderboard(data, element);
+					item = new ostk_Leaderboard();
 					break;
 				case 'skyscraper':
-					var item = new ostk_Skyscraper(data, element);
+					item = new ostk_Skyscraper();
 					break;
 				case 'carousel':
-					var item = new ostk_Carousel(data, element);
+					item = new ostk_Carousel();
 					break;
 				case 'stock_photo':
-					var item = new ostk_Stockphoto(data, element);
+					item = new ostk_Stockphoto();
 					break;
 				case 'product_link':
-					var item = new ostk_ProductDetailsLink(data, element);
+					item = new ostk_ProductDetailsLink();
 					break;
 				case 'sample_data':
-					var item = new ostk_SampleData(data, element);
+					item = new ostk_SampleData();
 					break;
+				default:
+					is_widget = true;
 			}//switch
+
+			if(is_widget){
+				var object = $ostk_jQuery.extend({}, new ostk_Widget(data, element), item);	
+				object.init();
+			}
 
 		});
 	};//ostk_get_elements

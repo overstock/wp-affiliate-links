@@ -122,35 +122,44 @@ function ostk_Plugin(){
 				}
 			}//for
 
+			var item;
+			var is_widget = true;
 			switch (data['type']) {
 				case 'search':
-					var item = new ostk_SearchQuery(data, element);
+					item = new ostk_SearchQuery();
 					break;
 				case 'link':
-					var item = new ostk_Link(data, element);
+					item = new ostk_Link();
 					break;
 				case 'rectangle':
-					var item = new ostk_Rectangle(data, element);
+					item = new ostk_Rectangle();
 					break;
 				case 'leaderboard':
-					var item = new ostk_Leaderboard(data, element);
+					item = new ostk_Leaderboard();
 					break;
 				case 'skyscraper':
-					var item = new ostk_Skyscraper(data, element);
+					item = new ostk_Skyscraper();
 					break;
 				case 'carousel':
-					var item = new ostk_Carousel(data, element);
+					item = new ostk_Carousel();
 					break;
 				case 'stock_photo':
-					var item = new ostk_Stockphoto(data, element);
+					item = new ostk_Stockphoto();
 					break;
 				case 'product_link':
-					var item = new ostk_ProductDetailsLink(data, element);
+					item = new ostk_ProductDetailsLink();
 					break;
 				case 'sample_data':
-					var item = new ostk_SampleData(data, element);
+					item = new ostk_SampleData();
 					break;
+				default:
+					is_widget = true;
 			}//switch
+
+			if(is_widget){
+				var object = $ostk_jQuery.extend({}, new ostk_Widget(data, element), item);	
+				object.init();
+			}
 
 		});
 	};//ostk_get_elements

@@ -8,11 +8,11 @@
 */
 
 /* Pages */
-include_once('plugin/pages/home-page.php');
-include_once('plugin/pages/generator-page.php');
-include_once('plugin/pages/documentation-page.php');
-include_once('plugin/pages/sandbox-page.php');
-include_once('plugin/pages/contact-page.php');
+include_once('plugin/pages/home.php');
+include_once('plugin/pages/generator.php');
+include_once('plugin/pages/documentation.php');
+include_once('plugin/pages/sandbox.php');
+include_once('plugin/pages/contact.php');
 
 /* Developer ID */
 $GLOBALS['developerId'] = get_option('ostk_settings');
@@ -82,31 +82,31 @@ function ostk_load_js() {
 
     $ostk_scripts = [
         //Libraries
-        'js/src/libs/jquery.min.js',
-        'js/src/libs/flexslider.min.js',
+        'api/js/src/libs/jquery.min.js',
+        'api/js/src/libs/flexslider.min.js',
 
         //Widgets
-        'js/src/widgets/widget.js',
-        'js/src/widgets/carousel.js',
-        'js/src/widgets/leaderboard.js',
-        'js/src/widgets/link.js',
-        'js/src/widgets/product-details-link.js',
-        'js/src/widgets/rectangle.js',
-        'js/src/widgets/sample-data.js',
-        'js/src/widgets/search-query.js',
-        'js/src/widgets/skyscraper.js',
-        'js/src/widgets/stockphoto.js',
+        'api/js/src/widgets/widget.js',
+        'api/js/src/widgets/carousel.js',
+        'api/js/src/widgets/leaderboard.js',
+        'api/js/src/widgets/link.js',
+        'api/js/src/widgets/product-details-link.js',
+        'api/js/src/widgets/rectangle.js',
+        'api/js/src/widgets/sample-data.js',
+        'api/js/src/widgets/search-query.js',
+        'api/js/src/widgets/skyscraper.js',
+        'api/js/src/widgets/stockphoto.js',
 
         //Classes
-        'js/src/classes/plugin.js',
-        'js/src/classes/multi-product-data.js',
-        'js/src/classes/single-product-data.js',
+        'api/js/src/classes/plugin.js',
+        'api/js/src/classes/multi-product-data.js',
+        'api/js/src/classes/single-product-data.js',
 
         //Functions
-        'js/src/functions.js',
+        'api/js/src/functions.js',
 
         //Embed
-        'js/src/overstock-embed.js?id='.$GLOBALS['developerId']
+        'api/js/src/overstock-embed.js?id='.$GLOBALS['developerId']
     ];
 
     $ostk_pageJs;
@@ -124,7 +124,7 @@ function ostk_load_js() {
     }
 
     for($i = 0 ; $i < count($ostk_scripts) ; $i ++){
-        wp_enqueue_script( 'ostk-'.$ostk_scripts[$i], plugins_url('api/'.$ostk_scripts[$i], __FILE__), array('jquery'), '1.0', true );
+        wp_enqueue_script( 'ostk-'.$ostk_scripts[$i], plugins_url($ostk_scripts[$i], __FILE__), array('jquery'), '1.0', true );
     }//for
 
 }//ostk_admin_js

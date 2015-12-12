@@ -6,15 +6,13 @@ Extends: 		ostk_Widget
 Description: 	Lets you create an image link to a product page (stock photo)
 				Allow users to add stock photos to their posts (and get paid for it)
 */
-function ostk_Stockphoto(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Stockphoto(){
 
 	// Init Element
 	this.initElement = function(){
 		var output = '';
 		var _this = this;
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'type': null,
 			'id': null, 
@@ -23,10 +21,10 @@ function ostk_Stockphoto(atts, element){
 			'image_number': '1', 
 			'custom_css': null,
 			'link_target': 'new_tab'
-		}, atts);
+		}, this.atts);
 
 	    this.obj = new ostk_SingleProductData();
-	    this.obj.productId = atts.id;
+	    this.obj.productId = this.atts.id;
 		this.obj.multiImages = true;
 
 		this.initObject();
@@ -37,9 +35,9 @@ function ostk_Stockphoto(atts, element){
 		var output = '';
 		var error = null;
 
-		if(atts.image_number){
-			if(this.obj.arrayOfAllProductImages.length < atts.image_number){
-				error = 'Image number '+atts.image_number+' is not available.';
+		if(this.atts.image_number){
+			if(this.obj.arrayOfAllProductImages.length < this.atts.image_number){
+				error = 'Image number '+this.atts.image_number+' is not available.';
 				if(this.obj.arrayOfAllProductImages.length > 1){
 					error += ' Image numbers from 1 to '+ this.obj.arrayOfAllProductImages.length +' are available.';
 				}else{
@@ -52,11 +50,11 @@ function ostk_Stockphoto(atts, element){
 		if(error){
 			this.renderHTMLError(error);
 		}else{
-			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(atts)+'>';
+			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(this.atts)+'>';
 				output += '<div class="ostk-element-inner">';
-					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 					    output += '<div class="ostk-element-content">';
-							output += '<img src="'+this.obj.getImageAtIndex(atts.image_number-1)+'" width="'+atts.width+'" height="'+atts.height+'" style="'+atts.custom_css+'">';
+							output += '<img src="'+this.obj.getImageAtIndex(this.atts.image_number-1)+'" width="'+this.atts.width+'" height="'+this.atts.height+'" style="'+this.atts.custom_css+'">';
 							output += '</div>';
 						    output += '<div class="element-overlay">';
 							    output += '<div class="ostk-element-content">';
@@ -76,5 +74,4 @@ function ostk_Stockphoto(atts, element){
 		this.renderHTML(output);
 	}//generateHtml
 
-	this.init();
 }//ostk_Stockphoto

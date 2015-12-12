@@ -24,6 +24,7 @@ module.exports = function(grunt) {
 		less: {
 			css: {
 				src: ['less/main.less'],
+				// dest: '../overstock-plugin.css'
 				dest: '../overstock-plugin.css'
 			}
 		},

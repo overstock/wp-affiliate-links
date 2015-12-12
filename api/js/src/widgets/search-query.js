@@ -7,19 +7,17 @@ Description: 	Takes you to search results page
 				Generate a link to a search results page
 				Query is link text if link_text parameter is empty
 */
-function ostk_SearchQuery(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_SearchQuery(){
 
 	// Generate Html
 	this.initElement = function(){
 		var output = '';
-		var keywords = (ostk_isset(atts.query) ? "keywords=" + atts.query.split(" ").join("%20") : null);
+		var keywords = (ostk_isset(this.atts.query) ? "keywords=" + this.atts.query.split(" ").join("%20") : null);
 		var taxonomy = '';
 		var taxonomyParam = '';
 		var error = null;
 		var sortOption = '';
-		var link_text = atts.link_text;
+		var link_text = this.atts.link_text;
 
 		if(!error){
 			if(keywords == null) {
@@ -28,8 +26,8 @@ function ostk_SearchQuery(atts, element){
 		}
 
 		if(error){
-			if(ostk_isset(atts.category)){
-				taxonomyParam = ostk_getTaxonomy(atts.category);
+			if(ostk_isset(this.atts.category)){
+				taxonomyParam = ostk_getTaxonomy(this.atts.category);
 				if(!taxonomyParam){
 					error = '"category" not found. Please check spelling and try again.';
 				} else {
@@ -39,8 +37,8 @@ function ostk_SearchQuery(atts, element){
 		}
 
 		if(error){
-			if(ostk_isset(atts.sort_by)){
-				sortOptionParam = ostk_getSortOption(atts.sort_by);
+			if(ostk_isset(this.atts.sort_by)){
+				sortOptionParam = ostk_getSortOption(this.atts.sort_by);
 				if(!sortOptionParam){
 					error = '"sort_by" not found. Please check spelling and try again.';
 				} else {
@@ -53,11 +51,10 @@ function ostk_SearchQuery(atts, element){
 			this.renderHTMLError(error);
 		}else{
 			var affiliateLink = ostk_generateAffiliateLink("http://www.overstock.com/search?"+keywords+taxonomy+sortOption);
-			link_text = (atts.link_text != null ? atts.link_text : atts.query);
-			output = '<a href="'+affiliateLink+'" class="ostk-element ostk-search" '+ostk_getLinkTarget(atts)+'>'+link_text+'</a>';
+			link_text = (this.atts.link_text != null ? this.atts.link_text : this.atts.query);
+			output = '<a href="'+affiliateLink+'" class="ostk-element ostk-search" '+ostk_getLinkTarget(this.atts)+'>'+link_text+'</a>';
 			this.renderHTML(output);
 		}
 	};//initElement
 
-	this.init();
 }//ostk_SearchQuery

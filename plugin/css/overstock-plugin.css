@@ -974,18 +974,14 @@
 .ostk-doc-page .shortcode-output {
   margin: 10px auto 50px auto;
 }
-.ostk-doc-page .shortcode-output .ostk-element {
+.ostk-doc-page .shortcode-output p.ostk-error,
+.ostk-doc-page .shortcode-output a.ostk-element {
+  text-align: center;
+}
+.ostk-doc-page .shortcode-output .ostk-element,
+.ostk-doc-page .shortcode-output div[data-tag="overstock"] {
   display: block;
   margin: 0 auto;
-}
-.ostk-doc-page .shortcode-output p.ostk-error {
-  text-align: center;
-}
-.ostk-doc-page .shortcode-output a.ostk-element.ostk-search,
-.ostk-doc-page .shortcode-output a.ostk-element.ostk-link,
-.ostk-doc-page .shortcode-output a.ostk-element.ostk-product-link {
-  display: block;
-  text-align: center;
 }
 /*----------------------------- WP Plugin Sandbox Page -----------------------------*/
 .ostk-sandbox-page .shortcode-input .inner,
@@ -1076,6 +1072,10 @@
 }
 .ostk-generator-page .embed-output {
   display: none;
+}
+.ostk-generator-page .embed-output .ostk-error,
+.ostk-generator-page .embed-output a.ostk-element {
+  text-align: center;
 }
 .ostk-generator-page .embed-output .ostk-element {
   margin: 0 auto;

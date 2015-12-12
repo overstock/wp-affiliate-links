@@ -5,18 +5,16 @@ Class: 			ostk_SampleData
 Extends: 		ostk_Widget
 Description: 	Takes productId returns ProductData object
 */
-function ostk_SampleData(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_SampleData(){
 
 	// Generate Html
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
+		this.atts = ostk_shortcode_atts(
 		{
 			'id': ''
-		}, atts);
+		}, this.atts);
 
-		this.obj = new ostk_SingleProductData(atts.id);
+		this.obj = new ostk_SingleProductData(this.atts.id);
 		this.obj.productId = this.atts.id;
 
 		this.initObject();
@@ -41,5 +39,4 @@ function ostk_SampleData(atts, element){
 		this.renderHTML(output);
 	};//generateHtml
 
-	this.init();
 }//ostk_SampleData
