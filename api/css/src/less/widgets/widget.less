@@ -1,0 +1,68 @@
+/*----------------------------- Widget -----------------------------*/
+.ostk-element-inner {
+  border: solid 2px @primary;
+  position: relative;
+  height: 100%;
+  .border-radius(8px);
+  a {
+    text-decoration: none;
+    outline: 0;
+    .box-shadow (none);
+    &:focus {
+      outline: 0;
+    }
+  }
+  p {
+    color: @black;
+  }
+  img {
+    max-width: 100%;
+  }
+  .branding {
+    background: @primary;    
+    padding: 5px 0;
+    img {
+      margin: 0 auto;
+      display: block;
+    }
+  }
+  .ostk-element-content {
+    padding: 10px;
+    position: relative;
+    .border-radius(2px);
+    overflow: hidden;
+    p {
+      font-size: 16px;
+      margin: 0;
+      &.title {
+        color: @primary;
+      }
+      &.price {
+        color: @grey-dk;
+      }
+    }
+  }
+  .element-overlay {
+    background-color: rgba(255, 255, 255, .9);
+    position: absolute;    
+    bottom: 0;
+    width: 100%;
+    .opacity(0);
+    padding: 10px;
+    .transition(all linear 500ms);
+    img {
+      width: auto; 
+      &.ostk-logo {
+        float: right;
+      }
+    }
+    p {
+      font-size: 16px;
+      margin: 0 0 5px 0;
+      &.title {
+        font-weight: bold;
+        color: @primary;
+      }
+    }
+  }
+}/* .ostk-element-inner */

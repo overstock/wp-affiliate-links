@@ -23,12 +23,21 @@ module.exports = function(grunt) {
 		concat: {
 			dist: {
 				src: [
+					//Libraries
 					'libs/jquery.min.js',
 					'libs/flexslider.min.js',
-					'js/patterns.js',
-					'js/functions.js',
-					'js/product-data.js',
-					'js/overstock-embed.js'
+
+					//Widgets
+					'widgets/*.js',
+
+					//Functions
+					'functions.js',
+
+					//Classes
+					'classes/*.js',
+
+					//Embed
+					'overstock-embed.js'
 				],
 				dest: '../overstock-embed.js'
 			}

@@ -1,0 +1,36 @@
+/*----------------------------- Rectangle -----------------------------*/
+&.ostk-rectangle {
+  /* Default
+  -----------------------------------*/
+  .ostk-element-inner {
+    &:hover {
+      .element-overlay {
+        .opacity(1);
+      }
+    }
+  }/* .ostk-element-inner */
+
+  /* Sales Events
+  -----------------------------------*/
+  &.sales-event {
+    width: 300px;
+    height: 250px;
+    .ostk-element-inner {
+      .ostk-element-header {
+        border-bottom: 1px solid @grey-lt;
+      }
+      .ostk-element-content {
+        height: 135px;
+        .product-image {
+          float: left;
+          width: 90px;
+        }
+        .product-info {
+          float: right;
+          width: 150px;
+          margin-top: 10px;
+        }
+      }
+    }/* .ostk-element-inner */
+  }/* sales-event */
+}/* .ostk-rectangle  */

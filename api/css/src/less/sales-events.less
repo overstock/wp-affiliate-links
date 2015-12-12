@@ -1,0 +1,114 @@
+/*----------------------------- Sales Event -----------------------------*/
+&.sales-event {
+  .ostk-element-inner {
+    .ostk-element-content {
+      .product-info {
+        p {
+          &.title {
+            font-size: 16px;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            .truncate;
+          }
+          &.price {
+            color: @primary;
+            font-size: 18px;
+          }
+          &.savings {
+            color: @grey;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}/* salse-event */
+
+/*----------------------------- Flash Deals -----------------------------*/
+&.flash-deals {
+  .ostk-element-inner {
+    background: @flash-deal-yellow;
+    .border-radius(0px);
+    border: 2px solid @grey-lt;
+    .dealEndTime {
+      p {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+      }
+      span {
+        font-size: 10px;
+      }
+      .single-line {
+        p {
+          line-height: 30px;          
+        }
+      }
+      .double-line {
+        margin: 10px 0;
+        p.bottom-line {
+          font-size: 10px;
+          span {
+            line-height: 10px;
+            margin: 0 7px;
+          }
+        }
+      }
+    }
+    .branding {
+      background: @white;
+      img {
+        width: 170px;
+      }
+    }
+    .ostk-element-header {
+      background: @white;
+    }
+    .ostk-element-content {
+      background: @white;
+      .border-radius(5px);
+      border: solid 1px @grey-lt;
+      margin: 0px 10px 10px 10px;
+      .product-info {
+        p {
+          &.title {
+            border-bottom: solid 1px @grey-lt;
+            color: @black;
+          }
+        }
+      }
+    }
+    .ostk-element-footer {
+      background: @white;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      border-top: 1px solid @grey-lt;
+      .branding {
+        img {
+          width: 100px;
+        }
+      }
+    }
+  }
+}/* flash-deals */
+
+/*----------------------------- Sales and Promotions -----------------------------*/
+&.sales,
+&.promotions {
+  .ostk-element-inner {
+    .ostk-element-content {
+      .product-info {
+        p {
+          &.savings {
+            font-size: 30px;
+            color: @primary;
+          }
+        }
+      }
+    }
+  }
+}/* sales and promotions */

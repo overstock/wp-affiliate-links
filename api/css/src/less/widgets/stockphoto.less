@@ -1,0 +1,29 @@
+/*----------------------------- Stockphoto -----------------------------*/
+&.ostk-stock-photo {
+  .ostk-element-inner {
+    &:hover {
+      .element-overlay {
+        .opacity(1);
+      }
+    }
+    &.image-small {
+      width: 200px;
+    }
+    &.image-medium {
+      width: 400px;
+    }
+    &.img-large {
+      width: 600px;
+    }
+    .ostk-element-content {
+    }
+    .element-overlay {
+      background-color: rgba(255, 255, 255, .9);
+      position: absolute;    
+      bottom: 0;
+      width: 100%;
+      .opacity(0);
+      .transition(all linear 500ms);
+    }
+  }/* .ostk-element-inner */
+}/* .ostk-stock-photo */

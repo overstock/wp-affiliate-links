@@ -1,0 +1,32 @@
+/*----------------------------- Skyscraper -----------------------------*/
+&.ostk-skyscraper {
+  /* Default
+  -----------------------------------*/
+  .ostk-element-inner {
+    .ostk-element-content {
+      p {
+        text-align: center;
+      }
+      img {
+        display: block;
+        margin: 0 auto 10px auto;
+        max-width: 100%;
+      }
+    }
+  }/* .ostk-element-inner */
+
+  /* Sales Event
+  -----------------------------------*/
+  &.sales-event {
+    width: 160px;
+    height: 600px;
+    .ostk-element-inner {
+      p {
+        &.dealEndTime {
+          margin-bottom: 15px;
+        }
+      }
+    }/* .ostk-element-inner */
+  }/* sales-event */
+
+}/* .ostk-skyscraper  */
