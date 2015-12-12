@@ -5,9 +5,7 @@ Class: 			ostk_Carousel
 Extends: 		ostk_Widget
 Description: 	Lets you create a carousel banner
 */
-function ostk_Carousel(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Carousel(){
 
 	// Init Element
 	this.initElement = function(){
@@ -234,5 +232,4 @@ function ostk_Carousel(atts, element){
 		});
 	};//showThumbnails
 
-	this.init();
 }//ostk_Skyscraper

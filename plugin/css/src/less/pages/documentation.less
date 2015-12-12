@@ -92,21 +92,14 @@
 	}
 	.shortcode-output {
 		margin: 10px auto 50px auto;
-		
-		.ostk-element {
-			display: block;
-			margin: 0 auto;
-		}
-		p.ostk-error {
+		p.ostk-error,
+		a.ostk-element {
 			text-align: center;
 		}
-		a.ostk-element {
-			&.ostk-search,
-			&.ostk-link,
-			&.ostk-product-link {
-				display: block;
-				text-align: center;
-			}
+		.ostk-element,
+		div[data-tag="overstock"] {
+			display: block;
+			margin: 0 auto;
 		}
 	}
 }

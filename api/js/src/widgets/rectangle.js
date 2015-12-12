@@ -5,9 +5,7 @@ Class: 			ostk_Rectangle
 Extends: 		ostk_Widget
 Description: 	Lets you create a rectangular banner for a SINGLE product
 */
-function ostk_Rectangle(atts, element){
-	//Extend Widget Class
-	ostk_Widget.call(this, atts, element);
+function ostk_Rectangle(){
 
 	// Init Html
 	this.initElement = function(){
@@ -28,13 +26,13 @@ function ostk_Rectangle(atts, element){
 		var output = '';
 		var product_name = '';
 
-		output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+		output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 
 			output += '<div class="dealEndTime"></div>';
 
 			output += '<div class="ostk-element-content">';
 				output += '<img src="'+this.obj.getImage_Large()+'" class="product-image"/>';
-				if(ostk_isset(atts.event)){
+				if(ostk_isset(this.atts.event)){
 					//Sales Event
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.getName()+'</p>';
@@ -49,7 +47,7 @@ function ostk_Rectangle(atts, element){
 				}
 			output += '</div>';
 
-			if(!ostk_isset(atts.event)){
+			if(!ostk_isset(this.atts.event)){
 				output += '<div class="element-overlay">';
 				    output += '<div class="ostk-element-content">';
 						output += '<p class="title">'+this.obj.getName()+'</p>';
@@ -66,5 +64,4 @@ function ostk_Rectangle(atts, element){
 
 	}//generateHtml
 
-	this.init();
 }//ostk_Reactagngle
