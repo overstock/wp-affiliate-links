@@ -297,12 +297,11 @@ $ostk_jQuery('form').on('change', '.ostk-form-content input[type="radio"]', func
 	sibs.find('input[type="radio"]').prop('checked', false);
 });
 
-
 /* Submit
 --------------------------------------------------------------------------------*/
 $ostk_jQuery('form.ostk-embed-builder').submit(function(e){
 	e.preventDefault();
-	var embed_code = $ostk_jQuery('textarea.code');
+	var embed_code = $ostk_jQuery('.code');
 	var embed_sandbox = $ostk_jQuery('.embed-sandbox');
 
 	$ostk_jQuery('.embed-output').fadeIn('slow');
@@ -354,3 +353,16 @@ function createOption(text, value){
 	}
 	return $ostk_jQuery("<option />", {value: value, text: text});
 }//createOption
+
+/* Copy Text
+--------------------------------------------------------------------------------*/
+$ostk_jQuery('.ostk-copy-to-clipboard-btn').click(function(){
+	var copyTextarea = $ostk_jQuery(this).siblings('.ostk-copy-to-clipboard-text');
+	copyTextarea.select();
+
+	try {
+		var successful = document.execCommand('copy');
+		var msg = successful ? 'successful' : 'unsuccessful';
+	} catch (err) {
+	}
+});

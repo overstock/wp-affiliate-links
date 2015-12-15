@@ -21,7 +21,10 @@ function ostk_generator_page() {
 				<div class="col-md-6">
 					<div class="embed-output">
 						<h3 class="center">Short Code</h3>
-						<textarea class="code"></textarea>
+						<div class="output-shortcode">
+							<textarea class="code ostk-copy-to-clipboard-text"></textarea>
+							<button class="ostk-btn ostk-copy-to-clipboard-btn">Copy</button>
+						</div>
 
 						<h3 class="center">Example</h3>
 						<div class="embed-sandbox"></div>

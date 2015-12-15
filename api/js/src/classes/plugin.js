@@ -36,10 +36,11 @@ function ostk_Plugin(){
 	this.getPatterns = function(){
 		var _this = this;
 		var json_url = ostk_api_url + "patterns.json";
+		json_url += "jsoncallback=?";
 		$ostk_jQuery.getJSON(json_url, function(ostk_patterns) {
 			_this.ostk_patterns = ostk_patterns;
 			_this.get_elements();
-		});
+		});		
 	};//getPatterns
 
 	this.ostk_get_script = function(url, success) {
