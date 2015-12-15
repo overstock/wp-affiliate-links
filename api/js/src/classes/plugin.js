@@ -35,7 +35,8 @@ function ostk_Plugin(){
 
 	this.getPatterns = function(){
 		var _this = this;
-		$ostk_jQuery.getJSON(ostk_api_url + "patterns.json", function(ostk_patterns) {
+		var json_url = ostk_api_url + "patterns.json";
+		$ostk_jQuery.getJSON(json_url, function(ostk_patterns) {
 			_this.ostk_patterns = ostk_patterns;
 			_this.get_elements();
 		});

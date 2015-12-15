@@ -30,7 +30,7 @@ for(var i = 0 ; i < scripts.length ; i++){
 			}//for
 			break;
 		}
-	}//for	
+	}	
 }//for
 
 var event_list = [
