@@ -34,13 +34,36 @@ function ostk_Plugin(){
 	};//ostk_init_elements
 
 	this.getPatterns = function(){
+/*
 		var _this = this;
 		var json_url = ostk_api_url + "patterns.json";
-		json_url += "?jsoncallback=?";
 		$ostk_jQuery.getJSON(json_url, function(ostk_patterns) {
 			_this.ostk_patterns = ostk_patterns;
 			_this.get_elements();
 		});		
+*/
+
+		var _this = this;
+		var json_url = ostk_api_url + "patterns.json";
+
+		// json_url += "?format=json&jsoncallback=?";
+		// json_url += "?jsoncallback=?";
+
+		// $ostk_jQuery.getJSON(json_url, function(ostk_patterns) {
+	 //    	console.log('success');
+			// _this.ostk_patterns = ostk_patterns;
+			// _this.get_elements();
+		// });		
+
+	    $ostk_jQuery.ajax({
+			url: json_url,
+			dataType: 'json'
+	    }).done(function(ostk_patterns) {
+	    	console.log('success');
+			_this.ostk_patterns = ostk_patterns;
+			_this.get_elements();
+		});
+
 	};//getPatterns
 
 	this.ostk_get_script = function(url, success) {
