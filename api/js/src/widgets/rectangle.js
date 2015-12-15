@@ -36,7 +36,7 @@ function ostk_Rectangle(){
 					//Sales Event
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.getName()+'</p>';
-						if(atts.event == 'Flash Deals'){
+						if(this.atts.event == 'Flash Deals'){
 							output += '<p class="price">$'+this.obj.price+'</p>';
 							output += '<p class="savings">Save: '+this.obj.percentOff+'%</p>';
 						}else{

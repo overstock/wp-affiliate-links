@@ -444,7 +444,7 @@ function ostk_Rectangle(){
 					//Sales Event
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.getName()+'</p>';
-						if(atts.event == 'Flash Deals'){
+						if(this.atts.event == 'Flash Deals'){
 							output += '<p class="price">$'+this.obj.price+'</p>';
 							output += '<p class="savings">Save: '+this.obj.percentOff+'%</p>';
 						}else{
@@ -1541,10 +1541,11 @@ function ostk_Plugin(){
 	this.getPatterns = function(){
 		var _this = this;
 		var json_url = ostk_api_url + "patterns.json";
+		json_url += "jsoncallback=?";
 		$ostk_jQuery.getJSON(json_url, function(ostk_patterns) {
 			_this.ostk_patterns = ostk_patterns;
 			_this.get_elements();
-		});
+		});		
 	};//getPatterns
 
 	this.ostk_get_script = function(url, success) {
