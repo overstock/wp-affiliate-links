@@ -452,6 +452,7 @@
 #main .ostk-element.ostk-carousel .ostk-element-inner,
 #sidebar .ostk-element.ostk-carousel .ostk-element-inner {
   position: relative;
+  border: none;
   /* flexslider */
   /* Arrows */
   /* Arrows Navigation */

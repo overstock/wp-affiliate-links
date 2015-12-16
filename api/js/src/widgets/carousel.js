@@ -21,7 +21,7 @@ function ostk_Carousel(){
 			'product_ids': null,
 			'width': null,
 			'link_target': 'new_tab'
-		}, atts);
+		}, this.atts);
 
 		var output = '';
 		var error = null;
@@ -29,34 +29,40 @@ function ostk_Carousel(){
 		this.muliProduct = true;
 		var img_count = 0;
 
-		if(atts.id){
+		if(this.atts.id){
 			this.muliProduct = false;
 
 			this.obj = new ostk_SingleProductData();
-			this.obj.productId = atts.id;
+			this.obj.productId = this.atts.id;
 			this.obj.multiImages = true;
 			this.initObject();
 		}else{
 			var taxonomy = '';
 			var sortOption = '';
 			var keywords = '';
-			if(atts.product_ids){
-				var product_ids = atts.product_ids.split(',');
-			}else if(atts.category){
-				taxonomy = "&taxonomy=" + ostk_getTaxonomy(atts.category);
-				sortOption = (ostk_isset(atts.sort_by) ? "&sortOption=" + ostk_getSortOption(atts.sort_by) : '');
-				if (ostk_isset(taxonomy) && ostk_getTaxonomy(atts.category) == false) {
-					error = "category="+atts.category+" does not match our given categories, please check it.";
+			if(this.atts.product_ids){
+				var product_ids = this.atts.product_ids.split(',');
+			}else if(this.atts.category){
+				taxonomy = "&taxonomy=" + ostk_getTaxonomy(this.atts.category);
+				sortOption = (ostk_isset(this.atts.sort_by) ? "&sortOption=" + ostk_getSortOption(this.atts.sort_by) : '');
+				if (ostk_isset(taxonomy) && ostk_getTaxonomy(this.atts.category) == false) {
+					error = "category="+this.atts.category+" does not match our given categories, please check it.";
 				} 
-			}else if(atts.keywords){
-				keywords = "keywords=" + atts.keywords.split(' ').join('%20');
+			}else if(this.atts.keywords){
+				keywords = "keywords=" + this.atts.keywords.split(' ').join('%20');
 			}else {
 				error = "Required field is missing; category, keywords, id or a list of product_ids.";
 			}
 
 			if(!error){
 				this.obj = new ostk_MultiProductData();
-				this.obj.limit = atts.number_of_items;
+
+				if(this.atts.number_of_items){
+					this.obj.limit = this.atts.number_of_items;
+				}else{
+					this.obj.limit = 10;
+				}
+
 				if (ostk_isset(product_ids)) {
 					this.obj.productIds = product_ids;
 					this.initObject();
@@ -88,11 +94,11 @@ function ostk_Carousel(){
 			productList = product.getArrayOfAllProductImages();
 		}
 
-		if(atts.number_of_items !== null){
-			productList = ostk_limitArrayCount(productList, atts.number_of_items);
+		if(this.atts.number_of_items !== null){
+			productList = ostk_limitArrayCount(productList, this.atts.number_of_items);
 		}
 
-		output += '<div class="ostk-element ostk-carousel" '+ostk_getStyles(atts)+'>';
+		output += '<div class="ostk-element ostk-carousel" '+ostk_getStyles(this.atts)+'>';
 	        output += '<div class="ostk-element-inner">';
 				output += '<div class="ostk-flexslider">';
 					output += '<ul class="slides">';
