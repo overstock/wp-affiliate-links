@@ -1,6 +1,5 @@
 {
     "name": "Sample Data",
-    "slug": "sample_data",
     "description": "Print data form a given ID",
     "example_shortcodes": [
         {

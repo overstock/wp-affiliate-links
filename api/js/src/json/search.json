@@ -1,6 +1,5 @@
 {
     "name": "Search Query",
-    "slug": "search",
     "description": "The Search Query shortcode will create a link that will take a user to a Search Results Page on Overstock.com.",
     "example_shortcodes": [
         {

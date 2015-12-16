@@ -1,6 +1,5 @@
 {
     "name": "Link",
-    "slug": "link",
     "description": "The URL link shortcode lets you create links to any page on Overstock.com.",
     "example_shortcodes": [
         {
