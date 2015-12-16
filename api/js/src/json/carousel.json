@@ -1,0 +1,90 @@
+{
+    "name": "Carousel",
+    "slug": "carousel",
+    "description": "Lets you create a carousel widget for up to 10 products. You will get the product ids from the product&apos;s URL on Overstock.com.",
+    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
+    "example_shortcodes": [
+        {
+            "type": "carousel",
+            "product_ids": "9659704,6753542,5718385,5735179",
+            "width": "400px"
+        }
+    ],
+    "required_attributes": [
+        {
+            "name": "type"
+        },
+        {
+            "options": [
+                {
+                    "name": "id",
+                    "description": "Any product id",
+                    "example": "10234427"
+                },
+                {
+                    "name": "product_ids",
+                    "description": "A list of product ids separated by commas."
+                },
+                {
+                    "name": "category",
+                    "description": "Select items from a specific Overstock store.",
+                    "options": [
+                        "Home & Garden",
+                        "Jewelry & Watches",
+                        "Sports & Toys",
+                        "Worldstock Fair Trade",
+                        "Clothing & Shoes",
+                        "Health & Beauty",
+                        "Food & Gifts",
+                        "Office Supplies",
+                        "Luggage & Bags",
+                        "Crafts & Sewing",
+                        "Baby",
+                        "Pet Supplies",
+                        "Emergency Preparedness",
+                        "Bedding & Bath"
+                    ]
+                },
+                {
+                    "name": "keywords",
+                    "description": "A keyword search",
+                    "example": "soccer shoes"
+                }
+            ]
+        }
+    ],
+    "optional_attributes": [
+        {
+            "name": "number_of_items",
+            "description": "Choose an item limit. By default it is unlimited.",
+            "example": "10"
+        },
+        {
+            "name": "sort_by",
+            "description": "Choose a sort option",
+            "options": [
+                "Relevance", 
+                "Recommended",
+                "Reviews",
+                "Lowest Price", 
+                "Highest Price", 
+                "New Arrivals"
+            ]
+        },
+        {
+            "name": "width",
+            "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
+            "default": "100%",
+            "example": "100%\" or \"300px"
+        },
+        {
+            "name": "link_target",
+            "description": "Choose how to open the link.",
+            "default": "new_tab",
+            "options": [
+                "new_tab", 
+                "current_tab"
+            ]
+        }
+    ]
+}

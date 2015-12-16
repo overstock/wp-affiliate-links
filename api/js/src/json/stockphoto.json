@@ -1,0 +1,56 @@
+{
+    "name": "Stock Photo",
+    "slug": "stock_photo",
+    "description": "Use Overstock&apos;s product and lifestyle photos for your blog. Each one will link to its corresponding product page on Overstock.com.",
+    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
+    "example_shortcodes": [
+        {
+            "type": "stock_photo",
+            "id": "8859234",
+            "width": "300px"
+        }
+    ],
+    "required_attributes": [
+        {
+            "name": "type"
+        },
+        {
+            "name": "id",
+            "example": "10234427",
+            "description": "Choose an attribute to display"
+        }
+    ],
+    "optional_attributes": [
+        {
+            "name": "image_number",
+            "description": "Choose an image number, images are numbered from left to right on the product page, 1,2,3, ect."
+        },
+        {
+            "name": "width",
+            "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",
+            "default": "100%",
+            "example": "100%\" or \"300px"
+        },
+        {
+            "name": "height",
+            "description": "Height of the shortcode element. This attribute accepts \"px\"",
+            "notes": "The height of the image will automatically adjust according to the width. The best practice would be to only set the height if it absolutely necessary .",
+            "default": "auto",
+            "example": "300px"
+        },
+        {
+            "name": "link_target",
+            "description": "Choose how to open the link.",
+            "default": "new_tab",
+            "options": [
+                "new_tab", 
+                "current_tab"
+            ]
+        },
+        {
+            "name": "custom_css",
+            "description": "Add custom CSS to the image element.",
+            "example": "border:solid 1px red;"
+        }
+    ]
+}

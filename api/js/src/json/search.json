@@ -1,0 +1,76 @@
+{
+    "name": "Search Query",
+    "slug": "search",
+    "description": "The Search Query shortcode will create a link that will take a user to a Search Results Page on Overstock.com.",
+    "example_shortcodes": [
+        {
+            "type": "search",
+            "query": "soccer shoes"
+        },
+        {
+            "type": "search",
+            "query": "soccer shoes",
+            "link_text": "Overstock has great soccer shoes"
+        }
+    ],
+    "required_attributes": [
+        {
+            "name": "type"
+        },
+        {
+            "name": "query",
+            "description": "Product search terms",
+            "example": "soccer shoes"
+        }
+    ],
+    "optional_attributes": [
+        {
+            "name": "link_text",
+            "description": "The text that will show for the link",
+            "default": "query attribute text",
+            "example": "Click to see these soccer shoes!",
+            "notes": "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."
+        },
+        {
+            "name": "category",
+            "description": "Filter results by store",
+            "options": [
+                "Home & Garden",
+                "Jewelry & Watches",
+                "Sports & Toys",
+                "Worldstock Fair Trade",
+                "Clothing & Shoes",
+                "Health & Beauty",
+                "Food & Gifts",
+                "Office Supplies",
+                "Luggage & Bags",
+                "Crafts & Sewing",
+                "Baby",
+                "Pet Supplies",
+                "Emergency Preparedness",
+                "Bedding & Bath"
+            ]
+        },
+        {
+            "name": "sort_by",
+            "description": "Sort results in different ways",
+            "options": [
+                "Relevance", 
+                "Recommended",
+                "Reviews", 
+                "Lowest Price", 
+                "Highest Price", 
+                "New Arrivals"
+            ]
+        },
+        {
+            "name": "link_target",
+            "description": "Choose how to open the link.",
+            "default": "new_tab",
+            "options": [
+                "new_tab", 
+                "current_tab"
+            ]
+        }
+    ]
+}

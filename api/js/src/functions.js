@@ -198,7 +198,7 @@ function ostk_areAttributesValid(atts){
 
 	if(!error){
 		var keys = ostk_getKeyList(atts);
-		var item = ostk_findObjWhereKeyEqualsValue(ostk_patterns, 'slug', type);
+		var item = ostk_patterns[type];
 		if(!item){
 	    	error = 'Invalid type attribute';
 		}else{

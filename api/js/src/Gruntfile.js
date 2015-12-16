@@ -4,6 +4,7 @@
 1) Install all dependant libraries:
 	npm install grunt
 	npm install load-grunt-tasks --save-dev
+	npm install grunt-json --save-dev
 	npm install grunt-contrib-concat --save-dev
 	npm install grunt-contrib-uglify --save-dev
 
@@ -19,6 +20,21 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		//Compile all of the widget json files together as a JS object
+		json: {
+		    main: {
+		        options: {
+		            namespace: 'ostk_patterns',
+		            includePath: false,
+		            processName: function(filename) {
+		            	return filename.toLowerCase();
+		            }
+		        },
+		        src: ['json/*.json'],
+		        dest: 'patterns.js'
+		    }
+		},
+
 		//Compile custom and library JS files into one file
 		concat: {
 			dist: {
@@ -32,6 +48,7 @@ module.exports = function(grunt) {
 
 					//Functions
 					'functions.js',
+					'patterns.js',
 
 					//Classes
 					'classes/*.js',
@@ -47,13 +64,13 @@ module.exports = function(grunt) {
 		uglify: {
 			my_target: {
 				files: {
-					'../overstock-embed.min.js': ['../overstock-embed.js'], //Minify plugin JS
+					'../overstock-embed.min.js': ['../overstock-embed.js'] //Minify plugin JS
 				}
 			}
 		}
 	});
 
 	//Default task
-	grunt.registerTask('default', ['concat', 'uglify']);
+	grunt.registerTask('default', ['json', 'concat', 'uglify']);
 
 };
