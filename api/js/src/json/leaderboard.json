@@ -1,0 +1,66 @@
+{
+    "name": "Leaderboard",
+    "slug": "leaderboard",
+    "description": "Lets you create a leaderboard banner for up to two products.",
+    "notes": [
+        "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
+        "Leaderboard is set to 728px by 90px"
+    ],
+    "example_shortcodes": [
+        {
+            "type": "leaderboard",
+            "product_ids": "8641092"
+        },
+        {
+            "type": "leaderboard",
+            "product_ids": "8641092, 9547029"
+        }
+    ],
+    "required_attributes": [
+        {
+            "name": "type"
+        },
+        {
+            "options": [
+                {
+                    "name": "product_ids",
+                    "description": "A list of product ids separated by commas.",
+                    "notes": "Required to have 1 or 2 product ids"
+                },
+                {
+                    "name": "event",
+                    "description": "Sales event elements",
+                    "options": [
+                        "Flash Deals",
+                        "Sales",
+                        "Promotions"
+                    ]
+                }
+            ]
+        }
+    ],
+    "optional_attributes": [
+        {
+            "name": "version",
+            "options": [
+                "v1",
+                "v2",
+                "v3"
+            ]
+        },
+        {
+            "name": "number_of_items",
+            "description": "Choose an item limit. By default it is unlimited.",
+            "example": "10"
+        },
+        {
+            "name": "link_target",
+            "description": "Choose how to open the link.",
+            "default": "new_tab",
+            "options": [
+                "new_tab", 
+                "current_tab"
+            ]
+        }
+    ]
+}

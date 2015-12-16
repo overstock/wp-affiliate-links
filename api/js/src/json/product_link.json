@@ -1,0 +1,43 @@
+{
+    "name": "Product Details Link",
+    "slug": "product_link",
+    "description": "Create simple links for a certain product. Each one will link to the product page on Overstock.com.",
+    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",
+    "example_shortcodes": [
+        {
+            "type": "product_link",
+            "display": "name",
+            "id": "8859234"
+        }
+    ],
+    "required_attributes": [
+        {
+            "name": "type"
+        },
+        {
+            "name": "id",
+            "example": "10234427",
+            "description": "Choose an attribute to display"
+        },
+        {
+            "name": "display",
+            "description": "Choose an attribute to display",
+            "options": [
+                "name",
+                "price",
+                "description"
+            ]
+        }
+    ],
+    "optional_attributes": [
+        {
+            "name": "link_target",
+            "description": "Choose how to open the link.",
+            "default": "new_tab",
+            "options": [
+                "new_tab", 
+                "current_tab"
+            ]
+        }
+    ]
+}

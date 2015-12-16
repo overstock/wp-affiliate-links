@@ -1,0 +1,44 @@
+{
+    "name": "Link",
+    "slug": "link",
+    "description": "The URL link shortcode lets you create links to any page on Overstock.com.",
+    "example_shortcodes": [
+        {
+            "type": "link",
+            "url": "http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html"
+        },
+        {
+            "type": "link",
+            "url": "http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html",
+            "link_text": "I want to buy this for my wife"
+        }
+    ],
+    "required_attributes": [
+        {
+            "name": "type"
+        },
+        {
+            "name": "url",
+            "description": "A link to an Overstock page",
+            "example": "http://www.overstock.com/Worldstock-Fair-Trade/Natural-Thailand/9179503/product.html"
+        }
+    ],
+    "optional_attributes": [
+        {
+            "name": "link_text",
+            "description": "The text that will show for the link",
+            "default": "A link to Overstock.com",
+            "example": "A present for my wife",
+            "notes": "If link_text parameter is left blank, the phrase \"A link to Overstock.com\" will be used as the link text."
+        },
+        {
+            "name": "link_target",
+            "description": "Choose how to open the link.",
+            "default": "new_tab",
+            "options": [
+                "new_tab", 
+                "current_tab"
+            ]
+        }
+    ]
+}
