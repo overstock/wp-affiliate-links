@@ -10,14 +10,6 @@ function ostk_Rectangle(){
 	// Init Html
 	this.initElement = function(){
 		this.obj = new ostk_SingleProductData();
-
-		if(this.atts.id){
-			this.obj.productId = this.atts.id;
-		}else if(this.atts.event){
-			var query = ostk_getEventQuery(this.atts.event);
-			this.obj.query = query;
-		}
-
 		this.initObject();
 	};//initElement
 
@@ -35,11 +27,11 @@ function ostk_Rectangle(){
 				if(ostk_isset(this.atts.event)){
 					//Sales Event
 					output += '<div class="product-info">';
-						output += '<p class="title">'+this.obj.getName()+'</p>';
-						if(this.atts.event == 'Flash Deals'){
+						output += '<p class="title">'+this.obj.name+'</p>';
+						if(this.atts.event == 'flash_deals'){
 							output += '<p class="price">$'+this.obj.price+'</p>';
-							output += '<p class="savings">Save: '+this.obj.percentOff+'%</p>';
 						}else{
+							output += '<p class="description">'+this.obj.discountMsg+'</p>';
 							output += '<p class="savings">'+this.obj.percentOff+'% OFF</p>';
 						}
 
@@ -50,11 +42,11 @@ function ostk_Rectangle(){
 			if(!ostk_isset(this.atts.event)){
 				output += '<div class="element-overlay">';
 				    output += '<div class="ostk-element-content">';
-						output += '<p class="title">'+this.obj.getName()+'</p>';
+						output += '<p class="title">'+this.obj.name+'</p>';
 						if(this.obj.averageReviewAsGif){
 							output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
 						}
-						output += '<p class="price">'+this.obj.getPrice()+'</p>';
+						output += '<p class="price">'+this.obj.price+'</p>';
 					output += '</div>';
 				output += '</div>';
 			}

@@ -1,12 +1,7 @@
-@font-face {
-    font-family: helvetica-neue-bold;
-    src: url(../fonts/helvetica-neue-bold.ttf);
-}
-
 .ostk-error {
   color: @primary;
   * {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: @primaryFontBold;
   }
 }
 .ostk-loader {
@@ -19,7 +14,7 @@
   max-width: 140px; 
   text-align: center;
   * {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: @primaryFontBold;
   }
   img {
     display: block;
@@ -42,8 +37,9 @@
   @import "reset.less";
   position: relative;
   overflow: hidden;
+  transform-origin: 0 0;
   * {
-    font-family: helvetica-neue-bold, Helvetica, Arial, sans-serif;
+    font-family: @primaryFontBold;
     box-sizing: border-box;
   }
 

@@ -16,13 +16,6 @@ function ostk_Widget(atts, element){
 		}
 
 		if(!error){
-			var areAttsValid = ostk_areAttributesValid(this.atts)
-			if(areAttsValid !== true){
-				error = areAttsValid;
-			}
-		}
-
-		if(!error){
 			if(this.atts.type == '' || this.atts.type == null){ 
 				error = "Type parameter cannot be empty.";
 			}else if(ostk_isset(this.atts.link_target) && !ostk_isValidLinkTarget(this.atts)){ 
@@ -31,7 +24,13 @@ function ostk_Widget(atts, element){
 		}
 
 		if(!error){
-			// hoki - check to make sure that this pregmatch is working
+			var areAttsValid = ostk_areAttributesValid(this.atts)
+			if(areAttsValid !== true){
+				error = areAttsValid;
+			}
+		}
+
+		if(!error){
 			var regex = /^[1-9]\d*(px|%)/i;
 			if(ostk_isset(this.atts.width) && !regex.exec(this.atts.width)){
 				error = "Width requires % or px, and a value greater than 0.";
@@ -55,20 +54,39 @@ function ostk_Widget(atts, element){
 
 	// Init Object
 	this.initObject = function(){
-		var _this = this;
-		this.obj.init(
-			//Success
-			function(){
-				_this.generateHtml();
-			},
-			// Error
-			function(error){
-				_this.renderHTMLError(error);
+		var error = null;
+
+		if(this.atts.id){
+			this.obj.productId = this.atts.id;
+		}		
+		if(this.atts.product_ids){
+			this.obj.productIds = this.atts.product_ids;
+		}
+		if(this.atts.event){
+			this.obj.query = ostk_getEventQuery(this.atts.event);
+			if(!this.obj.query){
+				error = 'Invalid query attribute';
 			}
-		);
+		}
+
+		if(error){
+			this.renderHTMLError(error);
+		}else{
+			var _this = this;
+			this.obj.init(
+				//Success
+				function(){
+					_this.generateHtml();
+				},
+				// Error
+				function(error){
+					_this.renderHTMLError(error);
+				}
+			);
+		}
 	};//initObject
 
-	//Set Flash Deals Timer
+	//Set flash_deals Timer
 	this.setFlashDealsTimer = function(obj){
 		// var t = new Date();
 		// t.setSeconds(t.getSeconds() + 5);
@@ -76,6 +94,7 @@ function ostk_Widget(atts, element){
 
 		var _this = this;
 		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
+
 		obj.html(this.timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
 			if(timeDiff <= 1000){
@@ -145,54 +164,33 @@ function ostk_Widget(atts, element){
 		var output = '';
 		var eventClass = '';
 		var styles = '';
-		var brand_img = 'white';
 
 		if(ostk_isset(atts.version)){
 			eventClass += ' '+atts.version;
 		}
 		if(ostk_isset(atts.event)){
 			var eventName = atts.event.split(' ').join('-').toLowerCase();
-			eventClass += ' sales-event '+eventName;
-			if(atts.event == 'Flash Deals'){
-				brand_img = 'flash-deals';
-			}
-		}else {
+			eventClass += ' sales-event '+eventName.split('_').join('-');
+		}else{
 			styles = ostk_getStyles(atts);
 		}
 
 		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
 			output += '<div class="ostk-element-inner">';
 
-				if(atts.type !== 'leaderboard'){
-					output += '<div class="ostk-element-header">';
-						output += this.getBranding(brand_img);
-					output += '</div>';
-				}
+				// if(atts.type !== 'leaderboard'){
+				// 	output += '<div class="ostk-element-header">';
+				// 		output += this.getBranding(brand_img);
+				// 	output += '</div>';
+				// }
 
 				output += elment_contents;
 
-				if(atts.type === 'leaderboard'){
-					if(atts.event == 'Flash Deals'){
-						output += '<div class="ostk-element-footer">';
-			    			output += this.getBranding('flash-deals');
-							if(atts.version === 'v1'){
-								output += '<div class="dealEndTime"></div>';
-							}
-							if(atts.version === 'v2'){
-								output += '<div class="dealEndTime"></div>';
-							}
-			    			output += this.getBranding();
-						output += '</div>';
-					}else{
-						output += '<div class="ostk-element-footer">';
-			    			output += this.getBranding('white');
-						output += '</div>';
-					}
-				}else if(atts.event == 'Flash Deals'){
-					output += '<div class="ostk-element-footer">';
-		    			output += this.getBranding();
-					output += '</div>';
-				}
+				// if(atts.type !== 'leaderboard'){
+				// 	output += '<div class="ostk-element-footer">';
+		  //   			output += this.getBranding();
+				// 	output += '</div>';
+				// }
 										
 			output += '</div>';
 		output += '</div>';
@@ -200,7 +198,7 @@ function ostk_Widget(atts, element){
 		output = $ostk_jQuery(output);
 
 		if(ostk_isset(atts.event)){
-			if(atts.event == 'Flash Deals'){
+			if(atts.event == 'flash_deals'){
 				this.setFlashDealsTimer(output.find('.dealEndTime'));
 			}
 		}
@@ -211,17 +209,38 @@ function ostk_Widget(atts, element){
 
 	//Render HTML
 	this.renderHTML = function(data){
+		var scale = null;
+		if(this.element.parent().outerWidth() != null){
+			var myWidth = this.element.outerWidth();
+			this.parentWidth = this.element.parent().outerWidth();
+			if(myWidth > this.parentWidth){
+				scale  = (this.parentWidth) / myWidth;
+			}
+		}
+
 		data = $ostk_jQuery(data);
 		this.element.fadeOut('slow');
 		this.element.replaceWith(data);
 		this.element = data;
 		data.hide();
 		data.fadeIn('slow');
+
+		if(scale != null){
+/*
+			data.css({
+				'-webkit-transform' : 'scale(' + scale + ')',
+				'-moz-transform'    : 'scale(' + scale + ')',
+				'-ms-transform'     : 'scale(' + scale + ')',
+				'-o-transform'      : 'scale(' + scale + ')',
+				'transform'         : 'scale(' + scale + ')'
+			});
+*/
+		}
+
 	};//rederHTML
 
 	//Render HTML Error
 	this.renderHTMLError = function(data){
-
 		this.renderHTML(ostk_formatError(data));
 	};//renderHTMLError
 }//ostk_Widget

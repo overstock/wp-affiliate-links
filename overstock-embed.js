@@ -1,0 +1,1 @@
+var ostk_patterns = ostk_patterns || {};

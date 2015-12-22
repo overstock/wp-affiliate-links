@@ -9,22 +9,20 @@ function ostk_SampleData(){
 
 	// Generate Html
 	this.initElement = function(){
-		this.atts = ostk_shortcode_atts(
-		{
-			'id': ''
-		}, this.atts);
+		// this.atts = ostk_shortcode_atts(
+		// {
+		// 	'id': ''
+		// }, this.atts);
 
-		this.obj = new ostk_SingleProductData(this.atts.id);
-		this.obj.productId = this.atts.id;
-
+		this.obj = new ostk_SingleProductData();
 		this.initObject();
 	};//initElement
 
 	// Generate Html
 	this.generateHtml = function(){
 		var output = '';
-		output += '<p>The name is <strong>'+this.obj.getName()+'</strong></p><br/>';
-		output += '<p>The price is <strong>'+this.obj.getPrice()+'</strong></p><br/>';
+		output += '<p>The name is <strong>'+this.obj.name()+'</strong></p><br/>';
+		output += '<p>The price is <strong>'+this.obj.price+'</strong></p><br/>';
 		output += '<p>The rating (as decimal is) <strong>'+this.obj.getAverageReviewAsDecimal()+'</strong></p><br/>';
 		output += '<p>The rating (as gif is)... see below</p><br/>';
 		output += '<img src= "'+this.obj.getAverageReviewAsGif()+'"/><br/>';
