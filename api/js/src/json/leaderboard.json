@@ -30,9 +30,12 @@
                     "name": "event",
                     "description": "Sales event elements",
                     "options": [
-                        "Flash Deals",
-                        "Sales",
-                        "Promotions"
+                        "flash_deals"
+                        /*
+                        ,
+                        "sales",
+                        "promotions"
+                        */
                     ]
                 }
             ]
@@ -41,10 +44,11 @@
     "optional_attributes": [
         {
             "name": "version",
+            "default": "standard",
             "options": [
-                "v1",
-                "v2",
-                "v3"
+                "standard",
+                "mini",
+                "mobile"
             ]
         },
         {

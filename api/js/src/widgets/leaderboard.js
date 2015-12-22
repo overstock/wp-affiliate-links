@@ -9,34 +9,29 @@ function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		this.atts = ostk_shortcode_atts(
-		{
-			'type': null,
-			'product_ids': null,
-			'event': null,
-			'link_target': 'new_tab',
-			'number_of_items': 2,
-			'version': 'v1'
-		}, this.atts);
+		// this.atts = ostk_shortcode_atts(
+		// {
+		// 	'type': null,
+		// 	'product_ids': null,
+		// 	'event': null,
+		// 	'link_target': 'new_tab',
+		// 	'number_of_items': 2,
+		// 	'version': 'v1'
+		// }, this.atts);
 
-		var output = '';
-		var error = null;
-		var _this = this;
+		// if(ostk_isset(this.atts.version) && this.atts.version !== 'v1'){
+		// 	this.atts.number_of_items = 1;
+		// }
 
-		if(ostk_isset(this.atts.version) && this.atts.version !== 'v1'){
-			this.atts.number_of_items = 1;
+		var limit = 2;
+		if(ostk_isset(this.atts.version) && this.atts.version !== 'standard'){
+			limit = 1;
+		}else{
+			limit = (parseInt(this.atts.number_of_items) < 2) ? this.atts.number_of_items : 2;
 		}
-
-		var limit = (parseInt(this.atts.number_of_items) < 2) ? this.atts.number_of_items : 2;
 
 		this.obj = new ostk_MultiProductData();
 		this.obj.limit = limit;
-
-		if(this.atts.product_ids){
-			this.obj.productIds = this.atts.product_ids;
-		}else if(this.atts.event){
-			this.obj.query = ostk_getEventQuery(this.atts.event);
-		}
 
 		this.initObject();
 	};//initElement
@@ -45,6 +40,19 @@ function ostk_Leaderboard(){
 	this.generateHtml = function(){
 		var productList = this.obj.getProductList();
 		var output = '';
+		var brand_img = 'white';
+
+		if(ostk_isset(this.atts.event)){
+			var eventName = this.atts.event.split(' ').join('-').toLowerCase();
+			// eventClass += ' sales-event '+eventName.split('_').join('-');
+			if(this.atts.event == 'flash_deals'){
+				brand_img = 'flash-deals';
+			}
+		}
+
+		if(productList[0].dealEndTime){
+			this.obj.dealEndTime = productList[0].dealEndTime;
+		}
 
 		output += '<div class="item-holder item-count-'+productList.length+'">';
 			for(var i = 0 ; i < productList.length ; i++){
@@ -56,21 +64,18 @@ function ostk_Leaderboard(){
 							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
 
 						    output += '<div class="product-info">';
-								output += '<p class="title">'+product.getName()+'</p>';
+								output += '<p class="title">'+product.name+'</p>';
 								if(!ostk_isset(this.atts.event)){
 									output += '<p class="description">'+product.description+'</p>';
 									if(product.averageReviewAsGif){
 										output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
 									}
 								}
-
-								output += '<p class="price">$'+product.getPrice()+'</p>';
-								if(ostk_isset(this.atts.event)){
-									if(this.atts.event == 'Flash Deals'){
-										output += '<p class="savings">Save: '+product.percentOff+'%</p>';
-									}else{
-										output += '<p class="savings">'+product.percentOff+' OFF</p>';
-									}
+								if(product.price){
+									output += '<p class="price">$'+product.price+'</p>';
+								}
+								if(product.percentOff){
+									output += '<p class="savings">'+product.percentOff+'% OFF</p>';
 								}
 							output += '</div>';
 						output += '</a>';
@@ -78,6 +83,24 @@ function ostk_Leaderboard(){
 
 			output += '</div>';
 			}//for
+		output += '</div>';
+
+		if(this.atts.event == 'flash_deals' && this.atts.version == 'mini'){
+			output += '<div class="dealEndTime"></div>';
+		}
+
+		output += '<div class="ostk-element-footer">';
+			if(this.atts.event == 'flash_deals'){
+    			output += this.getBranding('flash-deals');
+				if(this.atts.version !== 'mini' || this.atts.version !== 'mobile'){
+					output += '<div class="dealEndTime"></div>';
+				}
+    			output += this.getBranding();
+			}else if(this.atts.event == 'sales' || this.atts.event == 'promotions'){
+    			output += this.getBranding();
+			}else{
+    			output += this.getBranding('white');
+			}
 		output += '</div>';
 
 		this.renderElement(output);

@@ -11,13 +11,13 @@ function ostk_Link(){
 
 	// Generate Html
 	this.initElement = function(){
-		this.atts = ostk_shortcode_atts(
-	    {
-	      'type': null,
-	      'url': 'http://www.overstock.com/', 
-	      'link_text': 'A link to Overstock.com',
-	      'link_target': 'new_tab'
-	    }, this.atts);
+		// this.atts = ostk_shortcode_atts(
+	 //    {
+	 //      'type': null,
+	 //      'url': 'http://www.overstock.com/', 
+	 //      'link_text': 'A link to Overstock.com',
+	 //      'link_target': 'new_tab'
+	 //    }, this.atts);
 
 		var output = '';
 		var link_text = this.atts.link_text;

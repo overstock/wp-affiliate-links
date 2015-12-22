@@ -155,6 +155,9 @@ function ostk_Plugin(){
 
 			if(is_widget){
 				var object = $ostk_jQuery.extend({}, new ostk_Widget(data, element), item);	
+				// object.completionCallback = function(){
+				// 	console.log('complete');
+				// };
 				object.init();
 			}
 

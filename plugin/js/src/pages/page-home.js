@@ -1,5 +1,3 @@
-/* Click Step Button
------------------------------------------------------*/
 var ostk_step_counter = 0;
 var ostk_steps_array = Array('step1');
 

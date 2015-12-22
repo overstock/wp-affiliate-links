@@ -9,6 +9,23 @@ function d(obj){
 	console.dir(obj);
 }
 
+function ostk_searchURLForParam(url, str){
+	if(url.indexOf("?") > -1 && url.indexOf(str)){
+		var params = url.split('?')[1];
+		var param_items = params.split('&');
+		for(var k = 0 ; k < param_items.length ; k++){
+			var param_pieces = param_items[k].split('=');
+			var key = param_pieces[0];
+			var value = param_pieces[1];
+			if(key == str){
+				return value 
+				break;
+			}
+		}//for
+	}
+	return null;
+}//ostk_searchURLForParam
+
 function ostk_getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }//ostk_getRandomInt
@@ -154,7 +171,12 @@ function ostk_getSortOption(input){
 }//ostk_getSortOption
 
 function ostk_getEventQuery(event){
-	return ostk_findObjWhereKeyEqualsValue(event_list, 'event', event).url;
+	var query = ostk_findObjWhereKeyEqualsValue(event_list, 'event', event);
+	if(query){
+		return query.url;
+	}else{
+		return null;
+	}
 }//ostk_getEventQuery
 
 function ostk_stringToList(str){
@@ -189,8 +211,6 @@ Validate that the shortcode attributes are valid. return Boolean.
 function ostk_areAttributesValid(atts){
 	var error = null;
 	var type = atts.type;
-
-	var ostk_patterns = ostk_plugin.ostk_patterns;
 
 	if(!type){
 		error = 'Type attribute is required';
@@ -269,13 +289,13 @@ function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
 function ostk_lookForInvalidAtts(keys, required_attributes, optional_attributes){
 	var invalid_atts = Array();
 	var array = $ostk_jQuery.merge($ostk_jQuery.merge([], optional_attributes), required_attributes);
-	invalid_atts = ostk_lookFoInvalidAttsInArray(keys, array);
+	invalid_atts = ostk_lookForInvalidAttsInArray(keys, array);
 	return ostk_getKeyList(invalid_atts);
 }//ostk_lookForInvalidAtts
 
 /* Return an array of attributes that are not in a given list
 used for both require and optional att arrays */
-function ostk_lookFoInvalidAttsInArray(keys, array){
+function ostk_lookForInvalidAttsInArray(keys, array){
 	var invalid_atts = {};
 	//Loop through keys
 
@@ -333,7 +353,7 @@ function ostk_lookFoInvalidAttsInArray(keys, array){
 		}
 	}//for
 	return invalid_atts
-}//ostk_lookFoInvalidAttsInArray
+}//ostk_lookForInvalidAttsInArray
 
 /* Return all keys of an object as an array
 (ostk_areAttributesValid - helper function) */

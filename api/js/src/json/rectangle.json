@@ -24,9 +24,12 @@
                     "name": "event",
                     "description": "Sales event elements",
                     "options": [
-                        "Flash Deals",
-                        "Sales",
-                        "Promotions"
+                        "flash_deals"
+                        /*
+                        ,
+                        "sales",
+                        "promotions"
+                        */
                     ]
                 }
             ]

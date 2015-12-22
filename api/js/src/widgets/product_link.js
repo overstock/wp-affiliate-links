@@ -9,15 +9,14 @@ function ostk_ProductDetailsLink(){
 
 	// Generate Html
 	this.initElement = function(){
-		this.atts = ostk_shortcode_atts(
-		{
-			'id': null,
-			'display': null,
-			'link_target': 'new_tab'
-		}, this.atts);
+		// this.atts = ostk_shortcode_atts(
+		// {
+		// 	'id': null,
+		// 	'display': null,
+		// 	'link_target': 'new_tab'
+		// }, this.atts);
 
 		this.obj = new ostk_SingleProductData();
-		this.obj.productId = this.atts.id
 
 		this.initObject();
 	};//initElement
@@ -27,13 +26,13 @@ function ostk_ProductDetailsLink(){
 		var output = '';
 				switch (this.atts.display) {
 					case 'name':
-						output = this.obj.getName();
+						output = this.obj.name;
 						break;
 					case "price":
-						output = this.obj.getPrice();
+						output = this.obj.price;
 						break;
 					case 'description':
-						output = this.obj.getDescription();
+						output = this.obj.description;
 						break;
 				}//switch
 		output = '<a href="'+this.obj.getAffiliateUrl()+'" class="ostk-element ostk-product-link" '+ostk_getLinkTarget(this.atts)+'>'+output+'</a>';

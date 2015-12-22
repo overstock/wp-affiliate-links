@@ -57,10 +57,17 @@ function ostk_SingleProductData(){
 		this.name = this.setName(productData);
 		this.productId = productData.id;
 		this.developerId = ostk_developerId;
-		this.description = productData.description;
+
+		if(productData.description){
+			this.description = productData.description;
+		}
 
 		if(productData.price){
 			this.price = productData.price;
+		}
+
+		if(productData.discountMsg){
+			this.discountMsg = productData.discountMsg;
 		}
 
 		if(productData.url){
@@ -118,14 +125,6 @@ function ostk_SingleProductData(){
 		return this.validProductID;
 	}
 
-	this.getProductId = function(){
-		return (ostk_isset(this.productId) ? this.productId : '' );
-	}
-
-	this.getName = function(){
-		return (ostk_isset(this.name) ? this.name : '' );
-	}
-
 	this.setName = function(productData){
 		if(ostk_isset(productData.name)){
 			return productData.name;
@@ -134,8 +133,8 @@ function ostk_SingleProductData(){
 		}
 	}
 
-	this.getPrice = function(){
-		return (ostk_isset(this.price) ? this.price : '' );
+	this.getProductId = function(){
+		return (ostk_isset(this.productId) ? this.productId : '' );
 	}
 
 	this.getImageBaseUrl = function(){
@@ -172,9 +171,5 @@ function ostk_SingleProductData(){
 
 	this.getArrayOfAllProductImages = function(){
 		return this.arrayOfAllProductImages;
-	}
-
-	this.getDescription = function(){
-		return this.description;
 	}
 }//ostk_SingleProductData

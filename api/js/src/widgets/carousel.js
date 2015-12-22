@@ -9,19 +9,19 @@ function ostk_Carousel(){
 
 	// Init Element
 	this.initElement = function(){
-		atts = ostk_shortcode_atts(
-		{
-			'id': null,
-			'type': null,
-			'category': null, 
-			'carousel-type': null, 
-			'number_of_items': 10,
-			'sort_by': null, 
-			'keywords': null,
-			'product_ids': null,
-			'width': null,
-			'link_target': 'new_tab'
-		}, this.atts);
+		// atts = ostk_shortcode_atts(
+		// {
+		// 	'id': null,
+		// 	'type': null,
+		// 	'category': null, 
+		// 	'carousel-type': null, 
+		// 	'number_of_items': 10,
+		// 	'sort_by': null, 
+		// 	'keywords': null,
+		// 	'product_ids': null,
+		// 	'width': null,
+		// 	'link_target': 'new_tab'
+		// }, this.atts);
 
 		var output = '';
 		var error = null;
@@ -165,16 +165,16 @@ function ostk_Carousel(){
 	this.getCarouselListItems = function(product, productImg){
 		var output = '';
 		output += '<li data-thumb="'+productImg+'">';
-			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(atts)+'>';
+			output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 			    output += '<div class="ostk-element-content">';
 					output += '<img src="'+productImg+'"/>';
 				output += '</div>';
 			    output += '<div class="element-overlay">';
-						output += '<p class="title">'+product.getName()+'</p>';
+						output += '<p class="title">'+product.name+'</p>';
 						if(product.averageReviewAsGif){
 							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 						}
-						output += '<p class="price">'+product.getPrice()+'</p>';
+						output += '<p class="price">'+product.price+'</p>';
 						output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
 				output += '</div>';
 			output += '</a>';

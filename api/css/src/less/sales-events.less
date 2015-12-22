@@ -3,12 +3,18 @@
   .ostk-element-inner {
     .ostk-element-content {
       .product-info {
+        padding-right: 10px;
         p {
           &.title {
             font-size: 16px;
             margin-bottom: 5px;
             padding-bottom: 5px;
+            border-bottom: solid 1px @grey-lt;
+            color: @black;
             .truncate;
+          }
+          &.description {
+            font-family: @primaryFontThin;
           }
           &.price {
             color: @primary;
@@ -29,7 +35,7 @@
   .ostk-element-inner {
     background: @flash-deal-yellow;
     .border-radius(0px);
-    border: 2px solid @grey-lt;
+    border: 1px solid @grey-lt;
     .dealEndTime {
       p {
         font-size: 18px;
@@ -70,14 +76,6 @@
       .border-radius(5px);
       border: solid 1px @grey-lt;
       margin: 0px 10px 10px 10px;
-      .product-info {
-        p {
-          &.title {
-            border-bottom: solid 1px @grey-lt;
-            color: @black;
-          }
-        }
-      }
     }
     .ostk-element-footer {
       background: @white;
@@ -100,7 +98,9 @@
 &.sales,
 &.promotions {
   .ostk-element-inner {
+    background: @primary;
     .ostk-element-content {
+      background: @white;
       .product-info {
         p {
           &.savings {

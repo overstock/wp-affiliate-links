@@ -1,5 +1,11 @@
 /*----------------------------- WP Plugin Generator Page -----------------------------*/
 .ostk-plugin-settings .ostk-generator-page {
+	h2 {
+		cursor: pointer;
+		&:hover {
+			color: @primary-dk;
+		}
+	}
 	form {
 		p, label {
 			line-height: 40px;
@@ -8,7 +14,6 @@
 	        width: 150px;
 	        font-weight: bold;
 	        float: left;
-        	margin: 0 0 0 30px;
         }
         input[type="text"] {
         	min-width: 200px;
@@ -23,6 +28,7 @@
 					position: relative;
 					padding: 5px 0;
 					margin: 0 0 10px 0;
+					overflow: hidden;
 					&.disabled {
 						color: #cccccc;
 						select,
@@ -30,12 +36,20 @@
 							border: solid 1px #cccccc;
 						}
 					}
+					.prefix-holder {
+						.make-sm-column(3);
+					}
+					.label-holder {
+						.make-sm-column(3);
+					}
 					.chunk {
-						margin-left: 200px;
+						.make-sm-column(9);
 						&.no-label {
 							margin-left: 0;
+							.make-sm-column(6);
 						}
 						&.with-options {
+							.make-sm-column(12);
 							margin-left: 0;
 						}
 						.fa-info-circle {
@@ -45,9 +59,17 @@
 						.info {
 							display: none;	
 						}
+						p {
+							margin: 0;
+						}
 					}
 					input[type="radio"] {
 					    margin: 12px 0 0 30px;
+						float: left;
+					}
+					p.att-option-numb {
+					    margin: 0 0 0 30px;
+						line-height: 40px;
 						float: left;
 					}
 					.group-border {
@@ -84,6 +106,13 @@
 		    button {
 		    	margin: 5px 0 0 0;
 		    	float: right;
+		    }
+		    p.ostk-copy-to-clipboard-notification {
+		    	display: none;
+				font-style: italic;
+				float: right;
+				margin: 5px 10px 0 0;
+				line-height: 30px;
 		    }
 		}
 	}/* embed-output */

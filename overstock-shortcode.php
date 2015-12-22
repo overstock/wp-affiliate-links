@@ -59,6 +59,9 @@ class ostk_PluginSettings {
                 $output .= '</ul>';
             $output .= '</nav>';
         $output .= '</div>';
+
+        $output .= '<div class="ostk-notifications">';
+        $output .= '</div>';
         return $output;
     }//ostk_get_header
 }//ostk_PluginSettings
@@ -68,50 +71,29 @@ class ostk_PluginSettings {
 function ostk_load_js() {
     wp_enqueue_script('jquery');
 
+    $ostk_scripts = [];
+
     /* Initialize the plugin */
     wp_enqueue_script( 'ostk-plugin', plugins_url('plugin/js/src/plugin.js', __FILE__), array('jquery'), '1.0', true );
 
-    /*
     // Live API
-    wp_enqueue_script( 'ostk-embed-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
-    wp_enqueue_script( 'ostk-plugin-js', plugins_url('js/overstock-plugin.min.js', __FILE__), array('jquery'), '1.0', true );
-
+    // https://rawgithub.com/overstock/wp-affiliate-links/master/api/
+ 
     // Local API
-    wp_enqueue_script( 'ostk-plugin-js', plugins_url('api/js/overstock-embed.min.js', __FILE__), array('jquery'), '1.0', true );
-    */
+    array_push($ostk_scripts, 'api/js/overstock-embed.min.js?id='.$GLOBALS['developerId']);
 
-    $ostk_scripts = [
-        //Libraries
-        'api/js/src/libs/jquery.min.js',
-        'api/js/src/libs/flexslider.min.js',
+    //Functions
+    array_push($ostk_scripts, 'plugin/js/src/functions.js');
 
-        //Widgets
-        'api/js/src/widgets/widget.js',
-        'api/js/src/widgets/carousel.js',
-        'api/js/src/widgets/leaderboard.js',
-        'api/js/src/widgets/link.js',
-        'api/js/src/widgets/product-details-link.js',
-        'api/js/src/widgets/rectangle.js',
-        'api/js/src/widgets/sample-data.js',
-        'api/js/src/widgets/search-query.js',
-        'api/js/src/widgets/skyscraper.js',
-        'api/js/src/widgets/stockphoto.js',
-
-        //Classes
-        'api/js/src/classes/plugin.js',
-        'api/js/src/classes/multi-product-data.js',
-        'api/js/src/classes/single-product-data.js',
-
-        //Functions
-        'api/js/src/functions.js',
-
-        //Embed
-        'api/js/src/overstock-embed.js?id='.$GLOBALS['developerId']
-    ];
+    //Class
+    array_push($ostk_scripts, 'plugin/js/src/classes/documentation');
 
     $ostk_pageJs;
     // Page specific JS
     switch($_REQUEST['page']){
+        case 'ostk-documentation':
+            $ostk_pageJs = 'page-documentation';
+            break;      
         case 'ostk-generator':
             $ostk_pageJs = 'page-generator';
             break;      
@@ -149,14 +131,5 @@ function ostk_theme_options_panel(){
         }
     }//foreach
 }//ostk_theme_options_panel
-
-function getPatterns(){
-    $json_url = plugins_url("api/patterns.json", __FILE__);
-    $json = file_get_contents($json_url);
-    return json_decode($json, true);
-}
-
-$ostk_patterns = getPatterns();
-
 
 ?>

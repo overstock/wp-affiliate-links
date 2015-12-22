@@ -10,21 +10,18 @@ function ostk_Stockphoto(){
 
 	// Init Element
 	this.initElement = function(){
-		var output = '';
-		var _this = this;
-		this.atts = ostk_shortcode_atts(
-		{
-			'type': null,
-			'id': null, 
-			'height': null, 
-			'width': null, 
-			'image_number': '1', 
-			'custom_css': null,
-			'link_target': 'new_tab'
-		}, this.atts);
+		// this.atts = ostk_shortcode_atts(
+		// {
+		// 	'type': null,
+		// 	'id': null, 
+		// 	'height': null, 
+		// 	'width': null, 
+		// 	'image_number': '1', 
+		// 	'custom_css': null,
+		// 	'link_target': 'new_tab'
+		// }, this.atts);
 
 	    this.obj = new ostk_SingleProductData();
-	    this.obj.productId = this.atts.id;
 		this.obj.multiImages = true;
 
 		this.initObject();
@@ -58,11 +55,11 @@ function ostk_Stockphoto(){
 							output += '</div>';
 						    output += '<div class="element-overlay">';
 							    output += '<div class="ostk-element-content">';
-									output += '<p class="title">'+this.obj.getName()+'</p>';
+									output += '<p class="title">'+this.obj.name+'</p>';
 									if(this.obj.averageReviewAsGif){
 										output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
 									}
-									output += '<p class="price">'+this.obj.getPrice()+'</p>';
+									output += '<p class="price">'+this.obj.price+'</p>';
 									output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
 							output += '</div>';
 						output += '</div>';

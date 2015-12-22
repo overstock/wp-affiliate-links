@@ -2,14 +2,14 @@
 ===== Grunt Compile Overstock API Embed JS =====
 
 1) Install all dependant libraries:
-	npm install grunt
-	npm install load-grunt-tasks --save-dev
-	npm install grunt-json --save-dev
-	npm install grunt-contrib-concat --save-dev
-	npm install grunt-contrib-uglify --save-dev
+npm install grunt
+npm install load-grunt-tasks --save-dev
+npm install grunt-json --save-dev
+npm install grunt-contrib-concat --save-dev
+npm install grunt-contrib-uglify --save-dev
 
 2) Run the compiler:
-	grunt
+grunt
 */
 module.exports = function(grunt) {
 
@@ -68,6 +68,7 @@ module.exports = function(grunt) {
 				}
 			}
 		}
+
 	});
 
 	//Default task
