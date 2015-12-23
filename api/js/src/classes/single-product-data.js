@@ -45,6 +45,7 @@ function ostk_SingleProductData(){
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
+				console.log('fail: '+_this.productId);
 				errorCallback('Invalid product id: ' + _this.productId);
 			});
 		}
@@ -131,26 +132,6 @@ function ostk_SingleProductData(){
 		}else if(ostk_isset(productData.detailMsg)){
 			return productData.detailMsg;
 		}
-	}
-
-	this.getProductId = function(){
-		return (ostk_isset(this.productId) ? this.productId : '' );
-	}
-
-	this.getImageBaseUrl = function(){
-		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : '' );
-	}
-
-	this.getImage_Thumbnail = function(){
-		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : '' );
-	}
-
-	this.getImage_Medium = function(){
-		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : '' );
-	}
-
-	this.getImage_Large = function(){
-		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : '' );
 	}
 
 	this.getAffiliateUrl = function(){

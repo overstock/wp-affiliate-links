@@ -32,6 +32,8 @@ function ostk_Carousel(){
 		// 	'link_target': 'new_tab'
 		// }, this.atts);
 
+	
+
 		var output = '';
 		var error = null;
 		var _this = this;
@@ -40,7 +42,6 @@ function ostk_Carousel(){
 
 		if(this.atts.id){
 			this.muliProduct = false;
-
 			this.obj = new ostk_SingleProductData();
 			this.obj.productId = this.atts.id;
 			this.obj.multiImages = true;
@@ -115,7 +116,7 @@ function ostk_Carousel(){
 						if(this.muliProduct){
 							for(var i = 0 ; i < productList.length ; i++){
 								var product = productList[i];
-								productImg = product.getImage_Large();
+								productImg = product.imgUrl_large;
 								output += this.getCarouselListItems(product, productImg);
 							}//foreach
 						}else{
@@ -260,20 +261,6 @@ function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'product_ids': null,
-		// 	'event': null,
-		// 	'link_target': 'new_tab',
-		// 	'number_of_items': 2,
-		// 	'version': 'v1'
-		// }, this.atts);
-
-		// if(ostk_isset(this.atts.version) && this.atts.version !== 'v1'){
-		// 	this.atts.number_of_items = 1;
-		// }
-
 		var limit = 2;
 		if(ostk_isset(this.atts.version) && this.atts.version !== 'standard'){
 			limit = 1;
@@ -312,7 +299,7 @@ function ostk_Leaderboard(){
 			    output += '<div class="ostk-item">';
 				    output += '<div class="ostk-element-content">';
 						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
-							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+							output += '<img class="product-image" src="'+product.imgUrl_large+'"/>';
 
 						    output += '<div class="product-info">';
 								output += '<p class="title">'+product.name+'</p>';
@@ -505,11 +492,6 @@ function ostk_SampleData(){
 
 	// Generate Html
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'id': ''
-		// }, this.atts);
-
 		this.obj = new ostk_SingleProductData();
 		this.initObject();
 	};//initElement
@@ -523,12 +505,12 @@ function ostk_SampleData(){
 		output += '<p>The rating (as gif is)... see below</p><br/>';
 		output += '<img src= "'+this.obj.getAverageReviewAsGif()+'"/><br/>';
 		output += '<p> <strong>Large image:</strong></p><br/>';
-		output += '<a href="'+this.obj.getAffiliateUrl()+'"><img src= '+this.obj.getImage_Large()+' /></a><br/>';
+		output += '<a href="'+this.obj.affiliateUrl+'"><img src= '+this.obj.imgUrl_large+' /></a><br/>';
 		output += '<p> <strong>Medium image:</strong></p><br/>';
-		output += '<a href="'+this.obj.getAffiliateUrl()+'"><img src= '+this.obj.getImage_Medium()+' /></a><br/>';
+		output += '<a href="'+this.obj.affiliateUrl+'"><img src= '+this.obj.imgUrl_medium+' /></a><br/>';
 		output += '<p> <strong>Small image:</strong></p><br/>';
-		output += '<a href="'+this.obj.getAffiliateUrl()+'"><img src= '+this.obj.getImage_Thumbnail()+' /></a><br/>';
-		output += '<p>The url link is <a href="'+this.obj.getAffiliateUrl()+'"><strong>here, click me!</strong></a></p><br/>';
+		output += '<a href="'+this.obj.affiliateUrl+'"><img src= '+this.obj.imgUrl_thumbnail+' /></a><br/>';
+		output += '<p>The url link is <a href="'+this.obj.affiliateUrl+'"><strong>here, click me!</strong></a></p><br/>';
 		output += '<p>Also, all photos are clickable.<p><br/>';
 		this.renderHTML(output);
 	};//generateHtml
@@ -607,16 +589,6 @@ function ostk_Skyscraper(){
 
 	// Init Element
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'event': null,
-		// 	'product_ids': null,
-		// 	'width': null,
-		// 	'link_target': 'new_tab',
-		// 	'number_of_items': 3,
-		// }, this.atts);
-
 		var error = '';
 		this.atts.number_of_items = (parseInt(this.atts.number_of_items) > 3) ? 3 : this.atts.number_of_items;
 
@@ -624,11 +596,7 @@ function ostk_Skyscraper(){
 			this.atts.number_of_items = 2;
 		}
 
-		if(this.atts.number_of_items > 1){
-			this.obj = new ostk_MultiProductData();
-		}else{
-			this.obj = new ostk_SingleProductData();
-		}
+		this.obj = new ostk_MultiProductData();
 		this.obj.limit = this.atts.number_of_items;
 
 		this.initObject();
@@ -640,11 +608,7 @@ function ostk_Skyscraper(){
 		var output = '';
 		var product_name = '';
 
-		if(this.atts.number_of_items > 1){
-			productList = this.obj.getProductList();
-		}else{
-			productList.push(this.obj);
-		}
+		productList = this.obj.getProductList();
 
 		output += '<div class="dealEndTime"></div>';
 
@@ -652,7 +616,7 @@ function ostk_Skyscraper(){
 		    var product = productList[i];
 		    output += '<div class="ostk-element-content">';
 				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
-					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+					output += '<img class="product-image" src="'+product.imgUrl_large+'"/>';
 
 					output += '<div class="product-info">';
 
@@ -1776,6 +1740,7 @@ function ostk_SingleProductData(){
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
+				console.log('fail: '+_this.productId);
 				errorCallback('Invalid product id: ' + _this.productId);
 			});
 		}
@@ -1862,26 +1827,6 @@ function ostk_SingleProductData(){
 		}else if(ostk_isset(productData.detailMsg)){
 			return productData.detailMsg;
 		}
-	}
-
-	this.getProductId = function(){
-		return (ostk_isset(this.productId) ? this.productId : '' );
-	}
-
-	this.getImageBaseUrl = function(){
-		return (ostk_isset(this.baseImageUrl) ? this.baseImageUrl : '' );
-	}
-
-	this.getImage_Thumbnail = function(){
-		return (ostk_isset(this.imgUrl_thumbnail) ? this.imgUrl_thumbnail : '' );
-	}
-
-	this.getImage_Medium = function(){
-		return (ostk_isset(this.imgUrl_medium) ? this.imgUrl_medium : '' );
-	}
-
-	this.getImage_Large = function(){
-		return (ostk_isset(this.imgUrl_large) ? this.imgUrl_large : '' );
 	}
 
 	this.getAffiliateUrl = function(){

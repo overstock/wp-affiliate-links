@@ -9,20 +9,6 @@ function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'product_ids': null,
-		// 	'event': null,
-		// 	'link_target': 'new_tab',
-		// 	'number_of_items': 2,
-		// 	'version': 'v1'
-		// }, this.atts);
-
-		// if(ostk_isset(this.atts.version) && this.atts.version !== 'v1'){
-		// 	this.atts.number_of_items = 1;
-		// }
-
 		var limit = 2;
 		if(ostk_isset(this.atts.version) && this.atts.version !== 'standard'){
 			limit = 1;
@@ -61,7 +47,7 @@ function ostk_Leaderboard(){
 			    output += '<div class="ostk-item">';
 				    output += '<div class="ostk-element-content">';
 						output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
-							output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+							output += '<img class="product-image" src="'+product.imgUrl_large+'"/>';
 
 						    output += '<div class="product-info">';
 								output += '<p class="title">'+product.name+'</p>';

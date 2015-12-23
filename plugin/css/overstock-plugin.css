@@ -916,7 +916,6 @@
 .ostk-plugin-settings .ostk-generator-page form label {
   width: 150px;
   font-weight: bold;
-  float: left;
 }
 .ostk-plugin-settings .ostk-generator-page form input[type="text"] {
   min-width: 200px;
@@ -924,6 +923,9 @@
 .ostk-plugin-settings .ostk-generator-page form select {
   min-width: 170px;
   height: 40px;
+}
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul {
+  /* li */
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li {
   position: relative;
@@ -938,114 +940,59 @@
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.disabled input[type="text"] {
   border: solid 1px #cccccc;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .prefix-holder {
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .prefix-holder {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
     float: left;
     width: 25%;
   }
 }
 @media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .prefix-holder {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
     float: left;
     width: 25%;
   }
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .label-holder {
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
+  background: #ccc;
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .label-holder {
-    float: left;
-    width: 25%;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .label-holder {
-    float: left;
-    width: 25%;
-  }
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
     float: left;
     width: 75%;
   }
 }
 @media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
     float: left;
     width: 75%;
   }
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk.no-label {
-  margin-left: 0;
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk.no-label {
-    float: left;
-    width: 50%;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk.no-label {
-    float: left;
-    width: 50%;
-  }
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk.with-options {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-left: 0;
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk.with-options {
-    float: left;
-    width: 100%;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk.with-options {
-    float: left;
-    width: 100%;
-  }
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk .fa-info-circle {
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .fa-info-circle {
   cursor: pointer;
   margin-left: 10px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk .info {
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .info {
   display: none;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .chunk p {
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content p {
   margin: 0;
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li input[type="radio"] {
-  margin: 12px 0 0 30px;
+  margin: 12px 0 0 0;
   float: left;
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li p.att-option-numb {
-  margin: 0 0 0 30px;
+  margin: 0 0 0 0;
   line-height: 40px;
   float: left;
 }
@@ -1057,6 +1004,24 @@
   bottom: 0;
   width: 20px;
   border-right: none;
+}
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.no-label .attr_content {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.no-label .attr_content {
+    float: left;
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.no-label .attr_content {
+    float: left;
+    width: 100%;
+  }
 }
 .ostk-plugin-settings .ostk-generator-page .embed-output {
   display: none;
