@@ -9,16 +9,6 @@ function ostk_Skyscraper(){
 
 	// Init Element
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'event': null,
-		// 	'product_ids': null,
-		// 	'width': null,
-		// 	'link_target': 'new_tab',
-		// 	'number_of_items': 3,
-		// }, this.atts);
-
 		var error = '';
 		this.atts.number_of_items = (parseInt(this.atts.number_of_items) > 3) ? 3 : this.atts.number_of_items;
 
@@ -26,11 +16,7 @@ function ostk_Skyscraper(){
 			this.atts.number_of_items = 2;
 		}
 
-		if(this.atts.number_of_items > 1){
-			this.obj = new ostk_MultiProductData();
-		}else{
-			this.obj = new ostk_SingleProductData();
-		}
+		this.obj = new ostk_MultiProductData();
 		this.obj.limit = this.atts.number_of_items;
 
 		this.initObject();
@@ -42,11 +28,7 @@ function ostk_Skyscraper(){
 		var output = '';
 		var product_name = '';
 
-		if(this.atts.number_of_items > 1){
-			productList = this.obj.getProductList();
-		}else{
-			productList.push(this.obj);
-		}
+		productList = this.obj.getProductList();
 
 		output += '<div class="dealEndTime"></div>';
 
@@ -54,7 +36,7 @@ function ostk_Skyscraper(){
 		    var product = productList[i];
 		    output += '<div class="ostk-element-content">';
 				output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
-					output += '<img class="product-image" src="'+product.getImage_Large()+'"/>';
+					output += '<img class="product-image" src="'+product.imgUrl_large+'"/>';
 
 					output += '<div class="product-info">';
 

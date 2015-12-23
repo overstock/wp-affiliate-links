@@ -13,7 +13,6 @@
 	    label {
 	        width: 150px;
 	        font-weight: bold;
-	        float: left;
         }
         input[type="text"] {
         	min-width: 200px;
@@ -36,22 +35,12 @@
 							border: solid 1px #cccccc;
 						}
 					}
-					.prefix-holder {
+					.attr_label {
 						.make-sm-column(3);
 					}
-					.label-holder {
-						.make-sm-column(3);
-					}
-					.chunk {
+					.attr_content {
+						background: #ccc;
 						.make-sm-column(9);
-						&.no-label {
-							margin-left: 0;
-							.make-sm-column(6);
-						}
-						&.with-options {
-							.make-sm-column(12);
-							margin-left: 0;
-						}
 						.fa-info-circle {
 							cursor: pointer;
 							margin-left: 10px;
@@ -64,11 +53,11 @@
 						}
 					}
 					input[type="radio"] {
-					    margin: 12px 0 0 30px;
+					    margin: 12px 0 0 0;
 						float: left;
 					}
 					p.att-option-numb {
-					    margin: 0 0 0 30px;
+					    margin: 0 0 0 0;
 						line-height: 40px;
 						float: left;
 					}
@@ -81,7 +70,12 @@
 					    width: 20px;
 					    border-right: none;
 					}
-				}
+					&.no-label {
+						.attr_content {
+							.make-sm-column(12);
+						}
+					}
+				}/* li */
 			}
 		}/* ostk-form-content */
 	}/* form */

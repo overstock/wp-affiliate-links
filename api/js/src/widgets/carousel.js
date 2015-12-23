@@ -23,6 +23,8 @@ function ostk_Carousel(){
 		// 	'link_target': 'new_tab'
 		// }, this.atts);
 
+	
+
 		var output = '';
 		var error = null;
 		var _this = this;
@@ -31,7 +33,6 @@ function ostk_Carousel(){
 
 		if(this.atts.id){
 			this.muliProduct = false;
-
 			this.obj = new ostk_SingleProductData();
 			this.obj.productId = this.atts.id;
 			this.obj.multiImages = true;
@@ -106,7 +107,7 @@ function ostk_Carousel(){
 						if(this.muliProduct){
 							for(var i = 0 ; i < productList.length ; i++){
 								var product = productList[i];
-								productImg = product.getImage_Large();
+								productImg = product.imgUrl_large;
 								output += this.getCarouselListItems(product, productImg);
 							}//foreach
 						}else{

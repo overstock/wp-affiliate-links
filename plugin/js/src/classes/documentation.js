@@ -70,14 +70,14 @@ function ostk_Documentation(){
 			var li = $ostk_jQuery("<li>")
 				.appendTo(ul);
 
+			var li_contents = this.create_attr(attr, required, null).html();
+			li.html(li_contents)
+
 		    $ostk_jQuery("<div>")
 		    	.attr({
 		    		'class': 'group-border'
 		    	})
-		    	.appendTo(li);
-
-			this.create_attr(attr, required)
-				.appendTo(li);
+		    	.prependTo(li);
 
 		}//for
 		return ul;
@@ -89,31 +89,32 @@ function ostk_Documentation(){
 	};//createLabel
 
 	//Create Attribute
-	this.create_attr = function(attr, required){
-		var container = $ostk_jQuery("<div>")
+	this.create_attr = function(attr, required, test){
+		console.log('-- create_attr --');
+		var container = $ostk_jQuery("<div>");
 
 		if(attr.name){
+			console.dir(attr);
 			var label_holder = $ostk_jQuery("<div>")
 				.attr({
-					'class': 'label-holder'
+					'class': 'attr_label'
 				})
 				.appendTo(container);
+
+			if(test !== null){
+				this.optionObjectPrefix(test)
+					.appendTo(label_holder);
+			}
 
 			this.createLabel(attr.name)
 				.appendTo(label_holder);
 		}
-
-		var div = $ostk_jQuery("<div>")
+		var container_inner = $ostk_jQuery("<div>")
 			.attr({
-				'class': 'chunk'
+				'class': 'attr_content'
 			})
 			.appendTo(container);
 
-		if(!attr.name){
-			div.attr({
-				'class': 'chunk no-label'
-			});
-		}
 
 		//Attribute has options
 		if(attr.options){
@@ -121,40 +122,30 @@ function ostk_Documentation(){
 		    var option_is_object = (typeof attr.options[0]['name'] !== 'undefined') ? true : false;
 			if(option_is_object){
 
-				div.attr({
-					'class': 'chunk no-label with-options'
-				});
-
 				var ul_tiered = $ostk_jQuery('<ul>')
-					.appendTo(div);
+					.appendTo(container_inner);
 
 				for(var i = 0 ; i < attr.options.length ; i++) {
 					var li_tiered = $ostk_jQuery("<li>")
+						.attr({
+							'class': 'no-label'
+						})
 						.appendTo(ul_tiered);
 
-					var prefix_holder = $ostk_jQuery('<div>')
-						.attr({
-							'class': 'prefix-holder'
-						})
-						.appendTo(li_tiered);
-
-					this.optionObjectPrefix(i)
-						.appendTo(prefix_holder);
-
-					this.create_attr(attr.options[i], required)
-						.appendTo(li_tiered);
+					var li_contents = this.create_attr(attr.options[i], required, i).html();
+						li_tiered.html(li_contents);
 				}//for
 
 		    //Options are strings
 			}else{
 				this.createOptions(attr)
-					.appendTo(div);
+					.appendTo(container_inner);
 			}
 		//Attribute does not have options
 		}else{
 			if(required && attr.name === 'type'){
 				createText(ostk_selected_pattern['slug'])
-					.appendTo(div);
+					.appendTo(container_inner);
 			}else{
 				var input = $ostk_jQuery('<input>')
 				.attr({
@@ -167,13 +158,13 @@ function ostk_Documentation(){
 						required: 'true'
 					});
 				}
-				input.appendTo(div);
+				input.appendTo(container_inner);
 			}
 		}
 
 		if(attr.description || attr.example){
 			this.getInfo(attr)
-				.appendTo(div);
+				.appendTo(container_inner);
 		}
 
 		return container;
