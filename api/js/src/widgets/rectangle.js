@@ -23,7 +23,7 @@ function ostk_Rectangle(){
 			output += '<div class="dealEndTime"></div>';
 
 			output += '<div class="ostk-element-content">';
-				output += '<img src="'+this.obj.getImage_Large()+'" class="product-image"/>';
+				output += '<img src="'+this.obj.imgUrl_large+'" class="product-image"/>';
 				if(ostk_isset(this.atts.event)){
 					//Sales Event
 					output += '<div class="product-info">';
