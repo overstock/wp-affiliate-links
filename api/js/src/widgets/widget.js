@@ -178,19 +178,25 @@ function ostk_Widget(atts, element){
 		output += '<div class="ostk-element ostk-'+atts.type+' '+eventClass+'" '+styles+'>';
 			output += '<div class="ostk-element-inner">';
 
-				// if(atts.type !== 'leaderboard'){
-				// 	output += '<div class="ostk-element-header">';
-				// 		output += this.getBranding(brand_img);
-				// 	output += '</div>';
-				// }
+				if(atts.type !== 'leaderboard'){
+					output += '<div class="ostk-element-header">';
+						if(ostk_isset(atts.event) && atts.event === 'flash_deals'){
+							output += this.getBranding('flash-deals');
+						}else{
+							output += this.getBranding('white');
+						}
+					output += '</div>';
+				}
 
 				output += elment_contents;
 
-				// if(atts.type !== 'leaderboard'){
-				// 	output += '<div class="ostk-element-footer">';
-		  //   			output += this.getBranding();
-				// 	output += '</div>';
-				// }
+				if(atts.type !== 'leaderboard'){
+					if(ostk_isset(atts.event) && atts.event === 'flash_deals'){
+						output += '<div class="ostk-element-footer">';
+			    			output += this.getBranding();
+						output += '</div>';
+					}
+				}
 										
 			output += '</div>';
 		output += '</div>';
