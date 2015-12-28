@@ -91,7 +91,7 @@
         {
             "name": "number_of_items",
             "description": "Choose an item limit. By default it is unlimited.",
-            "example": "10"
+            "default": "10"
         },
         {
             "name": "link_target",

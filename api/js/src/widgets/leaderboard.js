@@ -9,15 +9,10 @@ function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		var limit = 2;
-		if(ostk_isset(this.atts.version) && this.atts.version !== 'standard'){
-			limit = 1;
-		}else{
-			limit = (parseInt(this.atts.number_of_items) < 2) ? this.atts.number_of_items : 2;
+		if(!ostk_isset(this.atts.number_of_items)){
+			this.atts.number_of_items = 2;
 		}
-
 		this.obj = new ostk_MultiProductData();
-		this.obj.limit = limit;
 
 		this.initObject();
 	};//initElement
@@ -30,7 +25,6 @@ function ostk_Leaderboard(){
 
 		if(ostk_isset(this.atts.event)){
 			var eventName = this.atts.event.split(' ').join('-').toLowerCase();
-			// eventClass += ' sales-event '+eventName.split('_').join('-');
 			if(this.atts.event == 'flash_deals'){
 				brand_img = 'flash-deals';
 			}

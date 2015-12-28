@@ -3,14 +3,16 @@
   /* Default
   -----------------------------------*/
   .ostk-element-inner {
-    .ostk-element-content {
-      p {
-        text-align: center;
-      }
-      img {
-        display: block;
-        margin: 0 auto 10px auto;
-        max-width: 100%;
+    .item-holder {
+      &.ostk-element-content {
+        p {
+          text-align: center;
+        }
+        img {
+          display: block;
+          margin: 0 auto 10px auto;
+          max-width: 100%;
+        }
       }
     }
   }/* .ostk-element-inner */
@@ -21,10 +23,23 @@
     width: 160px;
     height: 600px;
     .ostk-element-inner {
-      p {
-        &.dealEndTime {
-          margin-bottom: 15px;
+      .item-holder {
+        .ostk-element-content {
+          height: 235px;
+          p {
+            &.price {
+              text-align: left;
+            }
+            &.dealEndTime {
+              margin-bottom: 15px;
+            }
+          }
         }
+        &.item-count-1 {
+          .ostk-element-content {
+            height: 480px;
+          } 
+        } 
       }
     }/* .ostk-element-inner */
   }/* sales-event */

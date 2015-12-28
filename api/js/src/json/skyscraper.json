@@ -68,6 +68,11 @@
             "example": "100%\" or \"300px"
         },
         {
+            "name": "number_of_items",
+            "description": "Choose an item limit. By default it is unlimited.",
+            "default": "10"
+        },
+        {
             "name": "sort_by",
             "description": "Choose a sort option",
             "options": [

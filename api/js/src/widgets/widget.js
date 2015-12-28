@@ -56,6 +56,12 @@ function ostk_Widget(atts, element){
 	this.initObject = function(){
 		var error = null;
 
+		if(ostk_isset(this.atts.number_of_items)){
+			this.obj.limit = parseInt(this.atts.number_of_items);
+		}else{
+			this.obj.limit = 10;
+		}
+
 		if(this.atts.id){
 			this.obj.productId = this.atts.id;
 		}else if(this.atts.product_ids){
