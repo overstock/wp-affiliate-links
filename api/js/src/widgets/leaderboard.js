@@ -52,7 +52,9 @@ function ostk_Leaderboard(){
 						    output += '<div class="product-info">';
 								output += '<p class="title">'+product.name+'</p>';
 								if(!ostk_isset(this.atts.event)){
-									output += '<p class="description">'+product.description+'</p>';
+									if(this.atts.version !== 'mini' && this.atts.version !== 'mobile'){
+										output += '<p class="description">'+product.description+'</p>';
+									}
 									if(product.averageReviewAsGif){
 										output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
 									}
@@ -78,7 +80,7 @@ function ostk_Leaderboard(){
 		output += '<div class="ostk-element-footer">';
 			if(this.atts.event == 'flash_deals'){
     			output += this.getBranding('flash-deals');
-				if(this.atts.version !== 'mini' || this.atts.version !== 'mobile'){
+				if(this.atts.version !== 'mini' && this.atts.version !== 'mobile'){
 					output += '<div class="dealEndTime"></div>';
 				}
     			output += this.getBranding();

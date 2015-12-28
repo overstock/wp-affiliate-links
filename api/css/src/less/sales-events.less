@@ -53,11 +53,19 @@
       }
       .double-line {
         margin: 10px 0;
-        p.bottom-line {
-          font-size: 10px;
-          span {
-            line-height: 10px;
-            margin: 0 7px;
+        p {
+          &.top-line {
+            font-size: 18px;
+            line-height: 16px;
+          }
+          &.bottom-line {
+            font-size: 8px;
+            line-height: 8px;
+            span {
+              font-size: inherit;
+              line-height: inherit;
+              margin: 0 9px;
+            }
           }
         }
       }
