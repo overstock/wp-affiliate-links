@@ -1,12 +1,19 @@
 /*----------------------------- Skyscraper -----------------------------*/
 &.ostk-skyscraper {
+  width: 160px;
+  height: 600px;
+
   /* Default
   -----------------------------------*/
   .ostk-element-inner {
     .item-holder {
-      &.ostk-element-content {
+      .ostk-element-content {
+        height: 280px;
         p {
           text-align: center;
+          &.title {
+            .truncate;
+          }
         }
         img {
           display: block;
@@ -14,14 +21,17 @@
           max-width: 100%;
         }
       }
+      &.item-count-1 {
+        .ostk-element-content {
+          height: 555px;
+        } 
+      } 
     }
   }/* .ostk-element-inner */
 
   /* Sales Event
   -----------------------------------*/
   &.sales-event {
-    width: 160px;
-    height: 600px;
     .ostk-element-inner {
       .item-holder {
         .ostk-element-content {
