@@ -22,14 +22,11 @@ function ostk_Carousel(){
 		// 	'width': null,
 		// 	'link_target': 'new_tab'
 		// }, this.atts);
-
 	
 
-		var output = '';
 		var error = null;
 		var _this = this;
 		this.muliProduct = true;
-		var img_count = 0;
 
 		if(this.atts.id){
 			this.muliProduct = false;
@@ -38,23 +35,6 @@ function ostk_Carousel(){
 			this.obj.multiImages = true;
 			this.initObject();
 		}else{
-			var taxonomy = '';
-			var sortOption = '';
-			var keywords = '';
-			if(this.atts.product_ids){
-				var product_ids = this.atts.product_ids.split(',');
-			}else if(this.atts.category){
-				taxonomy = "&taxonomy=" + ostk_getTaxonomy(this.atts.category);
-				sortOption = (ostk_isset(this.atts.sort_by) ? "&sortOption=" + ostk_getSortOption(this.atts.sort_by) : '');
-				if (ostk_isset(taxonomy) && ostk_getTaxonomy(this.atts.category) == false) {
-					error = "category="+this.atts.category+" does not match our given categories, please check it.";
-				} 
-			}else if(this.atts.keywords){
-				keywords = "keywords=" + this.atts.keywords.split(' ').join('%20');
-			}else {
-				error = "Required field is missing; category, keywords, id or a list of product_ids.";
-			}
-
 			if(!error){
 				this.obj = new ostk_MultiProductData();
 
@@ -68,8 +48,6 @@ function ostk_Carousel(){
 					this.obj.productIds = product_ids;
 					this.initObject();
 				}else{
-					var query = "https://api.overstock.com/ads/products?developerid=test&"+keywords+taxonomy+sortOption;
-					this.obj.query = query;
 					this.initObject();
 				}
 			}

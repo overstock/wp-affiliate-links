@@ -1,6 +1,7 @@
-function ostk_Documentation(){
+function ostk_Documentation(type){
 
 	this.doc = $ostk_jQuery('.documentation-holder');
+	this.type = type;
 
 	this.construct = function(){
 		this.ostk_patterns = ostk_patterns;
@@ -63,7 +64,16 @@ function ostk_Documentation(){
 	};//hide
 
 	this.createInputList = function(attrs, required){
-		var ul = $ostk_jQuery("<ul>");
+		var ul_class = '';
+		if(required){
+			ul_class = 'required-attributes-list';
+		}else{
+			ul_class = 'optional-attributes-list';
+		}
+		var ul = $ostk_jQuery("<ul>")
+	    	.attr({
+	    		'class': ul_class
+	    	});
 		for(var i = 0 ; i < attrs.length ; i++){
 			var attr = attrs[i];
 
@@ -90,11 +100,11 @@ function ostk_Documentation(){
 
 	//Create Attribute
 	this.create_attr = function(attr, required, test){
-		console.log('-- create_attr --');
 		var container = $ostk_jQuery("<div>");
 
+		var content_classes = 'attr_content';
 		if(attr.name){
-			console.dir(attr);
+			content_classes += ' has_label'
 			var label_holder = $ostk_jQuery("<div>")
 				.attr({
 					'class': 'attr_label'
@@ -102,8 +112,19 @@ function ostk_Documentation(){
 				.appendTo(container);
 
 			if(test !== null){
-				this.optionObjectPrefix(test)
-					.appendTo(label_holder);
+				if(this.type === 'generator'){
+					$ostk_jQuery("<input>")
+						.attr({
+							'type': 'radio'
+						})
+						.appendTo(label_holder);
+				}else{
+					createText(test + 1 + '.')
+						.attr({
+							'class': 'att-option-numb'
+						})
+						.appendTo(label_holder);
+				}
 			}
 
 			this.createLabel(attr.name)
@@ -111,7 +132,7 @@ function ostk_Documentation(){
 		}
 		var container_inner = $ostk_jQuery("<div>")
 			.attr({
-				'class': 'attr_content'
+				'class': content_classes
 			})
 			.appendTo(container);
 
@@ -127,9 +148,6 @@ function ostk_Documentation(){
 
 				for(var i = 0 ; i < attr.options.length ; i++) {
 					var li_tiered = $ostk_jQuery("<li>")
-						.attr({
-							'class': 'no-label'
-						})
 						.appendTo(ul_tiered);
 
 					var li_contents = this.create_attr(attr.options[i], required, i).html();
@@ -138,6 +156,9 @@ function ostk_Documentation(){
 
 		    //Options are strings
 			}else{
+				createText('Options: ', 'label')
+					.appendTo(container_inner);
+
 				this.createOptions(attr)
 					.appendTo(container_inner);
 			}
@@ -147,18 +168,20 @@ function ostk_Documentation(){
 				createText(ostk_selected_pattern['slug'])
 					.appendTo(container_inner);
 			}else{
-				var input = $ostk_jQuery('<input>')
-				.attr({
-					type: 'text',
-					name: attr.name,
-					'attr': true
-				});
-				if(required){
-					input.attr({
-						required: 'true'
+				if(this.type === 'generator'){
+					var input = $ostk_jQuery('<input>')
+					.attr({
+						type: 'text',
+						name: attr.name,
+						'attr': true
 					});
+					if(required){
+						input.attr({
+							required: 'true'
+						});
+					}
+					input.appendTo(container_inner);
 				}
-				input.appendTo(container_inner);
 			}
 		}
 
@@ -172,19 +195,23 @@ function ostk_Documentation(){
 
 	//Attribute to String
 	this.attToString = function(item, str){
-		item = item[str];
+		var div = $ostk_jQuery("<div>");
+		var	item = item[str];
 		if(typeof item == 'string'){
-			return createText(str + ': ' + item);
+			createText(str + ': ', 'label')
+				.appendTo(div);
+
+			createText(item)
+				.appendTo(div);
 		}else{
-			var div = $ostk_jQuery("<div>");
 			createText(str+': ')
 				.appendTo(div);
 			for(var i = 0 ; i < item.length ; i++){
 				createText(item[i])
 					.appendTo(div);
 			}//for
-			return div;
 		}
+		return div;
 	};//attToString
 
 	//Change Type
@@ -214,30 +241,71 @@ function ostk_Documentation(){
 				inputList.appendTo(form_content);
 			}
 		}
-
-		$ostk_jQuery('<input>')
-			.attr({
-				type: 'submit',
-				value: 'Create Embed Code',
-				class: 'ostk-btn'
-			})
-			.appendTo(form_content);
+		if(this.type === 'generator'){
+			$ostk_jQuery('<input>')
+				.attr({
+					type: 'submit',
+					value: 'Create Embed Code',
+					class: 'ostk-btn'
+				})
+				.appendTo(form_content);
+		}
 	}//ostk_changeType
 
-	this.getInfo = function(attr){
-		var info_container = $ostk_jQuery("<div>");
+	this.createOptions = function(attr){
+		if(this.type === 'generator'){
+			var option_select = $ostk_jQuery('<select>')
+				.attr({
+					name: attr.name,
+					'attr': true
+				});
 
-		$ostk_jQuery("<i>")
+		    createOption('Select', '?')
+		    	.appendTo(option_select);
+
+			for(var i = 0 ; i < attr.options.length ; i++) {
+				var opt = attr.options[i];
+				createOption(opt)
+			    	.appendTo(option_select);
+			}//for
+			return option_select;
+		}else{
+			var options = $ostk_jQuery('<ul>')
+				.attr({
+					'class': 'list'
+				});
+			for(var i = 0 ; i < attr.options.length ; i++) {
+				var opt = attr.options[i];
+				createText(opt, 'li')
+			    	.appendTo(options);
+			}//for
+			return options;
+		}
+	};//createOptions
+
+	this.getInfo = function(attr){
+		var info_container = $ostk_jQuery("<div>")
 			.attr({
-				'class': 'fa fa-info-circle'
-			})
-			.appendTo(info_container);
+				'class': 'info-holder'
+			});
+
+		if(this.type === 'generator'){
+			$ostk_jQuery("<i>")
+				.attr({
+					'class': 'fa fa-info-circle'
+				})
+				.appendTo(info_container);
+		}
 
 		var info = $ostk_jQuery("<div>")
 			.attr({
 				'class': 'info'
 			})
 			.appendTo(info_container);
+
+		if(this.type === 'generator'){
+			info.addClass('hidden');
+		}
 
 		if(attr.description){
 			this.attToString(attr, 'description')
@@ -249,6 +317,22 @@ function ostk_Documentation(){
 		}
 		return info_container;
 	};//getInfo
+
+	//Concat Form Values
+	this.concatFormValues = function(obj, platform){
+		var str = '';
+		var key = obj[0].name;
+		var value = obj[0].value;
+		if(value !== '' && value !== '?'){ //if blank or if ostk_select is on the first option (?)
+			if(platform !== 'wordpress'){
+				key = 'data-'+key;
+			}
+			str = ' '+ key + '="' + value + '"';
+		}
+		return str;
+	};//concatFormValues
+
+	this.construct();
 
 }//ostk_Documentation
 

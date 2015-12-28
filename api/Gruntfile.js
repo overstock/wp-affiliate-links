@@ -42,7 +42,7 @@ module.exports = function(grunt) {
 		            }
 		        },
 		        src: ['js/src/json/*.json'],
-		        dest: 'js/patterns.js'
+		        dest: 'js/src/patterns.js'
 		    }
 		},
 

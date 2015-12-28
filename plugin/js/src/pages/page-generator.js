@@ -1,56 +1,13 @@
-var ostk_documentation = $ostk_jQuery.extend({}, new ostk_Documentation(), new ostk_Generator());	
-ostk_documentation.construct();
+// var ostk_documentation = $ostk_jQuery.extend({}, new ostk_Documentation(), new ostk_Generator());	
+// ostk_documentation.construct();
 
+var ostk_documentation = new ostk_Documentation('generator');
 
 /* Overstock Generator Class
 --------------------------------------------------------------------------------*/
 function ostk_Generator(){
 
-	//Concat Form Values
-	this.concatFormValues = function(obj, platform){
-		var str = '';
-		var key = obj[0].name;
-		var value = obj[0].value;
-		if(value !== '' && value !== '?'){ //if blank or if ostk_select is on the first option (?)
-			if(platform !== 'wordpress'){
-				key = 'data-'+key;
-			}
-			str = ' '+ key + '="' + value + '"';
-		}
-		return str;
-	};//concatFormValues
-
-	this.optionObjectPrefix = function(index){
-		return $ostk_jQuery("<input>")
-			.attr({
-				'type': 'radio'
-			});
-	};//optionObjectPrefix
-
-	this.createOptions = function(attr){
-		var option_select = $ostk_jQuery('<select>')
-			.attr({
-				name: attr.name,
-				'attr': true
-			});
-
-	    createOption('Select', '?')
-	    	.appendTo(option_select);
-
-		for(var i = 0 ; i < attr.options.length ; i++) {
-			var opt = attr.options[i];
-			createOption(opt)
-		    	.appendTo(option_select);
-		}//for
-		return option_select;
-	};//createOptions
-
 };//ostk_Generator
-
-
-
-
-
 
 
 
@@ -66,9 +23,20 @@ $ostk_jQuery('form.ostk-embed-builder i.fa-info-circle').click(function(){
 
 /* Select Options
 --------------------------------------------------------------------------------*/
-$ostk_jQuery('form').on('change', '.ostk-form-content input[type="radio"]', function() {
+$ostk_jQuery('form').on('change', 'input[type="radio"]', function() {
 	var _this = $ostk_jQuery(this);
+	disableSiblings(_this);
+});
 
+$ostk_jQuery('.required-attributes-list input[attr="true"], .required-attributes-list select[attr="true"]').focus(function(){
+	var _this = $ostk_jQuery(this);
+	disableSiblings(_this);
+
+	//Check the radio button
+	_this.closest('li').find('input[type="radio"]').prop('checked', true);
+});
+
+function disableSiblings(_this){
 	var li = _this.closest('li');
 
 	//Undisable the input or select box when selecting an options radio button
@@ -88,7 +56,7 @@ $ostk_jQuery('form').on('change', '.ostk-form-content input[type="radio"]', func
 
 	//Uncheck other options radio buttons
 	sibs.find('input[type="radio"]').prop('checked', false);
-});
+}
 
 /* Submit
 --------------------------------------------------------------------------------*/

@@ -14,15 +14,56 @@
             "name": "type"
         },
         {
-            "name": "id",
-            "example": "10234427",
-            "description": "Choose an attribute to display"
+            "options": [
+                {
+                    "name": "id",
+                    "example": "10234427",
+                    "description": "Choose an attribute to display"
+                },
+                {
+                    "name": "category",
+                    "description": "Select items from a specific Overstock store.",
+                    "options": [
+                        "Home & Garden",
+                        "Jewelry & Watches",
+                        "Sports & Toys",
+                        "Worldstock Fair Trade",
+                        "Clothing & Shoes",
+                        "Health & Beauty",
+                        "Food & Gifts",
+                        "Office Supplies",
+                        "Luggage & Bags",
+                        "Crafts & Sewing",
+                        "Baby",
+                        "Pet Supplies",
+                        "Emergency Preparedness",
+                        "Bedding & Bath"
+                    ]
+                },
+                {
+                    "name": "keywords",
+                    "description": "A keyword search",
+                    "example": "soccer shoes"
+                }
+            ]
         }
     ],
     "optional_attributes": [
         {
             "name": "image_number",
             "description": "Choose an image number, images are numbered from left to right on the product page, 1,2,3, ect."
+        },
+        {
+            "name": "sort_by",
+            "description": "Choose a sort option",
+            "options": [
+                "Relevance", 
+                "Recommended",
+                "Reviews",
+                "Lowest Price", 
+                "Highest Price", 
+                "New Arrivals"
+            ]
         },
         {
             "name": "width",

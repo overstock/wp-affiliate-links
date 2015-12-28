@@ -45,7 +45,6 @@ function ostk_SingleProductData(){
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
-				console.log('fail: '+_this.productId);
 				errorCallback('Invalid product id: ' + _this.productId);
 			});
 		}
