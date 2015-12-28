@@ -7,7 +7,7 @@
     height: 90px;
     position: relative;
     .item-holder {
-      margin-right: 150px;
+      margin-right: 140px;
       &.item-count-2 {
         .ostk-item {
           width: 50%;  
@@ -76,14 +76,21 @@
         }
         .dealEndTime {
           .double-line {
-            margin: 0;
-            line-height: 8px;
+            padding: 2px 0;
+            margin: 2px 0;
             p {
-              font-size: 16px;
-            }
-            span {
-              font-size: 8px;
-              line-height: 8px;
+              &.top-line {
+                font-size: 16px;
+                line-height: 16px;
+              }
+              &.bottom-line {
+                font-size: 8px;
+                line-height: 8px;
+                span {
+                  font-size: inherit;
+                  line-height: inherit;
+                }
+              }
             }
           }
         }
@@ -110,6 +117,11 @@
     }        
   }
   &.flash-deals {
+    .ostk-element-inner {
+      .item-holder {
+        margin-right: 130px;
+      }
+    }
     .ostk-element-footer {
       .dealEndTime {
         border-top: solid 1px @grey-lt;

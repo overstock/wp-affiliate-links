@@ -58,15 +58,27 @@ function ostk_Widget(atts, element){
 
 		if(this.atts.id){
 			this.obj.productId = this.atts.id;
-		}		
-		if(this.atts.product_ids){
+		}else if(this.atts.product_ids){
 			this.obj.productIds = this.atts.product_ids;
-		}
-		if(this.atts.event){
+		}else if(this.atts.event){
 			this.obj.query = ostk_getEventQuery(this.atts.event);
 			if(!this.obj.query){
 				error = 'Invalid query attribute';
 			}
+		}else if(this.atts.category || this.atts.keywords){
+			var taxonomy = '';
+			var sortOption = '';
+			var keywords = '';
+			if(this.atts.category){
+				taxonomy = "&taxonomy=" + ostk_getTaxonomy(this.atts.category);
+				sortOption = (ostk_isset(this.atts.sort_by) ? "&sortOption=" + ostk_getSortOption(this.atts.sort_by) : '');
+				if (ostk_isset(taxonomy) && ostk_getTaxonomy(this.atts.category) == false) {
+					error = "category="+this.atts.category+" does not match our given categories, please check it.";
+				} 
+			}else if(this.atts.keywords){
+				keywords = "keywords=" + this.atts.keywords.split(' ').join('%20');
+			}
+			this.obj.query = "https://api.overstock.com/ads/products?developerid=test&"+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
@@ -119,7 +131,7 @@ function ostk_Widget(atts, element){
 
 		if(this.atts.type === 'skyscraper' || this.atts.type === 'leaderboard'){
 			return '<div class="double-line">' + 
-				'<p>'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
+				'<p class="top-line">'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
 				'<p class="bottom-line">' +
 					'<span>HR</span>' +
 					'<span>MIN</span>' +

@@ -916,6 +916,7 @@
 .ostk-plugin-settings .ostk-generator-page form label {
   width: 150px;
   font-weight: bold;
+  display: block;
 }
 .ostk-plugin-settings .ostk-generator-page form input[type="text"] {
   min-width: 200px;
@@ -941,60 +942,53 @@
   border: solid 1px #cccccc;
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
+  width: 150px;
+  margin-left: 10px;
+  float: left;
 }
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
-    float: left;
-    width: 25%;
-  }
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label p.att-option-numb {
+  margin: 0 8px 0 0;
+  line-height: 40px;
+  float: left;
+  font-weight: bold;
 }
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
-    float: left;
-    width: 25%;
-  }
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label input[type="radio"] {
+  margin: 13px 8px 0 0;
+  float: left;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
-  background: #ccc;
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content.has_label {
+  margin-left: 160px;
 }
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
-    float: left;
-    width: 75%;
-  }
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content.has_label label {
+  text-transform: capitalize;
 }
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
-    float: left;
-    width: 75%;
-  }
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .info-holder {
+  margin-top: 10px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .fa-info-circle {
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .info-holder .fa-info-circle {
   cursor: pointer;
   margin-left: 10px;
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .info {
-  display: none;
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content p {
   margin: 0;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li input[type="radio"] {
-  margin: 12px 0 0 0;
-  float: left;
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li p.att-option-numb {
-  margin: 0 0 0 0;
-  line-height: 40px;
-  float: left;
+@media (min-width: 768px) {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+@media (min-width: 768px) {
+  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
+    float: left;
+    width: 33.33333333%;
+  }
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .group-border {
   border: solid 3px grey;
@@ -1004,24 +998,6 @@
   bottom: 0;
   width: 20px;
   border-right: none;
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.no-label .attr_content {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.no-label .attr_content {
-    float: left;
-    width: 100%;
-  }
-}
-@media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li.no-label .attr_content {
-    float: left;
-    width: 100%;
-  }
 }
 .ostk-plugin-settings .ostk-generator-page .embed-output {
   display: none;

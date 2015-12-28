@@ -37,6 +37,31 @@
                         "promotions"
                         */
                     ]
+                },
+                {
+                    "name": "category",
+                    "description": "Select items from a specific Overstock store.",
+                    "options": [
+                        "Home & Garden",
+                        "Jewelry & Watches",
+                        "Sports & Toys",
+                        "Worldstock Fair Trade",
+                        "Clothing & Shoes",
+                        "Health & Beauty",
+                        "Food & Gifts",
+                        "Office Supplies",
+                        "Luggage & Bags",
+                        "Crafts & Sewing",
+                        "Baby",
+                        "Pet Supplies",
+                        "Emergency Preparedness",
+                        "Bedding & Bath"
+                    ]
+                },
+                {
+                    "name": "keywords",
+                    "description": "A keyword search",
+                    "example": "soccer shoes"
                 }
             ]
         }
@@ -49,6 +74,18 @@
                 "standard",
                 "mini",
                 "mobile"
+            ]
+        },
+        {
+            "name": "sort_by",
+            "description": "Choose a sort option",
+            "options": [
+                "Relevance", 
+                "Recommended",
+                "Reviews",
+                "Lowest Price", 
+                "Highest Price", 
+                "New Arrivals"
             ]
         },
         {
