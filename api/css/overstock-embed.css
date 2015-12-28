@@ -399,16 +399,24 @@
 #sidebar .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line {
   margin: 10px 0;
 }
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line,
+#main .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line,
+#sidebar .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line {
+  font-size: 18px;
+  line-height: 16px;
+}
 .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line,
 #main .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line,
 #sidebar .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line {
-  font-size: 10px;
+  font-size: 8px;
+  line-height: 8px;
 }
 .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span,
 #main .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span,
 #sidebar .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span {
-  line-height: 10px;
-  margin: 0 7px;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0 9px;
 }
 .ostk-element.flash-deals .ostk-element-inner .branding,
 #main .ostk-element.flash-deals .ostk-element-inner .branding,
@@ -857,22 +865,10 @@
   font-size: 16px;
   line-height: 16px;
 }
-.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.bottom-line,
-#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.bottom-line,
-#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.bottom-line {
-  font-size: 8px;
-  line-height: 8px;
-}
-.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.bottom-line span,
-#main .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.bottom-line span,
-#sidebar .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.bottom-line span {
-  font-size: inherit;
-  line-height: inherit;
-}
 .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content,
 #sidebar .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content {
-  height: 75px;
+  height: 78px;
 }
 .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content .product-info p.title,
 #main .ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content .product-info p.title,
@@ -931,8 +927,10 @@
 #main .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price,
 #sidebar .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price {
   float: left;
-  padding-right: 3px;
+  border-right: solid 1px #aaaaaa;
+  padding-right: 5px;
   margin-right: 3px;
+  margin-top: 3px;
 }
 .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price,
 #main .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price,
@@ -948,17 +946,27 @@
 #sidebar .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-image {
   max-height: 40px;
 }
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 9px;
+}
 .ostk-element.ostk-leaderboard.mini .ostk-element-inner .dealEndTime,
 #main .ostk-element.ostk-leaderboard.mini .ostk-element-inner .dealEndTime,
 #sidebar .ostk-element.ostk-leaderboard.mini .ostk-element-inner .dealEndTime {
   float: left;
-  margin-left: 15px;
+  margin: 7px 0 0 15px;
 }
 .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child,
 #main .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child,
 #sidebar .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child {
   border-bottom: solid 1px #aaaaaa;
   margin-bottom: 2px;
+}
+.ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 0;
 }
 .ostk-element.ostk-leaderboard.mini.sales .ostk-element-inner .ostk-element-content,
 #main .ostk-element.ostk-leaderboard.mini.sales .ostk-element-inner .ostk-element-content,
@@ -981,6 +989,8 @@
 #sidebar .ostk-element.ostk-leaderboard.mobile {
   width: 320px;
   height: 50px;
+  /* flash deals */
+  /* sales and promotions */
 }
 .ostk-element.ostk-leaderboard.mobile .ostk-element-inner,
 #main .ostk-element.ostk-leaderboard.mobile .ostk-element-inner,
@@ -993,8 +1003,8 @@
 #sidebar .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content {
   padding: 0;
   margin: 2px;
-  height: 40px;
-  width: 180px;
+  height: 43px;
+  width: 183px;
 }
 .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-info p.title,
 #main .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-info p.title,
@@ -1023,6 +1033,30 @@
 #main .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-image,
 #sidebar .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-image {
   max-height: 40px;
+}
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 5px;
+}
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child,
+#main .ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child,
+#sidebar .ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child {
+  border-bottom: solid 1px #aaaaaa;
+  margin-bottom: 2px;
+}
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 0;
+}
+.ostk-element.ostk-leaderboard.mobile.sales .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.mobile.sales .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.mobile.sales .ostk-element-inner .ostk-element-footer .branding img,
+.ostk-element.ostk-leaderboard.mobile.promotions .ostk-element-inner .ostk-element-footer .branding img,
+#main .ostk-element.ostk-leaderboard.mobile.promotions .ostk-element-inner .ostk-element-footer .branding img,
+#sidebar .ostk-element.ostk-leaderboard.mobile.promotions .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 10px;
 }
 .ostk-element.ostk-rectangle,
 #main .ostk-element.ostk-rectangle,
