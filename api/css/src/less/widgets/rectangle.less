@@ -1,5 +1,8 @@
 /*----------------------------- Rectangle -----------------------------*/
 &.ostk-rectangle {
+  width: 300px;
+  height: 250px;
+
   /* Default
   -----------------------------------*/
   .ostk-element-inner {
@@ -8,13 +11,19 @@
         .opacity(1);
       }
     }
+    .ostk-element-content {
+      img.product-image {
+        display: block;
+        margin: 0 auto;
+        height: 185px;
+        width: 185px;
+      }
+    }
   }/* .ostk-element-inner */
 
   /* Sales Events
   -----------------------------------*/
   &.sales-event {
-    width: 300px;
-    height: 250px;
     .ostk-element-inner {
       .ostk-element-header {
         border-bottom: 1px solid @grey-lt;
@@ -23,6 +32,7 @@
         .product-image {
           float: left;
           width: 110px;
+          height: 110px;
           margin-top: 30px;
         }
         .product-info {

@@ -9,7 +9,9 @@ function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		if(!ostk_isset(this.atts.number_of_items)){
+		if(this.atts.version === 'mini' || this.atts.version === 'mobile'){
+			this.atts.number_of_items = 1;
+		}else if(!ostk_isset(this.atts.number_of_items)){
 			this.atts.number_of_items = 2;
 		}
 		this.obj = new ostk_MultiProductData();

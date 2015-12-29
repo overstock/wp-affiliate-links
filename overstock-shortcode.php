@@ -123,12 +123,9 @@ function ostk_register_settings() {
 
 function ostk_theme_options_panel(){
     global $OverstockPlugin;
+    add_menu_page('Overstock Affiliate Links', 'Overstock Affiliate Links', 'manage_options', 'ostk-home', 'ostk_home_page', plugin_dir_url( __FILE__ ).'plugin/images/overstock-icon.png');
     foreach ($OverstockPlugin->ostk_pages as $page) {
-        if($page == 'home'){
-            add_menu_page('Overstock Affiliate Links', 'Overstock Affiliate Links', 'manage_options', 'ostk-home', 'ostk_home_page', plugin_dir_url( __FILE__ ).'plugin/images/overstock-icon.png');
-        }else{
-            add_submenu_page( 'ostk-home', ucwords($page), ucwords($page), 'manage_options', 'ostk-'.$page, 'ostk_'.$page.'_page');
-        }
+        add_submenu_page( 'ostk-home', ucwords($page), ucwords($page), 'manage_options', 'ostk-'.$page, 'ostk_'.$page.'_page');
     }//foreach
 }//ostk_theme_options_panel
 

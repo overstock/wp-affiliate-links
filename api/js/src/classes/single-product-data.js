@@ -42,6 +42,7 @@ function ostk_SingleProductData(){
 				}else if(productData.sales){
 					productData = productData.sales[0];
 				}
+
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
