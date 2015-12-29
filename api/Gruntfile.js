@@ -5,9 +5,9 @@
 npm install grunt;
 npm install load-grunt-tasks --save-dev;
 npm install grunt-contrib-less --save-dev;
-npm install grunt-contrib-concat --save-dev
-npm install grunt-contrib-cssmin --save-dev
-npm install grunt-contrib-watch --save-dev
+npm install grunt-contrib-concat --save-dev;
+npm install grunt-contrib-cssmin --save-dev;
+npm install grunt-contrib-watch --save-dev;
 npm install grunt-json --save-dev;
 npm install grunt-contrib-uglify --save-dev;
 
@@ -48,15 +48,15 @@ module.exports = function(grunt) {
 
 		//Append library CSS files to the API Embed CSS
 		concat: {
-			dist: {
+			css: {
 				src: [
 					'css/overstock-embed.css',
-					'css/src/libs/font-awesome.min.css',
-					'css/src/libs/flex-slider.min.css'
+					//Libraries
+					'css/src/libs/*.css'
 				],
 				dest: 'css/overstock-embed.css'
 			},
-			dist: {
+			js: {
 				src: [
 					//Libraries
 					'js/src/libs/jquery.min.js',
@@ -65,15 +65,11 @@ module.exports = function(grunt) {
 					//Widgets
 					'js/src/widgets/*.js',
 
-					//Functions
-					'js/src/functions.js',
-					'js/src/patterns.js',
+					//JS Files
+					'js/src/*.js',
 
 					//Classes
-					'js/src/classes/*.js',
-
-					//Embed
-					'js/src/overstock-embed.js'
+					'js/src/classes/*.js'
 				],
 				dest: 'js/overstock-embed.js'
 			}

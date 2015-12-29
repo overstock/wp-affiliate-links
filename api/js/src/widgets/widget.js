@@ -233,34 +233,12 @@ function ostk_Widget(atts, element){
 
 	//Render HTML
 	this.renderHTML = function(data){
-		var scale = null;
-		if(this.element.parent().outerWidth() != null){
-			var myWidth = this.element.outerWidth();
-			this.parentWidth = this.element.parent().outerWidth();
-			if(myWidth > this.parentWidth){
-				scale  = (this.parentWidth) / myWidth;
-			}
-		}
-
 		data = $ostk_jQuery(data);
 		this.element.fadeOut('slow');
 		this.element.replaceWith(data);
 		this.element = data;
 		data.hide();
 		data.fadeIn('slow');
-
-		if(scale != null){
-/*
-			data.css({
-				'-webkit-transform' : 'scale(' + scale + ')',
-				'-moz-transform'    : 'scale(' + scale + ')',
-				'-ms-transform'     : 'scale(' + scale + ')',
-				'-o-transform'      : 'scale(' + scale + ')',
-				'transform'         : 'scale(' + scale + ')'
-			});
-*/
-		}
-
 	};//rederHTML
 
 	//Render HTML Error

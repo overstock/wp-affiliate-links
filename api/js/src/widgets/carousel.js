@@ -9,53 +9,20 @@ function ostk_Carousel(){
 
 	// Init Element
 	this.initElement = function(){
-		// atts = ostk_shortcode_atts(
-		// {
-		// 	'id': null,
-		// 	'type': null,
-		// 	'category': null, 
-		// 	'carousel-type': null, 
-		// 	'number_of_items': 10,
-		// 	'sort_by': null, 
-		// 	'keywords': null,
-		// 	'product_ids': null,
-		// 	'width': null,
-		// 	'link_target': 'new_tab'
-		// }, this.atts);
-	
-
-		var error = null;
-		var _this = this;
-		this.muliProduct = true;
+		if(!ostk_isset(this.atts.number_of_items)){
+			this.atts.number_of_items = 10;
+		}
 
 		if(this.atts.id){
-			this.muliProduct = false;
 			this.obj = new ostk_SingleProductData();
-			this.obj.productId = this.atts.id;
 			this.obj.multiImages = true;
-			this.initObject();
 		}else{
-			if(!error){
-				this.obj = new ostk_MultiProductData();
-
-				if(this.atts.number_of_items){
-					this.obj.limit = this.atts.number_of_items;
-				}else{
-					this.obj.limit = 10;
-				}
-
-				if (ostk_isset(product_ids)) {
-					this.obj.productIds = product_ids;
-					this.initObject();
-				}else{
-					this.initObject();
-				}
-			}
+			this.obj = new ostk_MultiProductData();
+			this.obj.muliProduct = true;
 		}
 
-		if(error){
-			this.renderHTMLError(error);
-		}
+		this.initObject();
+
 	};//initElement
 
 	// Generate Html

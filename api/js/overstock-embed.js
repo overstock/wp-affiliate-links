@@ -18,53 +18,20 @@ function ostk_Carousel(){
 
 	// Init Element
 	this.initElement = function(){
-		// atts = ostk_shortcode_atts(
-		// {
-		// 	'id': null,
-		// 	'type': null,
-		// 	'category': null, 
-		// 	'carousel-type': null, 
-		// 	'number_of_items': 10,
-		// 	'sort_by': null, 
-		// 	'keywords': null,
-		// 	'product_ids': null,
-		// 	'width': null,
-		// 	'link_target': 'new_tab'
-		// }, this.atts);
-	
-
-		var error = null;
-		var _this = this;
-		this.muliProduct = true;
+		if(!ostk_isset(this.atts.number_of_items)){
+			this.atts.number_of_items = 10;
+		}
 
 		if(this.atts.id){
-			this.muliProduct = false;
 			this.obj = new ostk_SingleProductData();
-			this.obj.productId = this.atts.id;
 			this.obj.multiImages = true;
-			this.initObject();
 		}else{
-			if(!error){
-				this.obj = new ostk_MultiProductData();
-
-				if(this.atts.number_of_items){
-					this.obj.limit = this.atts.number_of_items;
-				}else{
-					this.obj.limit = 10;
-				}
-
-				if (ostk_isset(product_ids)) {
-					this.obj.productIds = product_ids;
-					this.initObject();
-				}else{
-					this.initObject();
-				}
-			}
+			this.obj = new ostk_MultiProductData();
+			this.obj.muliProduct = true;
 		}
 
-		if(error){
-			this.renderHTMLError(error);
-		}
+		this.initObject();
+
 	};//initElement
 
 	// Generate Html
@@ -239,7 +206,9 @@ function ostk_Leaderboard(){
 
 	// Init Element
 	this.initElement = function(){
-		if(!ostk_isset(this.atts.number_of_items)){
+		if(this.atts.version === 'mini' || this.atts.version === 'mobile'){
+			this.atts.number_of_items = 1;
+		}else if(!ostk_isset(this.atts.number_of_items)){
 			this.atts.number_of_items = 2;
 		}
 		this.obj = new ostk_MultiProductData();
@@ -927,34 +896,12 @@ function ostk_Widget(atts, element){
 
 	//Render HTML
 	this.renderHTML = function(data){
-		var scale = null;
-		if(this.element.parent().outerWidth() != null){
-			var myWidth = this.element.outerWidth();
-			this.parentWidth = this.element.parent().outerWidth();
-			if(myWidth > this.parentWidth){
-				scale  = (this.parentWidth) / myWidth;
-			}
-		}
-
 		data = $ostk_jQuery(data);
 		this.element.fadeOut('slow');
 		this.element.replaceWith(data);
 		this.element = data;
 		data.hide();
 		data.fadeIn('slow');
-
-		if(scale != null){
-/*
-			data.css({
-				'-webkit-transform' : 'scale(' + scale + ')',
-				'-moz-transform'    : 'scale(' + scale + ')',
-				'-ms-transform'     : 'scale(' + scale + ')',
-				'-o-transform'      : 'scale(' + scale + ')',
-				'transform'         : 'scale(' + scale + ')'
-			});
-*/
-		}
-
 	};//rederHTML
 
 	//Render HTML Error
@@ -1401,6 +1348,60 @@ function ostk_array_key_exists(key, search) {
   }
   return key in search;
 }//ostk_array_key_exists
+// Only load the plugin if it hasn't already been loaded. 
+// Widget embeds might include the script tag multiple times.
+if(typeof(ostk_plugin) == 'undefined'){
+	var ostk_developerId = null;
+
+	if(!ostk_isset(ostk_clickPlatform)){
+		var ostk_clickPlatform = 'embed';
+	}
+
+	var ostk_clickurl = window.location.href;
+
+	var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
+	//Localhost for testing
+	if(ostk_clickurl.indexOf('http://localhost/~thoki') > -1){
+		ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
+	}
+
+	var scripts = document.getElementsByTagName('script');
+
+	for(var i = 0 ; i < scripts.length ; i++){
+		if(scripts[i].src.indexOf("overstock-embed") > -1){
+			var id_value = ostk_searchURLForParam(scripts[i].src, 'id');
+			if(id_value){
+				ostk_developerId = id_value;
+			}
+		}	
+	}//for
+
+	var ostk_url = 'https://api.test.overstock.com';
+	if(
+		typeof(os) !== 'undefined' && 
+		typeof(os.Otags) !== 'undefined' && 
+		typeof(os.Otags.api_url) !== 'undefined'
+	){
+		ostk_url = os.Otags.api_url;
+	}
+	var event_list = [
+		{
+			'event': 'flash_deals',
+			'url': ostk_url+'/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
+		},
+		{
+			'event': 'promotions',
+			'url': ostk_url+'/ads/sales?developerid='+ostk_developerId+'&sale_type=promotion'
+		},
+		{
+			'event': 'sales',
+			'url': ostk_url+'/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
+		}
+	];
+
+	var ostk_plugin = new ostk_Plugin();
+}
+
 var ostk_patterns = ostk_patterns || {};
 ostk_patterns["carousel"] = {    "name": "Carousel",    "description": "Lets you create a carousel widget for up to 10 products. You will get the product ids from the product&apos;s URL on Overstock.com.",    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",    "example_shortcodes": [        {            "type": "carousel",            "product_ids": "9659704,6753542,5718385,5735179",            "width": "400px"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "options": [                {                    "name": "id",                    "description": "Any product id",                    "example": "10234427"                },                {                    "name": "product_ids",                    "description": "A list of product ids separated by commas."                },                {                    "name": "category",                    "description": "Select items from a specific Overstock store.",                    "options": [                        "Home & Garden",                        "Jewelry & Watches",                        "Sports & Toys",                        "Worldstock Fair Trade",                        "Clothing & Shoes",                        "Health & Beauty",                        "Food & Gifts",                        "Office Supplies",                        "Luggage & Bags",                        "Crafts & Sewing",                        "Baby",                        "Pet Supplies",                        "Emergency Preparedness",                        "Bedding & Bath"                    ]                },                {                    "name": "keywords",                    "description": "A keyword search",                    "example": "soccer shoes"                }            ]        }    ],    "optional_attributes": [        {            "name": "number_of_items",            "description": "Choose an item limit. By default it is unlimited.",            "example": "10"        },        {            "name": "sort_by",            "description": "Choose a sort option",            "options": [                "Relevance",                 "Recommended",                "Reviews",                "Lowest Price",                 "Highest Price",                 "New Arrivals"            ]        },        {            "name": "width",            "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",            "default": "100%",            "example": "100%\" or \"300px"        },        {            "name": "link_target",            "description": "Choose how to open the link.",            "default": "new_tab",            "options": [                "new_tab",                 "current_tab"            ]        }    ]};
 ostk_patterns["leaderboard"] = {    "name": "Leaderboard",    "description": "Lets you create a leaderboard banner for up to two products.",    "notes": [        "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",        "Leaderboard is set to 728px by 90px"    ],    "example_shortcodes": [        {            "type": "leaderboard",            "product_ids": "8641092"        },        {            "type": "leaderboard",            "product_ids": "8641092, 9547029"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "options": [                {                    "name": "product_ids",                    "description": "A list of product ids separated by commas.",                    "notes": "Required to have 1 or 2 product ids"                },                {                    "name": "event",                    "description": "Sales event elements",                    "options": [                        "flash_deals"                        /*                        ,                        "sales",                        "promotions"                        */                    ]                },                {                    "name": "category",                    "description": "Select items from a specific Overstock store.",                    "options": [                        "Home & Garden",                        "Jewelry & Watches",                        "Sports & Toys",                        "Worldstock Fair Trade",                        "Clothing & Shoes",                        "Health & Beauty",                        "Food & Gifts",                        "Office Supplies",                        "Luggage & Bags",                        "Crafts & Sewing",                        "Baby",                        "Pet Supplies",                        "Emergency Preparedness",                        "Bedding & Bath"                    ]                },                {                    "name": "keywords",                    "description": "A keyword search",                    "example": "soccer shoes"                }            ]        }    ],    "optional_attributes": [        {            "name": "version",            "default": "standard",            "options": [                "standard",                "mini",                "mobile"            ]        },        {            "name": "sort_by",            "description": "Choose a sort option",            "options": [                "Relevance",                 "Recommended",                "Reviews",                "Lowest Price",                 "Highest Price",                 "New Arrivals"            ]        },        {            "name": "number_of_items",            "description": "Choose an item limit. By default it is unlimited.",            "default": "10"        },        {            "name": "link_target",            "description": "Choose how to open the link.",            "default": "new_tab",            "options": [                "new_tab",                 "current_tab"            ]        }    ]};
@@ -1727,6 +1728,7 @@ function ostk_SingleProductData(){
 				}else if(productData.sales){
 					productData = productData.sales[0];
 				}
+
 				_this.processData(productData, callback, errorCallback);
 			})
 			.fail(function(){
@@ -1838,57 +1840,3 @@ function ostk_SingleProductData(){
 		return this.arrayOfAllProductImages;
 	}
 }//ostk_SingleProductData
-
-// Only load the plugin if it hasn't already been loaded. 
-// Widget embeds might include the script tag multiple times.
-if(typeof(ostk_plugin) == 'undefined'){
-	var ostk_developerId = null;
-
-	if(!ostk_isset(ostk_clickPlatform)){
-		var ostk_clickPlatform = 'embed';
-	}
-
-	var ostk_clickurl = window.location.href;
-
-	var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
-	//Localhost for testing
-	if(ostk_clickurl.indexOf('http://localhost/~thoki') > -1){
-		ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
-	}
-
-	var scripts = document.getElementsByTagName('script');
-
-	for(var i = 0 ; i < scripts.length ; i++){
-		if(scripts[i].src.indexOf("overstock-embed") > -1){
-			var id_value = ostk_searchURLForParam(scripts[i].src, 'id');
-			if(id_value){
-				ostk_developerId = id_value;
-			}
-		}	
-	}//for
-
-	var ostk_url = 'https://api.test.overstock.com';
-	if(
-		typeof(os) !== 'undefined' && 
-		typeof(os.Otags) !== 'undefined' && 
-		typeof(os.Otags.api_url) !== 'undefined'
-	){
-		ostk_url = os.Otags.api_url;
-	}
-	var event_list = [
-		{
-			'event': 'flash_deals',
-			'url': ostk_url+'/ads/products/deals?developerid='+ostk_developerId+'&sort=lowest_price'
-		},
-		{
-			'event': 'promotions',
-			'url': ostk_url+'/ads/sales?developerid='+ostk_developerId+'&sale_type=promotion'
-		},
-		{
-			'event': 'sales',
-			'url': ostk_url+'/ads/sales?developerid='+ostk_developerId+'&sale_type=sale'
-		}
-	];
-
-	var ostk_plugin = new ostk_Plugin();
-}
