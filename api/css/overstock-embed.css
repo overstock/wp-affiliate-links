@@ -959,6 +959,11 @@
   float: left;
   margin: 7px 0 0 15px;
 }
+.ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-content .product-info p.price,
+#main .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-content .product-info p.price,
+#sidebar .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-content .product-info p.price {
+  border: none;
+}
 .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child,
 #main .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child,
 #sidebar .ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child {
