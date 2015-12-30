@@ -1,9 +1,15 @@
+/* Error Text
+----------------------------------------------------------*/
 .ostk-error {
+  @import "reset.less";
   color: @primary;
   * {
     font-family: @primaryFontBold;
   }
 }
+
+/* Loader for Widgets
+----------------------------------------------------------*/
 .ostk-loader {
   @import "reset.less";
   background: rgba(255, 255, 255, .6);
@@ -26,13 +32,12 @@
   }
 }
 
-.ostk-element,
-#main .ostk-element,
-#sidebar .ostk-element {
+/* Global for All Short Code Elements 
+----------------------------------------------------------*/
+.ostk-element {
   /*
   The "#main" and "#sidebar" is being used to make sure that the ostk styles have enough specificity to maintain ostk styles even in custom Wordpress themes. Id's are being used to add specificity instead of using important on every item. If important or other id's end up being needed, this may be motified.
   */
-  /*----------------------------- Global for All Short Code Elements -----------------------------*/
   background: @white;
   @import "reset.less";
   position: relative;
