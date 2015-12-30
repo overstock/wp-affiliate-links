@@ -5,11 +5,12 @@
 npm install grunt;
 npm install load-grunt-tasks --save-dev;
 npm install grunt-contrib-less --save-dev;
-npm install grunt-contrib-concat --save-dev;
-npm install grunt-contrib-cssmin --save-dev;
-npm install grunt-contrib-watch --save-dev;
 npm install grunt-json --save-dev;
+npm install grunt-css-important --save-dev
+npm install grunt-contrib-cssmin --save-dev;
+npm install grunt-contrib-concat --save-dev;
 npm install grunt-contrib-uglify --save-dev;
+npm install grunt-contrib-watch --save-dev;
 
 2) Run the compiler:
 grunt watch
@@ -31,6 +32,15 @@ module.exports = function(grunt) {
 			}
 		},
 
+		//Make all lines of the css important. 
+		//Crappy but needed because the widgets are being put on other peoples sites.
+		css_important: {
+			files: {
+	            src: ['css/overstock-embed.css'],
+	            dest: 'css/overstock-embed.css'
+            }
+		},
+
 		//Compile all of the widget json files together as a JS object
 		json: {
 		    main: {
@@ -50,6 +60,9 @@ module.exports = function(grunt) {
 		concat: {
 			css: {
 				src: [
+					//Fonts
+					'css/src/fonts/*.css',
+					//Compiled CSS
 					'css/overstock-embed.css',
 					//Libraries
 					'css/src/libs/*.css'
@@ -106,7 +119,7 @@ module.exports = function(grunt) {
 	        	//JSON
 	        	'js/src/json/*.json'
 	        ],
-	        tasks: ['less', 'json', 'concat', 'cssmin', 'uglify'],
+	        tasks: ['less', 'css_important', 'json', 'concat', 'cssmin', 'uglify'],
 	        options: {
 	          livereload: true,
 	          port: 9999
@@ -117,6 +130,9 @@ module.exports = function(grunt) {
 	});
 
 	//Default task
-	grunt.registerTask('default', ['less', 'json', 'concat', 'cssmin', 'uglify']);
+	// grunt.registerTask('default', ['less', 'json', 'concat', 'cssmin', 'uglify']);
+
+	// grunt.registerTask('default', ['css_important']);
+	grunt.registerTask('default', ['less', 'css_important', 'json', 'concat', 'cssmin', 'uglify']);
 
 };
