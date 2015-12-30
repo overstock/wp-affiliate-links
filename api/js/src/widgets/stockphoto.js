@@ -6,24 +6,20 @@ Extends: 		ostk_Widget
 Description: 	Lets you create an image link to a product page (stock photo)
 				Allow users to add stock photos to their posts (and get paid for it)
 */
-function ostk_Stockphoto(){
+function ostk_StockPhoto(){
 
 	// Init Element
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'id': null, 
-		// 	'height': null, 
-		// 	'width': null, 
-		// 	'image_number': '1', 
-		// 	'custom_css': null,
-		// 	'link_target': 'new_tab'
-		// }, this.atts);
+		if(!ostk_isset(this.atts.image_number)){
+			this.atts.image_number = 1;
+		}
 
-	    this.obj = new ostk_SingleProductData();
-		this.obj.multiImages = true;
-
+		if(ostk_isset(this.atts.id)){
+		    this.obj = new ostk_SingleProductData();
+			this.obj.multiImages = true;
+		}else{
+		    this.obj = new ostk_MultiProductData();
+		}
 		this.initObject();
 	};//initElement
 
@@ -33,10 +29,17 @@ function ostk_Stockphoto(){
 		var error = null;
 
 		if(this.atts.image_number){
-			if(this.obj.arrayOfAllProductImages.length < this.atts.image_number){
+			var a;
+			if(this.obj.productList){
+				a = this.obj.productList;
+			}else{
+				a = this.obj.arrayOfAllProductImages;
+			}
+
+			if(a.length < this.atts.image_number){
 				error = 'Image number '+this.atts.image_number+' is not available.';
-				if(this.obj.arrayOfAllProductImages.length > 1){
-					error += ' Image numbers from 1 to '+ this.obj.arrayOfAllProductImages.length +' are available.';
+				if(a.length > 1){
+					error += ' Image numbers from 1 to '+ a.length +' are available.';
 				}else{
 					error += ' This image only has 1 available image.';
 				}
@@ -47,28 +50,39 @@ function ostk_Stockphoto(){
 		if(error){
 			this.renderHTMLError(error);
 		}else{
+			var product;
+			if(this.obj.productList){
+				product = this.obj.productList[this.atts.image_number-1];
+			}else{
+				product = this.obj;
+			}
 			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(this.atts)+'>';
 				output += '<div class="ostk-element-inner">';
-					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
+					output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 					    output += '<div class="ostk-element-content">';
-							output += '<img src="'+this.obj.getImageAtIndex(this.atts.image_number-1)+'" width="'+this.atts.width+'" height="'+this.atts.height+'" style="'+this.atts.custom_css+'">';
+							output += '<img src="'+product.imgUrl_large+'" width="'+this.atts.width+'" height="'+this.atts.height+'" style="'+this.atts.custom_css+'"  class="product-image">';
 							output += '</div>';
 						    output += '<div class="element-overlay">';
 							    output += '<div class="ostk-element-content">';
-									output += '<p class="title">'+this.obj.name+'</p>';
-									if(this.obj.averageReviewAsGif){
-										output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
+							    	if(product.name){						    		
+										output += '<p class="title">'+product.name+'</p>';
+							    	}
+									if(product.averageReviewAsGif){
+										output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 									}
-									output += '<p class="price">'+this.obj.price+'</p>';
+									if(product.price){
+										output += '<p class="price">'+product.price+'</p>';
+									}
 									output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';
 				output += '</div>';
 			output += '</div>';
+
+			this.renderHTML(output);
 		}
 
-		this.renderHTML(output);
 	}//generateHtml
 
-}//ostk_Stockphoto
+}//ostk_StockPhoto

@@ -141,7 +141,7 @@ function ostk_Plugin(){
 					item = new ostk_Carousel();
 					break;
 				case 'stock_photo':
-					item = new ostk_Stockphoto();
+					item = new ostk_StockPhoto();
 					break;
 				case 'product_link':
 					item = new ostk_ProductDetailsLink();
@@ -150,7 +150,7 @@ function ostk_Plugin(){
 					item = new ostk_SampleData();
 					break;
 				default:
-					is_widget = true;
+					is_widget = false;
 			}//switch
 
 			if(is_widget){
@@ -159,6 +159,9 @@ function ostk_Plugin(){
 				// 	console.log('complete');
 				// };
 				object.init();
+			}else{
+				/* hoki - through an error here */
+				console.log('not widget');
 			}
 
 		});

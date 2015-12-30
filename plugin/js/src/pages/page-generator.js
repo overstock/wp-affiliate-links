@@ -31,9 +31,11 @@ $ostk_jQuery('form').on('change', 'input[type="radio"]', function() {
 $ostk_jQuery('.required-attributes-list input[attr="true"], .required-attributes-list select[attr="true"]').focus(function(){
 	var _this = $ostk_jQuery(this);
 	disableSiblings(_this);
+});
 
-	//Check the radio button
-	_this.closest('li').find('input[type="radio"]').prop('checked', true);
+$ostk_jQuery('.required-attributes-list .attr_label label').click(function(){
+	var _this = $ostk_jQuery(this);
+	disableSiblings(_this);
 });
 
 function disableSiblings(_this){
@@ -41,18 +43,17 @@ function disableSiblings(_this){
 
 	//Undisable the input or select box when selecting an options radio button
 	li.find('input[attr="true"], select[attr="true"]').prop('disabled', false);
-	li.removeClass('disabled');
+	li.find('.attr_content').removeClass('hidden');
+
+	//Check the radio button
+	li.find('input[type="radio"]').prop('checked', true);
 
 	//Siblings list items
 	var sibs = li.siblings('li');
-	sibs.addClass('disabled');
+	sibs.find('.attr_content').addClass('hidden');
 
 	//Disable other option's input or select box
 	sibs.find('input[attr="true"], select[attr="true"]').prop('disabled', true);
-	//Clear other option's input
-	sibs.find('input[attr="true"]').val('');
-	//Clear other option's select box
-	sibs.find('select[attr="true"]').prop('selectedIndex', 0);
 
 	//Uncheck other options radio buttons
 	sibs.find('input[type="radio"]').prop('checked', false);

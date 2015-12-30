@@ -1,23 +1,18 @@
 /*----------------------------- Stockphoto -----------------------------*/
 &.ostk-stock-photo {
   .ostk-element-inner {
+    .border-radius(0px);
     border: none;
     &:hover {
       .element-overlay {
         .opacity(1);
       }
     }
-    &.image-small {
-      width: 200px;
-    }
-    &.image-medium {
-      width: 400px;
-    }
-    &.img-large {
-      width: 600px;
-    }
     .ostk-element-content {
       padding: 0;
+      img.product-image {
+        width: 100%;
+      }
     }
     .element-overlay {
       background-color: rgba(255, 255, 255, .9);

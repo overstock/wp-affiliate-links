@@ -46,7 +46,7 @@ function ostk_Carousel(){
 			productList = this.obj.productList;
 		}else{
 			product = this.obj;
-			productList = product.getArrayOfAllProductImages();
+			productList = product.arrayOfAllProductImages;
 		}
 
 		if(this.atts.number_of_items !== null){
@@ -395,7 +395,9 @@ function ostk_Rectangle(){
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.name+'</p>';
 						if(this.atts.event == 'flash_deals'){
-							output += '<p class="price">$'+this.obj.price+'</p>';
+							if(ostk_isset(this.obj.price)){
+								output += '<p class="price">$'+this.obj.price+'</p>';
+							}
 						}else{
 							output += '<p class="description">'+this.obj.discountMsg+'</p>';
 							output += '<p class="savings">'+this.obj.percentOff+'% OFF</p>';
@@ -412,7 +414,9 @@ function ostk_Rectangle(){
 						if(this.obj.averageReviewAsGif){
 							output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
 						}
-						output += '<p class="price">'+this.obj.price+'</p>';
+						if(ostk_isset(this.obj.price)){
+							output += '<p class="price">$'+this.obj.price+'</p>';
+						}
 					output += '</div>';
 				output += '</div>';
 			}
@@ -571,7 +575,9 @@ function ostk_Skyscraper(){
 							}
 
 							if(!ostk_isset(this.atts.event) || this.atts.event == 'flash_deals'){
-								output += '<p class="price">$'+product.price+'</p>';
+								if(ostk_isset(product.price)){
+									output += '<p class="price">$'+product.price+'</p>';
+								}
 							}
 
 						output += '</div>';
@@ -594,24 +600,20 @@ Extends: 		ostk_Widget
 Description: 	Lets you create an image link to a product page (stock photo)
 				Allow users to add stock photos to their posts (and get paid for it)
 */
-function ostk_Stockphoto(){
+function ostk_StockPhoto(){
 
 	// Init Element
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'type': null,
-		// 	'id': null, 
-		// 	'height': null, 
-		// 	'width': null, 
-		// 	'image_number': '1', 
-		// 	'custom_css': null,
-		// 	'link_target': 'new_tab'
-		// }, this.atts);
+		if(!ostk_isset(this.atts.image_number)){
+			this.atts.image_number = 1;
+		}
 
-	    this.obj = new ostk_SingleProductData();
-		this.obj.multiImages = true;
-
+		if(ostk_isset(this.atts.id)){
+		    this.obj = new ostk_SingleProductData();
+			this.obj.multiImages = true;
+		}else{
+		    this.obj = new ostk_MultiProductData();
+		}
 		this.initObject();
 	};//initElement
 
@@ -621,10 +623,17 @@ function ostk_Stockphoto(){
 		var error = null;
 
 		if(this.atts.image_number){
-			if(this.obj.arrayOfAllProductImages.length < this.atts.image_number){
+			var a;
+			if(this.obj.productList){
+				a = this.obj.productList;
+			}else{
+				a = this.obj.arrayOfAllProductImages;
+			}
+
+			if(a.length < this.atts.image_number){
 				error = 'Image number '+this.atts.image_number+' is not available.';
-				if(this.obj.arrayOfAllProductImages.length > 1){
-					error += ' Image numbers from 1 to '+ this.obj.arrayOfAllProductImages.length +' are available.';
+				if(a.length > 1){
+					error += ' Image numbers from 1 to '+ a.length +' are available.';
 				}else{
 					error += ' This image only has 1 available image.';
 				}
@@ -635,31 +644,42 @@ function ostk_Stockphoto(){
 		if(error){
 			this.renderHTMLError(error);
 		}else{
+			var product;
+			if(this.obj.productList){
+				product = this.obj.productList[this.atts.image_number-1];
+			}else{
+				product = this.obj;
+			}
 			output += '<div class="ostk-element ostk-stock-photo" '+ostk_getStyles(this.atts)+'>';
 				output += '<div class="ostk-element-inner">';
-					output += '<a href="'+this.obj.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
+					output += '<a href="'+product.getAffiliateUrl()+'" '+ostk_getLinkTarget(this.atts)+'>';
 					    output += '<div class="ostk-element-content">';
-							output += '<img src="'+this.obj.getImageAtIndex(this.atts.image_number-1)+'" width="'+this.atts.width+'" height="'+this.atts.height+'" style="'+this.atts.custom_css+'">';
+							output += '<img src="'+product.imgUrl_large+'" width="'+this.atts.width+'" height="'+this.atts.height+'" style="'+this.atts.custom_css+'"  class="product-image">';
 							output += '</div>';
 						    output += '<div class="element-overlay">';
 							    output += '<div class="ostk-element-content">';
-									output += '<p class="title">'+this.obj.name+'</p>';
-									if(this.obj.averageReviewAsGif){
-										output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
+							    	if(product.name){						    		
+										output += '<p class="title">'+product.name+'</p>';
+							    	}
+									if(product.averageReviewAsGif){
+										output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 									}
-									output += '<p class="price">'+this.obj.price+'</p>';
+									if(product.price){
+										output += '<p class="price">'+product.price+'</p>';
+									}
 									output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';
 				output += '</div>';
 			output += '</div>';
+
+			this.renderHTML(output);
 		}
 
-		this.renderHTML(output);
 	}//generateHtml
 
-}//ostk_Stockphoto
+}//ostk_StockPhoto
 
 /*
 ==================== Widget ====================
@@ -1411,7 +1431,7 @@ ostk_patterns["rectangle"] = {    "name": "Rectangle",    "description": "The re
 ostk_patterns["sample_data"] = {    "name": "Sample Data",    "description": "Print data form a given ID",    "example_shortcodes": [        {            "type": "sample_data",            "id": "9659704"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "name": "id",            "description": "Any product id",            "example": "10234427"        }    ],    "optional_attributes": [    ]};
 ostk_patterns["search"] = {    "name": "Search Query",    "description": "The Search Query shortcode will create a link that will take a user to a Search Results Page on Overstock.com.",    "example_shortcodes": [        {            "type": "search",            "query": "soccer shoes"        },        {            "type": "search",            "query": "soccer shoes",            "link_text": "Overstock has great soccer shoes"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "name": "query",            "description": "Product search terms",            "example": "soccer shoes"        }    ],    "optional_attributes": [        {            "name": "link_text",            "description": "The text that will show for the link",            "default": "query attribute text",            "example": "Click to see these soccer shoes!",            "notes": "The query will be used as the link text if the link_text parameter is empty (i.e. \"soccer shoes\")."        },        {            "name": "category",            "description": "Filter results by store",            "options": [                "Home & Garden",                "Jewelry & Watches",                "Sports & Toys",                "Worldstock Fair Trade",                "Clothing & Shoes",                "Health & Beauty",                "Food & Gifts",                "Office Supplies",                "Luggage & Bags",                "Crafts & Sewing",                "Baby",                "Pet Supplies",                "Emergency Preparedness",                "Bedding & Bath"            ]        },        {            "name": "sort_by",            "description": "Sort results in different ways",            "options": [                "Relevance",                 "Recommended",                "Reviews",                 "Lowest Price",                 "Highest Price",                 "New Arrivals"            ]        },        {            "name": "link_target",            "description": "Choose how to open the link.",            "default": "new_tab",            "options": [                "new_tab",                 "current_tab"            ]        }    ]};
 ostk_patterns["skyscraper"] = {    "name": "Skyscraper",    "description": "Lets you create a skyscraper banner for up to three products.",    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",    "example_shortcodes": [        {            "type": "skyscraper",            "product_ids": "8641092, 9547029",            "width": "160px"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "options": [                {                    "name": "product_ids",                    "description": "A list of product ids separated by commas.",                    "notes": "Required to have 1 or 2 product ids"                },                {                    "name": "event",                    "description": "Sales event elements",                    "options": [                        "flash_deals"                        /*                        ,                        "sales",                        "promotions"                        */                    ]                },                {                    "name": "category",                    "description": "Select items from a specific Overstock store.",                    "options": [                        "Home & Garden",                        "Jewelry & Watches",                        "Sports & Toys",                        "Worldstock Fair Trade",                        "Clothing & Shoes",                        "Health & Beauty",                        "Food & Gifts",                        "Office Supplies",                        "Luggage & Bags",                        "Crafts & Sewing",                        "Baby",                        "Pet Supplies",                        "Emergency Preparedness",                        "Bedding & Bath"                    ]                },                {                    "name": "keywords",                    "description": "A keyword search",                    "example": "soccer shoes"                }            ]        }    ],    "optional_attributes": [        {            "name": "width",            "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",            "default": "100%",            "example": "100%\" or \"300px"        },        {            "name": "number_of_items",            "description": "Choose an item limit. By default it is unlimited.",            "default": "10"        },        {            "name": "sort_by",            "description": "Choose a sort option",            "options": [                "Relevance",                 "Recommended",                "Reviews",                "Lowest Price",                 "Highest Price",                 "New Arrivals"            ]        },        {            "name": "link_target",            "description": "Choose how to open the link.",            "default": "new_tab",            "options": [                "new_tab",                 "current_tab"            ]        }    ]};
-ostk_patterns["stockphoto"] = {    "name": "Stock Photo",    "description": "Use Overstock&apos;s product and lifestyle photos for your blog. Each one will link to its corresponding product page on Overstock.com.",    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",    "example_shortcodes": [        {            "type": "stock_photo",            "id": "8859234",            "width": "300px"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "options": [                {                    "name": "id",                    "example": "10234427",                    "description": "Choose an attribute to display"                },                {                    "name": "category",                    "description": "Select items from a specific Overstock store.",                    "options": [                        "Home & Garden",                        "Jewelry & Watches",                        "Sports & Toys",                        "Worldstock Fair Trade",                        "Clothing & Shoes",                        "Health & Beauty",                        "Food & Gifts",                        "Office Supplies",                        "Luggage & Bags",                        "Crafts & Sewing",                        "Baby",                        "Pet Supplies",                        "Emergency Preparedness",                        "Bedding & Bath"                    ]                },                {                    "name": "keywords",                    "description": "A keyword search",                    "example": "soccer shoes"                }            ]        }    ],    "optional_attributes": [        {            "name": "image_number",            "description": "Choose an image number, images are numbered from left to right on the product page, 1,2,3, ect."        },        {            "name": "sort_by",            "description": "Choose a sort option",            "options": [                "Relevance",                 "Recommended",                "Reviews",                "Lowest Price",                 "Highest Price",                 "New Arrivals"            ]        },        {            "name": "width",            "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",            "default": "100%",            "example": "100%\" or \"300px"        },        {            "name": "height",            "description": "Height of the shortcode element. This attribute accepts \"px\"",            "notes": "The height of the image will automatically adjust according to the width. The best practice would be to only set the height if it absolutely necessary .",            "default": "auto",            "example": "300px"        },        {            "name": "link_target",            "description": "Choose how to open the link.",            "default": "new_tab",            "options": [                "new_tab",                 "current_tab"            ]        },        {            "name": "custom_css",            "description": "Add custom CSS to the image element.",            "example": "border:solid 1px red;"        }    ]};
+ostk_patterns["stock_photo"] = {    "name": "Stock Photo",    "description": "Use Overstock&apos;s product and lifestyle photos for your blog. Each one will link to its corresponding product page on Overstock.com.",    "notes": "You will get the product id from the products URL on Overstock.com. For instance, the product URL \"http://www.overstock.com/Home-Garden/DHP-Emily-Grey-Linen-Chaise-Lounger/<span class=\"highlight\">9747008</span>/product.html\" has a product ID of <span class=\"highlight\">9747008</span>.",    "example_shortcodes": [        {            "type": "stock_photo",            "id": "8859234",            "width": "300px"        }    ],    "required_attributes": [        {            "name": "type"        },        {            "options": [                {                    "name": "id",                    "example": "10234427",                    "description": "Choose an attribute to display"                },                {                    "name": "category",                    "description": "Select items from a specific Overstock store.",                    "options": [                        "Home & Garden",                        "Jewelry & Watches",                        "Sports & Toys",                        "Worldstock Fair Trade",                        "Clothing & Shoes",                        "Health & Beauty",                        "Food & Gifts",                        "Office Supplies",                        "Luggage & Bags",                        "Crafts & Sewing",                        "Baby",                        "Pet Supplies",                        "Emergency Preparedness",                        "Bedding & Bath"                    ]                },                {                    "name": "keywords",                    "description": "A keyword search",                    "example": "soccer shoes"                }            ]        }    ],    "optional_attributes": [        {            "name": "image_number",            "description": "Choose an image number, images are numbered from left to right on the product page, 1,2,3, ect."        },        {            "name": "sort_by",            "description": "Choose a sort option",            "options": [                "Relevance",                 "Recommended",                "Reviews",                "Lowest Price",                 "Highest Price",                 "New Arrivals"            ]        },        {            "name": "width",            "description": "Width of the shortcode element. This attribute accepts \"px\" or \"%\"",            "default": "100%",            "example": "100%\" or \"300px"        },        {            "name": "height",            "description": "Height of the shortcode element. This attribute accepts \"px\"",            "notes": "The height of the image will automatically adjust according to the width. The best practice would be to only set the height if it absolutely necessary .",            "default": "auto",            "example": "300px"        },        {            "name": "link_target",            "description": "Choose how to open the link.",            "default": "new_tab",            "options": [                "new_tab",                 "current_tab"            ]        },        {            "name": "custom_css",            "description": "Add custom CSS to the image element.",            "example": "border:solid 1px red;"        }    ]};
 /*
 ==================== Multi Product Data ====================
 
@@ -1659,7 +1679,7 @@ function ostk_Plugin(){
 					item = new ostk_Carousel();
 					break;
 				case 'stock_photo':
-					item = new ostk_Stockphoto();
+					item = new ostk_StockPhoto();
 					break;
 				case 'product_link':
 					item = new ostk_ProductDetailsLink();
@@ -1668,7 +1688,7 @@ function ostk_Plugin(){
 					item = new ostk_SampleData();
 					break;
 				default:
-					is_widget = true;
+					is_widget = false;
 			}//switch
 
 			if(is_widget){
@@ -1677,6 +1697,9 @@ function ostk_Plugin(){
 				// 	console.log('complete');
 				// };
 				object.init();
+			}else{
+				/* hoki - through an error here */
+				console.log('not widget');
 			}
 
 		});
@@ -1738,12 +1761,13 @@ function ostk_SingleProductData(){
 	}//init
 
 	this.processData = function(productData, callback, errorCallback){
-		if(productData.images){
-		    this.arrayOfAllProductImages = this.getImageList(productData.images);
-		}
 		this.name = this.setName(productData);
 		this.productId = productData.id;
 		this.developerId = ostk_developerId;
+
+		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
+		this.imgUrl_medium = productData.imageURL;
+		this.imgUrl_thumbnail = productData.smallImageURL;
 
 		if(productData.description){
 			this.description = productData.description;
@@ -1778,9 +1802,9 @@ function ostk_SingleProductData(){
 			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
 		}
 
-		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
-		this.imgUrl_medium = productData.imageURL;
-		this.imgUrl_thumbnail = productData.smallImageURL;
+		if(productData.images){
+		    this.arrayOfAllProductImages = this.getImageList(productData.images);
+		}
 
 		callback(this);
 	};//processData
@@ -1788,8 +1812,11 @@ function ostk_SingleProductData(){
 	this.getImageList = function(images){
 		var a = Array();
 		for(var i = 0 ; i < images.length ; i++){
-			a.push(images[i]['scaledImages'][3]['url']);
+			a.push(images[i]['scaledImages'][1].url);
 		}//for
+		if(!a.length){
+			a.push(this.imgUrl_thumbnail);
+		}
 		return a;
 	}
 
@@ -1836,7 +1863,4 @@ function ostk_SingleProductData(){
 		return this.arrayOfAllProductImages[index];
 	}
 
-	this.getArrayOfAllProductImages = function(){
-		return this.arrayOfAllProductImages;
-	}
 }//ostk_SingleProductData
