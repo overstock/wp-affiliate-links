@@ -37,7 +37,7 @@ function ostk_Carousel(){
 			productList = this.obj.productList;
 		}else{
 			product = this.obj;
-			productList = product.getArrayOfAllProductImages();
+			productList = product.arrayOfAllProductImages;
 		}
 
 		if(this.atts.number_of_items !== null){

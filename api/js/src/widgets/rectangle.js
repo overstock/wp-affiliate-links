@@ -29,7 +29,9 @@ function ostk_Rectangle(){
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.name+'</p>';
 						if(this.atts.event == 'flash_deals'){
-							output += '<p class="price">$'+this.obj.price+'</p>';
+							if(ostk_isset(this.obj.price)){
+								output += '<p class="price">$'+this.obj.price+'</p>';
+							}
 						}else{
 							output += '<p class="description">'+this.obj.discountMsg+'</p>';
 							output += '<p class="savings">'+this.obj.percentOff+'% OFF</p>';
@@ -46,7 +48,9 @@ function ostk_Rectangle(){
 						if(this.obj.averageReviewAsGif){
 							output += '<img class="ostk-rating" src="'+this.obj.getAverageReviewAsGif()+'"/>';
 						}
-						output += '<p class="price">'+this.obj.price+'</p>';
+						if(ostk_isset(this.obj.price)){
+							output += '<p class="price">$'+this.obj.price+'</p>';
+						}
 					output += '</div>';
 				output += '</div>';
 			}

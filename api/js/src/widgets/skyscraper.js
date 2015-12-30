@@ -48,7 +48,9 @@ function ostk_Skyscraper(){
 							}
 
 							if(!ostk_isset(this.atts.event) || this.atts.event == 'flash_deals'){
-								output += '<p class="price">$'+product.price+'</p>';
+								if(ostk_isset(product.price)){
+									output += '<p class="price">$'+product.price+'</p>';
+								}
 							}
 
 						output += '</div>';

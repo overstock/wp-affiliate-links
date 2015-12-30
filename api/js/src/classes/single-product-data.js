@@ -52,12 +52,13 @@ function ostk_SingleProductData(){
 	}//init
 
 	this.processData = function(productData, callback, errorCallback){
-		if(productData.images){
-		    this.arrayOfAllProductImages = this.getImageList(productData.images);
-		}
 		this.name = this.setName(productData);
 		this.productId = productData.id;
 		this.developerId = ostk_developerId;
+
+		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
+		this.imgUrl_medium = productData.imageURL;
+		this.imgUrl_thumbnail = productData.smallImageURL;
 
 		if(productData.description){
 			this.description = productData.description;
@@ -92,9 +93,9 @@ function ostk_SingleProductData(){
 			this.percentOff = productData.percentOff !== null ? productData.percentOff : 0;
 		}
 
-		this.imgUrl_large = (ostk_isset(productData.largeImageURL)) ? productData.largeImageURL: productData.imageURL;
-		this.imgUrl_medium = productData.imageURL;
-		this.imgUrl_thumbnail = productData.smallImageURL;
+		if(productData.images){
+		    this.arrayOfAllProductImages = this.getImageList(productData.images);
+		}
 
 		callback(this);
 	};//processData
@@ -102,8 +103,11 @@ function ostk_SingleProductData(){
 	this.getImageList = function(images){
 		var a = Array();
 		for(var i = 0 ; i < images.length ; i++){
-			a.push(images[i]['scaledImages'][3]['url']);
+			a.push(images[i]['scaledImages'][1].url);
 		}//for
+		if(!a.length){
+			a.push(this.imgUrl_thumbnail);
+		}
 		return a;
 	}
 
@@ -150,7 +154,4 @@ function ostk_SingleProductData(){
 		return this.arrayOfAllProductImages[index];
 	}
 
-	this.getArrayOfAllProductImages = function(){
-		return this.arrayOfAllProductImages;
-	}
 }//ostk_SingleProductData

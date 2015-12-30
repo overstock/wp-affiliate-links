@@ -99,11 +99,15 @@ function ostk_Documentation(type){
 	};//createLabel
 
 	//Create Attribute
-	this.create_attr = function(attr, required, test){
+	this.create_attr = function(attr, required, index){
 		var container = $ostk_jQuery("<div>");
 
 		var content_classes = 'attr_content';
 		if(attr.name){
+			if(this.type === 'generator' && required && attr.name !== 'type'){
+				content_classes += ' hidden';
+			}
+
 			content_classes += ' has_label'
 			var label_holder = $ostk_jQuery("<div>")
 				.attr({
@@ -111,7 +115,7 @@ function ostk_Documentation(type){
 				})
 				.appendTo(container);
 
-			if(test !== null){
+			if(index !== null){
 				if(this.type === 'generator'){
 					$ostk_jQuery("<input>")
 						.attr({
@@ -119,7 +123,7 @@ function ostk_Documentation(type){
 						})
 						.appendTo(label_holder);
 				}else{
-					createText(test + 1 + '.')
+					createText(index + 1 + '.')
 						.attr({
 							'class': 'att-option-numb'
 						})
@@ -270,10 +274,12 @@ function ostk_Documentation(type){
 			}//for
 			return option_select;
 		}else{
-			var options = $ostk_jQuery('<ul>')
-				.attr({
+			var options = $ostk_jQuery('<ul>');
+			if(attr.options.length > 3){
+				options.attr({
 					'class': 'list'
 				});
+			}
 			for(var i = 0 ; i < attr.options.length ; i++) {
 				var opt = attr.options[i];
 				createText(opt, 'li')
