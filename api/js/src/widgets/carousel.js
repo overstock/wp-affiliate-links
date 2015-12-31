@@ -33,15 +33,11 @@ function ostk_Carousel(){
 		var img_count = 0;
 		var _this = this;
 
-		if(this.muliProduct){
+		if(this.obj.muliProduct){
 			productList = this.obj.productList;
 		}else{
 			product = this.obj;
 			productList = product.arrayOfAllProductImages;
-		}
-
-		if(this.atts.number_of_items !== null){
-			productList = ostk_limitArrayCount(productList, this.atts.number_of_items);
 		}
 
 		output += '<div class="ostk-element ostk-carousel" '+ostk_getStyles(this.atts)+'>';
@@ -49,7 +45,7 @@ function ostk_Carousel(){
 				output += '<div class="ostk-flexslider">';
 					output += '<ul class="slides">';
 
-						if(this.muliProduct){
+						if(this.obj.muliProduct){
 							for(var i = 0 ; i < productList.length ; i++){
 								var product = productList[i];
 								productImg = product.imgUrl_large;
@@ -86,15 +82,7 @@ function ostk_Carousel(){
 
 		output = $ostk_jQuery(output);
 
-		if(this.obj.multiImages){
-			img_count = this.obj.arrayOfAllProductImages.length;
-		}else{
-			if(this.muliProduct){
-				img_count = this.obj.productList.length;
-			}
-		}
-
-		if(img_count > 1){
+		if(productList.length > 1){
 			this.loadCarousel(output);
 		}
 		this.renderHTML(output);
