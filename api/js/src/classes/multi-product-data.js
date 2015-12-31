@@ -9,7 +9,7 @@ function ostk_MultiProductData(){
 	this.limit;
 	this.developerId = ostk_developerId;
 	this.productList = Array();
-	this.invalidProductIDs = Array();
+	this.error = null;
 	this.product_count_down = 0;
 
 	this.init = function(callback, errorCallback) {
@@ -29,20 +29,27 @@ function ostk_MultiProductData(){
 				this.query += '&limit=' + this.limit;
 			}
 			this.query = ostk_addTrackingToUrl(this.query);	
+
 			$ostk_jQuery.get( this.query, function( productData ){
-				if(productData.products){
+				if(productData.products && productData.products.length > 0){
 					productData = productData.products;
-				}else if(productData.sales){
+				}else if(productData.sales && productData.sales.length > 0){
 					productData = productData.sales;
+				}else{
+					this.error = 'No available products for this query';
 				}
 
-				_this.product_count_down = productData.length;
+				if(!this.error){
+					_this.product_count_down = productData.length;
 
-				for(var i = 0 ; i < productData.length ; i++){
-					var item = new ostk_SingleProductData();
-					item.obj =  productData[i];
-					_this.createSingleObjects(item, callback, errorCallback);
-				}//for
+					for(var i = 0 ; i < productData.length ; i++){
+						var item = new ostk_SingleProductData();
+						item.obj =  productData[i];
+						_this.createSingleObjects(item, callback, errorCallback);
+					}//for
+				}else{
+					errorCallback(this.error);
+				}
 
 			})
 			.fail(function(){
@@ -66,7 +73,7 @@ function ostk_MultiProductData(){
 			},
 			//Error
 			function(error){
-				_this.invalidProductIDs.push('hoki');
+				_this.error = error;
 				_this.checkProductCompletion(callback, errorCallback);
 			}
 		);
@@ -75,25 +82,13 @@ function ostk_MultiProductData(){
 	this.checkProductCompletion = function(callback, errorCallback){
 	    this.product_count_down--;
 	    if(this.product_count_down === 0){
-	    	if(this.invalidProductIDs.length > 0){
-				errorCallback();
+	    	if(this.error){
+				errorCallback(this.error);
 	    	}else{
 			    callback();
 	    	}
 	    }
 	};//checkProductCompletion
-
-	this.isAllValidProductIDs = function(){
-	    if(this.invalidProductIDs.length > 0){
-	    	multiMarker = '';
-		    if(this.invalidProductIDs.length > 1){
-		    	multiMarker = 's';
-	    	}
-	    	return false;
-    	}else{
-	    	return true;
-    	}
-	}//isAllValidProductIDs
 
 	this.getProductList = function(){
 

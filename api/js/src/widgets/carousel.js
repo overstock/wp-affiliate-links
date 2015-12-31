@@ -171,12 +171,14 @@ function ostk_Carousel(){
 		var onBothSides = (itemsPerPage-1)/2;
 
 		items.each(function(index){
-			if( (index>=(currentSlide-onBothSides) && index<=(currentSlide+onBothSides) ) ||
+			if( 
 				// The items on either side of the current item will show 
-				(currentSlide < onBothSides && index < itemsPerPage) ||
+				(index>=(currentSlide-onBothSides) && index<=(currentSlide+onBothSides) ) ||
 				// If at the beginning
-				(items.length-currentSlide <= onBothSides && items.length-index <= itemsPerPage) ){
+				(currentSlide < onBothSides && index < itemsPerPage) ||
 				// If at the end
+				(items.length-currentSlide <= onBothSides && items.length-index <= itemsPerPage) 
+			){
 				$ostk_jQuery(this).show();
 			}else{
 				$ostk_jQuery(this).hide();

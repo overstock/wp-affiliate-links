@@ -36,14 +36,22 @@ function ostk_SingleProductData(){
 			}
 			url = ostk_addTrackingToUrl(url);	
 			$ostk_jQuery.get( url, function( productData ){
-				if(productData.products){
+				var error = null;
+
+				if(productData.products && productData.products.length > 0){
 					var randInt = ostk_getRandomInt(0, productData.products.length-1);
 					productData = productData.products[randInt];
-				}else if(productData.sales){
+				}else if(productData.sales && productData.sales.length > 0){
 					productData = productData.sales[0];
+				}else{
+					error = 'Invalid product id: ' + _this.productId;
 				}
 
-				_this.processData(productData, callback, errorCallback);
+				if(error){
+					errorCallback(error);
+				}else{
+					_this.processData(productData, callback, errorCallback);
+				}
 			})
 			.fail(function(){
 				errorCallback('Invalid product id: ' + _this.productId);
