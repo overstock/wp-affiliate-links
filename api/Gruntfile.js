@@ -60,12 +60,12 @@ module.exports = function(grunt) {
 		concat: {
 			css: {
 				src: [
+					//Libraries
+					'css/src/libs/*.css',
 					//Fonts
 					'css/src/fonts/*.css',
 					//Compiled CSS
-					'css/overstock-embed.css',
-					//Libraries
-					'css/src/libs/*.css'
+					'css/overstock-embed.css'
 				],
 				dest: 'css/overstock-embed.css'
 			},
@@ -130,9 +130,6 @@ module.exports = function(grunt) {
 	});
 
 	//Default task
-	// grunt.registerTask('default', ['less', 'json', 'concat', 'cssmin', 'uglify']);
-
-	// grunt.registerTask('default', ['css_important']);
 	grunt.registerTask('default', ['less', 'css_important', 'json', 'concat', 'cssmin', 'uglify']);
 
 };

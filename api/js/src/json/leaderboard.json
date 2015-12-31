@@ -8,11 +8,7 @@
     "example_shortcodes": [
         {
             "type": "leaderboard",
-            "product_ids": "8641092"
-        },
-        {
-            "type": "leaderboard",
-            "product_ids": "8641092, 9547029"
+            "product_ids": "9747008"
         }
     ],
     "required_attributes": [
@@ -69,6 +65,7 @@
     "optional_attributes": [
         {
             "name": "version",
+            "description": "Different sizes and designs for the leaderboard.",
             "default": "standard",
             "options": [
                 "standard",

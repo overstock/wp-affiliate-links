@@ -906,15 +906,18 @@
 .ostk-plugin-settings .ostk-generator-page h2:hover {
   color: #690818;
 }
+.ostk-plugin-settings .ostk-generator-page textarea.code {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.ostk-plugin-settings .ostk-generator-page p {
+  margin: 0 0 10px 0;
+}
 .ostk-plugin-settings .ostk-generator-page form {
   /* ostk-form-content */
 }
-.ostk-plugin-settings .ostk-generator-page form p,
 .ostk-plugin-settings .ostk-generator-page form label {
-  line-height: 40px;
-}
-.ostk-plugin-settings .ostk-generator-page form label {
-  width: 150px;
   font-weight: bold;
   display: block;
 }
@@ -930,37 +933,25 @@
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li {
   position: relative;
-  padding: 5px 0;
+  padding: 5px;
   margin: 0 0 10px 0;
   overflow: hidden;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label {
-  width: 150px;
-  margin-left: 10px;
-  float: left;
-}
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label p.att-option-numb {
   margin: 0 8px 0 0;
-  line-height: 40px;
   float: left;
   font-weight: bold;
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label input[type="radio"] {
-  margin: 13px 8px 0 0;
+  margin: 3px 8px 0 0;
   float: left;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content.has_label {
-  margin-left: 160px;
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li select,
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li input[type="text"] {
+  margin-top: 3px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content.has_label label {
-  text-transform: capitalize;
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content .info-holder .fa-info-circle {
-  cursor: pointer;
-  margin-left: 10px;
-}
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content p {
-  margin: 0;
+.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
+  margin-left: 20px;
 }
 .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
   position: relative;

@@ -12,15 +12,6 @@ function ostk_Generator(){
 
 
 
-
-
-
-/* Show Info
---------------------------------------------------------------------------------*/
-$ostk_jQuery('form.ostk-embed-builder i.fa-info-circle').click(function(){
-	$ostk_jQuery(this).siblings('.info').slideToggle('slow');
-});
-
 /* Select Options
 --------------------------------------------------------------------------------*/
 $ostk_jQuery('form').on('change', 'input[type="radio"]', function() {

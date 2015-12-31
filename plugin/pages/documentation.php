@@ -16,7 +16,6 @@ function ostk_documentation_page() {
                 <p>Please select an embed type</p>
                 <div class="documentation-holder"></div>
 
-
                 <div class="row">
                     <div class="col-md-6">
                         <form class="ostk-embed-builder">

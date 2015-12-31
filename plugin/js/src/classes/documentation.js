@@ -108,7 +108,6 @@ function ostk_Documentation(type){
 				content_classes += ' hidden';
 			}
 
-			content_classes += ' has_label'
 			var label_holder = $ostk_jQuery("<div>")
 				.attr({
 					'class': 'attr_label'
@@ -133,13 +132,18 @@ function ostk_Documentation(type){
 
 			this.createLabel(attr.name)
 				.appendTo(label_holder);
+
+			if(attr.description){
+				createText(attr.description)
+					.appendTo(label_holder);
+			}
+
 		}
 		var container_inner = $ostk_jQuery("<div>")
 			.attr({
 				'class': content_classes
 			})
 			.appendTo(container);
-
 
 		//Attribute has options
 		if(attr.options){
@@ -189,8 +193,8 @@ function ostk_Documentation(type){
 			}
 		}
 
-		if(attr.description || attr.example){
-			this.getInfo(attr)
+		if(attr.example){
+			this.attToString(attr, 'example')
 				.appendTo(container_inner);
 		}
 
@@ -227,10 +231,29 @@ function ostk_Documentation(type){
 
 		if(type === '?'){
 			form_content.fadeOut('slow');
-			ostk_selected_pattern = null;
+			this.ostk_selected_pattern = null;
 		}else{
 			ostk_selected_pattern = this.ostk_patterns[type];
-			ostk_selected_pattern.slug = type;
+
+			this.ostk_selected_pattern = ostk_selected_pattern;
+			this.ostk_selected_pattern.slug = type;
+
+			if(ostk_selected_pattern.description){
+				createText(ostk_selected_pattern.description)
+					.appendTo(form_content);
+			}
+			if(ostk_selected_pattern.notes){
+				this.attToString(ostk_selected_pattern, 'notes')
+					.appendTo(form_content);
+			}
+
+			if(this.type !== 'generator'){
+				if(ostk_selected_pattern.example_shortcodes){
+					this.createShortCode(ostk_selected_pattern.example_shortcodes)
+						.appendTo(form_content);
+				}
+			}
+
 			form_content.fadeIn('slow');
 			if(ostk_selected_pattern.required_attributes){
 				createText('Required Attributes', 'h2')
@@ -244,6 +267,7 @@ function ostk_Documentation(type){
 				var inputList = this.createInputList(ostk_selected_pattern.optional_attributes, false);
 				inputList.appendTo(form_content);
 			}
+			ostk_plugin.get_elements();
 		}
 		if(this.type === 'generator'){
 			$ostk_jQuery('<input>')
@@ -255,6 +279,40 @@ function ostk_Documentation(type){
 				.appendTo(form_content);
 		}
 	}//ostk_changeType
+
+	this.createShortCode = function(shortcodes){
+		var val = $ostk_jQuery('<div>')
+
+		for(var i = 0 ; i < shortcodes.length ; i++){
+			var shortcode = shortcodes[i];
+
+			createText('Shortcode', 'h3')
+				.attr('class', 'center')
+				.appendTo(val);
+
+			var code_text = '';
+			var code = $ostk_jQuery('<textarea>')
+				.attr('class', 'code')
+				.appendTo(val);
+
+			var s = $ostk_jQuery('<div>')
+				s.attr('data-tag', 'overstock')
+				.appendTo(val);
+
+			for(var att in shortcode){
+				if(att === 'type'){
+					shortcode[att] = this.ostk_selected_pattern.slug;
+				}
+				s.attr('data-'+att, shortcode[att]);
+				code_text += ' '+att+'="'+shortcode[att]+'"';
+			}//for
+
+			code.text('[overstock'+code_text+']')
+
+		}//for
+
+		return val;
+	};//createShortCode
 
 	this.createOptions = function(attr){
 		if(this.type === 'generator'){
@@ -288,41 +346,6 @@ function ostk_Documentation(type){
 			return options;
 		}
 	};//createOptions
-
-	this.getInfo = function(attr){
-		var info_container = $ostk_jQuery("<div>")
-			.attr({
-				'class': 'info-holder'
-			});
-
-		if(this.type === 'generator'){
-			$ostk_jQuery("<i>")
-				.attr({
-					'class': 'fa fa-info-circle'
-				})
-				.appendTo(info_container);
-		}
-
-		var info = $ostk_jQuery("<div>")
-			.attr({
-				'class': 'info'
-			})
-			.appendTo(info_container);
-
-		if(this.type === 'generator'){
-			info.addClass('hidden');
-		}
-
-		if(attr.description){
-			this.attToString(attr, 'description')
-				.appendTo(info);
-		}
-		if(attr.example){
-			this.attToString(attr, 'example')
-				.appendTo(info);
-		}
-		return info_container;
-	};//getInfo
 
 	//Concat Form Values
 	this.concatFormValues = function(obj, platform){
