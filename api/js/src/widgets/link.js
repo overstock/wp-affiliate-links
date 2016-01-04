@@ -11,16 +11,8 @@ function ostk_Link(){
 
 	// Generate Html
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-	 //    {
-	 //      'type': null,
-	 //      'url': 'http://www.overstock.com/', 
-	 //      'link_text': 'A link to Overstock.com',
-	 //      'link_target': 'new_tab'
-	 //    }, this.atts);
-
 		var output = '';
-		var link_text = this.atts.link_text;
+		var link_text = ostk_isset(this.atts.link_text) ? this.atts.link_text : 'A link to Overstock.com';
 		var affiliateLink = ostk_generateAffiliateLink(this.atts.url);
 
 		output = '<a href="'+affiliateLink+'" class="ostk-element ostk-link" '+ostk_getLinkTarget(this.atts)+'>'+link_text+'</a>';

@@ -17,22 +17,9 @@ function ostk_documentation_page() {
                 <div class="documentation-holder"></div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <form class="ostk-embed-builder">
-                            <div class="ostk-form-content"></div>
-                        </form>
-                    </div><!-- col -->
-                    <div class="col-md-6">
-                        <div class="embed-output">
-                            <h3 class="center">Short Code</h3>
-                            <div class="output-shortcode">
-                                <textarea class="code ostk-copy-to-clipboard-text"></textarea>
-                                <button class="ostk-btn ostk-copy-to-clipboard-btn">Copy</button>
-                                <p class="ostk-copy-to-clipboard-notification">Short Code copied to clipboard.</p>
-                            </div>
-
-                            <h3 class="center">Example</h3>
-                            <div class="embed-sandbox"></div>
+                    <div class="col-md-12">
+                        <div class="ostk-embed-builder">
+                            <div class="ostk-doc-content"></div>
                         </div>
                     </div><!-- col -->
                 </div><!-- row -->

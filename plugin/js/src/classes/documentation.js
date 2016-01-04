@@ -17,8 +17,9 @@ function ostk_Documentation(type){
 	this.createPatternList = function(){
 		var counter = 1;
 		this.patternList = $ostk_jQuery("<div>")
-
-    	this.patternList
+			.attr({
+				'class': 'widget-options',
+			})
     		.appendTo(this.doc);
 
     	for(pattern_name in ostk_patterns){
@@ -135,9 +136,11 @@ function ostk_Documentation(type){
 
 			if(attr.description){
 				createText(attr.description)
+					.attr('class', 'description')
 					.appendTo(label_holder);
 			}
-
+		}else{
+			content_classes += ' no-label';
 		}
 		var container_inner = $ostk_jQuery("<div>")
 			.attr({
@@ -193,6 +196,10 @@ function ostk_Documentation(type){
 			}
 		}
 
+		if(attr.notes){
+			this.attToString(attr, 'notes')
+				.appendTo(container_inner);
+		}
 		if(attr.example){
 			this.attToString(attr, 'example')
 				.appendTo(container_inner);
@@ -205,15 +212,12 @@ function ostk_Documentation(type){
 	this.attToString = function(item, str){
 		var div = $ostk_jQuery("<div>");
 		var	item = item[str];
+		createText(str + ': ', 'label')
+			.appendTo(div);
 		if(typeof item == 'string'){
-			createText(str + ': ', 'label')
-				.appendTo(div);
-
 			createText(item)
 				.appendTo(div);
 		}else{
-			createText(str+': ')
-				.appendTo(div);
 			for(var i = 0 ; i < item.length ; i++){
 				createText(item[i])
 					.appendTo(div);
@@ -224,7 +228,7 @@ function ostk_Documentation(type){
 
 	//Change Type
 	this.ostk_changeType = function(type){
-		var form_content = $ostk_jQuery('form.ostk-embed-builder .ostk-form-content');
+		var form_content = $ostk_jQuery('.ostk-embed-builder .ostk-doc-content');
 
 		form_content.html(''); //clear div contents
 		$ostk_jQuery('.embed-output').fadeOut('slow'); //hide output
@@ -238,6 +242,8 @@ function ostk_Documentation(type){
 			this.ostk_selected_pattern = ostk_selected_pattern;
 			this.ostk_selected_pattern.slug = type;
 
+			createText(this.ostk_selected_pattern.name, 'h2')
+				.appendTo(form_content);
 			if(ostk_selected_pattern.description){
 				createText(ostk_selected_pattern.description)
 					.appendTo(form_content);
@@ -282,6 +288,8 @@ function ostk_Documentation(type){
 
 	this.createShortCode = function(shortcodes){
 		var val = $ostk_jQuery('<div>')
+			.attr('class', 'code-example');
+
 
 		for(var i = 0 ; i < shortcodes.length ; i++){
 			var shortcode = shortcodes[i];
@@ -291,7 +299,7 @@ function ostk_Documentation(type){
 				.appendTo(val);
 
 			var code_text = '';
-			var code = $ostk_jQuery('<textarea>')
+			var code = $ostk_jQuery('<code>')
 				.attr('class', 'code')
 				.appendTo(val);
 
