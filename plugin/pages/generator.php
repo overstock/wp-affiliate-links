@@ -17,7 +17,7 @@ function ostk_generator_page() {
 				<div class="row">
 					<div class="col-md-6">
 						<form class="ostk-embed-builder">
-							<div class="ostk-form-content"></div>
+							<div class="ostk-doc-content"></div>
 						</form>
 					</div><!-- col -->
 					<div class="col-md-6">

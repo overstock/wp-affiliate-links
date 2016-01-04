@@ -309,6 +309,7 @@
 
 .ostk-element .ostk-element-inner .ostk-element-content p {
   font-size: 16px !important;
+  line-height: 16px !important;
   margin: 0 !important;
 }
 
@@ -346,6 +347,7 @@
 
 .ostk-element .ostk-element-inner .element-overlay p {
   font-size: 16px !important;
+  line-height: 16px !important;
   margin: 0 0 5px 0 !important;
 }
 

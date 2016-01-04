@@ -835,6 +835,7 @@
   background: #FFFFFF;
   overflow: hidden;
 }
+.ostk-plugin-settings code,
 .ostk-plugin-settings textarea.code {
   background-color: #444444;
   color: #FFFFFF;
@@ -898,28 +899,41 @@
 /*----------------------------- WP Plugin Generator Page -----------------------------*/
 .ostk-plugin-settings .ostk-generator-page {
   /* form */
+  /* ostk-form-content */
   /* embed-output */
 }
-.ostk-plugin-settings .ostk-generator-page h2 {
+.ostk-plugin-settings .ostk-generator-page .widget-options h2 {
   cursor: pointer;
 }
-.ostk-plugin-settings .ostk-generator-page h2:hover {
+.ostk-plugin-settings .ostk-generator-page .widget-options h2:hover {
   color: #690818;
-}
-.ostk-plugin-settings .ostk-generator-page textarea.code {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 20px;
 }
 .ostk-plugin-settings .ostk-generator-page p {
   margin: 0 0 10px 0;
 }
-.ostk-plugin-settings .ostk-generator-page form {
-  /* ostk-form-content */
-}
-.ostk-plugin-settings .ostk-generator-page form label {
+.ostk-plugin-settings .ostk-generator-page label {
+  text-transform: capitalize;
+  font-size: 16px;
   font-weight: bold;
   display: block;
+  cursor: default;
+}
+.ostk-plugin-settings .ostk-generator-page .code-example {
+  margin: 20px 0;
+}
+.ostk-plugin-settings .ostk-generator-page .code-example code {
+  max-width: 300px;
+  margin: 0 auto 10px auto;
+  display: block;
+}
+.ostk-plugin-settings .ostk-generator-page .code-example div.ostk-element {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+.ostk-plugin-settings .ostk-generator-page .code-example a.ostk-element {
+  text-align: center;
+  display: block;
+  margin-bottom: 20px;
 }
 .ostk-plugin-settings .ostk-generator-page form input[type="text"] {
   min-width: 200px;
@@ -928,50 +942,66 @@
   min-width: 170px;
   height: 40px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content {
+  max-width: 1024px;
+}
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul {
   /* li */
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li {
   position: relative;
   padding: 5px;
   margin: 0 0 10px 0;
   overflow: hidden;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label p.att-option-numb {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_label {
+  margin: 10px 0 0 10px;
+}
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_label p.att-option-numb {
   margin: 0 8px 0 0;
   float: left;
   font-weight: bold;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_label input[type="radio"] {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_label p.description {
+  font-style: normal;
+  clear: both;
+}
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_label input[type="radio"] {
   margin: 3px 8px 0 0;
   float: left;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li select,
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li input[type="text"] {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li select,
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li input[type="text"] {
   margin-top: 3px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content {
-  margin-left: 20px;
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_content {
+  margin-left: 30px;
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_content.no-label {
+  margin-left: 0;
+}
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_content input {
+  margin-bottom: 10px;
+}
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_content ul.list li {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
+  .ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_content ul.list li {
     float: left;
     width: 50%;
   }
 }
 @media (min-width: 768px) {
-  .ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .attr_content ul.list li {
+  .ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .attr_content ul.list li {
     float: left;
     width: 50%;
   }
 }
-.ostk-plugin-settings .ostk-generator-page form .ostk-form-content ul li .group-border {
+.ostk-plugin-settings .ostk-generator-page .ostk-doc-content ul li .group-border {
   border: solid 3px grey;
   position: absolute;
   top: 0;

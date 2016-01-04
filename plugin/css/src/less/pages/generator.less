@@ -1,24 +1,41 @@
 /*----------------------------- WP Plugin Generator Page -----------------------------*/
 .ostk-plugin-settings .ostk-generator-page {
-	h2 {
-		cursor: pointer;
-		&:hover {
-			color: @primary-dk;
+	.widget-options {
+		h2 {
+			cursor: pointer;
+			&:hover {
+				color: @primary-dk;
+			}
 		}
-	}
-	textarea.code {
-	    display: block;
-	    margin: 0 auto;
-	    margin-bottom: 20px;
 	}
 	p {
 		margin: 0 0 10px 0
 	}
-	form {
-	    label {
-	        font-weight: bold;
+    label {
+    	text-transform: capitalize;
+    	font-size: 16px;
+        font-weight: bold;
+		display: block;
+		cursor: default;
+    }
+    .code-example {
+    	margin: 20px 0;
+		code {
+			max-width: 300px;
+			margin: 0 auto 10px auto;
 			display: block;
-        }
+		}
+	    div.ostk-element {
+	    	display: block;
+	    	margin: 0 auto 20px auto;
+	    }
+	    a.ostk-element {
+	    	text-align: center;
+	    	display: block;
+	    	margin-bottom: 20px;
+	    }
+    }
+	form {
         input[type="text"] {
         	min-width: 200px;
         }
@@ -26,49 +43,63 @@
 			min-width: 170px;
 			height: 40px;
 		}
-		.ostk-form-content {
-			ul {
-				li {
-					position: relative;
-					padding: 5px;
-					margin: 0 0 10px 0;
-					overflow: hidden;
-					.attr_label {
-						p.att-option-numb {
+	}/* form */
+	.ostk-doc-content {
+		max-width: 1024px;
+		ul {
+			li {
+				position: relative;
+				padding: 5px;
+				margin: 0 0 10px 0;
+				overflow: hidden;
+				.attr_label {
+					margin: 10px 0 0 10px;
+					p {
+						&.att-option-numb {
 						    margin: 0 8px 0 0;
 							float: left;
 							font-weight: bold;
 						}
-						input[type="radio"] {
-						    margin: 3px 8px 0 0;
-							float: left;
+						&.description {
+							font-style: normal;
+							clear: both;
 						}
 					}
-					select,
-					input[type="text"] {
-						margin-top: 3px;
+					input[type="radio"] {
+					    margin: 3px 8px 0 0;
+						float: left;
 					}
-					.attr_content {
-						margin-left: 20px;
-						ul.list {
-							li {
-								.make-sm-column(6);
-							}
+				}
+				select,
+				input[type="text"] {
+					margin-top: 3px;
+				}
+				.attr_content {
+					margin-left: 30px;
+					&.no-label {
+						margin-left: 0;
+					}
+					input {
+						margin-bottom: 10px;
+					}
+					ul.list {
+						li {
+							.make-sm-column(6);
 						}
 					}
-					.group-border {
-					    border: solid 3px grey;
-					    position: absolute;
-					    top: 0;
-					    left: 0;
-					    bottom: 0;
-					    width: 20px;
-					    border-right: none;
-					}
-				}/* li */
-			}
-		}/* ostk-form-content */
-	}/* form */
+				}
+				.group-border {
+				    border: solid 3px grey;
+				    position: absolute;
+				    top: 0;
+				    left: 0;
+				    bottom: 0;
+				    width: 20px;
+				    border-right: none;
+				}
+			}/* li */
+		}
+	}/* ostk-form-content */
 
 	.embed-output {
 		display: none;
