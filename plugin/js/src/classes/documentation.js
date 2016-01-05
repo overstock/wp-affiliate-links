@@ -94,9 +94,14 @@ function ostk_Documentation(type){
 		return ul;
 	}//createInputs
 
-	this.createLabel = function(str){
-		return $ostk_jQuery("<label>")
-			.text(str+':');
+	this.createLabel = function(str, val){
+		if(ostk_isset(val)){
+			return $ostk_jQuery("<label>")
+				.text(str+': '+val);
+		}else{
+			return $ostk_jQuery("<label>")
+				.text(str+':');
+		}
 	};//createLabel
 
 	//Create Attribute
@@ -105,10 +110,6 @@ function ostk_Documentation(type){
 
 		var content_classes = 'attr_content';
 		if(attr.name){
-			if(this.type === 'generator' && required && attr.name !== 'type'){
-				content_classes += ' hidden';
-			}
-
 			var label_holder = $ostk_jQuery("<div>")
 				.attr({
 					'class': 'attr_label'
@@ -116,6 +117,11 @@ function ostk_Documentation(type){
 				.appendTo(container);
 
 			if(index !== null){
+				if(this.type === 'generator' && required && attr.name !== 'type'){
+					content_classes += ' hidden';
+
+				}
+
 				if(this.type === 'generator'){
 					$ostk_jQuery("<input>")
 						.attr({
@@ -131,8 +137,13 @@ function ostk_Documentation(type){
 				}
 			}
 
-			this.createLabel(attr.name)
-				.appendTo(label_holder);
+			if(attr.name === 'type'){
+				this.createLabel(attr.name, ostk_selected_pattern['slug'])
+					.appendTo(label_holder);
+			}else{
+				this.createLabel(attr.name)
+					.appendTo(label_holder);
+			}
 
 			if(attr.description){
 				createText(attr.description)
@@ -148,12 +159,11 @@ function ostk_Documentation(type){
 			})
 			.appendTo(container);
 
-		//Attribute has options
 		if(attr.options){
-		    //Options are objects
+			//Attribute has options
 		    var option_is_object = (typeof attr.options[0]['name'] !== 'undefined') ? true : false;
 			if(option_is_object){
-
+			    //Options are objects
 				var ul_tiered = $ostk_jQuery('<ul>')
 					.appendTo(container_inner);
 
@@ -164,20 +174,27 @@ function ostk_Documentation(type){
 					var li_contents = this.create_attr(attr.options[i], required, i).html();
 						li_tiered.html(li_contents);
 				}//for
-
-		    //Options are strings
 			}else{
+			    //Options are strings
 				createText('Options: ', 'label')
 					.appendTo(container_inner);
 
-				this.createOptions(attr)
-					.appendTo(container_inner);
+				if(this.type === 'generator' || attr.options.length > 2){
+					this.createOptions(attr)
+						.appendTo(container_inner);
+				}else{
+					if(attr.options.length){
+						createText(attr.options[0])
+							.appendTo(container_inner);
+					}else{
+						createText(attr.options.join(' or '))
+							.appendTo(container_inner);
+					}
+				}
 			}
-		//Attribute does not have options
 		}else{
+			//Attribute does not have options
 			if(required && attr.name === 'type'){
-				createText(ostk_selected_pattern['slug'])
-					.appendTo(container_inner);
 			}else{
 				if(this.type === 'generator'){
 					var input = $ostk_jQuery('<input>')
