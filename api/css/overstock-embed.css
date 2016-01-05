@@ -400,32 +400,66 @@
   margin: 0 !important;
 }
 
-.ostk-element.flash-deals .ostk-element-inner .dealEndTime span {
-  font-size: 10px !important;
-}
-
 .ostk-element.flash-deals .ostk-element-inner .dealEndTime .single-line p {
   line-height: 30px !important;
 }
 
-.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line {
-  margin: 10px 0 !important;
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .single-line p span {
+  font-size: 10px !important;
 }
 
-.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line {
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line {
+  margin: 8px auto !important;
+  position: relative !important;
+  width: 90px !important;
+  height: 25px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line,
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators {
   font-size: 18px !important;
   line-height: 16px !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators span {
+  position: absolute !important;
+  top: 0 !important;
+  width: 10px !important;
+  margin-left: -5px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators span:first-child {
+  left: 30px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators span:last-child {
+  left: 60px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line,
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line {
+  overflow: hidden !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line span,
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span {
+  width: 30px !important;
+  display: block !important;
+  float: left !important;
 }
 
 .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line {
   font-size: 8px !important;
   line-height: 8px !important;
+  position: absolute !important;
+  top: 17px !important;
 }
 
 .ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span {
   font-size: inherit !important;
   line-height: inherit !important;
-  margin: 0 9px !important;
 }
 
 .ostk-element.flash-deals .ostk-element-inner .branding {
@@ -793,7 +827,8 @@
 
 .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line {
   padding: 2px 0 !important;
-  margin: 2px 0 !important;
+  display: block !important;
+  margin: 5px auto !important;
 }
 
 .ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.top-line {

@@ -43,28 +43,60 @@
         text-align: center;
         margin: 0;
       }
-      span {
-        font-size: 10px;
-      }
       .single-line {
         p {
           line-height: 30px;          
+          span {
+            font-size: 10px;
+          }
         }
       }
       .double-line {
-        margin: 10px 0;
+        margin: 8px auto;
+        position: relative;
+        width: 90px;
+        height: 25px;
         p {
-          &.top-line {
+          &.top-line,
+          &.deliminators {
             font-size: 18px;
             line-height: 16px;
+            position: absolute;
+            top: 0;
+          }
+          &.deliminators {
+            span {
+              position: absolute;
+              top: 0;
+              width: 10px;
+              margin-left: -5px;
+              &:first-child {
+                left: 30px;                
+              }
+              &:last-child {
+                left: 60px;                
+              }
+            }
+          }
+          &.top-line,
+          &.bottom-line {
+            overflow: hidden;
+            span {
+              width: 30px;
+              display: block;
+              float: left;
+            }
+          }
+          &.top-line {
           }
           &.bottom-line {
             font-size: 8px;
             line-height: 8px;
+            position: absolute;
+            top: 17px;
             span {
               font-size: inherit;
               line-height: inherit;
-              margin: 0 9px;
             }
           }
         }

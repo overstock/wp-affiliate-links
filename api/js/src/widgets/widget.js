@@ -136,16 +136,26 @@ function ostk_Widget(atts, element){
 		msec -= ss * 1000;
 
 		if(this.atts.type === 'skyscraper' || this.atts.type === 'leaderboard'){
-			return '<div class="double-line">' + 
-				'<p class="top-line">'+ostk_make_two_digits(hh) + ' : ' + ostk_make_two_digits(mm) + ' : ' + ostk_make_two_digits(ss) + '</p>' +
+			return '' + 
+			'<div class="double-line">' + 
+				'<p class="deliminators">' +
+					'<span>:</span>' +
+					'<span>:</span>' +
+				'</p>' +
+				'<p class="top-line">' +
+					'<span>'+ostk_make_two_digits(hh)+'</span>' +
+					'<span>'+ostk_make_two_digits(mm)+'</span>' +
+					'<span>'+ostk_make_two_digits(ss)+'</span>' +
+				'</p>' +
 				'<p class="bottom-line">' +
 					'<span>HR</span>' +
 					'<span>MIN</span>' +
-					'<span>SEC</span>';
-				'</p>';	
+					'<span>SEC</span>'
+				'</p>' +
 			'</div>';	
 		}else{
-			return '<div class="single-line">' + 
+			return '' + 
+			'<div class="single-line">' + 
 				'<p class="single-line">'+ostk_make_two_digits(hh) + ' <span>HR</span> : ' + ostk_make_two_digits(mm) + ' <span>MIN</span> : ' + ostk_make_two_digits(ss) + ' <span>SEC</span>' + '</p>' +
 			'</div>';	
 		}
