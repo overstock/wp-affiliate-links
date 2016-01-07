@@ -34,6 +34,8 @@ if(typeof(ostk_plugin) == 'undefined'){
 	){
 		ostk_url = os.Otags.api_url;
 	}
+	//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
+	ostk_developerId = 'lMh2Xiq9xN0';
 	var event_list = [
 		{
 			'event': 'flash_deals',
