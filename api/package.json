@@ -5,7 +5,7 @@
   "keywords": [
     "overstock"
   ],
-  "author": "Reif Tauti and Travis Hoki",
+  "author": "Travis Hoki and Reif Tauti",
   "license": "ISC",
   "devDependencies": {
     "grunt": "^0.4.5",

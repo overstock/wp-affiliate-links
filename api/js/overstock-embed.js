@@ -314,13 +314,6 @@ function ostk_ProductDetailsLink(){
 
 	// Generate Html
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'id': null,
-		// 	'display': null,
-		// 	'link_target': 'new_tab'
-		// }, this.atts);
-
 		this.obj = new ostk_SingleProductData();
 
 		this.initObject();
@@ -749,8 +742,9 @@ function ostk_Widget(atts, element){
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
-			console.log(this.obj.query);
+			//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
+			ostk_developerId = 'lMh2Xiq9xN0';
+			this.obj.query = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
@@ -972,21 +966,6 @@ function ostk_make_two_digits(int){
 		return int;
 	}
 }//ostk_make_two_digits
-
-function ostk_shortcode_atts(obj, atts){
-  var output = Array();
-  /* hoki make sure this is working */
-  // foreach(pairs as name => default) {
-  for(var key in obj){
-  	var value = obj[key];
-    if (ostk_array_key_exists(key, atts)){
-      output[key] = atts[key];
-    }else{
-      output[key] = value;
-		}
-  }//for
-  return output;
-}//ostk_shortcode_atts
 
 function ostk_generateAffiliateLink(murl){
 	var symbol = '?';
@@ -1681,13 +1660,10 @@ function ostk_Plugin(){
 
 			if(is_widget){
 				var object = $ostk_jQuery.extend({}, new ostk_Widget(data, element), item);	
-				// object.completionCallback = function(){
-				// 	console.log('complete');
-				// };
 				object.init();
 			}else{
-				/* hoki - through an error here */
-				console.log('not widget');
+				var html = ostk_formatError('Invalid widget type')
+				element.replaceWith(html);
 			}
 
 		});
@@ -1724,6 +1700,8 @@ function ostk_SingleProductData(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
+				//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
+				ostk_developerId = 'lMh2Xiq9xN0';
 				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";

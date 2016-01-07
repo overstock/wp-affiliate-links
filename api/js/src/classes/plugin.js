@@ -155,13 +155,10 @@ function ostk_Plugin(){
 
 			if(is_widget){
 				var object = $ostk_jQuery.extend({}, new ostk_Widget(data, element), item);	
-				// object.completionCallback = function(){
-				// 	console.log('complete');
-				// };
 				object.init();
 			}else{
-				/* hoki - through an error here */
-				console.log('not widget');
+				var html = ostk_formatError('Invalid widget type')
+				element.replaceWith(html);
 			}
 
 		});

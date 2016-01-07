@@ -48,21 +48,6 @@ function ostk_make_two_digits(int){
 	}
 }//ostk_make_two_digits
 
-function ostk_shortcode_atts(obj, atts){
-  var output = Array();
-  /* hoki make sure this is working */
-  // foreach(pairs as name => default) {
-  for(var key in obj){
-  	var value = obj[key];
-    if (ostk_array_key_exists(key, atts)){
-      output[key] = atts[key];
-    }else{
-      output[key] = value;
-		}
-  }//for
-  return output;
-}//ostk_shortcode_atts
-
 function ostk_generateAffiliateLink(murl){
 	var symbol = '?';
 	if(murl.indexOf("?") > -1){

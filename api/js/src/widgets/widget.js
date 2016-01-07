@@ -84,8 +84,9 @@ function ostk_Widget(atts, element){
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
-			console.log(this.obj.query);
+			//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
+			ostk_developerId = 'lMh2Xiq9xN0';
+			this.obj.query = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
