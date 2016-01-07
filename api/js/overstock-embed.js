@@ -677,7 +677,7 @@ function ostk_Widget(atts, element){
 	this.init = function(){
 		var error = null;
 		if(!ostk_isset(ostk_developerId)){
-			error = "Linkshare ID needs to be authenticated."; 
+			error = "LinkShare ID needs to be authenticated."; 
 		}
 
 		if(!error){
@@ -747,9 +747,10 @@ function ostk_Widget(atts, element){
 					error = "category="+this.atts.category+" does not match our given categories, please check it.";
 				} 
 			}else if(this.atts.keywords){
-				keywords = "keywords=" + this.atts.keywords.split(' ').join('%20');
+				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			this.obj.query = "https://api.overstock.com/ads/products?developerid=test&"+keywords+taxonomy+sortOption;
+			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
+			console.log(this.obj.query);
 		}
 
 		if(error){
