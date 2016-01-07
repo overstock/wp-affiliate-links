@@ -27,6 +27,8 @@ function ostk_SingleProductData(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
+				//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
+				ostk_developerId = 'lMh2Xiq9xN0';
 				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";

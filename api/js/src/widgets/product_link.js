@@ -9,13 +9,6 @@ function ostk_ProductDetailsLink(){
 
 	// Generate Html
 	this.initElement = function(){
-		// this.atts = ostk_shortcode_atts(
-		// {
-		// 	'id': null,
-		// 	'display': null,
-		// 	'link_target': 'new_tab'
-		// }, this.atts);
-
 		this.obj = new ostk_SingleProductData();
 
 		this.initObject();
