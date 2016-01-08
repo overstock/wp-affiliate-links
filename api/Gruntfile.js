@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 		less: {
 			css: {
 				src: ['css/src/less/embed-main.less'],
-				dest: 'css/overstock-embed.css'
+				dest: 'dist/overstock-embed.css'
 			}
 		},
 
@@ -42,8 +42,8 @@ module.exports = function(grunt) {
 		//Crappy but needed because the widgets are being put on other peoples sites.
 		css_important: {
 			files: {
-	            src: ['css/overstock-embed.css'],
-	            dest: 'css/overstock-embed.css'
+	            src: ['dist/overstock-embed.css'],
+	            dest: 'dist/overstock-embed.css'
             }
 		},
 
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 					//Fonts
 					'css/src/fonts/*.css',
 					//Compiled CSS
-					'css/overstock-embed.css'
+					'dist/overstock-embed.css'
 				],
 				dest: 'dist/overstock-embed.css'
 			},
@@ -112,8 +112,19 @@ module.exports = function(grunt) {
 			    options: {
 					replacements: [
 						{
+							//Relative img paths for local testing, hardcoded ostk urls for the live build
 							pattern: /dev\/devImages\//ig,
 							replacement: 'http://ak1.ostkcdn.com/img/mxc/'
+						},
+						{
+							//Testing api url to live api url
+							pattern: /api.test.overstock.com/ig,
+							replacement: 'api.overstock.com'
+						},
+						{
+							//Testing mid to live mid
+							pattern: /24513/ig,
+							replacement: '38601'
 						}
 					]
 			    }
@@ -136,11 +147,13 @@ module.exports = function(grunt) {
 		        	//Dev
 		        	'dev/index.html',
 		        	//LESS
-		        	'css/src/less/*',
-		        	//JS
-		        	'js/src/*.js',
-		        	//JSON
-		        	'js/src/*.json'
+		        	'css/src/less/*.less',
+		        	// //JS
+		        	'js/src/functions.js',
+		        	'js/src/overstock-embed.js',
+		        	'js/src/*/*.js',
+		        	// //JSON
+		        	'js/src/json/*.json'
 		        ],
 		        tasks: ['less', 'json'],
 		        options: {

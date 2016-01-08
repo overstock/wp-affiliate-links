@@ -26,7 +26,7 @@ if(typeof(ostk_plugin) == 'undefined'){
 		}	
 	}//for
 
-	var ostk_url = 'https://api.overstock.com';
+	var ostk_url = 'https://api.test.overstock.com';
 	if(
 		typeof(os) !== 'undefined' && 
 		typeof(os.Otags) !== 'undefined' && 

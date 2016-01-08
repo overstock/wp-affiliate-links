@@ -53,7 +53,7 @@ function ostk_generateAffiliateLink(murl){
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+	return 'https://api.test.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
 }//ostk_generateAffiliateLink
 
 function ostk_getTaxonomy(input){
