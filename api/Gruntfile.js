@@ -11,9 +11,15 @@ npm install grunt-contrib-cssmin --save-dev;
 npm install grunt-contrib-concat --save-dev;
 npm install grunt-contrib-uglify --save-dev;
 npm install grunt-contrib-watch --save-dev;
+npm install grunt-string-replace --save-dev;
 
 2) Run the compiler:
 grunt watch
+
+
+2) Run the compiler: (Create css and js files in the dist folder)
+grunt deploy
+
 */
 module.exports = function(grunt) {
 
@@ -67,7 +73,7 @@ module.exports = function(grunt) {
 					//Compiled CSS
 					'css/overstock-embed.css'
 				],
-				dest: 'css/overstock-embed.css'
+				dest: 'dist/overstock-embed.css'
 			},
 			js: {
 				src: [
@@ -84,7 +90,7 @@ module.exports = function(grunt) {
 					//Classes
 					'js/src/classes/*.js'
 				],
-				dest: 'js/overstock-embed.js'
+				dest: 'dist/overstock-embed.js'
 			}
 		},
 
@@ -92,8 +98,25 @@ module.exports = function(grunt) {
 		cssmin: { 
 			compress: {
 	        	files: {
-		          	'css/overstock-embed.min.css': ['css/overstock-embed.css']
+		          	'dist/overstock-embed.min.css': ['dist/overstock-embed.css']
 	        	}
+			}
+		},
+
+		//Replace string for deployment
+		'string-replace': {
+			dist: {
+			    files: {
+					'dist/overstock-embed.js': 'dist/overstock-embed.js'
+			    },
+			    options: {
+					replacements: [
+						{
+							pattern: /dev\/devImages\//ig,
+							replacement: 'http://ak1.ostkcdn.com/img/mxc/'
+						}
+					]
+			    }
 			}
 		},
 
@@ -101,35 +124,47 @@ module.exports = function(grunt) {
 		uglify: {
 			my_target: {
 				files: {
-					'js/overstock-embed.min.js': ['js/overstock-embed.js'] //Minify plugin JS
+					'dist/overstock-embed.min.js': ['dist/overstock-embed.js'] //Minify plugin JS
 				}
 			}
 		},
 
 		//Live Reload
 		watch: {
-	      src: {
-	        files: [
-	        	//LESS
-	        	'css/src/less/*.less',
-	        	'css/src/less/*/*.less',
-	        	//JS
-	        	'js/src/*.js',
-	        	'js/src/*/*.js',
-	        	//JSON
-	        	'js/src/json/*.json'
-	        ],
-	        tasks: ['less', 'css_important', 'json', 'concat', 'cssmin', 'uglify'],
-	        options: {
-	          livereload: true,
-	          port: 9999
-	        }
-	      }
-		}
+			src: {
+		        files: [
+		        	//Dev
+		        	'dev/index.html',
+		        	//LESS
+		        	'css/src/less/*',
+		        	//JS
+		        	'js/src/*.js',
+		        	//JSON
+		        	'js/src/*.json'
+		        ],
+		        tasks: ['less', 'json'],
+		        options: {
+		          livereload: true
+				}
+			}
+		},
+
+		//Create a dev server
+	    connect: {
+			server: {
+				options: {
+					port: 8080,
+					base: './',
+					livereload: true,
+					open: true
+				}
+			}
+	    }
 
 	});
 
 	//Default task
-	grunt.registerTask('default', ['less', 'css_important', 'json', 'concat', 'cssmin', 'uglify']);
-
+	grunt.registerTask('default', ['less', 'json']);
+	grunt.registerTask('deploy', ['css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
+	grunt.registerTask('server', ['connect', 'watch']);
 };

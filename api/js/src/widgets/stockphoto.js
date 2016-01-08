@@ -73,7 +73,7 @@ function ostk_StockPhoto(){
 									if(product.price){
 										output += '<p class="price">'+product.price+'</p>';
 									}
-									output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
+									output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';

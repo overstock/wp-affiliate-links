@@ -118,7 +118,7 @@ function ostk_Carousel(){
 							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 						}
 						output += '<p class="price">'+product.price+'</p>';
-						output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
+						output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
 				output += '</div>';
 			output += '</a>';
 		output += '</li>';
@@ -642,7 +642,7 @@ function ostk_StockPhoto(){
 									if(product.price){
 										output += '<p class="price">'+product.price+'</p>';
 									}
-									output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
+									output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';
@@ -742,9 +742,7 @@ function ostk_Widget(atts, element){
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
-			ostk_developerId = 'lMh2Xiq9xN0';
-			this.obj.query = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
+			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
@@ -832,17 +830,17 @@ function ostk_Widget(atts, element){
 
 		switch(brand){
 			case 'flash-deals':
-				img_url = 'overstock-flash-deals-logo.png';		
+				img_url = 'affiliate-embed-widgets-flash-deals-logo.png';		
 				break;
 			case 'white':
-				img_url = 'overstock-logo-white.png';		
+				img_url = 'affiliate-embed-widgets-ostk-logo-white.png';		
 				break;
 			default:
-				img_url = 'overstock-logo.png';		
+				img_url = 'affiliate-embed-widgets-ostk-logo.png';		
 		}//switch
 
 		output = '<div class="branding">';
-			output += '<img src="'+ostk_api_url+'images/'+img_url+'"/>';
+			output += '<img src="http://ak1.ostkcdn.com/img/mxc/'+img_url+'"/>';
 		output += '</div>';
 
 		return output;
@@ -1368,7 +1366,7 @@ if(typeof(ostk_plugin) == 'undefined'){
 		}	
 	}//for
 
-	var ostk_url = 'https://api.test.overstock.com';
+	var ostk_url = 'https://api.overstock.com';
 	if(
 		typeof(os) !== 'undefined' && 
 		typeof(os.Otags) !== 'undefined' && 
@@ -1376,8 +1374,6 @@ if(typeof(ostk_plugin) == 'undefined'){
 	){
 		ostk_url = os.Otags.api_url;
 	}
-	//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
-	ostk_developerId = 'lMh2Xiq9xN0';
 	var event_list = [
 		{
 			'event': 'flash_deals',
@@ -1567,7 +1563,7 @@ function ostk_Plugin(){
 		$ostk_jQuery('<link>')
 		  .appendTo('head')
 		  .attr({type : 'text/css', rel : 'stylesheet'})
-		  .attr('href', ostk_api_url+'css/overstock-embed.min.css');
+		  .attr('href', ostk_api_url+'dist/overstock-embed.min.css');
 	};//ostk_loadCSS
 
 	this.ostk_preloaders = function(){
@@ -1591,7 +1587,7 @@ function ostk_Plugin(){
 
 		    $ostk_jQuery('<img>')
 		    	.attr({
-		    		src: ostk_api_url+'images/overstock-logo.png',
+		    		src: 'http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png',
 		    		width: 125
 		    	})
 		    	.appendTo(ostk_loader_div);
@@ -1702,9 +1698,7 @@ function ostk_SingleProductData(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
-				//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
-				ostk_developerId = 'lMh2Xiq9xN0';
-				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
+				url = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";
 				}

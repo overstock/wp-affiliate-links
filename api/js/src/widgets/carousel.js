@@ -109,7 +109,7 @@ function ostk_Carousel(){
 							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 						}
 						output += '<p class="price">'+product.price+'</p>';
-						output += '<img class="ostk-logo" src="'+ostk_api_url+'images/overstock-logo.png">';
+						output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
 				output += '</div>';
 			output += '</a>';
 		output += '</li>';

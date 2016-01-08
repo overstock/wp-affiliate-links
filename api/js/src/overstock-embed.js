@@ -26,7 +26,7 @@ if(typeof(ostk_plugin) == 'undefined'){
 		}	
 	}//for
 
-	var ostk_url = 'https://api.test.overstock.com';
+	var ostk_url = 'https://api.overstock.com';
 	if(
 		typeof(os) !== 'undefined' && 
 		typeof(os.Otags) !== 'undefined' && 
@@ -34,8 +34,6 @@ if(typeof(ostk_plugin) == 'undefined'){
 	){
 		ostk_url = os.Otags.api_url;
 	}
-	//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
-	ostk_developerId = 'lMh2Xiq9xN0';
 	var event_list = [
 		{
 			'event': 'flash_deals',
