@@ -60,7 +60,7 @@ function ostk_Plugin(){
 		$ostk_jQuery('<link>')
 		  .appendTo('head')
 		  .attr({type : 'text/css', rel : 'stylesheet'})
-		  .attr('href', ostk_api_url+'css/overstock-embed.min.css');
+		  .attr('href', ostk_api_url+'dist/overstock-embed.min.css');
 	};//ostk_loadCSS
 
 	this.ostk_preloaders = function(){
@@ -84,7 +84,7 @@ function ostk_Plugin(){
 
 		    $ostk_jQuery('<img>')
 		    	.attr({
-		    		src: ostk_api_url+'images/overstock-logo.png',
+		    		src: 'dev/devImages/affiliate-embed-widgets-ostk-logo.png',
 		    		width: 125
 		    	})
 		    	.appendTo(ostk_loader_div);

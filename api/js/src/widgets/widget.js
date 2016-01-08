@@ -84,9 +84,7 @@ function ostk_Widget(atts, element){
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			//TODO: once in production remove this hardcoded ostk_developerId and remove .test from the api url
-			ostk_developerId = 'lMh2Xiq9xN0';
-			this.obj.query = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
+			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
@@ -174,17 +172,17 @@ function ostk_Widget(atts, element){
 
 		switch(brand){
 			case 'flash-deals':
-				img_url = 'overstock-flash-deals-logo.png';		
+				img_url = 'affiliate-embed-widgets-flash-deals-logo.png';		
 				break;
 			case 'white':
-				img_url = 'overstock-logo-white.png';		
+				img_url = 'affiliate-embed-widgets-ostk-logo-white.png';		
 				break;
 			default:
-				img_url = 'overstock-logo.png';		
+				img_url = 'affiliate-embed-widgets-ostk-logo.png';		
 		}//switch
 
 		output = '<div class="branding">';
-			output += '<img src="'+ostk_api_url+'images/'+img_url+'"/>';
+			output += '<img src="dev/devImages/'+img_url+'"/>';
 		output += '</div>';
 
 		return output;
