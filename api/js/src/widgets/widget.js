@@ -84,7 +84,7 @@ function ostk_Widget(atts, element){
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
+			this.obj.query = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){

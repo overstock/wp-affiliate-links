@@ -260,6 +260,7 @@
 
 .ostk-element .ostk-element-inner {
   border: solid 1px #c80f2e !important;
+  border: solid 5px green !important;
   position: relative !important;
   overflow: hidden !important;
   height: 100% !important;
