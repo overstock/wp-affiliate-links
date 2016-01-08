@@ -21,7 +21,11 @@ function ostk_Carousel(){
 			this.obj.muliProduct = true;
 		}
 
-		this.initObject();
+		var _this = this;
+		//TODO: make this call only once
+		$ostk_jQuery.getScript( 'https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.0/jquery.flexslider.min.js', function( data, textStatus, jqxhr ) {
+			_this.initObject();
+		});
 
 	};//initElement
 

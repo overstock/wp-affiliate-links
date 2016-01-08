@@ -10,13 +10,10 @@ function ostk_Plugin(){
 	};//constructor
 
 	this.ostk_check_jquery = function(){
+		var _this = this;
 		if(typeof jQuery == 'undefined'){
 			this.ostk_get_script('http://code.jquery.com/jquery-2.1.4.min.js', function() {
-				if(typeof jQuery=='undefined'){
-					// Super failsafe - still somehow failed...
-				}else{
-					this.ostk_init_elements();
-				}
+				_this.ostk_init_elements();
 			});
 		} else { // jQuery was already loaded	
 			this.ostk_init_elements();
