@@ -77,10 +77,6 @@ module.exports = function(grunt) {
 			},
 			js: {
 				src: [
-					//Libraries
-					'js/src/libs/jquery.min.js',
-					'js/src/libs/flexslider.min.js',
-
 					//Widgets
 					'js/src/widgets/*.js',
 

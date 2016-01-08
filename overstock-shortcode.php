@@ -74,19 +74,15 @@ function ostk_load_js() {
     $ostk_scripts = [];
 
     /* Initialize the plugin */
-    wp_enqueue_script( 'ostk-plugin', plugins_url('plugin/js/src/plugin.js', __FILE__), array('jquery'), '1.0', true );
+    array_push($ostk_scripts, 'plugin/js/src/plugin.js');
 
-    // Live API
-    // https://rawgithub.com/overstock/wp-affiliate-links/master/api/
- 
-    // Local API
-    array_push($ostk_scripts, 'api/js/overstock-embed.min.js?id='.$GLOBALS['developerId']);
+    wp_enqueue_script( 'ostk-embed-widget', 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/dist/overstock-embed.min.js?id='.$GLOBALS['developerId'], array('jquery'), '1.0', true );
 
     //Functions
     array_push($ostk_scripts, 'plugin/js/src/functions.js');
 
     //Class
-    array_push($ostk_scripts, 'plugin/js/src/classes/documentation');
+    array_push($ostk_scripts, 'plugin/js/src/classes/documentation.js');
 
     $ostk_pageJs;
     // Page specific JS
