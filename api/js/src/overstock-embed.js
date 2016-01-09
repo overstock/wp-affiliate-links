@@ -9,11 +9,7 @@ if(typeof(ostk_plugin) == 'undefined'){
 
 	var ostk_clickurl = window.location.href;
 
-	var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
-	//Localhost for testing
-	if(ostk_clickurl.indexOf('http://localhost/~thoki') > -1){
-		ostk_api_url = 'http://localhost/~thoki/overstock-affiliate-links/trunk/api/';
-	}
+	var ostk_api_url = 'http://localhost:8080/';
 
 	var scripts = document.getElementsByTagName('script');
 

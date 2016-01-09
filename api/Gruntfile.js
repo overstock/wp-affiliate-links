@@ -121,7 +121,13 @@ module.exports = function(grunt) {
 							//Testing mid to live mid
 							pattern: /24513/ig,
 							replacement: '38601'
+						},
+						{
+							//Local api to production api
+							pattern: /http:\/\/localhost:8080\//ig,
+							replacement: 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/'
 						}
+
 					]
 			    }
 			}
@@ -151,7 +157,7 @@ module.exports = function(grunt) {
 		        	// //JSON
 		        	'js/src/json/*.json'
 		        ],
-		        tasks: ['less', 'json'],
+		        tasks: ['less', 'json', 'concat', 'cssmin'],
 		        options: {
 		          livereload: true
 				}
@@ -173,7 +179,7 @@ module.exports = function(grunt) {
 	});
 
 	//Default task
-	grunt.registerTask('default', ['less', 'json']);
+	grunt.registerTask('default', ['less', 'json', 'concat', 'cssmin']);
 	grunt.registerTask('deploy', ['css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
 	grunt.registerTask('server', ['connect', 'watch']);
 };
