@@ -113,7 +113,7 @@ function ostk_Carousel(){
 							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 						}
 						output += '<p class="price">'+product.price+'</p>';
-						output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
+						output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
 				output += '</div>';
 			output += '</a>';
 		output += '</li>';
@@ -637,7 +637,7 @@ function ostk_StockPhoto(){
 									if(product.price){
 										output += '<p class="price">'+product.price+'</p>';
 									}
-									output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
+									output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';
@@ -737,7 +737,7 @@ function ostk_Widget(atts, element){
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			this.obj.query = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
+			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
@@ -835,7 +835,7 @@ function ostk_Widget(atts, element){
 		}//switch
 
 		output = '<div class="branding">';
-			output += '<img src="dev/devImages/'+img_url+'"/>';
+			output += '<img src="http://ak1.ostkcdn.com/img/mxc/'+img_url+'"/>';
 		output += '</div>';
 
 		return output;
@@ -965,7 +965,7 @@ function ostk_generateAffiliateLink(murl){
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.test.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+	return 'https://api.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
 }//ostk_generateAffiliateLink
 
 function ostk_getTaxonomy(input){
@@ -1344,7 +1344,7 @@ if(typeof(ostk_plugin) == 'undefined'){
 
 	var ostk_clickurl = window.location.href;
 
-	var ostk_api_url = 'http://localhost:8080/';
+	var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
 
 	var scripts = document.getElementsByTagName('script');
 
@@ -1357,7 +1357,7 @@ if(typeof(ostk_plugin) == 'undefined'){
 		}	
 	}//for
 
-	var ostk_url = 'https://api.test.overstock.com';
+	var ostk_url = 'https://api.overstock.com';
 	if(
 		typeof(os) !== 'undefined' && 
 		typeof(os.Otags) !== 'undefined' && 
@@ -1575,7 +1575,7 @@ function ostk_Plugin(){
 
 		    $ostk_jQuery('<img>')
 		    	.attr({
-		    		src: 'dev/devImages/affiliate-embed-widgets-ostk-logo.png',
+		    		src: 'http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png',
 		    		width: 125
 		    	})
 		    	.appendTo(ostk_loader_div);
@@ -1686,7 +1686,7 @@ function ostk_SingleProductData(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
-				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
+				url = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";
 				}

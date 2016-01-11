@@ -180,6 +180,6 @@ module.exports = function(grunt) {
 
 	//Default task
 	grunt.registerTask('default', ['less', 'json', 'concat', 'cssmin']);
-	grunt.registerTask('deploy', ['css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
+	grunt.registerTask('deploy', ['less', 'json',  'css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
 	grunt.registerTask('server', ['connect', 'watch']);
 };
