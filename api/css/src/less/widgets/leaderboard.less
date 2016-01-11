@@ -29,9 +29,8 @@
           }
         }
         .product-image {
-          padding: 5px;
           float: left;
-          margin: 0;
+          margin: 0 5px;
           max-height: 70px;
         }
       }
@@ -223,7 +222,7 @@
       width: 320px;
       height: 50px;
       .ostk-element-content {
-        padding: 0;
+        padding: 2px 0 0 0;
         margin: 2px;
         height: 43px;
         width: 183px;
@@ -231,13 +230,14 @@
           p {
             &.title {
               font-size: 12px;
-              padding-bottom: 3px;
-              margin-bottom: 3px;
+              padding-top: 3px;
             }
             &.price {
               float: left;
-              padding-right: 3px;
+              border-right: solid 1px @grey-lt;
+              padding-right: 5px;
               margin-right: 3px;
+              margin-top: 3px;
             }
             &.price,
             &.savings {
@@ -260,6 +260,19 @@
     }
     &.flash-deals {
       .ostk-element-inner {
+        .ostk-element-content {
+          .product-info {
+            p {
+              &.title {
+                margin: 0;
+                padding-bottom: 0px;
+              }
+              &.price {
+                border: none;
+              }
+            }
+          }
+        }
         .ostk-element-footer {
           .branding {
             padding: 4px;

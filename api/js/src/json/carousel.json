@@ -5,7 +5,7 @@
     "example_shortcodes": [
         {
             "type": "carousel",
-            "product_ids": "9659704,6753542,5718385,5735179",
+            "category": "Home & Garden",
             "width": "400px"
         }
     ],

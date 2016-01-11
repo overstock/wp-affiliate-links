@@ -5,7 +5,7 @@
     "example_shortcodes": [
         {
             "type": "stock_photo",
-            "id": "8859234",
+            "category": "Home & Garden",
             "width": "300px"
         }
     ],

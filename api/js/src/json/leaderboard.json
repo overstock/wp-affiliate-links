@@ -7,7 +7,7 @@
     "example_shortcodes": [
         {
             "type": "leaderboard",
-            "product_ids": "9747008"
+            "category": "Home & Garden"
         }
     ],
     "required_attributes": [
