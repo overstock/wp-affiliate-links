@@ -158,7 +158,7 @@ module.exports = function(grunt) {
 		        	// //JSON
 		        	'js/src/json/*.json'
 		        ],
-		        tasks: ['less', 'json', 'concat', 'cssmin'],
+		        tasks: ['less', 'json',  'css_important', 'concat', 'cssmin', 'string-replace', 'uglify'],
 		        options: {
 		          livereload: true
 				}
@@ -180,7 +180,6 @@ module.exports = function(grunt) {
 	});
 
 	//Default task
-	grunt.registerTask('default', ['less', 'json', 'concat', 'cssmin']);
-	grunt.registerTask('deploy', ['less', 'json',  'css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
+	grunt.registerTask('default', ['less', 'json',  'css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
 	grunt.registerTask('server', ['connect', 'watch']);
 };
