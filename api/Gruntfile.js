@@ -150,6 +150,7 @@ module.exports = function(grunt) {
 		        	'dev/index.html',
 		        	//LESS
 		        	'css/src/less/*.less',
+		        	'css/src/less/*/*.less',
 		        	// //JS
 		        	'js/src/functions.js',
 		        	'js/src/overstock-embed.js',

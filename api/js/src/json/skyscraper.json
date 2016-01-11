@@ -5,7 +5,7 @@
     "example_shortcodes": [
         {
             "type": "skyscraper",
-            "product_ids": "8641092, 9547029",
+            "category": "Home & Garden",
             "width": "160px"
         }
     ],
