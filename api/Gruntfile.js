@@ -147,7 +147,7 @@ module.exports = function(grunt) {
 			src: {
 		        files: [
 		        	//Dev
-		        	'dev/index.html',
+		        	'index.html',
 		        	//LESS
 		        	'css/src/less/*.less',
 		        	'css/src/less/*/*.less',

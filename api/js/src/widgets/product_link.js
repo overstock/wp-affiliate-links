@@ -11,7 +11,7 @@ function ostk_ProductDetailsLink(){
 	this.initElement = function(){
 		this.obj = new ostk_SingleProductData();
 
-		this.initObject();
+		this.generateHtml();
 	};//initElement
 
 	// Generate Html
