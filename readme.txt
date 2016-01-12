@@ -1,5 +1,5 @@
 === Overstock Affiliate Links ===
-Contributors: reiftauati, travishoki
+Contributors: OverstockAPI, travishoki, reiftauati
 Tested up to: 4.3.1
 Stable tag: 1.1
 Tags: overstock, affiliate, affiliates, affiliate integration, deeplink, affiliate links in post, affiliate posts, affiliate post, e-commerce, affiliate marketing, ads, WP e-commerce, wordpress affiliate, wordpress affiliate shortcode, wordpress affiliate plugin, linkshare, widget, shortcode, shortcode plugin, shortcode widget, sidebar widget, affiliate advertising, ad embed, embeddable ad, skyscraper, leaderboard
