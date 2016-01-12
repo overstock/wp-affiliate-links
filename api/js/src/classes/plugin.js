@@ -143,9 +143,6 @@ function ostk_Plugin(){
 				case 'product_link':
 					item = new ostk_ProductDetailsLink();
 					break;
-				case 'sample_data':
-					item = new ostk_SampleData();
-					break;
 				default:
 					is_widget = false;
 			}//switch

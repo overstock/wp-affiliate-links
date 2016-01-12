@@ -1,14 +1,3 @@
-function l(key, value){
-	if(typeof value !== 'undefined'){
-		console.log(key+': '+value);
-	}else{
-		console.log(key);
-	}
-}
-function d(obj){
-	console.dir(obj);
-}
-
 function ostk_searchURLForParam(url, str){
 	if(url.indexOf("?") > -1 && url.indexOf(str)){
 		var params = url.split('?')[1];
