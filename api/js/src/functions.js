@@ -205,7 +205,7 @@ function ostk_areAttributesValid(atts){
 	if(!error){
 		var missingRequiredAtts = ostk_lookForMissingRequiredAttributes(atts, required_attributes);
 		if(missingRequiredAtts.length > 0){
-			error = 'Missing required attributes: ' + missingRequiredAtts.join(', ');
+			error = 'Missing required attributes: ' + ostk_array_to_list_string(missingRequiredAtts, '&');
 		}
 	}
 
@@ -213,7 +213,7 @@ function ostk_areAttributesValid(atts){
 	if(!error){
 		var invalidExtraAtts = ostk_lookForInvalidAtts(atts, required_attributes, optional_attributes);
 		if(invalidExtraAtts.length > 0){
-			error = 'The following are not valid attributes: ' + invalidExtraAtts.join(', ');
+			error = 'The following are not valid attributes: ' + ostk_array_to_list_string(invalidExtraAtts, '&');
 		}
 	}
 
@@ -234,20 +234,22 @@ function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
 		var ra = required_attributes[i];
 		var key = ra['name'];
 		if(!atts[key]){
-			//if the missing attribute has options
-			if(ra['options']){
+			//if the missing attribute has options that are objects
+			if(ra['options'] && typeof(ra['options'][0]['name']) != 'undefined'){
 				var option_fulfilled = false;
 				//Loop through missing attributes' options
 				for(var k = 0 ; k < ra['options'].length ; k++){
-					var option_key = ra['options'][k]['name'];
-					//if one of the options is included in the atts
+					var option_key = '';
+					option_key = ra['options'][k]['name'];
 					if(atts[option_key]){
 						option_fulfilled = true;
 					}
 				}//for
 				if(!option_fulfilled){
 					//None of the options where fullfilled
-					missing_atts.push('(' + ostk_getListByKey(ra['options'], 'name').join(' or ') + ')');
+					var missing_options_list = ostk_getListByKey(ra['options'], 'name');
+					var missing_options_string = ostk_array_to_list_string(missing_options_list, 'or');
+					missing_atts.push('(' +  missing_options_string + ')');
 				}
 			}else{
 				//Missing attribute doesn't have options so push it ot the missing array
@@ -410,3 +412,17 @@ function ostk_array_key_exists(key, search) {
   }
   return key in search;
 }//ostk_array_key_exists
+
+/* Return a string given an array that is comma seperated with an or clause */
+function ostk_array_to_list_string(a, deliminator){
+  switch(a.length){
+    case 0:
+      return '';
+    case 1:
+      return a[0];
+    case 2:
+      return a.join(' '+deliminator+' ');
+    default:
+      return a.slice(0, a.length-1).join(', ') + ', '+deliminator+' ' + a[a.length-1];
+  }//switch
+}//ostk_array_to_and_list_string
