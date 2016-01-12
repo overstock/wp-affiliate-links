@@ -47,7 +47,10 @@ function ostk_Leaderboard(){
 
 						    output += '<div class="product-info">';
 								output += '<p class="title">'+product.name+'</p>';
-								if(!ostk_isset(this.atts.event)){
+
+								if(ostk_isset(this.atts.event)){
+									output += '<hr>';
+								}else{
 									if(this.atts.version !== 'mini' && this.atts.version !== 'mobile'){
 										output += '<p class="description">'+product.description+'</p>';
 									}

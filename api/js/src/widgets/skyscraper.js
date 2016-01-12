@@ -41,7 +41,9 @@ function ostk_Skyscraper(){
 
 							output += '<p class="title">'+product.name+'</p>';
 
-							if(!ostk_isset(this.atts.event)){
+							if(ostk_isset(this.atts.event)){
+								output += '<hr>';
+							}else {
 								if(product.averageReviewAsGif){
 									output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
 								}

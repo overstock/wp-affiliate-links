@@ -229,7 +229,10 @@ function ostk_Leaderboard(){
 
 						    output += '<div class="product-info">';
 								output += '<p class="title">'+product.name+'</p>';
-								if(!ostk_isset(this.atts.event)){
+
+								if(ostk_isset(this.atts.event)){
+									output += '<hr>';
+								}else{
 									if(this.atts.version !== 'mini' && this.atts.version !== 'mobile'){
 										output += '<p class="description">'+product.description+'</p>';
 									}
@@ -364,7 +367,9 @@ function ostk_Rectangle(){
 					//Sales Event
 					output += '<div class="product-info">';
 						output += '<p class="title">'+this.obj.name+'</p>';
+
 						if(this.atts.event == 'flash_deals'){
+							output += '<hr>';
 							if(ostk_isset(this.obj.price)){
 								output += '<p class="price">$'+this.obj.price+'</p>';
 							}
@@ -502,7 +507,9 @@ function ostk_Skyscraper(){
 
 							output += '<p class="title">'+product.name+'</p>';
 
-							if(!ostk_isset(this.atts.event)){
+							if(ostk_isset(this.atts.event)){
+								output += '<hr>';
+							}else {
 								if(product.averageReviewAsGif){
 									output += '<img src="'+product.getAverageReviewAsGif()+'"/>';
 								}
