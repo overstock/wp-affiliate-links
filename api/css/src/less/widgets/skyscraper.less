@@ -10,11 +10,10 @@
       .ostk-element-content {
         height: 280px;
         p {
-          text-align: center;
           &.title {
-            .truncate;
-            margin-bottom: 10px;
+            .clamp-text(13px, 16px, 2);
           }
+          text-align: center;
         }
         img {
           display: block;
@@ -38,6 +37,9 @@
         .ostk-element-content {
           height: 235px;
           p {
+            &.title {
+              text-align: left;
+            }
             &.price {
               text-align: left;
             }

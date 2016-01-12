@@ -17,13 +17,17 @@
       .ostk-element-content {
         padding: 7px 0px;
         .product-info {
+          margin: 0 10px;
+          hr {
+            margin: 0 3px;
+          }
           p {
             text-align: left;
             &.title {
-              .truncate;
+              .truncate();
             }
             &.description {
-              .truncate;
+              .truncate();
               font-size: 12px;
             }
           }
@@ -139,8 +143,6 @@
           p {
             &.title {
               font-size: 14px;
-              padding-bottom: 3px;
-              margin-bottom: 3px;
             }
             &.price {
               float: left;

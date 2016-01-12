@@ -285,6 +285,14 @@
   outline: 0 !important;
 }
 
+.ostk-element .ostk-element-inner hr {
+  display: block !important;
+  height: 1px !important;
+  border: 0 !important;
+  border-top: solid 1px #aaaaaa !important;
+  margin: 5px 0 !important;
+}
+
 .ostk-element .ostk-element-inner p {
   color: #000000 !important;
 }
@@ -361,19 +369,10 @@
   color: #c80f2e !important;
 }
 
-.ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info {
-  padding-right: 10px !important;
-}
-
 .ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.title {
   font-size: 16px !important;
   margin-bottom: 5px !important;
-  padding-bottom: 5px !important;
-  border-bottom: solid 1px #aaaaaa !important;
   color: #000000 !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
 }
 
 .ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.description {
@@ -758,6 +757,14 @@
   padding: 7px 0px !important;
 }
 
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info {
+  margin: 0 10px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info hr {
+  margin: 0 3px !important;
+}
+
 .ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p {
   text-align: left !important;
 }
@@ -883,8 +890,6 @@
 
 .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.title {
   font-size: 14px !important;
-  padding-bottom: 3px !important;
-  margin-bottom: 3px !important;
 }
 
 .ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price {
@@ -1022,6 +1027,20 @@
   /* sales-event */
 }
 
+.ostk-element.ostk-rectangle .ostk-element-content .product-info p.title {
+  font-size: 13px !important;
+  line-height: 16px !important;
+  height: 48px !important;
+  /* Fallback for non-webkit */
+  display: block !important;
+  /* Fallback for non-webkit */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
 .ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay {
   -webkit-opacity: 1 !important;
   -moz-opacity: 1 !important;
@@ -1088,10 +1107,17 @@
 }
 
 .ostk-element.ostk-skyscraper .ostk-element-inner .item-holder .ostk-element-content p.title {
-  white-space: nowrap !important;
+  font-size: 13px !important;
+  line-height: 16px !important;
+  height: 32px !important;
+  /* Fallback for non-webkit */
+  display: block !important;
+  /* Fallback for non-webkit */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
-  margin-bottom: 10px !important;
 }
 
 .ostk-element.ostk-skyscraper .ostk-element-inner .item-holder .ostk-element-content img {
@@ -1110,6 +1136,10 @@
 
 .ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content {
   height: 235px !important;
+}
+
+.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content p.title {
+  text-align: left !important;
 }
 
 .ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content p.price {
