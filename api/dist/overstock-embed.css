@@ -550,6 +550,7 @@
 }
 
 .ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li {
+  padding: 0 !important;
   position: relative !important;
 }
 

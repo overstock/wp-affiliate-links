@@ -6,7 +6,7 @@
         {
             "type": "product_link",
             "display": "name",
-            "id": "8859234"
+            "id": "9747008"
         }
     ],
     "required_attributes": [
@@ -15,7 +15,7 @@
         },
         {
             "name": "id",
-            "example": "10234427",
+            "example": "9747008",
             "description": "Choose an attribute to display"
         },
         {
