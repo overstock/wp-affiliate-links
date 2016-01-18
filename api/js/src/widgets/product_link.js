@@ -11,23 +11,23 @@ function ostk_ProductDetailsLink(){
 	this.initElement = function(){
 		this.obj = new ostk_SingleProductData();
 
-		this.generateHtml();
+		this.initObject();
 	};//initElement
 
 	// Generate Html
 	this.generateHtml = function(){
 		var output = '';
-				switch (this.atts.display) {
-					case 'name':
-						output = this.obj.name;
-						break;
-					case "price":
-						output = this.obj.price;
-						break;
-					case 'description':
-						output = this.obj.description;
-						break;
-				}//switch
+		switch (this.atts.display) {
+			case 'name':
+				output = this.obj.name;
+				break;
+			case "price":
+				output = this.obj.price;
+				break;
+			case 'description':
+				output = this.obj.description;
+				break;
+		}//switch
 		output = '<a href="'+this.obj.getAffiliateUrl()+'" class="ostk-element ostk-product-link" '+ostk_getLinkTarget(this.atts)+'>'+output+'</a>';
 		this.renderHTML(output);
 	}//generateHtml
