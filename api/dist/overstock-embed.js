@@ -1321,8 +1321,6 @@ if(typeof(ostk_plugin) == 'undefined'){
 
 	var ostk_clickurl = window.location.href;
 
-	var ostk_api_url = 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/';
-
 	var scripts = document.getElementsByTagName('script');
 
 	for(var i = 0 ; i < scripts.length ; i++){
@@ -1527,7 +1525,7 @@ function ostk_Plugin(){
 		$ostk_jQuery('<link>')
 		  .appendTo('head')
 		  .attr({type : 'text/css', rel : 'stylesheet'})
-		  .attr('href', ostk_api_url+'dist/overstock-embed.min.css');
+		  .attr('href', 'http://www.overstock.com/css/affiliate-link-plugin/api.min.css');
 	};//ostk_loadCSS
 
 	this.ostk_preloaders = function(){
