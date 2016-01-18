@@ -9,8 +9,6 @@ if(typeof(ostk_plugin) == 'undefined'){
 
 	var ostk_clickurl = window.location.href;
 
-	var ostk_api_url = 'http://localhost:8080/';
-
 	var scripts = document.getElementsByTagName('script');
 
 	for(var i = 0 ; i < scripts.length ; i++){

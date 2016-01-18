@@ -123,9 +123,9 @@ module.exports = function(grunt) {
 							replacement: '38601'
 						},
 						{
-							//Local api to production api
-							pattern: /http:\/\/localhost:8080\//ig,
-							replacement: 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/'
+							//Local api css to production api
+							pattern: /http:\/\/localhost:8080\/dist\/overstock-embed.min.css/ig,
+							replacement: 'http://www.overstock.com/css/affiliate-link-plugin/api.min.css'
 						}
 
 					]
