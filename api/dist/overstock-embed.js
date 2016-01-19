@@ -902,10 +902,6 @@ function ostk_getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }//ostk_getRandomInt
 
-function ostk_addTrackingToUrl(url){
-	return url + '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
-};//ostk_addTrackingToUrl
-
 function ostk_getTimeDiff(dealEndTime){
 	var endTime = new Date(dealEndTime);
 	var currentTime = new Date();
@@ -921,11 +917,16 @@ function ostk_make_two_digits(int){
 }//ostk_make_two_digits
 
 function ostk_generateAffiliateLink(murl){
+	console.log('-- ostk_generateAffiliateLink --');
 	var symbol = '?';
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+	return 'https://api.overstock.com/ads/deeplink'
+	+ '?id='+ostk_developerId
+	+ '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl
+	+ '&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+
 }//ostk_generateAffiliateLink
 
 function ostk_getTaxonomy(input){
@@ -1397,7 +1398,6 @@ function ostk_MultiProductData(){
 			if(this.limit !== null){
 				this.query += '&limit=' + this.limit;
 			}
-			this.query = ostk_addTrackingToUrl(this.query);	
 
 			$ostk_jQuery.get( this.query, function( productData ){
 				if(productData.products && productData.products.length > 0){
@@ -1664,7 +1664,6 @@ function ostk_SingleProductData(){
 			}else if(this.query){
 				url = this.query;
 			}
-			url = ostk_addTrackingToUrl(url);	
 			$ostk_jQuery.get( url, function( productData ){
 				var error = null;
 
@@ -1715,6 +1714,7 @@ function ostk_SingleProductData(){
 		}else if(productData.saleURL){
 			this.affiliateUrl = productData.saleURL;
 		}
+		this.affiliateUrl += '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
 
 		if(productData.review){
 			if(productData.review.stars){

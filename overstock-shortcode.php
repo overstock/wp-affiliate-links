@@ -73,24 +73,27 @@ function ostk_load_js() {
 
     $ostk_scripts = [];
 
-    /* Initialize the plugin */
-    array_push($ostk_scripts, 'plugin/js/src/plugin.js');
+    //Initialize the plugin
+    array_push($ostk_scripts, 'plugin/js/plugin.js');
 
-    wp_enqueue_script( 'ostk-embed-widget', 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/dist/overstock-embed.min.js?id='.$GLOBALS['developerId'], array('jquery'), '1.0', true );
+    //Widgets Embed
+    // wp_enqueue_script( 'ostk-embed-widget', 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/dist/overstock-embed.min.js?id='.$GLOBALS['developerId'], array('jquery'), '1.0', true );
+    wp_enqueue_script( 'ostk-embed-widget', 'http://www.overstock.com/js/affiliate-link-plugin/api.min.js?id='.$GLOBALS['developerId'], array('jquery'), '1.0', true );
+
+
 
     //Functions
-    array_push($ostk_scripts, 'plugin/js/src/functions.js');
-
-    //Class
-    array_push($ostk_scripts, 'plugin/js/src/classes/documentation.js');
+    array_push($ostk_scripts, 'plugin/js/functions.js');
 
     $ostk_pageJs;
     // Page specific JS
     switch($_REQUEST['page']){
         case 'ostk-documentation':
+            array_push($ostk_scripts, 'plugin/js/classes/documentation.js');
             $ostk_pageJs = 'page-documentation';
             break;      
         case 'ostk-generator':
+            array_push($ostk_scripts, 'plugin/js/classes/documentation.js');
             $ostk_pageJs = 'page-generator';
             break;      
         case 'ostk-home':
@@ -98,7 +101,7 @@ function ostk_load_js() {
             break;
     }//switch
     if(isset($ostk_pageJs)){
-        array_push($ostk_scripts, 'plugin/js/src/pages/'.$ostk_pageJs.'.js');
+        array_push($ostk_scripts, 'plugin/js/pages/'.$ostk_pageJs.'.js');
     }
 
     for($i = 0 ; $i < count($ostk_scripts) ; $i ++){

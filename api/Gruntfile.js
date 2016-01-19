@@ -16,10 +16,6 @@ npm install grunt-string-replace --save-dev;
 2) Run the compiler:
 grunt watch
 
-
-2) Run the compiler: (Create css and js files in the dist folder)
-grunt deploy
-
 */
 module.exports = function(grunt) {
 

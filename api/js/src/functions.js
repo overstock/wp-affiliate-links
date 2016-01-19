@@ -19,10 +19,6 @@ function ostk_getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }//ostk_getRandomInt
 
-function ostk_addTrackingToUrl(url){
-	return url + '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
-};//ostk_addTrackingToUrl
-
 function ostk_getTimeDiff(dealEndTime){
 	var endTime = new Date(dealEndTime);
 	var currentTime = new Date();
@@ -38,11 +34,16 @@ function ostk_make_two_digits(int){
 }//ostk_make_two_digits
 
 function ostk_generateAffiliateLink(murl){
+	console.log('-- ostk_generateAffiliateLink --');
 	var symbol = '?';
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.test.overstock.com/ads/deeplink?id='+ostk_developerId+'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+	return 'https://api.test.overstock.com/ads/deeplink'
+	+ '?id='+ostk_developerId
+	+ '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl
+	+ '&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+
 }//ostk_generateAffiliateLink
 
 function ostk_getTaxonomy(input){
