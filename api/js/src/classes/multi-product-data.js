@@ -28,7 +28,6 @@ function ostk_MultiProductData(){
 			if(this.limit !== null){
 				this.query += '&limit=' + this.limit;
 			}
-			this.query = ostk_addTrackingToUrl(this.query);	
 
 			$ostk_jQuery.get( this.query, function( productData ){
 				if(productData.products && productData.products.length > 0){

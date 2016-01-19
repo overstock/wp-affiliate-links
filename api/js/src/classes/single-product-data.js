@@ -34,7 +34,6 @@ function ostk_SingleProductData(){
 			}else if(this.query){
 				url = this.query;
 			}
-			url = ostk_addTrackingToUrl(url);	
 			$ostk_jQuery.get( url, function( productData ){
 				var error = null;
 
@@ -85,6 +84,7 @@ function ostk_SingleProductData(){
 		}else if(productData.saleURL){
 			this.affiliateUrl = productData.saleURL;
 		}
+		this.affiliateUrl += '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl;
 
 		if(productData.review){
 			if(productData.review.stars){
