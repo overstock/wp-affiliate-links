@@ -1,17 +1,4 @@
 @font-face {
-    font-family: helvetica-neue-bold;
-    src: url(../fonts/helvetica-neue-bold.ttf);
-}
-@font-face {
-    font-family: helvetica-neue;
-    src: url(../fonts/helvetica-neue.ttf);
-}
-@font-face {
-    font-family: helvetica-neue-thin;
-    src: url(../fonts/helvetica-neue-thin.otf);
-}
-
-@font-face {
 	font-family:"overstock-icon-font";
 	src:url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.eot");
 	src:url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.eot?#iefix") format("embedded-opentype"),
