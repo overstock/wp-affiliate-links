@@ -70,12 +70,12 @@ function ostk_Carousel(){
 					output +=  '<div class="custom-navigation count-'+productList.length+'">';
 						output += '<a href="#" class="flex-prev">';
 							output += '<div class="ostk-arrow">';
-								output += '<i class="fa fa-chevron-left"></i>';
+								output += '<i class="os-icon os-icon-chevron-left"></i>';
 							output += '</div>';
 						output += '</a>';
 						output += '<a href="#" class="flex-next">';
 							output += '<div class="ostk-arrow">';
-								output += '<i class="fa fa-chevron-right"></i>';
+								output += '<i class="os-icon os-icon-chevron-right"></i>';
 							output += '</div>';
 						output += '</a>';
 						output += '<div class="custom-controls-container"></div>';
@@ -1325,10 +1325,15 @@ if(typeof(ostk_plugin) == 'undefined'){
 	var scripts = document.getElementsByTagName('script');
 
 	for(var i = 0 ; i < scripts.length ; i++){
-		if(scripts[i].src.indexOf("overstock-embed") > -1){
+		if(
+		//TODO: overstock-embed needs to be deprecated at some point
+		scripts[i].src.indexOf("overstock-embed") > -1 ||
+		scripts[i].src.indexOf("affiliate-link-plugin/api") > -1
+		){
 			var id_value = ostk_searchURLForParam(scripts[i].src, 'id');
 			if(id_value){
 				ostk_developerId = id_value;
+				break;
 			}
 		}	
 	}//for

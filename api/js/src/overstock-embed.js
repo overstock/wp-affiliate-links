@@ -12,10 +12,15 @@ if(typeof(ostk_plugin) == 'undefined'){
 	var scripts = document.getElementsByTagName('script');
 
 	for(var i = 0 ; i < scripts.length ; i++){
-		if(scripts[i].src.indexOf("overstock-embed") > -1){
+		if(
+		//TODO: overstock-embed needs to be deprecated at some point
+		scripts[i].src.indexOf("overstock-embed") > -1 ||
+		scripts[i].src.indexOf("affiliate-link-plugin/api") > -1
+		){
 			var id_value = ostk_searchURLForParam(scripts[i].src, 'id');
 			if(id_value){
 				ostk_developerId = id_value;
+				break;
 			}
 		}	
 	}//for
