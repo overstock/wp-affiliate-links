@@ -70,12 +70,12 @@ function ostk_Carousel(){
 					output +=  '<div class="custom-navigation count-'+productList.length+'">';
 						output += '<a href="#" class="flex-prev">';
 							output += '<div class="ostk-arrow">';
-								output += '<i class="fa fa-chevron-left"></i>';
+								output += '<i class="os-icon os-icon-chevron-left"></i>';
 							output += '</div>';
 						output += '</a>';
 						output += '<a href="#" class="flex-next">';
 							output += '<div class="ostk-arrow">';
-								output += '<i class="fa fa-chevron-right"></i>';
+								output += '<i class="os-icon os-icon-chevron-right"></i>';
 							output += '</div>';
 						output += '</a>';
 						output += '<div class="custom-controls-container"></div>';

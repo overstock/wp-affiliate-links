@@ -52,3 +52,40 @@
 	text-overflow: ellipsis;
 
 }
+
+/* Overstock Icons
+--------------------------------------------------*/
+.os-icon:before {
+	font-family:"overstock-icon-font";
+	display:inline-block;
+	vertical-align:middle;
+	line-height:1;
+	font-weight:normal;
+	font-style:normal;
+	speak:none;
+	text-decoration:inherit;
+	text-transform:none;
+	text-rendering:auto;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+.os-icon-mixin-chevron-left() {
+	&:before {
+		content:"\f122";
+	}
+	
+}
+.os-icon-chevron-left{
+ 	.os-icon-mixin-chevron-left();
+}
+
+.os-icon-mixin-chevron-right() {
+	&:before {
+		content:"\f123";
+	}
+	
+}
+.os-icon-chevron-right{
+ 	.os-icon-mixin-chevron-right();
+}
