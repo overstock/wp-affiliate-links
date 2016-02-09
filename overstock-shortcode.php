@@ -77,10 +77,7 @@ function ostk_load_js() {
     array_push($ostk_scripts, 'plugin/js/plugin.js');
 
     //Widgets Embed
-    // wp_enqueue_script( 'ostk-embed-widget', 'https://rawgithub.com/overstock/wp-affiliate-links/master/api/dist/overstock-embed.min.js?id='.$GLOBALS['developerId'], array('jquery'), '1.0', true );
     wp_enqueue_script( 'ostk-embed-widget', 'http://www.overstock.com/js/affiliate-link-plugin/api.min.js?id='.$GLOBALS['developerId'], array('jquery'), '1.0', true );
-
-
 
     //Functions
     array_push($ostk_scripts, 'plugin/js/functions.js');
