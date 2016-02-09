@@ -9,6 +9,7 @@ npm install grunt-json --save-dev;
 npm install grunt-css-important --save-dev
 npm install grunt-contrib-cssmin --save-dev;
 npm install grunt-contrib-concat --save-dev;
+npm install grunt-contrib-connect --save-dev;
 npm install grunt-contrib-uglify --save-dev;
 npm install grunt-contrib-watch --save-dev;
 npm install grunt-string-replace --save-dev;
