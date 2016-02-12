@@ -30,6 +30,6 @@ function ostk_ProductDetailsLink(){
 		}//switch
 		output = '<a href="'+this.obj.getAffiliateUrl()+'" class="ostk-element ostk-product-link" '+ostk_getLinkTarget(this.atts)+'>'+output+'</a>';
 		this.renderHTML(output);
-	}//generateHtml
+	};//generateHtml
 
 }//ostk_ProductLink

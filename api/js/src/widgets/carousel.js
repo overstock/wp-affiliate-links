@@ -34,6 +34,7 @@ function ostk_Carousel(){
 		var output = '';
 		var productList;
 		var product;		
+		var productImg;
 		var img_count = 0;
 		var _this = this;
 
@@ -51,15 +52,15 @@ function ostk_Carousel(){
 
 						if(this.obj.muliProduct){
 							for(var i = 0 ; i < productList.length ; i++){
-								var product = productList[i];
+								product = productList[i];
 								productImg = product.imgUrl_large;
 								output += this.getCarouselListItems(product, productImg);
-							}//foreach
+							}//for
 						}else{
-							for(var i = 0 ; i < productList.length ; i++){
-								var productImg = productList[i];
+							for(var k = 0 ; k < productList.length ; k++){
+								productImg = productList[k];
 								output += this.getCarouselListItems(product, productImg);
-							}//foreach
+							}//for
 						}
 
 					output += '</ul>';
@@ -98,7 +99,7 @@ function ostk_Carousel(){
 				_this.resizeCarousel(output);
 		    }, 250);
 		});
-	}//generateHtml
+	};//generateHtml
 
 	this.getCarouselListItems = function(product, productImg){
 		var output = '';

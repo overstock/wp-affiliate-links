@@ -83,6 +83,6 @@ function ostk_StockPhoto(){
 			this.renderHTML(output);
 		}
 
-	}//generateHtml
+	};//generateHtml
 
 }//ostk_StockPhoto

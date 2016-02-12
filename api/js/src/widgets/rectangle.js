@@ -60,6 +60,6 @@ function ostk_Rectangle(){
 
 		this.renderElement(output);
 
-	}//generateHtml
+	};//generateHtml
 
 }//ostk_Reactagngle

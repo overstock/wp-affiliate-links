@@ -20,7 +20,7 @@ function ostk_SearchQuery(){
 		var link_text = this.atts.link_text;
 
 		if(!error){
-			if(keywords == null) {
+			if(keywords === null) {
 				error = '"query" parameter cannot be empty.';
 			}
 		}
@@ -51,7 +51,7 @@ function ostk_SearchQuery(){
 			this.renderHTMLError(error);
 		}else{
 			var affiliateLink = ostk_generateAffiliateLink("http://www.overstock.com/search?"+keywords+taxonomy+sortOption);
-			link_text = (this.atts.link_text != null ? this.atts.link_text : this.atts.query);
+			link_text = (this.atts.link_text !== null ? this.atts.link_text : this.atts.query);
 			output = '<a href="'+affiliateLink+'" class="ostk-element ostk-search" '+ostk_getLinkTarget(this.atts)+'>'+link_text+'</a>';
 			this.renderHTML(output);
 		}

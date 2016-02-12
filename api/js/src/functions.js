@@ -7,8 +7,7 @@ function ostk_searchURLForParam(url, str){
 			var key = param_pieces[0];
 			var value = param_pieces[1];
 			if(key == str){
-				return value 
-				break;
+				return value;
 			}
 		}//for
 	}
@@ -39,60 +38,46 @@ function ostk_generateAffiliateLink(murl){
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.test.overstock.com/ads/deeplink'
-	+ '?id='+ostk_developerId
-	+ '&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl
-	+ '&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
+	return 'https://api.test.overstock.com/ads/deeplink' +
+	'?id='+ostk_developerId +
+	'&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl +
+	'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
 
 }//ostk_generateAffiliateLink
 
 function ostk_getTaxonomy(input){
-	if(input == null) { 
+	if(input === null) { 
 		return false;
 	} else {
 		switch (input) {
 			case "Home & Garden":
 			  return "sto1";
-			  break;
 			case "Jewelry & Watches":
 			  return "sto4";
-			  break;
 			case "Sports & Toys":
 			  return "sto5";
-			  break;
 			case "Worldstock Fair Trade":
 		      return "sto6";
-		      break;
 		    case "Clothing & Shoes":
 		      return "sto7";
-		      break;
 		    case "Health & Beauty":
 		      return "sto8";
-		      break;
 		    case "Food & Gifts":
 		      return "sto9";
-		      break;
 		    case "Office Supplies":
 		      return "sto22";
-		      break;
 		    case "Luggage & Bags":
 		      return "sto33";
-		      break;
 		    case "Baby":
 		      return "sto35";
-		      break;
 		    case "Crafts & Sewing":
 		      return "sto34";
-		      break;
 		    case "Pet Supplies":
 		      return "sto37";
-		      break;
 		    case "Emergency Preparedness":
 		      return "sto42";
-		      break;
 		    case "Bedding & Bath":
 		      return "sto43";
-		      break;
 		    default:
 		      return false;
 		}//switch
@@ -121,25 +106,18 @@ function ostk_getSortOption(input){
 	switch (input.toLowerCase()) {
 		case "Relevance".toLowerCase():
 			return "Relevance";
-			break;
 		case "Recommended".toLowerCase():
 			return "Recommended";
-			break;
 		case "Reviews".toLowerCase():
 			return "Avg.%20Customer%20Review";
-			break;
 		case "Name".toLowerCase():
 			return "Name";
-			break;
 		case "Lowest Price".toLowerCase():
 			return "Lowest+Price";
-			break;
 		case "Highest Price".toLowerCase():
 			return "Highest+Price";
-			break;
 		case "New Arrivals".toLowerCase():
 			return "New+Arrivals";
-			break;
 		default:
 			return null;
 	}//switch
@@ -186,6 +164,8 @@ Validate that the shortcode attributes are valid. return Boolean.
 function ostk_areAttributesValid(atts){
 	var error = null;
 	var type = atts.type;
+	var required_attributes = null;
+	var optional_attributes = null;
 
 	if(!type){
 		error = 'Type attribute is required';
@@ -197,8 +177,8 @@ function ostk_areAttributesValid(atts){
 		if(!item){
 	    	error = 'Invalid type attribute';
 		}else{
-			var required_attributes = item['required_attributes'];
-			var optional_attributes = item['optional_attributes'];
+			required_attributes = item.required_attributes;
+			optional_attributes = item.optional_attributes;
 		}
 	}
 
@@ -233,22 +213,22 @@ function ostk_lookForMissingRequiredAttributes(atts, required_attributes){
 	//Loop through required attributes
 	for (var i = 0 ; i < required_attributes.length; i++) {
 		var ra = required_attributes[i];
-		var key = ra['name'];
+		var key = ra.name;
 		if(!atts[key]){
 			//if the missing attribute has options that are objects
-			if(ra['options'] && typeof(ra['options'][0]['name']) != 'undefined'){
+			if(ra.options && typeof(ra.options[0].name) !== 'undefined'){
 				var option_fulfilled = false;
 				//Loop through missing attributes' options
-				for(var k = 0 ; k < ra['options'].length ; k++){
+				for(var k = 0 ; k < ra.options.length ; k++){
 					var option_key = '';
-					option_key = ra['options'][k]['name'];
+					option_key = ra.options[k].name;
 					if(atts[option_key]){
 						option_fulfilled = true;
 					}
 				}//for
 				if(!option_fulfilled){
 					//None of the options where fullfilled
-					var missing_options_list = ostk_getListByKey(ra['options'], 'name');
+					var missing_options_list = ostk_getListByKey(ra.options, 'name');
 					var missing_options_string = ostk_array_to_list_string(missing_options_list, 'or');
 					missing_atts.push('(' +  missing_options_string + ')');
 				}
@@ -283,14 +263,14 @@ function ostk_lookForInvalidAttsInArray(keys, array){
 
 		for(var k = array.length-1 ; k >= 0 ; k--){
 			var a = array[k];
-			var a_key = a['name'];
+			var a_key = a.name;
 			//if the attribure has options dig deeper
-			if(a['options']){
-				if(a['options'][0]['name']){
+			if(a.options){
+				if(a.options[0].name){
 					//options are objects not just strings
-					for(var z = 0 ; z < a['options'].length ; z++){
-						var a_op = a['options'][z];	
-						var a_op_key = a_op['name'];	
+					for(var z = 0 ; z < a.options.length ; z++){
+						var a_op = a.options[z];	
+						var a_op_key = a_op.name;	
 						if(key === a_op_key){
 							is_valid = true;
 							break;
@@ -300,9 +280,9 @@ function ostk_lookForInvalidAttsInArray(keys, array){
 					//options are just strings
 					if(key === a_key){
 						var found_it = false;
-						for(var z = 0 ; z < a['options'].length ; z++){
-							var a_op_key = a['options'][z];
-							if(value === a_op_key){
+						for(var m = 0 ; m < a.options.length ; m++){
+							var a_op_key2 = a.options[m];
+							if(value === a_op_key2){
 								found_it = true;
 								break;
 							}
@@ -329,7 +309,7 @@ function ostk_lookForInvalidAttsInArray(keys, array){
 			array.splice(k, 1);
 		}
 	}//for
-	return invalid_atts
+	return invalid_atts;
 }//ostk_lookForInvalidAttsInArray
 
 /* Return all keys of an object as an array
@@ -397,7 +377,7 @@ function ostk_getLinkTarget(atts){
 
 /* Check if defined or not link php ostk_isset() */
 function ostk_isset(item){
-	if(item == null){
+	if(item === null){
 		return false;
 	}else if(typeof item === "undefined"){
 		return false;

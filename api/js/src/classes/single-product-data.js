@@ -5,18 +5,18 @@ Class: 			ostk_SingleProductData
 Description: 	Takes a productId or query and returns specific product details
 */ 
 function ostk_SingleProductData(){
-	this.productId;
-	this.name;
-	this.price;
-	this.baseImageUrl;
-	this.imgUrl_large;
-	this.imgUrl_medium;
-	this.imgUrl_thumbnail;
-	this.affiliateUrl;
-	this.averageReviewAsDecimal;
-	this.averageReviewAsGif;
-	this.arrayOfAllProductImages;
-	this.description;
+	this.productId = null;
+	this.name = null;
+	this.price = null;
+	this.baseImageUrl = null;
+	this.imgUrl_large = null;
+	this.imgUrl_medium = null;
+	this.imgUrl_thumbnail = null;
+	this.affiliateUrl = null;
+	this.averageReviewAsDecimal = null;
+	this.averageReviewAsGif = null;
+	this.arrayOfAllProductImages = null;
+	this.description = null;
 	this.multiImages = false;
 
 	this.init = function(callback, errorCallback){
@@ -56,7 +56,7 @@ function ostk_SingleProductData(){
 				errorCallback('Invalid product id: ' + _this.productId);
 			});
 		}
-	}//init
+	};//init
 
 	this.processData = function(productData, callback, errorCallback){
 		this.name = this.setName(productData);
@@ -111,13 +111,13 @@ function ostk_SingleProductData(){
 	this.getImageList = function(images){
 		var a = Array();
 		for(var i = 0 ; i < images.length ; i++){
-			a.push(images[i]['scaledImages'][1].url);
+			a.push(images[i].scaledImages[1].url);
 		}//for
 		if(!a.length){
 			a.push(this.imgUrl_thumbnail);
 		}
 		return a;
-	}
+	};//getImageList
 
 	//Return star gif from float value
 	this.getStars = function(stars){
@@ -132,11 +132,11 @@ function ostk_SingleProductData(){
     	}else{
     		return null;
     	}
-	}
+	};//getStars
 
 	this.isValidProductID = function(){
 		return this.validProductID;
-	}
+	};//isValidProductID
 
 	this.setName = function(productData){
 		if(ostk_isset(productData.name)){
@@ -144,22 +144,22 @@ function ostk_SingleProductData(){
 		}else if(ostk_isset(productData.detailMsg)){
 			return productData.detailMsg;
 		}
-	}
+	};//setName
 
 	this.getAffiliateUrl = function(){
 		return (ostk_isset(this.affiliateUrl) ? this.affiliateUrl : '' );
-	}
+	};//getAffiliateUrl
 
 	this.getAverageReviewAsDecimal = function(){
 		return (ostk_isset(this.averageReviewAsDecimal) ? this.averageReviewAsDecimal : '' );
-	}
+	};//getAverageReviewAsDecimal
 
 	this.getAverageReviewAsGif = function(){
 		return (ostk_isset(this.averageReviewAsGif) ? this.averageReviewAsGif : '' );
-	}
+	};//getAverageRevewAsGif
 
 	this.getImageAtIndex = function(index){
 		return this.arrayOfAllProductImages[index];
-	}
+	};//getImageAtIndex
 
 }//ostk_SingleProductData

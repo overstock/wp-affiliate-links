@@ -26,11 +26,6 @@
                     "description": "Sales event elements",
                     "options": [
                         "flash_deals"
-                        /*
-                        ,
-                        "sales",
-                        "promotions"
-                        */
                     ]
                 },
                 {
