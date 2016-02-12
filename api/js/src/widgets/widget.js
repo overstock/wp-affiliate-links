@@ -111,7 +111,7 @@ function ostk_Widget(atts, element){
 		// this.obj.dealEndTime = t;
 
 		var _this = this;
-		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime)
+		var timeDiff = ostk_getTimeDiff(this.obj.dealEndTime);
 
 		obj.html(this.timeDiffToString(timeDiff));
 		var flashDealsTimer = setInterval(function(){
@@ -150,7 +150,7 @@ function ostk_Widget(atts, element){
 				'<p class="bottom-line">' +
 					'<span>HR</span>' +
 					'<span>MIN</span>' +
-					'<span>SEC</span>'
+					'<span>SEC</span>' +
 				'</p>' +
 			'</div>';	
 		}else{
@@ -159,7 +159,7 @@ function ostk_Widget(atts, element){
 				'<p class="single-line">'+ostk_make_two_digits(hh) + ' <span>HR</span> : ' + ostk_make_two_digits(mm) + ' <span>MIN</span> : ' + ostk_make_two_digits(ss) + ' <span>SEC</span>' + '</p>' +
 			'</div>';	
 		}
-	}//timeDiffToString
+	};//timeDiffToString
 
 	//Get Branding
 	this.getBranding = function(brand){

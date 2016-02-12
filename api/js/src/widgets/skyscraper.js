@@ -63,6 +63,6 @@ function ostk_Skyscraper(){
 
 		this.renderElement(output);
 
-	}//generateHtml
+	};//generateHtml
 
 }//ostk_Skyscraper

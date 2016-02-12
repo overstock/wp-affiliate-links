@@ -5,8 +5,8 @@ Class: 			ostk_MultiProductData
 Description: 	Takes a list of product id's or a query and creates a productList array of ostk_SingleProductData objects. 
 */
 function ostk_MultiProductData(){
-	this.productIds;
-	this.limit;
+	this.productIds = null;
+	this.limit = null;
 	this.developerId = ostk_developerId;
 	this.productList = Array();
 	this.error = null;
@@ -55,7 +55,7 @@ function ostk_MultiProductData(){
 				errorCallback('Invalid query');
 			});
 		}
-	}//init
+	};//init
 
 	this.createSingleObjects = function(item, callback, errorCallback){
 		var _this = this;
@@ -92,6 +92,6 @@ function ostk_MultiProductData(){
 	this.getProductList = function(){
 
 		return this.productList;
-	}//getProductList
+	};//getProductList
 }//ostk_MultiProductData
 

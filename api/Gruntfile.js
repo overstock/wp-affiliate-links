@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 		            }
 		        },
 		        src: ['js/src/json/*.json'],
-		        dest: 'js/src/patterns.js'
+		        dest: 'dist/overstock-embed.js'
 		    }
 		},
 
@@ -76,15 +76,27 @@ module.exports = function(grunt) {
 				src: [
 					//Widgets
 					'js/src/widgets/*.js',
-
 					//JS Files
 					'js/src/*.js',
-
 					//Classes
-					'js/src/classes/*.js'
+					'js/src/classes/*.js',
+					//Compiles Json JS
+					'dist/overstock-embed.js'
 				],
 				dest: 'dist/overstock-embed.js'
 			}
+		},
+
+		//Make a dev version of the deployed files
+		copy: {
+		  js: {
+		    src: 'dist/overstock-embed.js',
+		    dest: 'dev/overstock-embed.js',
+		  },
+		  css: {
+		    src: 'dist/overstock-embed.css',
+		    dest: 'dev/overstock-embed.css',
+		  }
 		},
 
 		//Minify API Embed CSS
@@ -148,14 +160,14 @@ module.exports = function(grunt) {
 		        	//LESS
 		        	'css/src/less/*.less',
 		        	'css/src/less/*/*.less',
-		        	// //JS
+		        	//JS
 		        	'js/src/functions.js',
 		        	'js/src/overstock-embed.js',
 		        	'js/src/*/*.js',
-		        	// //JSON
+		        	//JSON
 		        	'js/src/json/*.json'
 		        ],
-		        tasks: ['less', 'json',  'css_important', 'concat', 'cssmin', 'string-replace', 'uglify'],
+		        tasks: ['less', 'json',  'css_important', 'concat', 'copy', 'cssmin', 'string-replace', 'uglify'],
 		        options: {
 		          livereload: true
 				}
@@ -177,6 +189,6 @@ module.exports = function(grunt) {
 	});
 
 	//Default task
-	grunt.registerTask('default', ['less', 'json',  'css_important', 'concat', 'cssmin', 'string-replace', 'uglify']);
+	grunt.registerTask('default', ['less', 'json',  'css_important', 'concat', 'copy', 'cssmin', 'string-replace', 'uglify']);
 	grunt.registerTask('server', ['connect', 'watch']);
 };

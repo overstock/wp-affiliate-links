@@ -1,0 +1,1205 @@
+@font-face{font-family:flexslider-icon;src:url(../fonts/flexslider-icon.eot);src:url(../fonts/flexslider-icon.eot?#iefix) format('embedded-opentype'),url(../fonts/flexslider-icon.woff) format('woff'),url(../fonts/flexslider-icon.ttf) format('truetype'),url(../fonts/flexslider-icon.svg#flexslider-icon) format('svg');font-weight:400;font-style:normal}.flex-container a:focus,.flex-container a:hover,.flex-slider a:focus,.flex-slider a:hover{outline:0}.flex-control-nav,.flex-direction-nav,.slides,.slides>li{margin:0;padding:0;list-style:none}.flex-pauseplay span{text-transform:capitalize}.flexslider{padding:0}.flexslider .slides>li{display:none;-webkit-backface-visibility:hidden}.flexslider .slides img{width:100%;display:block}.flexslider .slides:after{content:"\0020";display:block;clear:both;visibility:hidden;line-height:0;height:0}html[xmlns] .flexslider .slides{display:block}* html .flexslider .slides{height:1%}.no-js .flexslider .slides>li:first-child{display:block}.flexslider{margin:0 0 60px;background:#fff;border:4px solid #fff;position:relative;zoom:1;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:'' 0 1px 4px rgba(0,0,0,.2);-moz-box-shadow:'' 0 1px 4px rgba(0,0,0,.2);-o-box-shadow:'' 0 1px 4px rgba(0,0,0,.2);box-shadow:'' 0 1px 4px rgba(0,0,0,.2)}.flexslider .slides{zoom:1}.flexslider .slides img{height:auto}.flex-viewport{max-height:2000px;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;-ms-transition:all 1s ease;-o-transition:all 1s ease;transition:all 1s ease}.loading .flex-viewport{max-height:300px}.carousel li{margin-right:5px}.flex-direction-nav a{text-decoration:none;display:block;width:40px;height:40px;margin:-20px 0 0;position:absolute;top:50%;z-index:10;overflow:hidden;opacity:0;cursor:pointer;color:rgba(0,0,0,.8);text-shadow:1px 1px 0 rgba(255,255,255,.3);-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-ms-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out}.flex-direction-nav a:before{font-family:flexslider-icon;font-size:40px;display:inline-block;content:'\f001';color:rgba(0,0,0,.8);text-shadow:1px 1px 0 rgba(255,255,255,.3)}.flex-direction-nav a.flex-next:before{content:'\f002'}.flex-direction-nav .flex-prev{left:-50px}.flex-direction-nav .flex-next{right:-50px;text-align:right}.flexslider:hover .flex-direction-nav .flex-prev{opacity:.7;left:10px}.flexslider:hover .flex-direction-nav .flex-prev:hover{opacity:1}.flexslider:hover .flex-direction-nav .flex-next{opacity:.7;right:10px}.flexslider:hover .flex-direction-nav .flex-next:hover{opacity:1}.flex-direction-nav .flex-disabled{opacity:0!important;filter:alpha(opacity=0);cursor:default}.flex-pauseplay a{display:block;width:20px;height:20px;position:absolute;bottom:5px;left:10px;opacity:.8;z-index:10;overflow:hidden;cursor:pointer;color:#000}.flex-pauseplay a:before{font-family:flexslider-icon;font-size:20px;display:inline-block;content:'\f004'}.flex-pauseplay a:hover{opacity:1}.flex-pauseplay a.flex-play:before{content:'\f003'}.flex-control-nav{width:100%;position:absolute;bottom:-40px;text-align:center}.flex-control-nav li{margin:0 6px;display:inline-block;zoom:1}.flex-control-paging li a{width:11px;height:11px;display:block;background:#666;background:rgba(0,0,0,.5);cursor:pointer;text-indent:-9999px;-webkit-box-shadow:inset 0 0 3px rgba(0,0,0,.3);-moz-box-shadow:inset 0 0 3px rgba(0,0,0,.3);-o-box-shadow:inset 0 0 3px rgba(0,0,0,.3);box-shadow:inset 0 0 3px rgba(0,0,0,.3);-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px}.flex-control-paging li a:hover{background:#333;background:rgba(0,0,0,.7)}.flex-control-paging li a.flex-active{background:#000;background:rgba(0,0,0,.9);cursor:default}.flex-control-thumbs{margin:5px 0 0;position:static;overflow:hidden}.flex-control-thumbs li{width:25%;float:left;margin:0}.flex-control-thumbs img{width:100%;height:auto;display:block;opacity:.7;cursor:pointer;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;-ms-transition:all 1s ease;-o-transition:all 1s ease;transition:all 1s ease}.flex-control-thumbs img:hover{opacity:1}.flex-control-thumbs .flex-active{opacity:1;cursor:default}@media screen and (max-width:860px){.flex-direction-nav .flex-prev{opacity:1;left:10px}.flex-direction-nav .flex-next{opacity:1;right:10px}}
+@font-face {
+	font-family:"overstock-icon-font";
+	src:url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.eot");
+	src:url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.eot?#iefix") format("embedded-opentype"),
+		url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.woff") format("woff"),
+		url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.ttf") format("truetype"),
+		url("http://ak1.ostkcdn.com/downloads/webfonts/overstock-icon-font.2.0.5.svg#overstock-icon-font.2.0.5") format("svg");
+	font-weight:normal;
+	font-style:normal;
+}
+/* Less Variable */
+
+/* Widths */
+
+/* Colors */
+
+/* Fonts */
+
+.noselect {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.truncate {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Overstock Icons
+--------------------------------------------------*/
+
+.os-icon:before {
+  font-family: "overstock-icon-font" !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  speak: none !important;
+  text-decoration: inherit !important;
+  text-transform: none !important;
+  text-rendering: auto !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+.os-icon-chevron-left:before {
+  content: "\f122" !important;
+}
+
+.os-icon-chevron-right:before {
+  content: "\f123" !important;
+}
+
+/* API Embed Styles */
+
+/* Error Text
+----------------------------------------------------------*/
+
+.ostk-error {
+  /**
+ * Global Reset of all HTML Elements
+ *
+ * Resetting all of our HTML Elements ensures a smoother
+ * visual transition between browsers. If you don't believe me,
+ * try temporarily commenting out this block of code, then go
+ * and look at Mozilla versus Safari, both good browsers with
+ * a good implementation of CSS. The thing is, all browser CSS
+ * defaults are different and at the end of the day if visual
+ * consistency is what we're shooting for, then we need to
+ * make sure we're resetting all spacing elements.
+ *
+ */
+  color: #c80f2e !important;
+}
+
+.ostk-error html,
+.ostk-error body {
+  border: 0 !important;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ostk-error div,
+.ostk-error span,
+.ostk-error object,
+.ostk-error iframe,
+.ostk-error img,
+.ostk-error table,
+.ostk-error caption,
+.ostk-error thead,
+.ostk-error tbody,
+.ostk-error tfoot,
+.ostk-error tr,
+.ostk-error tr,
+.ostk-error td,
+.ostk-error article,
+.ostk-error aside,
+.ostk-error canvas,
+.ostk-error details,
+.ostk-error figure,
+.ostk-error hgroup,
+.ostk-error menu,
+.ostk-error nav,
+.ostk-error footer,
+.ostk-error header,
+.ostk-error section,
+.ostk-error summary,
+.ostk-error mark,
+.ostk-error audio,
+.ostk-error video {
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ostk-error h1,
+.ostk-error h2,
+.ostk-error h3,
+.ostk-error h4,
+.ostk-error h5,
+.ostk-error h6,
+.ostk-error p,
+.ostk-error blockquote,
+.ostk-error pre,
+.ostk-error a,
+.ostk-error abbr,
+.ostk-error address,
+.ostk-error cit,
+.ostk-error code,
+.ostk-error del,
+.ostk-error dfn,
+.ostk-error em,
+.ostk-error ins,
+.ostk-error q,
+.ostk-error samp,
+.ostk-error small,
+.ostk-error strong,
+.ostk-error sub,
+.ostk-error sup,
+.ostk-error b,
+.ostk-error i,
+.ostk-error hr,
+.ostk-error dl,
+.ostk-error dt,
+.ostk-error dd,
+.ostk-error ol,
+.ostk-error ul,
+.ostk-error li,
+.ostk-error fieldset,
+.ostk-error legend,
+.ostk-error label {
+  border: 0 !important;
+  font-size: 100% !important;
+  vertical-align: baseline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ostk-error article,
+.ostk-error aside,
+.ostk-error canvas,
+.ostk-error figure,
+.ostk-error figure img,
+.ostk-error figcaption,
+.ostk-error hgroup,
+.ostk-error footer,
+.ostk-error header,
+.ostk-error nav,
+.ostk-error section,
+.ostk-error audio,
+.ostk-error video {
+  display: block !important;
+}
+
+.ostk-error table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+.ostk-error table caption,
+.ostk-error table th,
+.ostk-error table td {
+  text-align: left !important;
+  vertical-align: middle !important;
+}
+
+.ostk-error a img {
+  border: 0 !important;
+}
+
+.ostk-error :focus {
+  outline: 0 !important;
+}
+
+.ostk-error * {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* Loader for Widgets
+----------------------------------------------------------*/
+
+.ostk-loader {
+  background: rgba(255, 255, 255, 0.6) !important;
+  padding: 10px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  border-radius: 10px !important;
+  display: block !important;
+  margin: 10px auto !important;
+  max-width: 140px !important;
+  text-align: center !important;
+}
+
+.ostk-loader * {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ostk-loader img {
+  display: block !important;
+  margin: 10px auto !important;
+  max-width: 125px !important;
+}
+
+.ostk-loader p {
+  margin: 0 !important;
+}
+
+/* Global for All Short Code Elements 
+----------------------------------------------------------*/
+
+.ostk-element {
+  /*
+  The "#main" and "#sidebar" is being used to make sure that the ostk styles have enough specificity to maintain ostk styles even in custom Wordpress themes. Id's are being used to add specificity instead of using important on every item. If important or other id's end up being needed, this may be motified.
+  */
+  background: #FFFFFF !important;
+  position: relative !important;
+  overflow: hidden !important;
+  /* Import Widget */
+  /*----------------------------- Widget -----------------------------*/
+  /* .ostk-element-inner */
+  /* Import Sales Events */
+  /*----------------------------- Sales Event -----------------------------*/
+  /* salse-event */
+  /*----------------------------- Flash Deals -----------------------------*/
+  /* flash-deals */
+  /*----------------------------- Sales and Promotions -----------------------------*/
+  /* sales and promotions */
+  /* Import Widgets */
+  /*----------------------------- Carousel -----------------------------*/
+  /* .ostk-carousel */
+  /*----------------------------- Leaderboard -----------------------------*/
+  /* .ostk-leaderboard  */
+  /*----------------------------- Rectangle -----------------------------*/
+  /* .ostk-rectangle  */
+  /*----------------------------- Skyscraper -----------------------------*/
+  /* .ostk-skyscraper  */
+  /*----------------------------- Stockphoto -----------------------------*/
+  /* .ostk-stock-photo */
+}
+
+.ostk-element * {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  box-sizing: border-box !important;
+}
+
+.ostk-element .ostk-element-inner {
+  border: solid 1px #c80f2e !important;
+  position: relative !important;
+  overflow: hidden !important;
+  height: 100% !important;
+  -webkit-border-radius: 8px !important;
+  -moz-border-radius: 8px !important;
+  border-radius: 8px !important;
+}
+
+.ostk-element .ostk-element-inner a {
+  text-decoration: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.ostk-element .ostk-element-inner a:focus {
+  outline: 0 !important;
+}
+
+.ostk-element .ostk-element-inner hr {
+  display: block !important;
+  height: 1px !important;
+  border: 0 !important;
+  border-top: solid 1px #aaaaaa !important;
+  margin: 5px 0 !important;
+}
+
+.ostk-element .ostk-element-inner p {
+  color: #000000 !important;
+}
+
+.ostk-element .ostk-element-inner img {
+  max-width: 100% !important;
+}
+
+.ostk-element .ostk-element-inner .branding {
+  background: #c80f2e !important;
+  padding: 5px 0 !important;
+}
+
+.ostk-element .ostk-element-inner .branding img {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+.ostk-element .ostk-element-inner .ostk-element-content {
+  padding: 10px !important;
+  position: relative !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+}
+
+.ostk-element .ostk-element-inner .ostk-element-content p {
+  font-size: 16px !important;
+  line-height: 16px !important;
+  margin: 0 !important;
+}
+
+.ostk-element .ostk-element-inner .ostk-element-content p.title {
+  color: #c80f2e !important;
+}
+
+.ostk-element .ostk-element-inner .ostk-element-content p.price {
+  color: #444444 !important;
+}
+
+.ostk-element .ostk-element-inner .element-overlay {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  -webkit-opacity: 0 !important;
+  -moz-opacity: 0 !important;
+  opacity: 0 !important;
+  padding: 10px !important;
+  -webkit-transition: all linear 500ms !important;
+  -moz-transition: all linear 500ms !important;
+  -ms-transition: all linear 500ms !important;
+  -o-transition: all linear 500ms !important;
+  transition: all linear 500ms !important;
+}
+
+.ostk-element .ostk-element-inner .element-overlay img {
+  width: auto !important;
+}
+
+.ostk-element .ostk-element-inner .element-overlay img.ostk-logo {
+  float: right !important;
+}
+
+.ostk-element .ostk-element-inner .element-overlay p {
+  font-size: 16px !important;
+  line-height: 16px !important;
+  margin: 0 0 5px 0 !important;
+}
+
+.ostk-element .ostk-element-inner .element-overlay p.title {
+  font-weight: bold !important;
+  color: #c80f2e !important;
+}
+
+.ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 16px !important;
+  margin-bottom: 5px !important;
+  color: #000000 !important;
+}
+
+.ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.description {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.price {
+  color: #c80f2e !important;
+  font-size: 18px !important;
+}
+
+.ostk-element.sales-event .ostk-element-inner .ostk-element-content .product-info p.savings {
+  color: #7b7b7b !important;
+  font-size: 18px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner {
+  background: #f8c300 !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  border: 1px solid #aaaaaa !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime p {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .single-line p {
+  line-height: 30px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .single-line p span {
+  font-size: 10px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line {
+  margin: 8px auto !important;
+  position: relative !important;
+  width: 90px !important;
+  height: 25px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line,
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators {
+  font-size: 18px !important;
+  line-height: 16px !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators span {
+  position: absolute !important;
+  top: 0 !important;
+  width: 10px !important;
+  margin-left: -5px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators span:first-child {
+  left: 30px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.deliminators span:last-child {
+  left: 60px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line,
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line {
+  overflow: hidden !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.top-line span,
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span {
+  width: 30px !important;
+  display: block !important;
+  float: left !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line {
+  font-size: 8px !important;
+  line-height: 8px !important;
+  position: absolute !important;
+  top: 17px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .dealEndTime .double-line p.bottom-line span {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .branding {
+  background: #FFFFFF !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .branding img {
+  width: 170px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .ostk-element-header {
+  background: #FFFFFF !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .ostk-element-content {
+  background: #FFFFFF !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+  border: solid 1px #aaaaaa !important;
+  margin: 0px 10px 10px 10px !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .ostk-element-footer {
+  background: #FFFFFF !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  border-top: 1px solid #aaaaaa !important;
+}
+
+.ostk-element.flash-deals .ostk-element-inner .ostk-element-footer .branding img {
+  width: 100px !important;
+}
+
+.ostk-element.sales .ostk-element-inner,
+.ostk-element.promotions .ostk-element-inner {
+  background: #c80f2e !important;
+}
+
+.ostk-element.sales .ostk-element-inner .ostk-element-content,
+.ostk-element.promotions .ostk-element-inner .ostk-element-content {
+  background: #FFFFFF !important;
+}
+
+.ostk-element.sales .ostk-element-inner .ostk-element-content .product-info p.savings,
+.ostk-element.promotions .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 30px !important;
+  color: #c80f2e !important;
+}
+
+.ostk-element.ostk-carousel {
+  /* .ostk-element-inner */
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner {
+  position: relative !important;
+  border: none !important;
+  /* flexslider */
+  /* Arrows */
+  /* Arrows Navigation */
+  /* custom-navigation */
+  /* .ostk-carousel.desktop-size */
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .ostk-flexslider {
+  padding: 30px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider:hover .element-overlay {
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  opacity: 1 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider a {
+  text-decoration: none !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides {
+  margin: 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li {
+  padding: 0 !important;
+  position: relative !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .ostk-element-content {
+  padding: 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-flexslider ul.slides li .ostk-element-content img {
+  width: 100% !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  border-radius: 2px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .element-overlay p {
+  text-align: center !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .element-overlay img {
+  width: auto !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .element-overlay img.ostk-rating {
+  margin: 0 auto 5px auto !important;
+  display: block !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow {
+  outline: none !important;
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .ostk-arrow i {
+  text-align: center !important;
+  width: 100% !important;
+  line-height: 25px !important;
+  font-size: 20px !important;
+  color: #7b7b7b !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a {
+  text-decoration: none !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-prev {
+  float: left !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation a.flex-next {
+  float: right !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner .custom-navigation .flex-control-thumbs {
+  margin: 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size {
+  /* Arrows Navigation */
+  /* .custom-navigation */
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation {
+  /* Thumbail Navigation */
+  /* .custom-controls-container */
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a {
+  position: absolute !important;
+  top: 50% !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-prev {
+  left: 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation a.flex-next {
+  right: 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow {
+  padding: 5px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .ostk-arrow i {
+  color: #c80f2e !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.mobile-size .custom-navigation .custom-controls-container {
+  display: none !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size {
+  /* Arrows Navigation */
+  /* custom-navigation */
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation {
+  max-width: 430px !important;
+  margin: 10px auto 0 auto !important;
+  /* Thumbail Navigation */
+  /* .custom-controls-container */
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-4 {
+  max-width: 360px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-3 {
+  max-width: 280px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation.count-2 {
+  max-width: 210px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a {
+  border: solid 1px #aeaeae !important;
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  border-radius: 2px !important;
+  background: #dddddd !important;
+  margin-top: 5px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a .ostk-arrow {
+  margin: 20px 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation a:hover {
+  background: #f6f6f6 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container {
+  display: table !important;
+  margin: 0 auto !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol {
+  list-style: none !important;
+  padding: 0 !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li {
+  padding: 5px !important;
+  width: auto !important;
+  list-style: none !important;
+  float: left !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img {
+  -webkit-border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  border-radius: 2px !important;
+  border: solid 1px grey !important;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ol li img.flex-active {
+  border: solid 1px #c80f2e !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav {
+  list-style: none !important;
+}
+
+.ostk-element.ostk-carousel .ostk-element-inner.desktop-size .custom-navigation .custom-controls-container ul.flex-direction-nav li {
+  list-style: none !important;
+}
+
+.ostk-element.ostk-leaderboard {
+  width: 728px !important;
+  height: 90px !important;
+  /* .ostk-element-inner */
+  /* Sales Event
+  -----------------------------------*/
+  /* Version == Standard
+  -----------------------------------*/
+  /* flash deals */
+  /* Version == Mini
+  -----------------------------------*/
+  /* mini */
+  /* Version == Mobile
+  -----------------------------------*/
+  /* mobile */
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner {
+  width: 728px !important;
+  height: 90px !important;
+  position: relative !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder {
+  margin-right: 140px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder.item-count-2 .ostk-item {
+  width: 50% !important;
+  float: left !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content {
+  padding: 7px 0px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info {
+  margin: 0 10px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info hr {
+  margin: 0 3px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p {
+  text-align: left !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.title {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-info p.description {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 12px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .item-holder .ostk-element-content .product-image {
+  float: left !important;
+  margin: 0 5px !important;
+  max-height: 70px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer {
+  top: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  right: 0 !important;
+  -webkit-border-radius: 0px 6px 6px 0px !important;
+  -moz-border-radius: 0px 6px 6px 0px !important;
+  border-radius: 0px 6px 6px 0px !important;
+  position: absolute !important;
+  width: 130px !important;
+  background: #c80f2e !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 22px !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner {
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-content {
+  margin: 5px !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-left: 1px solid #aaaaaa !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding {
+  background: #FFFFFF !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .branding img {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line {
+  padding: 2px 0 !important;
+  display: block !important;
+  margin: 5px auto !important;
+}
+
+.ostk-element.ostk-leaderboard.sales-event .ostk-element-inner .ostk-element-footer .dealEndTime .double-line p.top-line {
+  font-size: 16px !important;
+  line-height: 16px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content {
+  height: 78px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 14px !important;
+}
+
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content .product-info p.price,
+.ostk-element.ostk-leaderboard .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 15px !important;
+}
+
+.ostk-element.ostk-leaderboard.flash-deals .ostk-element-inner .item-holder {
+  margin-right: 130px !important;
+}
+
+.ostk-element.ostk-leaderboard.flash-deals .ostk-element-footer .dealEndTime {
+  border-top: solid 1px #aaaaaa !important;
+  border-bottom: solid 1px #aaaaaa !important;
+}
+
+.ostk-element.ostk-leaderboard.mini {
+  width: 498px !important;
+  height: 60px !important;
+  /* flash deals */
+  /* sales and promotions */
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner {
+  width: 498px !important;
+  height: 60px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content {
+  margin: 2px !important;
+  height: 54px !important;
+  width: 230px !important;
+  float: left !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 14px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price {
+  float: left !important;
+  border-right: solid 1px #aaaaaa !important;
+  padding-right: 5px !important;
+  margin-right: 3px !important;
+  margin-top: 3px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.price,
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 13px !important;
+  line-height: 13px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-content .product-image {
+  max-height: 40px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 9px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini .ostk-element-inner .dealEndTime {
+  float: left !important;
+  margin: 7px 0 0 15px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-content .product-info p.price {
+  border: none !important;
+}
+
+.ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child {
+  border-bottom: solid 1px #aaaaaa !important;
+  margin-bottom: 2px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini.flash-deals .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 0 !important;
+}
+
+.ostk-element.ostk-leaderboard.mini.sales .ostk-element-inner .ostk-element-content,
+.ostk-element.ostk-leaderboard.mini.promotions .ostk-element-inner .ostk-element-content {
+  width: 358px !important;
+}
+
+.ostk-element.ostk-leaderboard.mini.sales .ostk-element-inner .ostk-element-footer .branding img,
+.ostk-element.ostk-leaderboard.mini.promotions .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 10px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile {
+  width: 320px !important;
+  height: 50px !important;
+  /* flash deals */
+  /* sales and promotions */
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner {
+  width: 320px !important;
+  height: 50px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content {
+  padding: 2px 0 0 0 !important;
+  margin: 2px !important;
+  height: 43px !important;
+  width: 183px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-info p.title {
+  font-size: 12px !important;
+  padding-top: 3px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-info p.price {
+  float: left !important;
+  border-right: solid 1px #aaaaaa !important;
+  padding-right: 5px !important;
+  margin-right: 3px !important;
+  margin-top: 3px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-info p.price,
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-info p.savings {
+  font-size: 13px !important;
+  line-height: 13px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-content .product-image {
+  max-height: 40px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 5px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-content .product-info p.title {
+  margin: 0 !important;
+  padding-bottom: 0px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-content .product-info p.price {
+  border: none !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding {
+  padding: 4px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding:first-child {
+  border-bottom: solid 1px #aaaaaa !important;
+  margin-bottom: 2px !important;
+  padding: 2px !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile.flash-deals .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 0 !important;
+}
+
+.ostk-element.ostk-leaderboard.mobile.sales .ostk-element-inner .ostk-element-footer .branding img,
+.ostk-element.ostk-leaderboard.mobile.promotions .ostk-element-inner .ostk-element-footer .branding img {
+  margin-top: 10px !important;
+}
+
+.ostk-element.ostk-rectangle {
+  width: 300px !important;
+  height: 250px !important;
+  /* Default
+  -----------------------------------*/
+  /* .ostk-element-inner */
+  /* Sales Events
+  -----------------------------------*/
+  /* sales-event */
+}
+
+.ostk-element.ostk-rectangle .ostk-element-content .product-info p.title {
+  font-size: 13px !important;
+  line-height: 16px !important;
+  height: 48px !important;
+  /* Fallback for non-webkit */
+  display: block !important;
+  /* Fallback for non-webkit */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.ostk-element.ostk-rectangle .ostk-element-inner:hover .element-overlay {
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  opacity: 1 !important;
+}
+
+.ostk-element.ostk-rectangle .ostk-element-inner .ostk-element-content img.product-image {
+  display: block !important;
+  margin: 0 auto !important;
+  height: 185px !important;
+  width: 185px !important;
+}
+
+.ostk-element.ostk-rectangle.sales-event {
+  /* .ostk-element-inner */
+}
+
+.ostk-element.ostk-rectangle.sales-event .ostk-element-inner .ostk-element-header {
+  border-bottom: 1px solid #aaaaaa !important;
+}
+
+.ostk-element.ostk-rectangle.sales-event .ostk-element-inner .ostk-element-content .product-image {
+  float: left !important;
+  width: 110px !important;
+  height: 110px !important;
+  margin-top: 30px !important;
+}
+
+.ostk-element.ostk-rectangle.sales-event .ostk-element-inner .ostk-element-content .product-info {
+  float: right !important;
+  width: 140px !important;
+  margin-top: 10px !important;
+}
+
+.ostk-element.ostk-rectangle.sales-event .ostk-element-inner .ostk-element-content .product-info p.savings {
+  margin-top: 15px !important;
+}
+
+.ostk-element.ostk-rectangle.flash-deals .ostk-element-inner .ostk-element-content .product-image {
+  margin: 0 !important;
+}
+
+.ostk-element.ostk-rectangle.flash-deals .ostk-element-inner .ostk-element-content .product-info {
+  width: 130px !important;
+}
+
+.ostk-element.ostk-skyscraper {
+  width: 160px !important;
+  height: 600px !important;
+  /* Default
+  -----------------------------------*/
+  /* .ostk-element-inner */
+  /* Sales Event
+  -----------------------------------*/
+  /* sales-event */
+}
+
+.ostk-element.ostk-skyscraper .ostk-element-inner .item-holder .ostk-element-content {
+  height: 280px !important;
+}
+
+.ostk-element.ostk-skyscraper .ostk-element-inner .item-holder .ostk-element-content p {
+  text-align: center !important;
+}
+
+.ostk-element.ostk-skyscraper .ostk-element-inner .item-holder .ostk-element-content p.title {
+  font-size: 13px !important;
+  line-height: 16px !important;
+  height: 32px !important;
+  /* Fallback for non-webkit */
+  display: block !important;
+  /* Fallback for non-webkit */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.ostk-element.ostk-skyscraper .ostk-element-inner .item-holder .ostk-element-content img {
+  display: block !important;
+  margin: 0 auto 10px auto !important;
+  max-width: 100% !important;
+}
+
+.ostk-element.ostk-skyscraper .ostk-element-inner .item-holder.item-count-1 .ostk-element-content {
+  height: 555px !important;
+}
+
+.ostk-element.ostk-skyscraper.sales-event {
+  /* .ostk-element-inner */
+}
+
+.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content {
+  height: 235px !important;
+}
+
+.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content p.title {
+  text-align: left !important;
+}
+
+.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content p.price {
+  text-align: left !important;
+}
+
+.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder .ostk-element-content p.dealEndTime {
+  margin-bottom: 15px !important;
+}
+
+.ostk-element.ostk-skyscraper.sales-event .ostk-element-inner .item-holder.item-count-1 .ostk-element-content {
+  height: 480px !important;
+}
+
+.ostk-element.ostk-stock-photo {
+  /* .ostk-element-inner */
+}
+
+.ostk-element.ostk-stock-photo .ostk-element-inner {
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  border: none !important;
+}
+
+.ostk-element.ostk-stock-photo .ostk-element-inner:hover .element-overlay {
+  -webkit-opacity: 1 !important;
+  -moz-opacity: 1 !important;
+  opacity: 1 !important;
+}
+
+.ostk-element.ostk-stock-photo .ostk-element-inner .ostk-element-content {
+  padding: 0 !important;
+}
+
+.ostk-element.ostk-stock-photo .ostk-element-inner .ostk-element-content img.product-image {
+  width: 100% !important;
+}
+
+.ostk-element.ostk-stock-photo .ostk-element-inner .element-overlay {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  -webkit-opacity: 0 !important;
+  -moz-opacity: 0 !important;
+  opacity: 0 !important;
+  -webkit-transition: all linear 500ms !important;
+  -moz-transition: all linear 500ms !important;
+  -ms-transition: all linear 500ms !important;
+  -o-transition: all linear 500ms !important;
+  transition: all linear 500ms !important;
+}

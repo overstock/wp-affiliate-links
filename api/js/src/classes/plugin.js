@@ -17,7 +17,7 @@ function ostk_Plugin(){
 			});
 		} else { // jQuery was already loaded	
 			this.ostk_init_elements();
-		};
+		}
 	};//ostk_check_jquery
 
 	this.ostk_init_elements = function(){
@@ -43,12 +43,12 @@ function ostk_Plugin(){
 		// Attach handlers for all browser
 		script.onload = script.onreadystatechange = function() {
 			if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-			done = true;
+				done = true;
 				// callback function provided as param
 				success();
 				script.onload = script.onreadystatechange = null;
 				head.removeChild(script);	
-			};
+			}
 		};
 		head.appendChild(script);
 	};//ostk_get_script
@@ -66,10 +66,10 @@ function ostk_Plugin(){
 
 			var attrs = _this[0].attributes;
 			for(var i = 0 ; i < attrs.length ; i++){
-				if(attrs[i]['name'] === 'data-width'){
-					_this.css('width', attrs[i]['value']);
+				if(attrs[i].name === 'data-width'){
+					_this.css('width', attrs[i].value);
 					break;
-				}else if(attrs[i]['name'] == 'data-type' && attrs[i]['value'] == 'leaderboard'){
+				}else if(attrs[i].name == 'data-type' && attrs[i].value == 'leaderboard'){
 					_this.css('width', '728px');
 					break;
 				}
@@ -107,9 +107,9 @@ function ostk_Plugin(){
 			var atts = $ostk_jQuery(this)[0].attributes;
 			var data = {};
 			for(var i = 0 ; i < atts.length ; i++){
-				if (atts[i]['name'].indexOf("data-") >= 0){
-					var name = atts[i]['name'].split('data-')[1];
-					var value = atts[i]['value'];
+				if (atts[i].name.indexOf("data-") >= 0){
+					var name = atts[i].name.split('data-')[1];
+					var value = atts[i].value;
 					if(name != 'tag'){
 						data[name] = value;
 					}
@@ -118,7 +118,7 @@ function ostk_Plugin(){
 
 			var item;
 			var is_widget = true;
-			switch (data['type']) {
+			switch (data.type) {
 				case 'search':
 					item = new ostk_SearchQuery();
 					break;
@@ -151,7 +151,7 @@ function ostk_Plugin(){
 				var object = $ostk_jQuery.extend({}, new ostk_Widget(data, element), item);	
 				object.init();
 			}else{
-				var html = ostk_formatError('Invalid widget type')
+				var html = ostk_formatError('Invalid widget type');
 				element.replaceWith(html);
 			}
 

@@ -91,6 +91,6 @@ function ostk_Leaderboard(){
 		output += '</div>';
 
 		this.renderElement(output);
-	}//generateHtml
+	};//generateHtml
 
 }//ostk_Leaderboard
