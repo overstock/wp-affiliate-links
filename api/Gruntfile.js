@@ -2,20 +2,13 @@
 ===== Grunt Compile Overstock API Embed CSS =====
 
 1) Install all dependant libraries:
-npm install grunt;
-npm install load-grunt-tasks --save-dev;
-npm install grunt-contrib-less --save-dev;
-npm install grunt-json --save-dev;
-npm install grunt-css-important --save-dev
-npm install grunt-contrib-cssmin --save-dev;
-npm install grunt-contrib-concat --save-dev;
-npm install grunt-contrib-connect --save-dev;
-npm install grunt-contrib-uglify --save-dev;
-npm install grunt-contrib-watch --save-dev;
-npm install grunt-string-replace --save-dev;
+npm install;
 
 2) Run the compiler:
 grunt watch
+
+2) Create Server:
+grunt server
 
 */
 module.exports = function(grunt) {
@@ -121,11 +114,11 @@ module.exports = function(grunt) {
 							pattern: /dev\/devImages\//ig,
 							replacement: 'http://ak1.ostkcdn.com/img/mxc/'
 						},
-						{
-							//Testing api url to live api url
-							pattern: /api.test.overstock.com/ig,
-							replacement: 'api.overstock.com'
-						},
+						// {
+						// 	//Testing api url to live api url
+						// 	pattern: /api.test.overstock.com/ig,
+						// 	replacement: 'api.overstock.com'
+						// },
 						{
 							//Testing mid to live mid
 							pattern: /24513/ig,
