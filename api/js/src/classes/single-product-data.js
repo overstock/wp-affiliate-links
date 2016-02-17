@@ -27,7 +27,7 @@ function ostk_SingleProductData(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
-				url = "https://api.test.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
+				url = ostk_url+"/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";
 				}

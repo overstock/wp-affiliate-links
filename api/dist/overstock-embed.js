@@ -641,7 +641,7 @@ function ostk_Widget(atts, element){
 		}
 
 		if(!error){
-			if(this.atts.type == '' || this.atts.type == null){ 
+			if(this.atts.type === '' || this.atts.type === null){ 
 				error = "Type parameter cannot be empty.";
 			}else if(ostk_isset(this.atts.link_target) && !ostk_isValidLinkTarget(this.atts)){ 
 				error = '"link_target" not found. Please check spelling and try again.';
@@ -649,7 +649,7 @@ function ostk_Widget(atts, element){
 		}
 
 		if(!error){
-			var areAttsValid = ostk_areAttributesValid(this.atts)
+			var areAttsValid = ostk_areAttributesValid(this.atts);
 			if(areAttsValid !== true){
 				error = areAttsValid;
 			}
@@ -703,13 +703,13 @@ function ostk_Widget(atts, element){
 			if(this.atts.category){
 				taxonomy = "&taxonomy=" + ostk_getTaxonomy(this.atts.category);
 				sortOption = (ostk_isset(this.atts.sort_by) ? "&sortOption=" + ostk_getSortOption(this.atts.sort_by) : '');
-				if (ostk_isset(taxonomy) && ostk_getTaxonomy(this.atts.category) == false) {
+				if (ostk_isset(taxonomy) && ostk_getTaxonomy(this.atts.category) === false) {
 					error = "category="+this.atts.category+" does not match our given categories, please check it.";
 				} 
 			}else if(this.atts.keywords){
 				keywords = "&keywords=" + this.atts.keywords.split(' ').join('%20');
 			}
-			this.obj.query = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
+			this.obj.query = ostk_url+"/ads/products?developerid="+ostk_developerId+keywords+taxonomy+sortOption;
 		}
 
 		if(error){
@@ -922,7 +922,7 @@ function ostk_generateAffiliateLink(murl){
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.overstock.com/ads/deeplink' +
+	return ostk_url+'/ads/deeplink' +
 	'?id='+ostk_developerId +
 	'&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl +
 	'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);
@@ -1634,7 +1634,7 @@ function ostk_SingleProductData(){
 			_this.processData(this.obj, callback, errorCallback);
 		}else{
 			if(this.productId){
-				url = "https://api.overstock.com/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
+				url = ostk_url+"/ads/products?developerid="+ostk_developerId+"&product_ids=" + this.productId;
 				if(this.multiImages){
 					url +=	"&fetch_all_images=true";
 				}

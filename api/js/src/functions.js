@@ -38,7 +38,7 @@ function ostk_generateAffiliateLink(murl){
 	if(murl.indexOf("?") > -1){
 		symbol = '&';
 	}
-	return 'https://api.test.overstock.com/ads/deeplink' +
+	return ostk_url+'/ads/deeplink' +
 	'?id='+ostk_developerId +
 	'&clickplatform='+ostk_clickPlatform + '&clickurl='+ostk_clickurl +
 	'&mid=38601&murl='+encodeURIComponent(murl+symbol+"utm_medium=api&utm_source=linkshare&utm_campaign=241370&CID=241370&devid="+ostk_developerId);

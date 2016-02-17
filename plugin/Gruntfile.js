@@ -2,12 +2,7 @@
 ===== Grunt Compile Overstock Plugin CSS =====
 
 1) Install all dependant libraries:
-npm install grunt;
-npm install load-grunt-tasks --save-dev;
-npm install grunt-contrib-less --save-dev;
-npm install grunt-contrib-concat --save-dev;
-npm install grunt-contrib-cssmin --save-dev;
-npm install grunt-contrib-watch --save-dev
+npm install;
 
 2) Run the compiler:
 grunt
