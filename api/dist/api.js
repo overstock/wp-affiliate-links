@@ -114,7 +114,7 @@ function ostk_Carousel(){
 							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 						}
 						output += '<p class="price">'+product.price+'</p>';
-						output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
+						output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
 				output += '</div>';
 			output += '</a>';
 		output += '</li>';
@@ -609,7 +609,7 @@ function ostk_StockPhoto(){
 									if(product.price){
 										output += '<p class="price">'+product.price+'</p>';
 									}
-									output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
+									output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';
@@ -807,7 +807,7 @@ function ostk_Widget(atts, element){
 		}//switch
 
 		output = '<div class="branding">';
-			output += '<img src="dev/devImages/'+img_url+'"/>';
+			output += '<img src="http://ak1.ostkcdn.com/img/mxc/'+img_url+'"/>';
 		output += '</div>';
 
 		return output;
@@ -1528,7 +1528,7 @@ function ostk_Plugin(){
 
 		    $ostk_jQuery('<img>')
 		    	.attr({
-		    		src: 'dev/devImages/affiliate-embed-widgets-ostk-logo.png',
+		    		src: 'http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png',
 		    		width: 125
 		    	})
 		    	.appendTo(ostk_loader_div);

@@ -114,7 +114,7 @@ function ostk_Carousel(){
 							output += '<img class="ostk-rating" src="'+product.getAverageReviewAsGif()+'"/>';
 						}
 						output += '<p class="price">'+product.price+'</p>';
-						output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
+						output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
 				output += '</div>';
 			output += '</a>';
 		output += '</li>';
@@ -609,7 +609,7 @@ function ostk_StockPhoto(){
 									if(product.price){
 										output += '<p class="price">'+product.price+'</p>';
 									}
-									output += '<img class="ostk-logo" src="http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png">';
+									output += '<img class="ostk-logo" src="dev/devImages/affiliate-embed-widgets-ostk-logo.png">';
 							output += '</div>';
 						output += '</div>';
 					output += '</a>';
@@ -807,7 +807,7 @@ function ostk_Widget(atts, element){
 		}//switch
 
 		output = '<div class="branding">';
-			output += '<img src="http://ak1.ostkcdn.com/img/mxc/'+img_url+'"/>';
+			output += '<img src="dev/devImages/'+img_url+'"/>';
 		output += '</div>';
 
 		return output;
@@ -1293,7 +1293,6 @@ function ostk_array_to_list_string(a, deliminator){
 }//ostk_array_to_and_list_string
 
 function ostk_script_init(){
-	console.log('%c========== ostk_script_init ==========', 'font-size: 16px');
 	// Only load the plugin if it hasn't already been loaded. 
 	// Widget embeds might include the script tag multiple times.
 	if(typeof(ostk_plugin) == 'undefined'){
@@ -1306,9 +1305,7 @@ function ostk_script_init(){
 		var ostk_clickurl = window.location.href;
 
 		var scripts = document.getElementsByTagName('script');
-		// console.log('scripts.length: ' + scripts.length);
 		for(var i = 0 ; i < scripts.length ; i++){
-			// console.log(scripts[i].src);
 			if(
 			//TODO: overstock-embed needs to be deprecated at some point
 			scripts[i].src.indexOf("overstock-embed") > -1 ||
@@ -1317,13 +1314,10 @@ function ostk_script_init(){
 				var id_value = ostk_searchURLForParam(scripts[i].src, 'id');
 				if(id_value){
 					ostk_developerId = id_value;
-					console.log('found api script with id');
 					break;
 				}
 			}	
 		}//for
-
-		console.log('ostk_developerId: ' + ostk_developerId);
 
 		var ostk_url = 'https://api.overstock.com';
 		if(
@@ -1510,7 +1504,7 @@ function ostk_Plugin(){
 		$ostk_jQuery('<link>')
 		  .appendTo('head')
 		  .attr({type : 'text/css', rel : 'stylesheet'})
-		  .attr('href', 'http://www.overstock.com/css/affiliate-link-plugin/api.min.css');
+		  .attr('href', 'http://localhost:8080/dist/overstock-embed.min.css');
 	};//ostk_loadCSS
 
 	this.ostk_preloaders = function(){
@@ -1534,7 +1528,7 @@ function ostk_Plugin(){
 
 		    $ostk_jQuery('<img>')
 		    	.attr({
-		    		src: 'http://ak1.ostkcdn.com/img/mxc/affiliate-embed-widgets-ostk-logo.png',
+		    		src: 'dev/devImages/affiliate-embed-widgets-ostk-logo.png',
 		    		width: 125
 		    	})
 		    	.appendTo(ostk_loader_div);

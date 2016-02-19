@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 		less: {
 			css: {
 				src: ['css/src/less/embed-main.less'],
-				dest: 'dist/overstock-embed.css'
+				dest: 'dist/api.css'
 			}
 		},
 
@@ -32,8 +32,8 @@ module.exports = function(grunt) {
 		//Crappy but needed because the widgets are being put on other peoples sites.
 		css_important: {
 			files: {
-	            src: ['dist/overstock-embed.css'],
-	            dest: 'dist/overstock-embed.css'
+	            src: ['dist/api.css'],
+	            dest: 'dist/api.css'
             }
 		},
 
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 		            }
 		        },
 		        src: ['js/src/json/*.json'],
-		        dest: 'dist/overstock-embed.js'
+		        dest: 'dist/api.js'
 		    }
 		},
 
@@ -61,9 +61,9 @@ module.exports = function(grunt) {
 					//Fonts
 					'css/src/fonts/*.css',
 					//Compiled CSS
-					'dist/overstock-embed.css'
+					'dist/api.css'
 				],
-				dest: 'dist/overstock-embed.css'
+				dest: 'dist/api.css'
 			},
 			js: {
 				src: [
@@ -74,21 +74,21 @@ module.exports = function(grunt) {
 					//Classes
 					'js/src/classes/*.js',
 					//Compiles Json JS
-					'dist/overstock-embed.js'
+					'dist/api.js'
 				],
-				dest: 'dist/overstock-embed.js'
+				dest: 'dist/api.js'
 			}
 		},
 
 		//Make a dev version of the deployed files
 		copy: {
 		  js: {
-		    src: 'dist/overstock-embed.js',
-		    dest: 'dev/overstock-embed.js',
+		    src: 'dist/api.js',
+		    dest: 'dev/api.js',
 		  },
 		  css: {
-		    src: 'dist/overstock-embed.css',
-		    dest: 'dev/overstock-embed.css',
+		    src: 'dist/api.css',
+		    dest: 'dev/api.css',
 		  }
 		},
 
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
 		cssmin: { 
 			compress: {
 	        	files: {
-		          	'dist/overstock-embed.min.css': ['dist/overstock-embed.css']
+		          	'dist/api.min.css': ['dist/api.css']
 	        	}
 			}
 		},
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
 		'string-replace': {
 			dist: {
 			    files: {
-					'dist/overstock-embed.js': 'dist/overstock-embed.js'
+					'dist/api.js': 'dist/api.js'
 			    },
 			    options: {
 					replacements: [
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
 						},
 						{
 							//Local api css to production api
-							pattern: /http:\/\/localhost:8080\/dist\/overstock-embed.min.css/ig,
+							pattern: /http:\/\/localhost:8080\/dist\/api.min.css/ig,
 							replacement: 'http://www.overstock.com/css/affiliate-link-plugin/api.min.css'
 						}
 
@@ -139,7 +139,7 @@ module.exports = function(grunt) {
 		uglify: {
 			my_target: {
 				files: {
-					'dist/overstock-embed.min.js': ['dist/overstock-embed.js'] //Minify plugin JS
+					'dist/api.min.js': ['dist/api.js'] //Minify plugin JS
 				}
 			}
 		},
@@ -155,7 +155,7 @@ module.exports = function(grunt) {
 		        	'css/src/less/*/*.less',
 		        	//JS
 		        	'js/src/functions.js',
-		        	'js/src/overstock-embed.js',
+		        	'js/src/api.js',
 		        	'js/src/*/*.js',
 		        	//JSON
 		        	'js/src/json/*.json'
